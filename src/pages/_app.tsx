@@ -1,6 +1,16 @@
-import '@/styles/globals.css'
+import { Kanit } from 'next/font/google'
 import type { AppProps } from 'next/app'
 
+const kanit = Kanit({
+  weight: ["400", "500", "600"],
+  subsets: ["latin-ext", "thai"],
+});
+
+
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <main className={kanit.className} data-theme="night">
+      <Component {...pageProps} />
+    </main>
+  )
 }
