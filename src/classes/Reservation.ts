@@ -1,5 +1,7 @@
 import supabase from "@/libs/supabase";
-import Table from "@/classes/Table";
+import Table, { TableData } from "@/classes/Table";
+import notify, { type NotifyData } from "@/libs/notify";
+import ShortUniqueId from 'short-unique-id';
 
 export type PaymentMethod = "QRCODE" | " ONSIDE" | "BANK";
 export type StatusPayment = "WAIT" | "COMPLETE" | "FAILS";
@@ -78,6 +80,7 @@ export default class Reservation {
       }
 
       const payload = {
+        id: new ShortUniqueId().rnd(10),
         tableId: reservation.tableId,
         name: reservation.name,
         phone: reservation.phone,
@@ -92,11 +95,18 @@ export default class Reservation {
         .insert(payload)
         .select("created_at");
 
-      await supabase
-        .from("tables")
-        .update({ isReserved: true })
-        .eq("id", reservation.tableId)
-        .select("id");
+      const tableReservated = (
+        await Table.updateTable({
+          id: reservation.tableId,
+          isReserved: true,
+        })
+      )[0] as TableData;
+
+      notify({
+        message: `🍽️ การจองโต๊ะ (${payload.id}) \nโต๊ะที่: ${tableReservated.index} ถูกจองแล้ว \nโดย: ${reservation.name} \nเบอร์โทร: ${reservation.phone} \nอีเมล: ${reservation.email} \nรุ่น: ${reservation.generation} \nวิธีการชำระเงิน: ${reservation.method}`,
+      }).then((res) =>
+        console.log(`send notify: การจองโต๊ะ ${tableReservated.index}`)
+      );
 
       if (error) {
         throw error;

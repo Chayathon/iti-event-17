@@ -41,7 +41,7 @@ export default class Table {
     return data;
   }
 
-  public static async createTable(table: TableData) {
+  public static async createTable(table: TableData): Promise<TableData> {
     const { data, error } = await supabase.from("tables").insert([table]);
 
     if (error) {
@@ -54,7 +54,8 @@ export default class Table {
     const { data, error } = await supabase
       .from("tables")
       .update(table)
-      .eq("id", table.id);
+      .eq("id", table.id)
+      .select("*");
 
     if (error) {
       throw error;
@@ -95,5 +96,4 @@ export default class Table {
     }
     return data;
   }
-
 }
