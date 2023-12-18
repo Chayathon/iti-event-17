@@ -1,4 +1,5 @@
 import supabase from "@/libs/supabase";
+import Table from "@/classes/Table";
 
 export type PaymentMethod = "QRCODE" | " ONSIDE" | "BANK";
 export type StatusPayment = "WAIT" | "COMPLETE" | "FAILS";
@@ -65,24 +66,51 @@ export default class Reservation {
   }
 
   public static async createReservation(reservation: ReservationData) {
-    const isReserved = await Reservation.getReservationByTableId(
-      reservation.tableId as string
-    );
+    try {
+      const isReserved = await Reservation.getReservationByTableId(
+        reservation.tableId as string
+      );
 
-    if (isReserved.length > 0) {
-      throw {
-        message: "Table is reserved",
+      if (isReserved.length > 0) {
+        throw {
+          message: "โต๊ะนี้ถูกจองไปแล้ว",
+        };
+      }
+
+      const payload = {
+        tableId: reservation.tableId,
+        name: reservation.name,
+        phone: reservation.phone,
+        email: reservation.email,
+        generation: reservation.generation,
+        method: reservation.method,
+        status: reservation.status,
       };
-    }
 
-    const { data, error } = await supabase
-      .from("reservationTable")
-      .insert([reservation]);
+      const { data, error } = await supabase
+        .from("reservationTable")
+        .insert(payload)
+        .select("created_at");
 
-    if (error) {
+      console.log(reservation.tableId);
+
+      const { data: tableData, error: tableError } = await supabase
+        .from("tables")
+        .update({ isReserved: true })
+        .eq("id", reservation.tableId).select("id");
+
+      console.log(reservation.tableId,tableData);
+
+      if (error) {
+        console.log(error);
+        throw error;
+      }
+
+      return data[0];
+    } catch (error) {
+      console.error(error);
       throw error;
     }
-    return data;
   }
 
   public static async updateReservation(reservation: ReservationData) {

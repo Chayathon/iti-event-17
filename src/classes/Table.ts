@@ -2,8 +2,8 @@ import supabase from "@/libs/supabase";
 
 export type TableData = {
   id?: string;
-  index: number;
-  name: string;
+  index?: number;
+  name?: string;
   isAvailable?: boolean;
   isReserved?: boolean;
 };

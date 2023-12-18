@@ -1,9 +1,18 @@
-import React from "react";
-import HomeLayout from '@/components/layouts/HomeLayout';
+import React, { Suspense } from "react";
+import dynamic from "next/dynamic";
+import HomeLayout from "@/components/layouts/HomeLayout";
+import { type TableData } from "@/classes/Table";
+import { fetcher } from "@/libs/axios";
+import useSWR from "swr";
+
+const TableLayout = dynamic(() => import("@/components/TableLayout"), {
+  ssr: true,
+});
 
 type Props = {};
 
 export default function Booking({}: Props) {
+  const { data: tables, error } = useSWR<TableData[]>("/tables", fetcher);
 
   return (
     <HomeLayout>
@@ -40,14 +49,16 @@ export default function Booking({}: Props) {
               <p className="text-sm">
                 ➡️ <b>โต๊ะรวม</b> จะเป็นนั่งรวมกับผู้อื่น
                 สามารถซื้อบัตรรายบุคคลได้ในราคา
-                <b className="text-red-700"> 380.- </b>บาท / คน {" "}
+                <b className="text-red-700"> 380.- </b>บาท / คน{" "}
                 <b>สามารถซื้อบัตรรายบุคคล หน้างานครับ</b>
               </p>
             </div>
           </div>
         </div>
       </div>
-      {/* <TableLayout data={tables ?? []} /> */}
+      <Suspense fallback={<div className="text-center">Loading...</div>}>
+        <TableLayout data={tables ?? []} />
+      </Suspense>
     </HomeLayout>
   );
 }

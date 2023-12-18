@@ -35,4 +35,4 @@ export default service;
 
 //make fetcher for SWR
 export const fetcher = (url: string) =>
-  service.get(url).then((res) => res.data);
+  service.get(url).then((res) => res.data.data);
