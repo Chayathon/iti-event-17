@@ -73,7 +73,7 @@ export default class Reservation {
 
       if (isReserved.length > 0) {
         throw {
-          message: "โต๊ะนี้ถูกจองไปแล้ว",
+          message: "โต๊ะนี้ถูกจองแล้ว",
         };
       }
 
@@ -92,17 +92,13 @@ export default class Reservation {
         .insert(payload)
         .select("created_at");
 
-      console.log(reservation.tableId);
-
-      const { data: tableData, error: tableError } = await supabase
+      await supabase
         .from("tables")
         .update({ isReserved: true })
-        .eq("id", reservation.tableId).select("id");
-
-      console.log(reservation.tableId,tableData);
+        .eq("id", reservation.tableId)
+        .select("id");
 
       if (error) {
-        console.log(error);
         throw error;
       }
 

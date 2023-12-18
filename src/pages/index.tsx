@@ -1,5 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { FaUtensils, FaShirt } from "react-icons/fa6";
 import HomeLayout from "@/components/layouts/HomeLayout";
 
@@ -28,7 +29,7 @@ export default function Home() {
               illo tenetur fuga ducimus numquam ea!
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a
+              <Link
                 className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                 href="/reservation"
               >
@@ -36,9 +37,9 @@ export default function Home() {
                   <FaUtensils />
                   จองโต๊ะอาหาร
                 </span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 className="inline-block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
                 href="/about"
               >
@@ -46,7 +47,7 @@ export default function Home() {
                   <FaShirt />
                   สั่งซื้อเสื้อ
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { type TableData } from "@/classes/Table";
 import { PaymentMethod, type ReservationData } from "@/classes/Reservation";
 import { useForm } from "react-hook-form";
 import axios from "@/libs/axios";
+import Swal from "sweetalert2";
 
 const LAST_GENERATION = 28;
 
@@ -71,11 +72,23 @@ export default function TableLayout({ data }: Props) {
 
       const resdata = await res.data;
 
-      console.log(resdata);
-
-      console.log(data);
+      if (resdata.message === "success") {
+        handleClose();
+        Swal.fire({
+          title: "บันทึกข้อมูลสำเร็จ",
+          text: "ขอบคุณที่ใช้บริการ",
+          icon: "success",
+        });
+      }
     } catch (error) {
       console.log(error);
+      handleClose();
+
+      Swal.fire({
+        title: "บันทึกข้อมูลไม่สำเร็จ",
+        text: error.response.data.message as string,
+        icon: "error",
+      });
     } finally {
       setIsloading(false);
     }
