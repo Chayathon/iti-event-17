@@ -104,6 +104,8 @@ export default class Reservation {
 
       notify({
         message: `🍽️ การจองโต๊ะ (${payload.id}) \nโต๊ะที่: ${tableReservated.index} ถูกจองแล้ว \nโดย: ${reservation.name} \nเบอร์โทร: ${reservation.phone} \nอีเมล: ${reservation.email} \nรุ่น: ${reservation.generation} \nวิธีการชำระเงิน: ${reservation.method}`,
+        // stickerId: 51626507,
+        // stickerPackageId: 11538,
       }).then((res) =>
         console.log(`send notify: การจองโต๊ะ ${tableReservated.index}`)
       );
@@ -114,7 +116,7 @@ export default class Reservation {
 
       return data[0];
     } catch (error) {
-      console.error(error);
+
       throw error;
     }
   }
