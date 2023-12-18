@@ -17,18 +17,23 @@ const LINE_API_URL = "https://notify-api.line.me/api/notify";
 const LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
 
 export default async function notify(data: NotifyData) {
-  const payload: NotifyData = {
-    stickerId: 51626507,
-    stickerPackageId: 11538,
-    message: `${data.message}`,
-  };
+  try {
+    const payload: NotifyData = {
+      stickerId: 51626507,
+      stickerPackageId: 11538,
+      message: `${data.message}`,
+    };
 
-  await axios.post(LINE_API_URL, payload, {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Bearer ${LINE_TOKEN}`,
-    },
-  });
+    await axios.post(LINE_API_URL, payload, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${LINE_TOKEN}`,
+      },
+    });
 
-  return true;
+    return true;
+  } catch (error) {
+    console.error("LINE Notify Error:",error);
+    return false;
+  }
 }
