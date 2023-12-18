@@ -4,6 +4,7 @@ import { PaymentMethod, type ReservationData } from "@/classes/Reservation";
 import { useForm } from "react-hook-form";
 import axios from "@/libs/axios";
 import Swal from "sweetalert2";
+import useSWR, { useSWRConfig } from 'swr'
 
 const LAST_GENERATION = 28;
 
@@ -22,8 +23,9 @@ type FormValues = {
 };
 
 export default function TableLayout({ data }: Props) {
+  const { mutate } = useSWRConfig()
   const [isloading, setIsloading] = useState(false);
-  const { register, handleSubmit, setValue } = useForm<FormValues>();
+  const { register, handleSubmit, setValue, reset } = useForm<FormValues>();
   const [selected, setSelected] = useState<TableData>();
   function getTableStatus(table: TableData) {
     if (table.isReserved) {
@@ -52,6 +54,7 @@ export default function TableLayout({ data }: Props) {
     ) as HTMLDialogElement | null;
     if (modalElement) {
       setSelected(undefined);
+      reset();
       modalElement.close();
     }
   }
@@ -78,6 +81,8 @@ export default function TableLayout({ data }: Props) {
           title: "บันทึกข้อมูลสำเร็จ",
           text: "ขอบคุณที่ใช้บริการ",
           icon: "success",
+        }).then(() => {
+          mutate('/tables')
         });
       }
     } catch (error) {
