@@ -7,6 +7,7 @@ import {
   FaLocationPin,
   FaComment,
   FaHandshake,
+  FaCircleQuestion,
 } from "react-icons/fa6";
 
 type Props = {};
@@ -52,6 +53,12 @@ const MENU: Menu[] = [
     href: "/location",
     target: "_self",
     icon: <FaLocationPin />,
+  },
+  {
+    title: "คำถามที่พบบ่อย",
+    href: "/faq",
+    target: "_self",
+    icon: <FaCircleQuestion />,
   },
   {
     title: "ติดต่อเรา",
