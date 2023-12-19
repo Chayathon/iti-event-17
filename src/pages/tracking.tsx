@@ -39,7 +39,7 @@ export default function Tracking({}: Props) {
             <input
               type="text"
               className="w-full text-black px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="เบอร์โทรศัพท์ หรือ อีเมล"
+              placeholder="เบอร์โทรศัพท์"
               {...register("search", { required: true })}
             />
             <button className="flex justify-center items-center gap-2 absolute inset-y-0 right-0 px-4 text-white bg-blue-500 rounded-r-md">

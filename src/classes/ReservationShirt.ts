@@ -67,7 +67,8 @@ export default class ReservationShirt {
                     *
                     `
       )
-      .eq(keyword, value);
+      .eq(keyword, value)
+      
 
     if (error) {
       throw error;

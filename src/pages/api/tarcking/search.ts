@@ -20,8 +20,8 @@ export default async function handler(
     switch (req.method) {
       case "GET":
         //@ts-ignore
-        // getTracking(req.query.search);
-        res.status(200).json({ message: "success", data: req.query.search });
+        const data = await getTracking(req.query.search);
+        res.status(200).json({ message: "success", data: data });
         break;
       case "POST":
         break;
@@ -37,5 +37,25 @@ export default async function handler(
 }
 
 async function getTracking(search: string) {
-  console.log(search);
+  try {
+    const shirt = await ReservationShirt.getReservationByKeyword(
+      "phone",
+      search
+    );
+
+    const table = await ReservationTable.getReservationByKeyword(
+      "phone",
+      search
+    );
+
+    const data = {
+      shirt: shirt,
+      table: table,
+    };
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return "ไม่พบข้อมูล (Error)";
+  }
 }
