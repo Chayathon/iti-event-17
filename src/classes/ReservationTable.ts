@@ -74,7 +74,8 @@ export default class ReservationTable {
       .from("reservationTable")
       .select(
         `
-                    *
+                    *,
+                    tableId (id,index,name) as table
                     `
       )
       .eq(keyword, value);
