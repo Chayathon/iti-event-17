@@ -69,6 +69,22 @@ export default class ReservationTable {
     return data;
   }
 
+  public static async getReservationByKeyword(keyword: string, value: string) {
+    const { data, error } = await supabase
+      .from("reservationTable")
+      .select(
+        `
+                    *
+                    `
+      )
+      .eq(keyword, value);
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
   public static async createReservation(reservation: ReservationData) {
     try {
       const isReserved = await ReservationTable.getReservationByTableId(

@@ -29,11 +29,11 @@ export type ReservationData = {
 export default class ReservationShirt {
   public static async getReservations() {
     const { data, error } = await supabase
-      .from("ReservationShirt")
+      .from("reservationShirt")
       .select(
         `
-            *
-            `
+                *
+                `
       )
       .order("created_at", { ascending: true });
 
@@ -45,11 +45,11 @@ export default class ReservationShirt {
 
   public static async getReservation(id: string) {
     const { data, error } = await supabase
-      .from("ReservationShirt")
+      .from("reservationShirt")
       .select(
         `
-                *
-                `
+                    *
+                    `
       )
       .eq("id", id);
 
@@ -59,15 +59,15 @@ export default class ReservationShirt {
     return data;
   }
 
-  public static async getReservationByTableId(tableId: string) {
+  public static async getReservationByKeyword(keyword: string, value: string) {
     const { data, error } = await supabase
-      .from("ReservationShirt")
+      .from("reservationShirt")
       .select(
         `
-                *
-                `
+                    *
+                    `
       )
-      .eq("tableId", tableId);
+      .eq(keyword, value);
 
     if (error) {
       throw error;
@@ -75,64 +75,20 @@ export default class ReservationShirt {
     return data;
   }
 
-  public static async createReservation(reservation: ReservationData) {
-    try {
-      const isReserved = await ReservationShirt.getReservationByTableId(
-        reservation.tableId as string
-      );
+  public static async createReservation(data: ReservationData) {
+    const { error } = await supabase.from("reservationShirt").insert([data]);
 
-      if (isReserved.length > 0) {
-        throw {
-          message: "โต๊ะนี้ถูกจองแล้ว",
-        };
-      }
-
-      const payload = {
-        id: new ShortUniqueId().rnd(10),
-        tableId: reservation.tableId,
-        name: reservation.name,
-        phone: reservation.phone,
-        email: reservation.email,
-        generation: reservation.generation,
-        method: reservation.method,
-        status: reservation.status,
-      };
-
-      const { data, error } = await supabase
-        .from("ReservationShirt")
-        .insert(payload)
-        .select("created_at");
-
-      const tableReservated = (
-        await Table.updateTable({
-          id: reservation.tableId,
-          isReserved: true,
-        })
-      )[0] as TableData;
-
-      notify({
-        message: `🍽️ การจองโต๊ะ (${payload.id}) \nโต๊ะที่: ${tableReservated.index} ถูกจองแล้ว \nโดย: ${reservation.name} \nเบอร์โทร: ${reservation.phone} \nอีเมล: ${reservation.email} \nรุ่น: ${reservation.generation} \nวิธีการชำระเงิน: ${reservation.method}`,
-        stickerId: 51626507,
-        stickerPackageId: 11538,
-      }).then((res) =>
-        console.log(`send notify: การจองโต๊ะ ${tableReservated.index}`)
-      );
-
-      if (error) {
-        throw error;
-      }
-
-      return data[0];
-    } catch (error) {
+    if (error) {
       throw error;
     }
+    return data;
   }
 
-  public static async updateReservation(reservation: ReservationData) {
-    const { data, error } = await supabase
-      .from("ReservationShirt")
-      .update(reservation)
-      .eq("id", reservation.id);
+  public static async updateReservation(id: string, data: ReservationData) {
+    const { error } = await supabase
+      .from("reservationShirt")
+      .update(data)
+      .eq("id", id);
 
     if (error) {
       throw error;
@@ -141,10 +97,60 @@ export default class ReservationShirt {
   }
 
   public static async deleteReservation(id: string) {
-    const { data, error } = await supabase
-      .from("ReservationShirt")
+    const { error } = await supabase
+      .from("reservationShirt")
       .delete()
       .eq("id", id);
+
+    if (error) {
+      throw error;
+    }
+    return true;
+  }
+
+  public static async getReservationByTrackingCode(trackingCode: string) {
+    const { data, error } = await supabase
+      .from("reservationShirt")
+      .select(
+        `
+                    *
+                    `
+      )
+      .eq("trackingCode", trackingCode);
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  public static async updateReservationByTrackingCode(
+    trackingCode: string,
+    data: ReservationData
+  ) {
+    const { data: reservation, error: reservationError } = await supabase
+      .from("reservationShirt")
+      .select(
+        `
+                    *
+                    `
+      )
+      .eq("trackingCode", trackingCode);
+
+    if (reservationError) {
+      throw reservationError;
+    }
+
+    if (reservation.length === 0) {
+      throw {
+        message: "ไม่พบรายการจอง",
+      };
+    }
+
+    const { error } = await supabase
+      .from("reservationShirt")
+      .update(data)
+      .eq("trackingCode", trackingCode);
 
     if (error) {
       throw error;
