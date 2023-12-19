@@ -18,6 +18,9 @@ export type ReservationData = {
   slip?: string;
   method?: PaymentMethod;
   status?: StatusPayment;
+  totalPrice?: number;
+  trackingCode?: string;
+  address?: string;
   size?: {
     [key: string]: number;
   };
