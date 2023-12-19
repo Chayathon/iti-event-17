@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Reservation, { type ReservationData } from "@/classes/ReservationTable";
+import Reservation, { type ReservationTableData } from "@/classes/ReservationTable";
 
 type Data = {
   message: string;
-  data?: ReservationData | ReservationData[] | any;
+  data?: ReservationTableData | ReservationTableData[] | any;
 };
 
 export default async function handler(

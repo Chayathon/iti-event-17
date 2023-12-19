@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function FAQ({ faq }: Props) {
-
   return (
     <HomeLayout titile="คำถามที่พบบ่อย">
       {faq.map((item) => (
@@ -52,6 +51,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const res = await fetch(`${BASE_URL}/api/faq`);
   const faq = await res.json();
+
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=300, stale-while-revalidate=59"
+  );
 
   return {
     props: { faq: faq.data },

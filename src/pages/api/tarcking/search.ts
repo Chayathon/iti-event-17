@@ -1,4 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import ReservationTable, {
+  type ReservationTableData,
+} from "@/classes/ReservationTable";
+import ReservationShirt, {
+  type ReservationShirtData,
+} from "@/classes/ReservationShirt";
 
 type Data = {
   message: string;
@@ -13,6 +19,9 @@ export default async function handler(
   try {
     switch (req.method) {
       case "GET":
+        //@ts-ignore
+        // getTracking(req.query.search);
+        res.status(200).json({ message: "success", data: req.query.search });
         break;
       case "POST":
         break;
@@ -22,9 +31,11 @@ export default async function handler(
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
+  } finally {
+    res.end();
   }
 }
 
 async function getTracking(search: string) {
-    
+  console.log(search);
 }

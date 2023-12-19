@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { type TableData } from "@/classes/Table";
-import { PaymentMethod, type ReservationData } from "@/classes/ReservationTable";
+import { PaymentMethod, type ReservationTableData } from "@/classes/ReservationTable";
 import { useForm } from "react-hook-form";
 import axios from "@/libs/axios";
 import Swal from "sweetalert2";
@@ -84,7 +84,7 @@ export default function TableLayout({ data }: Props) {
   async function onSave(data: FormValues) {
     try {
       setIsloading(true);
-      const payload: ReservationData = {
+      const payload: ReservationTableData = {
         tableId: data.tableId,
         email: data.email,
         phone: data.phone,

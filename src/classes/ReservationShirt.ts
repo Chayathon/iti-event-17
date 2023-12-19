@@ -6,7 +6,7 @@ import ShortUniqueId from "short-unique-id";
 export type PaymentMethod = "QRCODE" | " ONSIDE" | "BANK";
 export type StatusPayment = "WAIT" | "COMPLETE" | "FAILS";
 
-export type ReservationData = {
+export type ReservationShirtData = {
   id?: string;
   tableId?: string;
   created_at?: string; // Assuming you handle the timestamp as a string
@@ -75,7 +75,7 @@ export default class ReservationShirt {
     return data;
   }
 
-  public static async createReservation(data: ReservationData) {
+  public static async createReservation(data: ReservationShirtData) {
     const { error } = await supabase.from("reservationShirt").insert([data]);
 
     if (error) {
@@ -84,7 +84,7 @@ export default class ReservationShirt {
     return data;
   }
 
-  public static async updateReservation(id: string, data: ReservationData) {
+  public static async updateReservation(id: string, data: ReservationShirtData) {
     const { error } = await supabase
       .from("reservationShirt")
       .update(data)
@@ -126,7 +126,7 @@ export default class ReservationShirt {
 
   public static async updateReservationByTrackingCode(
     trackingCode: string,
-    data: ReservationData
+    data: ReservationShirtData
   ) {
     const { data: reservation, error: reservationError } = await supabase
       .from("reservationShirt")
