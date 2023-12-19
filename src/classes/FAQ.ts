@@ -13,10 +13,12 @@ export default class FAQ {
       .from("faq")
       .select(
         `
-                *
-                `
+        *
+         `
       )
       .order("created_at", { ascending: true });
+
+    console.log(data);
 
     if (error) {
       throw error;
