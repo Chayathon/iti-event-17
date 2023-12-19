@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { type TableData } from "@/classes/Table";
-import { PaymentMethod, type ReservationData } from "@/classes/Reservation";
+import { PaymentMethod, type ReservationData } from "@/classes/ReservationTable";
 import { useForm } from "react-hook-form";
 import axios from "@/libs/axios";
 import Swal from "sweetalert2";

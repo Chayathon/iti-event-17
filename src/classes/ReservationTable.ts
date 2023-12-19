@@ -1,7 +1,7 @@
 import supabase from "@/libs/supabase";
 import Table, { TableData } from "@/classes/Table";
-import notify, { type NotifyData } from "@/libs/notify";
-import ShortUniqueId from 'short-unique-id';
+import notify from "@/libs/notify";
+import ShortUniqueId from "short-unique-id";
 
 export type PaymentMethod = "QRCODE" | " ONSIDE" | "BANK";
 export type StatusPayment = "WAIT" | "COMPLETE" | "FAILS";
@@ -14,11 +14,13 @@ export type ReservationData = {
   phone?: string;
   email?: string;
   generation?: number;
+  refId?: string;
+  slip?: string;
   method?: PaymentMethod;
   status?: StatusPayment;
 };
 
-export default class Reservation {
+export default class ReservationTable {
   public static async getReservations() {
     const { data, error } = await supabase
       .from("reservationTable")
@@ -69,7 +71,7 @@ export default class Reservation {
 
   public static async createReservation(reservation: ReservationData) {
     try {
-      const isReserved = await Reservation.getReservationByTableId(
+      const isReserved = await ReservationTable.getReservationByTableId(
         reservation.tableId as string
       );
 
@@ -116,7 +118,6 @@ export default class Reservation {
 
       return data[0];
     } catch (error) {
-
       throw error;
     }
   }
