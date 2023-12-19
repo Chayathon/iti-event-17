@@ -59,7 +59,29 @@ export default function TableLayout({ data }: Props) {
     }
   }
 
-  async function onSubmit(data: FormValues) {
+  function onSubmit(data: FormValues) {
+    const modalElement = document.getElementById(
+      "reservationModal"
+    ) as HTMLDialogElement | null;
+    modalElement.close();
+    Swal.fire({
+      title: "ยืนยันการจอง",
+      text: "คุณได้ตรวจสอบข้อมูลว่าถูกต้องแล้วใช่หรือไม่?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "ใช่, ยืนยัน",
+      cancelButtonText: "ไม่แน่ใจ, ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onSave(data);
+      }
+      if (result.isDismissed) {
+        modalElement.showModal();
+      }
+    });
+  }
+
+  async function onSave(data: FormValues) {
     try {
       setIsloading(true);
       const payload: ReservationData = {
