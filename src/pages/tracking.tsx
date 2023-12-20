@@ -7,6 +7,7 @@ import HomeLayout from "@/components/layouts/HomeLayout";
 import { type ReservationShirtData } from "@/classes/ReservationShirt";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import ReservationListCard from "@/components/Cards/ReservationListCard";
+import PaidModal from "@/components/Modals/PaidModal";
 
 type Props = {};
 
@@ -56,12 +57,14 @@ export default function Tracking({}: Props) {
   }, [search]);
 
   function handlePaid(data: { id: string; status: string }) {
+    console.log(data);
     setOpenModal(data);
   }
 
   return (
     <HomeLayout titile="ตรวจสอบดำเนินการ">
       {/* {JSON.stringify(Data)} */}
+      <PaidModal data={openModal} />
       <div className="text-center ">
         <p className="text-white text-lg md:text-2xl">
           ตรวจสอบสถานะการดำเนินการของการจองของคุณ
