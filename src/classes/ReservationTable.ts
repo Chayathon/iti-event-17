@@ -3,8 +3,7 @@ import Table, { TableData } from "@/classes/Table";
 import notify from "@/libs/notify";
 import ShortUniqueId from "short-unique-id";
 
-export type PaymentMethod = "QRCODE" | " ONSIDE" | "BANK";
-export type StatusPayment = "WAIT" | "COMPLETE" | "FAILS";
+import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
 
 export type ReservationTableData = {
   id?: string;

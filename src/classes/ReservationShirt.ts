@@ -3,8 +3,7 @@ import Table, { TableData } from "@/classes/Table";
 import notify from "@/libs/notify";
 import ShortUniqueId from "short-unique-id";
 
-export type PaymentMethod = "QRCODE" | " ONSIDE" | "BANK";
-export type StatusPayment = "WAIT" | "COMPLETE" | "FAILS";
+import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
 
 export type ReservationShirtData = {
   id?: string;
@@ -67,8 +66,7 @@ export default class ReservationShirt {
                     *
                     `
       )
-      .eq(keyword, value)
-      
+      .eq(keyword, value);
 
     if (error) {
       throw error;
@@ -85,7 +83,10 @@ export default class ReservationShirt {
     return data;
   }
 
-  public static async updateReservation(id: string, data: ReservationShirtData) {
+  public static async updateReservation(
+    id: string,
+    data: ReservationShirtData
+  ) {
     const { error } = await supabase
       .from("reservationShirt")
       .update(data)
