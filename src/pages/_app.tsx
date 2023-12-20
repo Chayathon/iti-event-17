@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
       <Head>
-        <title>งานสานสัมพันธ์ ITI ครั้งที่ 17</title>
+        <title>งานสานสัมพันธ์ ITI ครั้งที่ 16</title>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <main className={kanit.className} data-theme="night">
