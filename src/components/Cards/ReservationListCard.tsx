@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react";
 import { type ReservationShirtData } from "@/classes/ReservationShirt";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import {
@@ -6,7 +7,8 @@ import {
   paymentMethod,
 } from "@/helpers/statusOrder";
 import { TableData } from "@/classes/Table";
-import { FaCashRegister } from "react-icons/fa";
+import { FaUpload, FaCheckCircle, FaBan } from "react-icons/fa";
+import Swal from "sweetalert2";
 import moment from "moment";
 import "moment/locale/th";
 
@@ -26,16 +28,52 @@ type CardTableProps = {
 };
 
 export default function CardTable({ data, callback }: CardTableProps) {
+  const [setSelectedfile, setSetselectedfile] = useState<File>();
+  const [preview, setPreview] = useState<string>();
+  const fileInput = useRef<HTMLInputElement>(null);
   const table = data.tableId as TableData;
 
+  // function onClick() {
+  //   if (callback) {
+  //     const payload: CallbackData = {
+  //       id: data.id,
+  //       status: "PAID",
+  //     };
+  //     callback(payload);
+  //   }
+  // }
+
   function onClick() {
-    if (callback) {
-      const payload: CallbackData = {
-        id: data.id,
-        status: "PAID",
-      };
-      callback(payload);
+    fileInput.current?.click();
+  }
+
+  function onCancel() {
+    setPreview(undefined);
+    setSetselectedfile(undefined);
+    //clear file input
+    if (fileInput.current) {
+      fileInput.current.value = "";
     }
+  }
+
+  function onUpload() {}
+
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+
+    if (!file) {
+      setPreview(undefined);
+      return;
+    }
+
+    //sweert preview image
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreview(reader.result as string);
+    };
+
+    setSetselectedfile(file);
   }
 
   return (
@@ -88,18 +126,47 @@ export default function CardTable({ data, callback }: CardTableProps) {
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">แนบหลักฐานการชำระ</dt>
             <dd className="text-gray-700 sm:col-span-2">
-              {/* <input
-                    type="file"
-                    accept="image/*"
-                    ref={fileInput}
-                    className="hidden file-input file-input-xs file-input-bordered w-full max-w-xs bg-white"
-                  /> */}
-              <button
-                onClick={onClick}
-                className="btn btn-sm w-full md:w-auto text-white hover:bg-blue-700 bg-blue-600 border-blue-600"
-              >
-                <FaCashRegister /> แจ้งการชำระเงิน
-              </button>
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInput}
+                onChange={onChange}
+                className="hidden file-input file-input-xs file-input-bordered w-full max-w-xs bg-white"
+              />
+              {preview && data.status === "PENDING" && (
+                <div className="my-2">
+                  <img src={preview} alt="slip" className="w-44" />
+                </div>
+              )}
+              <div className="flex flex-col mt-4 w-auto md:w-48  gap-4">
+                {preview && data.status === "PENDING" && (
+                  <React.Fragment>
+                    <button
+                      onClick={onUpload}
+                      className="btn btn-sm w-full md:w-auto text-white hover:bg-green-700 bg-green-600 border-green-600"
+                    >
+                      <FaCheckCircle /> ยืนยันการชำระเงิน
+                    </button>
+                    <button
+                      onClick={onCancel}
+                      className="btn btn-sm w-full md:w-auto text-white hover:bg-red-700 bg-red-600 border-red-600"
+                    >
+                      <FaBan /> ยกเลิกการชำระเงิน
+                    </button>
+                  </React.Fragment>
+                )}
+
+                {data.status === "WAIT" && <h1>รอการตรวจสอบการชำระเงิน</h1>}
+
+                {!preview && data.status === "PENDING" && (
+                  <button
+                    onClick={onClick}
+                    className="btn btn-sm w-full md:w-auto text-white hover:bg-blue-700 bg-blue-600 border-blue-600"
+                  >
+                    <FaUpload /> เลือกไฟล์การชำระเงิน
+                  </button>
+                )}
+              </div>
             </dd>
           </div>
         )}
