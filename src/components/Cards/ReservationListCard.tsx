@@ -11,6 +11,7 @@ import { FaUpload, FaCheckCircle, FaBan } from "react-icons/fa";
 import Swal from "sweetalert2";
 import moment from "moment";
 import "moment/locale/th";
+import axios from '@/libs/axios';
 
 type CallbackData = {
   id: string;
@@ -56,7 +57,54 @@ export default function CardTable({ data, callback }: CardTableProps) {
     }
   }
 
-  function onUpload() {}
+  async function onUpload() {
+    try {
+      if (!setSelectedfile) {
+        throw new Error("กรุณาเลือกไฟล์");
+      }
+
+      const formData = new FormData();
+      formData.append("file", setSelectedfile);
+      formData.append("id", data.id);
+
+      const res = await axios.post("/reservation/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log(res.data);
+
+      // if (callback) {
+      //   const payload: CallbackData = {
+      //     id: data.id,
+      //     status: "PAID",
+      //   };
+      //   callback(payload);
+      // }
+
+      Swal.fire({
+        icon: "success",
+        title: "อัพโหลดสำเร็จ",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setPreview(undefined);
+      setSetselectedfile(undefined);
+      //clear file input
+      if (fileInput.current) {
+        fileInput.current.value = "";
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "อัพโหลดไม่สำเร็จ",
+        text: error.message,
+      });
+    }
+  }
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
