@@ -10,7 +10,7 @@ type Props = {
 export default function FAQ({ faq }: Props) {
   return (
     <HomeLayout titile="คำถามที่พบบ่อย">
-      {faq.map((item) => (
+      {faq?.map((item) => (
         <div key={item.id} className="space-y-4 p-4">
           <details
             className="group rounded-lg bg-gray-300 pb-3 [&_summary::-webkit-details-marker]:hidden"
@@ -49,7 +49,7 @@ export default function FAQ({ faq }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const BASE_URL = process.env.BASE_URL || "http://localhost:3000/api";
 
-  const res = await fetch(`${BASE_URL}/api/faq`);
+  const res = await fetch(`${BASE_URL}/faq`);
   const faq = await res.json();
 
   context.res.setHeader(
@@ -58,6 +58,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   return {
-    props: { faq: faq },
+    props: { faq: faq.data },
   };
 };
