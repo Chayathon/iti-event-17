@@ -1,5 +1,4 @@
 import axios from "@/libs/axios";
-import { useRef } from "react";
 import { useRouter } from "next/router";
 import { FaSearch } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -24,6 +23,7 @@ export default function Tracking({}: Props) {
   const router = useRouter();
   const { search } = router.query;
   const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState<{ id: string; status: string }>();
   const [Data, setData] = useState<DataResopnse>();
 
   const {
@@ -54,6 +54,10 @@ export default function Tracking({}: Props) {
       onSubmit({ search: search as string });
     }
   }, [search]);
+
+  function handlePaid(data: { id: string; status: string }) {
+    setOpenModal(data);
+  }
 
   return (
     <HomeLayout titile="ตรวจสอบดำเนินการ">
@@ -97,7 +101,11 @@ export default function Tracking({}: Props) {
         <div className="flex gap-4 flex-col">
           {Data &&
             Data?.table.map((item) => (
-              <ReservationListCard data={item} key={item.id} />
+              <ReservationListCard
+                data={item}
+                key={item.id}
+                callback={handlePaid}
+              />
             ))}
         </div>
       </div>

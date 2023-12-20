@@ -9,7 +9,7 @@ export function paymentMethod(method: PaymentMethod) {
       return "ชำระเงินที่งาน";
 
     case "BANK":
-      return "โอนผ่านบัญชีธนาคารเงิน";
+      return "โอนผ่านบัญชีธนาคาร";
     default:
       break;
   }

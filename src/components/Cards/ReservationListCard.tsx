@@ -1,6 +1,10 @@
 import { type ReservationShirtData } from "@/classes/ReservationShirt";
 import { type ReservationTableData } from "@/classes/ReservationTable";
-import { statusOrderColor, statusOrder } from "@/helpers/statusOrder";
+import {
+  statusOrderColor,
+  statusOrder,
+  paymentMethod,
+} from "@/helpers/statusOrder";
 import { TableData } from "@/classes/Table";
 import { FaCashRegister } from "react-icons/fa";
 import moment from "moment";
@@ -75,22 +79,30 @@ export default function CardTable({ data, callback }: CardTableProps) {
           <dd className="text-gray-700 sm:col-span-2">{data.email}</dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">แนบหลักฐานการชำระ</dt>
+          <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            {/* <input
-                type="file"
-                accept="image/*"
-                ref={fileInput}
-                className="hidden file-input file-input-xs file-input-bordered w-full max-w-xs bg-white"
-              /> */}
-            <button
-              onClick={onClick}
-              className="btn btn-sm text-white hover:bg-blue-700 bg-blue-600 border-blue-600"
-            >
-              <FaCashRegister /> แจ้งการชำระเงิน
-            </button>
+            {paymentMethod(data.method)}
           </dd>
         </div>
+        {data.method !== " ONSIDE" && (
+          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-900">แนบหลักฐานการชำระ</dt>
+            <dd className="text-gray-700 sm:col-span-2">
+              {/* <input
+                    type="file"
+                    accept="image/*"
+                    ref={fileInput}
+                    className="hidden file-input file-input-xs file-input-bordered w-full max-w-xs bg-white"
+                  /> */}
+              <button
+                onClick={onClick}
+                className="btn btn-sm w-full md:w-auto text-white hover:bg-blue-700 bg-blue-600 border-blue-600"
+              >
+                <FaCashRegister /> แจ้งการชำระเงิน
+              </button>
+            </dd>
+          </div>
+        )}
       </dl>
     </div>
   );
