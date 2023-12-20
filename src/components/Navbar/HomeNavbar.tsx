@@ -73,7 +73,7 @@ export default function Navbar({}: Props) {
     <div className="navbar bg-blue-900 text-white shadow-lg p-0">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} accessKey="btn-bumberger" role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
