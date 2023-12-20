@@ -104,7 +104,7 @@ export default function Navbar({}: Props) {
         </div>
         <Link href={"/"} className="btn btn-ghost text-xl hidden md:flex">
           <FaHandshake />
-          งานสันสัมพันธ์
+          งานสานสัมพันธ์ ครั้งที่ 16
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex lg:bg-blue-900">

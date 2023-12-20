@@ -17,7 +17,7 @@ export default function Home() {
             <h1 className="sm:text-5xl text-3xl ">
               🎈
               <span className="from-green-300 mx-2 via-blue-500 to-purple-600 bg-gradient-to-r  bg-clip-text font-extrabold text-transparent ">
-                งานสานสัมพันธ์
+                งานสานสัมพันธ์ ครั้งที่ 16
               </span>
               🎈
             </h1>

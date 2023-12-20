@@ -7,19 +7,23 @@ import useSWR from "swr";
 
 const TableLayout = dynamic(() => import("@/components/TableLayout"), {
   ssr: true,
+  loading: () => <div className="text-center">Loading...</div>,
 });
 
 type Props = {};
 
 export default function Booking({}: Props) {
-  const { data: tables, error } = useSWR<TableData[]>("/tables", fetcher);
+  const {
+    data: tables,
+    error,
+    isLoading,
+  } = useSWR<TableData[]>("/tables", fetcher);
 
   return (
     <HomeLayout>
       <div className="flex mt-14 justify-center">
         <h1 className="text-4xl font-bold text-white">จองโต๊ะอาหาร</h1>
       </div>
-      {/* {JSON.stringify(tables)} */}
       <div className="w-full justify-center flex">
         <div
           className="bg-white lg:w-2/4 w-full border-t mt-4 border-b border-blue-500 text-blue-700 px-4 py-3 rounded-md shadow-md"
@@ -27,7 +31,6 @@ export default function Booking({}: Props) {
         >
           <div className="flex items-center">
             <div className="w-6 h-6 mr-2 hidden md:block">
-              {/* You can replace the content of this div with an icon or an SVG image */}
               <svg
                 className="w-full h-full text-blue-500"
                 fill="currentColor"
@@ -56,6 +59,11 @@ export default function Booking({}: Props) {
           </div>
         </div>
       </div>
+      {isLoading && (
+        <div className="flex justify-center mt-4">
+          <div className="w-12 h-12 border-t-2 border-gray-900 rounded-full animate-spin"></div>
+        </div>
+      )}
       <Suspense fallback={<div className="text-center">Loading...</div>}>
         <TableLayout data={tables ?? []} />
       </Suspense>

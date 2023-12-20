@@ -45,11 +45,16 @@ export default function FAQ({ faq }: Props) {
   );
 }
 
+
+
 // // server side rendering
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+  const BASE_URL =
+    // process.env.NEXT_PUBLIC_VERCEL_URL ||
+    // process.env.NEXT_PUBLIC_BASE_URL ||
+    "localhost:3000/api/";
 
-  const res = await fetch(`${BASE_URL}/api/faq`);
+  const res = await fetch(`http://${BASE_URL}/faq`);
   const faq = await res.json();
 
   context.res.setHeader(

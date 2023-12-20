@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="th">
       <Head>
         <meta
           name="description"
@@ -13,8 +13,8 @@ export default function Document() {
           content="ปราจีนบุรี, ITI, มจพ, งานสานสัมพันธ์, kmutnb, ครั้งที่ 16, 2566, รุ่นที่ 27"
         />
         <meta name="robots" content="index, follow" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="language" content="English" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="language" content="Thai" />
         <meta name="revisit-after" content="1 days" />
         <meta name="author" content="somchai2647" />
 
@@ -26,10 +26,7 @@ export default function Document() {
           property="og:description"
           content="เว็บไซต์เกี่ยวกับการจ้องโต๊ะอาหารและรายละเอียดเกี่ยวกับกิจกรรม สาขา ITI มพจ. ปราจีนบุรี"
         />
-        <meta
-          property="og:image"
-          content="/homescreen.png"
-        />
+        <meta property="og:image" content="/homescreen.png" />
 
         {/* Twitter meta tags */}
         <meta property="twitter:card" content="summary_large_image" />
@@ -42,10 +39,7 @@ export default function Document() {
           property="twitter:description"
           content="เว็บไซต์เกี่ยวกับการจ้องโต๊ะอาหารและรายละเอียดเกี่ยวกับกิจกรรม สาขา ITI มพจ. ปราจีนบุรี"
         />
-        <meta
-          property="twitter:image"
-          content="/homescreen.png"
-        />
+        <meta property="twitter:image" content="/homescreen.png" />
       </Head>
       <body>
         <Main />
