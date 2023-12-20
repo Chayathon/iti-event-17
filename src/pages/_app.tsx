@@ -1,4 +1,4 @@
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
 import { Kanit } from "next/font/google";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <main className={kanit.className} data-theme="night">
         <Component {...pageProps} />
-        <SpeedInsights />
+        <Analytics />
       </main>
     </React.Fragment>
   );

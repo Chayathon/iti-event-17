@@ -11,6 +11,9 @@ if (process.env.NODE_ENV !== 'development') {
 
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    BASE_URL,
+  },
   rewrites: async () => [
     {
       source: `/api/:path*`,
