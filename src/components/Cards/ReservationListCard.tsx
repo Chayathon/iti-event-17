@@ -11,7 +11,8 @@ import { FaUpload, FaCheckCircle, FaBan } from "react-icons/fa";
 import Swal from "sweetalert2";
 import moment from "moment";
 import "moment/locale/th";
-import axios from '@/libs/axios';
+import axios from "@/libs/axios";
+import supabase from "@/libs/supabase";
 
 type CallbackData = {
   id: string;
@@ -29,7 +30,7 @@ type CardTableProps = {
 };
 
 export default function CardTable({ data, callback }: CardTableProps) {
-  const [setSelectedfile, setSetselectedfile] = useState<File>();
+  const [Selectedfile, setSelectedfile] = useState<File>();
   const [preview, setPreview] = useState<string>();
   const fileInput = useRef<HTMLInputElement>(null);
   const table = data.tableId as TableData;
@@ -50,7 +51,7 @@ export default function CardTable({ data, callback }: CardTableProps) {
 
   function onCancel() {
     setPreview(undefined);
-    setSetselectedfile(undefined);
+    setSelectedfile(undefined);
     //clear file input
     if (fileInput.current) {
       fileInput.current.value = "";
@@ -63,25 +64,24 @@ export default function CardTable({ data, callback }: CardTableProps) {
         throw new Error("กรุณาเลือกไฟล์");
       }
 
-      const formData = new FormData();
-      formData.append("file", setSelectedfile);
-      formData.append("id", data.id);
+      await supabase.storage
+        .from("iti-event")
+        .upload(`slip/${data.id}`, Selectedfile);
 
-      const res = await axios.post("/reservation/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      //get url file
+      const { data: publicURL } = supabase.storage
+        .from("iti-event")
+        .getPublicUrl(`slip/${data.id}`);
 
-      console.log(res.data);
+      const payload = {
+        id: data.id,
+        slip: publicURL.publicUrl,
+        status: "WAIT",
+      };
 
-      // if (callback) {
-      //   const payload: CallbackData = {
-      //     id: data.id,
-      //     status: "PAID",
-      //   };
-      //   callback(payload);
-      // }
+      const res = await (await axios.patch("/reservation/upload", payload)).data;
+
+
 
       Swal.fire({
         icon: "success",
@@ -91,7 +91,7 @@ export default function CardTable({ data, callback }: CardTableProps) {
       });
 
       setPreview(undefined);
-      setSetselectedfile(undefined);
+      setSelectedfile(undefined);
       //clear file input
       if (fileInput.current) {
         fileInput.current.value = "";
@@ -121,7 +121,7 @@ export default function CardTable({ data, callback }: CardTableProps) {
       setPreview(reader.result as string);
     };
 
-    setSetselectedfile(file);
+    setSelectedfile(file);
   }
 
   return (

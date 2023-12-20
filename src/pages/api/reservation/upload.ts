@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Reservation, { type ReservationTableData } from "@/classes/ReservationTable";
-import notify from '@/libs/notify';
 
 type Data = {
   message: string;
@@ -13,13 +12,9 @@ export default async function handler(
 ) {
   try {
     switch (req.method) {
-      case "GET":
-        break;
-      case "POST":
-        const { body } = req;
-        console.log(body.id);
-
-        return res.status(200).json({ message: "OK" });
+      case "PATCH":
+        const reservation = await Reservation.updateReservation(req.body);
+        res.status(200).json({ message: "success", data: req.body });
         break;
       default:
         res.status(405).json({ message: "Method not allowed" });
