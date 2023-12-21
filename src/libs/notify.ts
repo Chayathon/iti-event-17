@@ -18,18 +18,24 @@ const LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
 
 export default async function notify(data: NotifyData) {
   try {
-    const payload: NotifyData = {
-      stickerId: data.stickerId ? data.stickerId : 51626533,
-      stickerPackageId: data.stickerPackageId ? data.stickerPackageId : 11537,
-      message: `${data.message}`,
-    };
+    const payload: NotifyData = data.stickerId
+      ? {
+          stickerId: data.stickerId ? data.stickerId : 51626533,
+          stickerPackageId: data.stickerPackageId
+            ? data.stickerPackageId
+            : 11537,
+          message: `${data.message}`,
+        }
+      : {
+          message: `${data.message}`,
+        };
 
     await axios.post(LINE_API_URL, payload, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Bearer ${LINE_TOKEN}`,
       },
-    })
+    });
 
     return true;
   } catch (error) {

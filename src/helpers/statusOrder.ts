@@ -36,15 +36,15 @@ export function statusOrder(status: StatusPayment) {
 export function statusOrderColor(status: StatusPayment) {
   switch (status) {
     case "PENDING":
-      return "text-white badge-warning";
+      return "text-white badge badge-success";
 
     case "WAIT":
-      return "text-white badge-info";
+      return "text-white badge badge-info";
     case "COMPLETE":
-      return "text-white badge-success";
+      return "text-white badge badge-success";
 
     case "FAILS":
-      return "text-white badge-error";
+      return "text-white badge badge-error";
     default:
       break;
   }

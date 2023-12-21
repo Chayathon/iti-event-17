@@ -142,7 +142,8 @@ export default class ReservationTable {
     const { data, error } = await supabase
       .from("reservationTable")
       .update(reservation)
-      .eq("id", reservation.id);
+      .eq("id", reservation.id)
+      .select(`*,tableId (id,index,name) as table`).single();
 
     if (error) {
       throw error;

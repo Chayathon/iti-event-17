@@ -35,15 +35,7 @@ export default function CardTable({ data, callback }: CardTableProps) {
   const fileInput = useRef<HTMLInputElement>(null);
   const table = data.tableId as TableData;
 
-  // function onClick() {
-  //   if (callback) {
-  //     const payload: CallbackData = {
-  //       id: data.id,
-  //       status: "PAID",
-  //     };
-  //     callback(payload);
-  //   }
-  // }
+  const [loading, setLoading] = useState(false);
 
   function onClick() {
     fileInput.current?.click();
@@ -64,6 +56,8 @@ export default function CardTable({ data, callback }: CardTableProps) {
         throw new Error("กรุณาเลือกไฟล์");
       }
 
+      setLoading(true);
+
       await supabase.storage
         .from("iti-event")
         .upload(`slip/${data.id}`, Selectedfile);
@@ -79,16 +73,21 @@ export default function CardTable({ data, callback }: CardTableProps) {
         status: "WAIT",
       };
 
-      const res = await (await axios.patch("/reservation/upload", payload)).data;
-
-
+      const res = await (
+        await axios.patch("/reservation/upload", payload)
+      ).data;
 
       Swal.fire({
         icon: "success",
         title: "อัพโหลดสำเร็จ",
-        showConfirmButton: false,
-        timer: 1500,
+        text: "รอการตรวจสอบการชำระเงิน \nโดยใช้เวลา 1 - 2 วัน หลังจากนั้นจะมีการแจ้งเตือนผ่านทางอีเมล",
+        showConfirmButton: true,
+        timer: 10000,
       });
+
+      if (callback) {
+        callback({ id: data.id, status: "WAIT" });
+      }
 
       setPreview(undefined);
       setSelectedfile(undefined);
@@ -103,6 +102,8 @@ export default function CardTable({ data, callback }: CardTableProps) {
         title: "อัพโหลดไม่สำเร็จ",
         text: error.message,
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -191,12 +192,15 @@ export default function CardTable({ data, callback }: CardTableProps) {
                   <React.Fragment>
                     <button
                       onClick={onUpload}
+                      disabled={loading}
                       className="btn btn-sm w-full md:w-auto text-white hover:bg-green-700 bg-green-600 border-green-600"
                     >
-                      <FaCheckCircle /> ยืนยันการชำระเงิน
+                      <FaCheckCircle />{" "}
+                      {loading ? "กำลังอัพโหลด" : "ยืนยันการชำระเงิน"}
                     </button>
                     <button
                       onClick={onCancel}
+                      disabled={loading}
                       className="btn btn-sm w-full md:w-auto text-white hover:bg-red-700 bg-red-600 border-red-600"
                     >
                       <FaBan /> ยกเลิกการชำระเงิน
