@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.no-scrollbar::-webkit-scrollbar { 
-  display: none; 
-} 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
 .text-container {
   z-index: 100;

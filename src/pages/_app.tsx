@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import "../styles/globals.css";
 import React from "react";
 import Head from "next/head";
+import "@/styles/background.css";
 
 const kanit = Kanit({
   weight: ["400", "500", "600"],
