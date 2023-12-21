@@ -6,7 +6,7 @@ import { fetcher } from "@/libs/axios";
 import useSWR from "swr";
 
 const TableLayout = dynamic(() => import("@/components/TableLayout"), {
-  ssr: true,
+  ssr: false,
   loading: () => <div className="text-center">Loading...</div>,
 });
 

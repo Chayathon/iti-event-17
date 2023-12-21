@@ -7,7 +7,6 @@ import HomeLayout from "@/components/layouts/HomeLayout";
 import { type ReservationShirtData } from "@/classes/ReservationShirt";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import ReservationListCard from "@/components/Cards/ReservationListCard";
-import PaidModal from "@/components/Modals/PaidModal";
 
 type Props = {};
 
@@ -24,7 +23,6 @@ export default function Tracking({}: Props) {
   const router = useRouter();
   const { search } = router.query;
   const [loading, setLoading] = useState(false);
-  const [openModal, setOpenModal] = useState<{ id: string; status: string }>();
   const [Data, setData] = useState<DataResopnse>();
 
   const {
@@ -57,14 +55,20 @@ export default function Tracking({}: Props) {
   }, [search]);
 
   function handlePaid(data: { id: string; status: string }) {
-    console.log(data);
-    setOpenModal(data);
+    const { id, status } = data;
+    const newData = Data?.table.map((item) => {
+      if (item.id === id) {
+        return { ...item, status };
+      }
+      return item;
+    });
+
+    setData({ ...Data, table: newData } as DataResopnse);
   }
 
   return (
     <HomeLayout titile="ตรวจสอบดำเนินการ">
       {/* {JSON.stringify(Data)} */}
-      <PaidModal data={openModal} />
       <div className="text-center ">
         <p className="text-white text-lg md:text-2xl">
           ตรวจสอบสถานะการดำเนินการของการจองของคุณ
