@@ -111,7 +111,7 @@ export default class ReservationTable {
       const { data, error } = await supabase
         .from("reservationTable")
         .insert(payload)
-        .select("created_at");
+        .select("created_at").single();
 
       const tableReservated = (
         await Table.updateTable({
@@ -132,7 +132,7 @@ export default class ReservationTable {
         throw error;
       }
 
-      return data[0];
+      return {...data, phone: payload.phone};
     } catch (error) {
       throw error;
     }

@@ -102,7 +102,8 @@ export default function TableLayout({ data }: Props) {
         handleClose();
         Swal.fire({
           title: "บันทึกข้อมูลสำเร็จ",
-          text: "ขอบคุณที่ใช้บริการ",
+          html: `คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resdata?.data?.phone}" target="_blank" class="underline">ตรวจสอบดำเนินการ</a> หรือตรวจสอบได้ที่เมนู "ตรวจสอบดำเนินการ"
+                  `,
           icon: "success",
         }).then(() => {
           mutate("/tables");
