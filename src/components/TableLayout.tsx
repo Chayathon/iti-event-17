@@ -6,27 +6,57 @@ import { useForm } from "react-hook-form";
 import axios from "@/libs/axios";
 import Swal from "sweetalert2";
 import { useSWRConfig } from "swr";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const LAST_GENERATION = 28;
+
+const phoneRegex = /^0[0-9]{9}$/;
+
+const schema = yup
+  .object({
+    tableId: yup.string().required("กรุณาเลือกโต๊ะ"),
+    firstName: yup.string().required("กรุณากรอกชื่อจริง"),
+    lastName: yup.string().required("กรุณากรอกนามสกุล"),
+    email: yup
+      .string()
+      .required("กรุณากรอกอีเมล")
+      .email("กรุณากรอกอีเมลให้ถูกต้อง"),
+    phone: yup
+      .string()
+      .required("กรุณากรอกเบอร์โทรศัพท์")
+      .matches(phoneRegex, "กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง"),
+    generation: yup.number().required("กรุณาเลือกรุ่นการศึกษา"),
+    method: yup.string().required("กรุณาเลือกวิธีการชำระเงิน"),
+  })
+  .required("กรุณากรอกข้อมูลให้ครบถ้วน");
 
 type Props = {
   data: TableData[];
 };
 
 type FormValues = {
-  tableId: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  generation: number;
-  method: string;
+  tableId?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  generation?: number;
+  method?: string;
 };
 
 export default function TableLayout({ data }: Props) {
   const { mutate } = useSWRConfig();
   const [isloading, setIsloading] = useState(false);
-  const { register, handleSubmit, setValue, reset } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: yupResolver<FormValues>(schema),
+  });
   const [selected, setSelected] = useState<TableData>();
   function getTableStatus(table: TableData) {
     if (table.isReserved) {
@@ -158,6 +188,9 @@ export default function TableLayout({ data }: Props) {
                     autoComplete="firstName"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+                  <span className="text-red-600">
+                    {errors.firstName?.message}
+                  </span>
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -175,6 +208,9 @@ export default function TableLayout({ data }: Props) {
                     autoComplete="lastName"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+                  <span className="text-red-600">
+                    {errors.lastName?.message}
+                  </span>
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -192,6 +228,7 @@ export default function TableLayout({ data }: Props) {
                     autoComplete="email"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+                  <span className="text-red-600">{errors.email?.message}</span>
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -205,9 +242,10 @@ export default function TableLayout({ data }: Props) {
                   type="tel"
                   {...register("phone", { required: true })}
                   id="phone"
-                  autoComplete="tel"
+                  autoComplete="off"
                   className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                <span className="text-red-600">{errors.phone?.message}</span>
               </div>
               <label className="form-control md:w-full">
                 <div className="label">
@@ -232,9 +270,13 @@ export default function TableLayout({ data }: Props) {
                     )
                   )}
                 </select>
-                <div className="label">
-                  {/* <span className="label-text-alt">Alt label</span> */}
-                </div>
+                <span className="text-red-600">
+                  {errors.generation?.message}
+                </span>
+
+                {/* <div className="label">
+                  <span className="label-text-alt">Alt label</span>
+                </div> */}
               </label>
               <div className="sm:col-span-2 flex ">
                 <div className="flex items-center gap-2">
@@ -248,7 +290,7 @@ export default function TableLayout({ data }: Props) {
                   <div className="relative flex items-center">
                     <label htmlFor="radioBank">ชำระผ่านเลขบัญชีธนาคาร</label>
                   </div>
-                  <input
+                  {/* <input
                     type="radio"
                     id="radioOnSite"
                     {...register("method", { required: true })}
@@ -258,7 +300,7 @@ export default function TableLayout({ data }: Props) {
                     <label htmlFor="radioOnSite" className="disabled">
                       ชำระหน้างาน
                     </label>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
