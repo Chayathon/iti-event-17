@@ -41,7 +41,7 @@ export default function Home() {
 
                 <Link
                   className="inline-block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-                  href="/about"
+                  href="/shop"
                 >
                   <span className="inline-flex gap-2">
                     <FaShirt />

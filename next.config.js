@@ -19,6 +19,10 @@ const nextConfig = {
       source: `/api/:path*`,
       destination: `${BASE_URL}/:path*`,
     },
+    {
+      source: `/storage/:path*`,
+      destination: `https://gvasxyypgldgbgdmtaxd.supabase.co/storage/v1/object/public/:path*`,
+    }
   ],
 }
 
