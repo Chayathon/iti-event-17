@@ -116,9 +116,14 @@ export default function Tracking({}: Props) {
               />
             ))}
         </div>
-        {Data?.table?.length !== 0 && (
+        {!loading && Data?.table?.length !== 0 && Data?.shirt.length === 0 && (
           <div>
             <BankInfo />
+          </div>
+        )}
+        {Data?.shirt.length === 0 && Data?.table.length === 0 && (
+          <div className="text-center mt-10 text-white">
+            <h1 className="text-xl">ไม่พบข้อมูลการจองของคุณ</h1>
           </div>
         )}
       </div>
