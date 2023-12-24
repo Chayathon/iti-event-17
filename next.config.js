@@ -6,7 +6,7 @@ let BASE_URL = "http://localhost:3000"
 
 //check env dev or prod
 if (process.env.NODE_ENV !== 'development') {
-  BASE_URL = `https://${process.env.VERCEL_URL}` || process.env.NEXT_PUBLIC_BASE_URL
+  BASE_URL = process.env.PROD_BASE_URL || process.env.VERCEL_URL
 }
 
 const nextConfig = {
@@ -20,8 +20,8 @@ const nextConfig = {
   rewrites: async () => [
     {
       source: `/api/:path*`,
-      destination: `${BASE_URL}/:path*`,
-      
+      destination: `${BASE_URL}/api/:path*`,
+
     },
     {
       source: `/storage/:path*`,
