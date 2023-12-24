@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Table, { type TableData } from "@/classes/Table";
+import Product, { type ProductData } from "@/classes/Product";
 
 type Data = {
   message: string;
-  data?: TableData | TableData[];
+  data?: ProductData | ProductData[];
 };
 
 export default async function handler(
@@ -12,8 +12,14 @@ export default async function handler(
 ) {
   switch (req.method) {
     case "GET":
-      const tables = await Table.getTables();
-      res.status(200).json({ message: "Success", data: tables });
+      const products = await Product.getProducts();
+
+      res.status(200).json({ message: "Success", data: products });
+      break;
+    case "POST":
+      const data = req.body;
+      await Product.createProduct(data);
+      res.status(200).json({ message: "Success" });
       break;
 
     default:

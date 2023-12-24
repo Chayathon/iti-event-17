@@ -4,7 +4,7 @@ import ReservationTable, {
 } from "@/classes/ReservationTable";
 import ReservationShirt, {
   type ReservationShirtData,
-} from "@/classes/ReservationShirt";
+} from "@/classes/ReservationProduct";
 
 type Data = {
   message: string;

@@ -4,8 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
 import axios from "@/libs/axios";
+import { type ProductData } from "@/classes/Product";
 
-type Props = {};
+type Props = {
+  products: ProductData[];
+};
 
 const products = [
   {
@@ -20,12 +23,12 @@ const products = [
   // More products...
 ];
 
-export default function ShopPage({}: Props) {
+export default function ShopPage({ products }: Props) {
   return (
     <HomeLayout titile="การจองสินค้าในงานสานสัมพันธ์ ครั้งที่ 16">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-10 lg:max-w-7xl lg:px-8">
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {products.map((product) => (
+          {products?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -34,12 +37,12 @@ export default function ShopPage({}: Props) {
   );
 }
 
-export function ProductCard({ product }) {
+export function ProductCard({ product }: { product: ProductData }) {
   return (
     <div className="group relative bg-white rounded-lg">
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none  lg:h-80">
         <img
-          src={product.imageSrc}
+          src={`${product.image1}`}
           alt={product.name}
           className="h-full w-full object-cover object-center group-hover:scale-125 lg:h-full lg:w-full"
         />
@@ -47,7 +50,7 @@ export function ProductCard({ product }) {
       <div className="mt-4 flex justify-between p-2">
         <div>
           <h3 className="text-lg md:text-sm text-black">
-            <Link href={product.href}>
+            <Link href={`/shop/${product.id}`}>
               <span aria-hidden="true" className="absolute inset-0" />
               {product.name}
             </Link>
@@ -63,19 +66,17 @@ export function ProductCard({ product }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // const BASE_URL = process.env.BASE_URL || "http://localhost:3000/api";
+  const res = await axios.get(`/product`);
+  const product = await res.data;
 
-  //   const res = await axios.get(`/tables`);
-  //   const tables = await res.data;
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=300, stale-while-revalidate=59"
+  );
 
-  //   context.res.setHeader(
-  //     "Cache-Control",
-  //     "public, s-maxage=300, stale-while-revalidate=59"
-  //   );
-
-  console.log(context);
+  //   console.log(context);
 
   return {
-    props: { tables: [] },
+    props: { products: product.data },
   };
 };

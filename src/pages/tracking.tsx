@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import HomeLayout from "@/components/layouts/HomeLayout";
-import { type ReservationShirtData } from "@/classes/ReservationShirt";
+import { type ReservationProductData } from "@/classes/ReservationProduct";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import ReservationListCard from "@/components/Cards/ReservationListCard";
 import BankInfo from "@/components/BankInfo";
@@ -17,7 +17,7 @@ type FormValues = {
 
 type DataResopnse = {
   table: ReservationTableData[];
-  shirt: ReservationShirtData[];
+  prodicts: ReservationProductData[];
 };
 
 export default function Tracking({}: Props) {
@@ -116,12 +116,14 @@ export default function Tracking({}: Props) {
               />
             ))}
         </div>
-        {!loading && Data?.table?.length !== 0 && Data?.shirt.length === 0 && (
-          <div>
-            <BankInfo />
-          </div>
-        )}
-        {Data?.shirt.length === 0 && Data?.table.length === 0 && (
+        {!loading &&
+          Data?.table?.length !== 0 &&
+          Data?.prodicts.length === 0 && (
+            <div>
+              <BankInfo />
+            </div>
+          )}
+        {Data?.prodicts.length === 0 && Data?.table.length === 0 && (
           <div className="text-center mt-10 text-white">
             <h1 className="text-xl">ไม่พบข้อมูลการจองของคุณ</h1>
           </div>

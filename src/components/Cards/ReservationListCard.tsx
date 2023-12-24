@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { type ReservationShirtData } from "@/classes/ReservationShirt";
+import { type ReservationShirtData } from "@/classes/ReservationProduct";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import {
   statusOrderColor,

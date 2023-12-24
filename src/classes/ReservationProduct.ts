@@ -5,7 +5,7 @@ import ShortUniqueId from "short-unique-id";
 
 import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
 
-export type ReservationShirtData = {
+export type ReservationProductData = {
   id?: string;
   tableId?: string;
   created_at?: string; // Assuming you handle the timestamp as a string
@@ -20,15 +20,15 @@ export type ReservationShirtData = {
   totalPrice?: number;
   trackingCode?: string;
   address?: string;
-  size?: {
+  options?: {
     [key: string]: number;
   };
 };
 
-export default class ReservationShirt {
+export default class ReservationProduct {
   public static async getReservations() {
     const { data, error } = await supabase
-      .from("reservationShirt")
+      .from("reservationProduct")
       .select(
         `
                 *
@@ -44,7 +44,7 @@ export default class ReservationShirt {
 
   public static async getReservation(id: string) {
     const { data, error } = await supabase
-      .from("reservationShirt")
+      .from("reservationProduct")
       .select(
         `
                     *
@@ -60,7 +60,7 @@ export default class ReservationShirt {
 
   public static async getReservationByKeyword(keyword: string, value: string) {
     const { data, error } = await supabase
-      .from("reservationShirt")
+      .from("reservationProduct")
       .select(
         `
                     *
@@ -74,8 +74,8 @@ export default class ReservationShirt {
     return data;
   }
 
-  public static async createReservation(data: ReservationShirtData) {
-    const { error } = await supabase.from("reservationShirt").insert([data]);
+  public static async createReservation(data: ReservationProductData) {
+    const { error } = await supabase.from("reservationProduct").insert([data]);
 
     if (error) {
       throw error;
@@ -85,10 +85,10 @@ export default class ReservationShirt {
 
   public static async updateReservation(
     id: string,
-    data: ReservationShirtData
+    data: ReservationProductData
   ) {
     const { error } = await supabase
-      .from("reservationShirt")
+      .from("reservationProduct")
       .update(data)
       .eq("id", id);
 
@@ -100,7 +100,7 @@ export default class ReservationShirt {
 
   public static async deleteReservation(id: string) {
     const { error } = await supabase
-      .from("reservationShirt")
+      .from("reservationProduct")
       .delete()
       .eq("id", id);
 
@@ -112,7 +112,7 @@ export default class ReservationShirt {
 
   public static async getReservationByTrackingCode(trackingCode: string) {
     const { data, error } = await supabase
-      .from("reservationShirt")
+      .from("reservationProduct")
       .select(
         `
                     *
@@ -128,10 +128,10 @@ export default class ReservationShirt {
 
   public static async updateReservationByTrackingCode(
     trackingCode: string,
-    data: ReservationShirtData
+    data: ReservationProductData
   ) {
     const { data: reservation, error: reservationError } = await supabase
-      .from("reservationShirt")
+      .from("reservationProduct")
       .select(
         `
                     *
@@ -150,7 +150,7 @@ export default class ReservationShirt {
     }
 
     const { error } = await supabase
-      .from("reservationShirt")
+      .from("reservationProduct")
       .update(data)
       .eq("trackingCode", trackingCode);
 
