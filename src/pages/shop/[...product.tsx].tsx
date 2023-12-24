@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import axios from "@/libs/axios";
 import { type ProductData } from "@/classes/Product";
+import { type ProductOptionData } from "@/classes/ProductOption";
 import Image from "next/image";
 
 type Props = {
@@ -107,18 +108,32 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   Size:
                 </h2>
                 <div className="flex flex-wrap -mx-2 -mb-2">
-                  <button className="py-1 mb-2 mr-1 border w-11 hover:border-blue-400 dark:border-gray-400 hover:text-blue-600 dark:hover:border-gray-300 dark:text-white">
-                    XL
-                  </button>
-                  <button className="py-1 mb-2 mr-1 border w-11 hover:border-blue-400 hover:text-blue-600 dark:border-gray-400 dark:hover:border-gray-300 dark:text-white">
-                    S
-                  </button>
-                  <button className="py-1 mb-2 mr-1 border w-11 hover:border-blue-400 hover:text-blue-600 dark:border-gray-400 dark:hover:border-gray-300 dark:text-white">
-                    M
-                  </button>
-                  <button className="py-1 mb-2 mr-1 border w-11 hover:border-blue-400 hover:text-blue-600 dark:border-gray-400 dark:hover:border-gray-300 dark:text-white">
-                    XS
-                  </button>
+                  <fieldset className="flex flex-wrap gap-3">
+                    <legend className="sr-only">Color</legend>
+                    {data.productOption
+                      .sort(
+                        (a: ProductOptionData, b: ProductOptionData) =>
+                          parseInt(a.id) - parseInt(b.id)
+                      )
+                      .map((item) => (
+                        <div key={`${item.name}-${item.id}`}>
+                          <input
+                            type="radio"
+                            name="productOption"
+                            value={item.name}
+                            id={item.id}
+                            className="peer hidden"
+                          />
+
+                          <label
+                            htmlFor={item.id}
+                            className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-500 peer-checked:text-white"
+                          >
+                            <p className="text-sm font-medium">{item.name}</p>
+                          </label>
+                        </div>
+                      ))}
+                  </fieldset>
                 </div>
               </div>
               <div className="w-32 mb-8 ">
@@ -129,16 +144,17 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   Quantity
                 </label>
                 <div className="relative flex flex-row w-full h-10 mt-4 bg-transparent rounded-lg">
-                  <button className="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer dark:hover:bg-gray-700 dark:text-white hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-400">
-                    <span className="m-auto text-2xl font-thin">-</span>
+                  <button className="w-20 h-full rounded-l outline-none cursor-pointer bg-white">
+                    <span className="m-auto text-2xl font-thin text-black">-</span>
                   </button>
                   <input
                     type="number"
-                    className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none text-md hover:text-black"
+                    className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                     defaultValue={1}
+                    readOnly
                   />
-                  <button className="w-20 h-full text-gray-600 bg-gray-300 rounded-r outline-none cursor-pointer dark:hover:bg-gray-700 dark:text-white dark:bg-gray-900 hover:text-gray-700 hover:bg-gray-400">
-                    <span className="m-auto text-2xl font-thin">+</span>
+                  <button className="w-20 h-full rounded-r outline-none cursor-pointer bg-white">
+                    <span className="m-auto text-2xl font-thin text-black">+</span>
                   </button>
                 </div>
               </div>

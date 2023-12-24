@@ -12,7 +12,7 @@ export type ProductData = {
   image3?: string;
   details?: string;
   isActive?: boolean;
-  options?: ProductOptionData[];
+  productOption?: ProductOptionData[];
 };
 
 export default class Product {
@@ -26,9 +26,6 @@ export default class Product {
                     `
       )
       .order("created_at", { ascending: true });
-
-
-
     if (error) {
       throw error;
     }
