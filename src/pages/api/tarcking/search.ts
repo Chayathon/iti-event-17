@@ -2,9 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import ReservationTable, {
   type ReservationTableData,
 } from "@/classes/ReservationTable";
-import ReservationShirt, {
-  type ReservationShirtData,
-} from "@/classes/ReservationProduct";
+import ReservationShirt from "@/classes/ReservationProduct";
 
 type Data = {
   message: string;
