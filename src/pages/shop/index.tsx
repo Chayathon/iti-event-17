@@ -3,27 +3,17 @@ import HomeLayout from "@/components/layouts/HomeLayout";
 import Image from "next/image";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
-import axios from "@/libs/axios";
+import axios, { fetcher } from "@/libs/axios";
 import { type ProductData } from "@/classes/Product";
+import useSWR from "swr";
 
 type Props = {
   products: ProductData[];
 };
 
-const products = [
-  {
-    id: 1,
-    name: "เสื้องานสานสัมพันธ์ ครั้งที่ 16",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    price: "฿ 330.-",
-    details: "Size : S, M, L, XL, 2XL, 3XL",
-  },
-  // More products...
-];
+export default function ShopPage({}: Props) {
+  const { data: products, error } = useSWR(`/api/product`, fetcher);
 
-export default function ShopPage({ products }: Props) {
   return (
     <HomeLayout titile="การจองสินค้าในงานสานสัมพันธ์ ครั้งที่ 16">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-10 lg:max-w-7xl lg:px-8">
@@ -55,7 +45,9 @@ export function ProductCard({ product }: { product: ProductData }) {
               {product.name}
             </Link>
           </h3>
-          <p className="mt-1 text-sm text-gray-500 overflow-hidden">{product.details}</p>
+          <p className="mt-1 text-sm text-gray-500 overflow-hidden">
+            {product.details}
+          </p>
         </div>
         <p className="text-lg md:text-sm font-medium text-gray-900">
           {product.price}
@@ -66,7 +58,7 @@ export function ProductCard({ product }: { product: ProductData }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(process.env.BASE_URL)
+  console.log(process.env.BASE_URL);
   const res = await axios.get(`/api/product`);
   const product = await res.data;
 
