@@ -50,7 +50,7 @@ export default function Booking({ tables }: Props) {
               <p className="text-sm">
                 ➡️ <b>การเหมาโต๊ะ</b> จะเป็นการซื้อบัตรจองโต๊ะนั้น ๆ
                 โต๊ะสามารถนั้งได้ 8 คน ราคา
-                <b className="text-red-700"> 2,800.- </b>บาท / โต๊ะ
+                <b className="text-red-700"> 4,000.- </b>บาท / โต๊ะ
               </p>
               <p className="text-sm">
                 ➡️ <b>โต๊ะรวม</b> จะเป็นนั่งรวมกับผู้อื่น
