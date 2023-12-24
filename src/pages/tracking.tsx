@@ -7,6 +7,7 @@ import HomeLayout from "@/components/layouts/HomeLayout";
 import { type ReservationShirtData } from "@/classes/ReservationShirt";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import ReservationListCard from "@/components/Cards/ReservationListCard";
+import BankInfo from "@/components/BankInfo";
 
 type Props = {};
 
@@ -115,6 +116,11 @@ export default function Tracking({}: Props) {
               />
             ))}
         </div>
+        {Data?.table?.length !== 0 && (
+          <div>
+            <BankInfo />
+          </div>
+        )}
       </div>
     </HomeLayout>
   );

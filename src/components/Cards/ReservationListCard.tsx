@@ -80,7 +80,7 @@ export default function CardTable({ data, callback }: CardTableProps) {
       Swal.fire({
         icon: "success",
         title: "อัพโหลดสำเร็จ",
-        text: "รอการตรวจสอบการชำระเงิน \nโดยใช้เวลา 1 - 2 วัน หลังจากนั้นจะมีการแจ้งเตือนผ่านทางอีเมล",
+        html: "รอการตรวจสอบการชำระเงิน <br />โดยใช้เวลา 1 - 2 วัน หลังจากนั้นจะมีการแจ้งเตือนผ่านทางอีเมล<br />หรือหน้าตรวจสอบดำเนินการ",
         showConfirmButton: true,
         timer: 10000,
       });

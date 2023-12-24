@@ -3,12 +3,14 @@ import { type TableData } from "@/classes/Table";
 import { PaymentMethod } from "@/interfaces/Payment.type";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import { useForm } from "react-hook-form";
+import { FaBuildingColumns } from "react-icons/fa6";
 import axios from "@/libs/axios";
 import Swal from "sweetalert2";
 import { useSWRConfig } from "swr";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import * as yup from "yup";
+import BankInfo from "./BankInfo";
 
 const LAST_GENERATION = 28;
 
@@ -317,7 +319,8 @@ export default function TableLayout({ data }: Props) {
                 </div>
               </div>
             </div>
-            <div className="mt-10">
+            <BankInfo />
+            <div className="mt-5">
               <button
                 type="submit"
                 disabled={isloading}
