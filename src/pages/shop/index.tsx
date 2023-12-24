@@ -14,14 +14,17 @@ type Props = {
 export default function ShopPage({}: Props) {
   // const { data: products, error } = useSWR(`/api/product`, fetcher);
   const [products, setProducts] = useState([]);
+  const [loading, setloading] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log(process.env)
+      console.log(process.env);
+      setloading(true);
       const res = await axios.get(`/product`);
       const product = await res.data;
       console.log(product);
       setProducts(product.data);
+      setloading(false);
       // .......
     };
     fetchProducts();
@@ -30,6 +33,12 @@ export default function ShopPage({}: Props) {
   return (
     <HomeLayout titile="การจองสินค้าในงานสานสัมพันธ์ ครั้งที่ 16">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-10 lg:max-w-7xl lg:px-8">
+        {loading && (
+          // title loading
+          <div className="text-center ">
+            <p className="text-white text-lg md:text-2xl">Loading...</p>
+          </div>
+        )}
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {products?.map((product) => (
             <ProductCard key={product.id} product={product} />
