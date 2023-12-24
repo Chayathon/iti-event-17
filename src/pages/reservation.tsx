@@ -2,22 +2,25 @@ import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { type TableData } from "@/classes/Table";
-import { fetcher } from "@/libs/axios";
+import axios, { fetcher } from "@/libs/axios";
 import useSWR from "swr";
+import { GetServerSideProps } from "next";
 
 const TableLayout = dynamic(() => import("@/components/TableLayout"), {
   ssr: false,
   loading: () => <div className="text-center">Loading...</div>,
 });
 
-type Props = {};
+type Props = {
+  tables: TableData[];
+};
 
-export default function Booking({}: Props) {
-  const {
-    data: tables,
-    error,
-    isLoading,
-  } = useSWR<TableData[]>("/tables", fetcher);
+export default function Booking({ tables }: Props) {
+  // const {
+  //   data: tables,
+  //   error,
+  //   isLoading,
+  // } = useSWR<TableData[]>("/tables", fetcher);
 
   return (
     <HomeLayout>
@@ -59,14 +62,30 @@ export default function Booking({}: Props) {
           </div>
         </div>
       </div>
-      {isLoading && (
+      {/* {isLoading && (
         <div className="flex justify-center mt-4">
           <div className="w-12 h-12 border-t-2 border-gray-900 rounded-full animate-spin"></div>
         </div>
-      )}
+      )} */}
       <Suspense fallback={<div className="text-center">Loading...</div>}>
         <TableLayout data={tables ?? []} />
       </Suspense>
     </HomeLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // const BASE_URL = process.env.BASE_URL || "http://localhost:3000/api";
+
+  const res = await axios.get(`/tables`);
+  const tables = await res.data;
+
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=300, stale-while-revalidate=59"
+  );
+
+  return {
+    props: { tables: tables.data },
+  };
+};

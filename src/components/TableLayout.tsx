@@ -3,7 +3,6 @@ import { type TableData } from "@/classes/Table";
 import { PaymentMethod } from "@/interfaces/Payment.type";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import { useForm } from "react-hook-form";
-import { FaBuildingColumns } from "react-icons/fa6";
 import axios from "@/libs/axios";
 import Swal from "sweetalert2";
 import { useSWRConfig } from "swr";
@@ -149,7 +148,7 @@ export default function TableLayout({ data }: Props) {
                   `,
           icon: "success",
         }).then(() => {
-          mutate("/tables");
+          // mutate("/tables");
           router.push(`/tracking?search=${resdata?.data?.phone}`);
         });
       }

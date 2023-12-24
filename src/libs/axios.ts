@@ -2,7 +2,7 @@ import axios from "axios";
 
 //create an axios instance
 const service = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL, // api base_url
+  baseURL: process.env.BASE_URL, // api base_url
   timeout: 5000, // request timeout
 });
 
