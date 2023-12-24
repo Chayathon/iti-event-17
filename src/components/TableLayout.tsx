@@ -7,6 +7,7 @@ import axios from "@/libs/axios";
 import Swal from "sweetalert2";
 import { useSWRConfig } from "swr";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
 import * as yup from "yup";
 
 const LAST_GENERATION = 28;
@@ -46,6 +47,7 @@ type FormValues = {
 };
 
 export default function TableLayout({ data }: Props) {
+  const router = useRouter();
   const { mutate } = useSWRConfig();
   const [isloading, setIsloading] = useState(false);
   const {
@@ -104,6 +106,14 @@ export default function TableLayout({ data }: Props) {
       cancelButtonText: "ไม่แน่ใจ, ยกเลิก",
     }).then((result) => {
       if (result.isConfirmed) {
+        Swal.fire({
+          title: "กำลังบันทึกข้อมูล...",
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
         onSave(data);
       }
       if (result.isDismissed) {
@@ -115,6 +125,7 @@ export default function TableLayout({ data }: Props) {
   async function onSave(data: FormValues) {
     try {
       setIsloading(true);
+
       const payload: ReservationTableData = {
         tableId: data.tableId,
         email: data.email,
@@ -137,6 +148,7 @@ export default function TableLayout({ data }: Props) {
           icon: "success",
         }).then(() => {
           mutate("/tables");
+          router.push(`/tracking?search=${resdata?.data?.phone}`);
         });
       }
     } catch (error) {
@@ -147,6 +159,7 @@ export default function TableLayout({ data }: Props) {
         title: "บันทึกข้อมูลไม่สำเร็จ",
         text: error.response.data.message as string,
         icon: "error",
+        timer: 3000,
       });
     } finally {
       setIsloading(false);
