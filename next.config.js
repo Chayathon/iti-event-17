@@ -14,6 +14,9 @@ const nextConfig = {
   env: {
     BASE_URL,
   },
+  images: {
+    domains: ['gvasxyypgldgbgdmtaxd.supabase.co'],
+  },
   rewrites: async () => [
     {
       source: `/api/:path*`,

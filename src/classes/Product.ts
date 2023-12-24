@@ -1,5 +1,6 @@
 import supabase from "@/libs/supabase";
 import ShortUniqueId from "short-unique-id";
+import ProductOption, { type ProductOptionData } from "@/classes/ProductOption";
 
 export type ProductData = {
   id?: string;
@@ -11,9 +12,7 @@ export type ProductData = {
   image3?: string;
   details?: string;
   isActive?: boolean;
-  options?: {
-    [key: string]: number;
-  };
+  options?: ProductOptionData[];
 };
 
 export default class Product {
@@ -23,9 +22,12 @@ export default class Product {
       .select(
         `
                     *
+        ,productOption(id, name, price,productId)
                     `
       )
       .order("created_at", { ascending: true });
+
+
 
     if (error) {
       throw error;

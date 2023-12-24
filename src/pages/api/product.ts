@@ -12,10 +12,7 @@ export default async function handler(
 ) {
   switch (req.method) {
     case "GET":
-      const { pid } = req.query;
-      console.log(req.query);
       const allProduct = await Product.getProducts();
-      //@ts-ignore
       res.status(200).json({ message: "Success", data: allProduct });
       break;
     case "POST":

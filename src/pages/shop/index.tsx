@@ -28,9 +28,9 @@ export default function ShopPage({ products }: Props) {
     <HomeLayout titile="การจองสินค้าในงานสานสัมพันธ์ ครั้งที่ 16">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-10 lg:max-w-7xl lg:px-8">
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {/* {products?.map((product) => (
+          {products?.map((product) => (
             <ProductCard key={product.id} product={product} />
-          ))} */}
+          ))}
         </div>
       </div>
     </HomeLayout>
@@ -55,7 +55,7 @@ export function ProductCard({ product }: { product: ProductData }) {
               {product.name}
             </Link>
           </h3>
-          <p className="mt-1 text-sm text-gray-500">{product.details}</p>
+          <p className="mt-1 text-sm text-gray-500 overflow-hidden">{product.details}</p>
         </div>
         <p className="text-lg md:text-sm font-medium text-gray-900">
           {product.price}
@@ -77,6 +77,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //   console.log(context);
 
   return {
-    props: { products: [] },
+    props: { products: product.data },
   };
 };
