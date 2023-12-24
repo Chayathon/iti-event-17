@@ -118,7 +118,7 @@ export default function Tracking({}: Props) {
         </div>
         {!loading &&
           Data?.table?.length !== 0 &&
-          Data?.prodicts.length === 0 && (
+          Data?.prodicts?.length === 0 && (
             <div>
               <BankInfo />
             </div>
