@@ -254,7 +254,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const productId = context.query["product.tsx"][0] as string;
 
-  const res = await axios.get(`/api/product`);
+  const res = await axios.get(`/product`);
   const product = (await res.data) as ProductData[];
 
   context.res.setHeader(
