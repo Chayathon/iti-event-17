@@ -123,11 +123,11 @@ export default function Tracking({}: Props) {
               <BankInfo />
             </div>
           )}
-        {Data?.prodicts.length === 0 && Data?.table.length === 0 && (
+        {/* {Data?.prodicts.length === 0 && Data?.table.length === 0 && (
           <div className="text-center mt-10 text-white">
             <h1 className="text-xl">ไม่พบข้อมูลการจองของคุณ</h1>
           </div>
-        )}
+        )} */}
       </div>
     </HomeLayout>
   );
