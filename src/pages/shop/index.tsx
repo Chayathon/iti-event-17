@@ -69,24 +69,24 @@ export function ProductCard({ product }: { product: ProductData }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(process.env.BASE_URL);
-  // const res = await axios.get(`/api/product`);
-  // const product = await res.data;
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   console.log(process.env.BASE_URL);
+//   // const res = await axios.get(`/api/product`);
+//   // const product = await res.data;
 
-  const res = await fetch(`${process.env.BASE_URL}/api/product`);
-  const product = await res.json();
+//   const res = await fetch(`${process.env.BASE_URL}/api/product`);
+//   const product = await res.json();
 
-  console.log(product.data);
+//   console.log(product.data);
 
-  context.res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=300, stale-while-revalidate=59"
-  );
+//   context.res.setHeader(
+//     "Cache-Control",
+//     "public, s-maxage=300, stale-while-revalidate=59"
+//   );
 
-  //   console.log(context);
+//   //   console.log(context);
 
-  return {
-    props: { products: [] },
-  };
-};
+//   return {
+//     props: { products: [] },
+//   };
+// };
