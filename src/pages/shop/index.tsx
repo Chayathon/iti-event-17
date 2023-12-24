@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +12,18 @@ type Props = {
 };
 
 export default function ShopPage({}: Props) {
-  const { data: products, error } = useSWR(`/api/product`, fetcher);
+  // const { data: products, error } = useSWR(`/api/product`, fetcher);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await axios.get(`/api/product`);
+      const product = await res.data;
+      console.log(product);
+      setProducts(product.data);
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <HomeLayout titile="การจองสินค้าในงานสานสัมพันธ์ ครั้งที่ 16">
@@ -59,8 +70,13 @@ export function ProductCard({ product }: { product: ProductData }) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log(process.env.BASE_URL);
-  const res = await axios.get(`/api/product`);
-  const product = await res.data;
+  // const res = await axios.get(`/api/product`);
+  // const product = await res.data;
+
+  const res = await fetch(`${process.env.BASE_URL}/api/product`);
+  const product = await res.json();
+
+  console.log(product.data);
 
   context.res.setHeader(
     "Cache-Control",
@@ -70,6 +86,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //   console.log(context);
 
   return {
-    props: { products: product.data },
+    props: { products: [] },
   };
 };

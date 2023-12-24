@@ -21,6 +21,7 @@ const nextConfig = {
     {
       source: `/api/:path*`,
       destination: `${BASE_URL}/:path*`,
+      
     },
     {
       source: `/storage/:path*`,
