@@ -21,6 +21,7 @@ export default function ShopPage({}: Props) {
       const product = await res.data;
       console.log(product);
       setProducts(product.data);
+      // .......
     };
     fetchProducts();
   }, []);
