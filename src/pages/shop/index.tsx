@@ -66,7 +66,8 @@ export function ProductCard({ product }: { product: ProductData }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await axios.get(`/product`);
+  console.log(process.env.BASE_URL)
+  const res = await axios.get(`/api/product`);
   const product = await res.data;
 
   context.res.setHeader(
