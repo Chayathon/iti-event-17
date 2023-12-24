@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import axios from "@/libs/axios";
 import { type ProductData } from "@/classes/Product";
 import { type ProductOptionData } from "@/classes/ProductOption";
-import Image from "next/image";
-
+import Swal from "sweetalert2";
 type Props = {
   productData: ProductData;
 };
@@ -21,30 +20,94 @@ export default function Product({ productData }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const productId = context.query["product.tsx"][0] as string;
-
-  const res = await axios.get(`/product`);
-  const product = (await res.data) as ProductData[];
-
-  context.res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=300, stale-while-revalidate=59"
-  );
-
-  //@ts-ignore
-  const allProduct = product.data as ProductData[];
-
-  let filtered = allProduct.find((item) => item.id === productId);
-
-  console.log(filtered);
-
-  return {
-    props: { productData: filtered },
-  };
-};
-
 export const ProductCard = ({ data }: { data?: ProductData }) => {
+  const router = useRouter();
+
+  const [optionSelect, setOptionSelect] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+  const handleOptionSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOptionSelect(e.target.value);
+  };
+
+  const addQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const removeQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (optionSelect === "") {
+      Swal.fire({
+        icon: "error",
+        title: "แจ้งเตือน",
+        text: "กรุณาเลือกขนาดสินค้า",
+      });
+      return;
+    }
+
+    if (quantity <= 0) {
+      Swal.fire({
+        icon: "error",
+        title: "แจ้งเตือน",
+        text: "กรุณาเลือกจำนวนสินค้า",
+      });
+      return;
+    }
+
+    let cart = localStorage.getItem("cart");
+
+    if (cart === null) {
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([
+          {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            quantity: quantity,
+            optionSelect: optionSelect,
+          },
+        ])
+      );
+    } else {
+      let cartData = JSON.parse(cart);
+
+      let isExist = cartData.find(
+        (item) => item.id === data.id && item.option === optionSelect
+      );
+
+      if (isExist) {
+        let index = cartData.findIndex(
+          (item) => item.id === data.id && item.option === optionSelect
+        );
+
+        cartData[index].quantity += quantity;
+      } else {
+        cartData.push({
+          id: data.id,
+          name: data.name,
+          price: data.price,
+          quantity: quantity,
+          optionSelect: optionSelect,
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cartData));
+    }
+
+    Swal.fire({
+      icon: "success",
+      title: "เพิ่มสินค้าลงตะกร้าสำเร็จ",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
   return (
     <React.Fragment>
       <div className="max-w-6xl px-4 mx-auto lg:py-8 md:px-6">
@@ -122,6 +185,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                             name="productOption"
                             value={item.name}
                             id={item.id}
+                            onChange={handleOptionSelect}
                             className="peer hidden"
                           />
 
@@ -144,23 +208,37 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   Quantity
                 </label>
                 <div className="relative flex flex-row w-full h-10 mt-4 bg-transparent rounded-lg">
-                  <button className="w-20 h-full rounded-l outline-none cursor-pointer bg-white">
-                    <span className="m-auto text-2xl font-thin text-black">-</span>
+                  <button
+                    onClick={removeQuantity}
+                    className="w-20 h-full rounded-l outline-none cursor-pointer bg-white"
+                  >
+                    <span className="m-auto text-2xl font-thin text-black">
+                      -
+                    </span>
                   </button>
                   <input
                     type="number"
                     className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                     defaultValue={1}
+                    value={quantity}
                     readOnly
                   />
-                  <button className="w-20 h-full rounded-r outline-none cursor-pointer bg-white">
-                    <span className="m-auto text-2xl font-thin text-black">+</span>
+                  <button
+                    onClick={addQuantity}
+                    className="w-20 h-full rounded-r outline-none cursor-pointer bg-white"
+                  >
+                    <span className="m-auto text-2xl font-thin text-black">
+                      +
+                    </span>
                   </button>
                 </div>
               </div>
               <div className="flex flex-wrap items-center -mx-4 ">
                 <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
-                  <button className="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md dark:text-gray-200 dark:border-blue-600 hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100 dark:bg-blue-600 dark:hover:bg-blue-700 dark:hover:border-blue-700 dark:hover:text-gray-300">
+                  <button
+                    onClick={handleAddToCart}
+                    className="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md dark:text-gray-200 dark:border-blue-600 hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100 dark:bg-blue-600 dark:hover:bg-blue-700 dark:hover:border-blue-700 dark:hover:text-gray-300"
+                  >
                     Add to Cart
                   </button>
                 </div>
@@ -171,4 +249,25 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
       </div>
     </React.Fragment>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const productId = context.query["product.tsx"][0] as string;
+
+  const res = await axios.get(`/product`);
+  const product = (await res.data) as ProductData[];
+
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=300, stale-while-revalidate=59"
+  );
+
+  //@ts-ignore
+  const allProduct = product.data as ProductData[];
+
+  let filtered = allProduct.find((item) => item.id === productId);
+
+  return {
+    props: { productData: filtered },
+  };
 };
