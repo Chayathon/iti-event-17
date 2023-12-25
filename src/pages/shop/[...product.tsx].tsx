@@ -6,6 +6,8 @@ import axios from "@/libs/axios";
 import { type ProductData } from "@/classes/Product";
 import { type ProductOptionData } from "@/classes/ProductOption";
 import Swal from "sweetalert2";
+import { type Cart } from "@/interfaces/Cart.type";
+import { FaCartPlus, FaCartShopping } from "react-icons/fa6";
 type Props = {
   productData: ProductData;
 };
@@ -78,12 +80,14 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
       let cartData = JSON.parse(cart);
 
       let isExist = cartData.find(
-        (item) => item.id === data.id && item.option === optionSelect
+        (item: Cart) =>
+          item.id === data.id && item.optionSelect === optionSelect
       );
 
       if (isExist) {
         let index = cartData.findIndex(
-          (item) => item.id === data.id && item.option === optionSelect
+          (item: Cart) =>
+            item.id === data.id && item.optionSelect === optionSelect
         );
 
         cartData[index].quantity += quantity;
@@ -237,9 +241,19 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                 <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
                   <button
                     onClick={handleAddToCart}
-                    className="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md dark:text-gray-200 dark:border-blue-600 hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100 dark:bg-blue-600 dark:hover:bg-blue-700 dark:hover:border-blue-700 dark:hover:text-gray-300"
+                    className="flex items-center justify-center w-full p-4 text-white border border-blue-500 bg-blue-600 hover:bg-blue-800 hover:border-blue-800 rounded-md "
                   >
-                    Add to Cart
+                    <FaCartPlus />
+                    <span className="ml-2">เพิ่มสินค้าลงตะกร้า</span>
+                  </button>
+                </div>
+                <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
+                  <button
+                    onClick={handleAddToCart}
+                    className="flex items-center justify-center w-full p-4 text-white border border-blue-500 bg-blue-600 hover:bg-blue-800 hover:border-blue-800 rounded-md "
+                  >
+                    <FaCartShopping />
+                    <span className="ml-2">ดูตะกร้าสินค้า</span>
                   </button>
                 </div>
               </div>
