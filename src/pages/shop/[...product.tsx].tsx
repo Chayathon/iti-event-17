@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import HomeLayout from "@/components/layouts/HomeLayout";
-import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
-import axios from "@/libs/axios";
-import { type ProductData } from "@/classes/Product";
-import { type ProductOptionData } from "@/classes/ProductOption";
-import Swal from "sweetalert2";
-import { type Cart } from "@/interfaces/Cart.type";
 import Link from "next/link";
+import Swal from "sweetalert2";
+import axios from "@/libs/axios";
+import { GetServerSideProps } from "next";
+import React, { useState, useEffect } from "react";
+import { type Cart } from "@/interfaces/Cart.type";
+import { type ProductData } from "@/classes/Product";
+import HomeLayout from "@/components/layouts/HomeLayout";
 import { FaCartPlus, FaCartShopping } from "react-icons/fa6";
+import { type ProductOptionData } from "@/classes/ProductOption";
+
 type Props = {
   productData: ProductData;
 };
@@ -63,19 +63,17 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
 
     let cart = localStorage.getItem("cart");
 
+    const cartPayload: Cart = {
+      id: data.id,
+      name: data.name,
+      price: data.price,
+      quantity: quantity,
+      optionSelect: optionSelect,
+      image: data.image1,
+    };
+
     if (cart === null) {
-      localStorage.setItem(
-        "cart",
-        JSON.stringify([
-          {
-            id: data.id,
-            name: data.name,
-            price: data.price,
-            quantity: quantity,
-            optionSelect: optionSelect,
-          },
-        ])
-      );
+      localStorage.setItem("cart", JSON.stringify([cartPayload]));
 
       setCount("1");
     } else {
@@ -94,13 +92,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
 
         cartData[index].quantity += quantity;
       } else {
-        cartData.push({
-          id: data.id,
-          name: data.name,
-          price: data.price,
-          quantity: quantity,
-          optionSelect: optionSelect,
-        });
+        cartData.push(cartPayload);
 
         setCount((parseInt(count) + 1).toString());
       }
