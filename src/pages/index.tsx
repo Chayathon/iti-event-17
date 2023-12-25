@@ -23,7 +23,7 @@ export default function Home() {
                 🎈
               </h1>
               <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text font-bold whitespace-nowrap text-transparent md:text-4xl sm:text-2xl text-xl">
-                <TypingEffect text={["Information Technology for Industrial"]} />
+                <TypingEffect text={["Information Technology for Industry"]} />
               </h1>
               <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed text-white">
                 ทุกช่วงเวลา ร้อยเรียงเป็นเรื่องราวให้เราได้คิดถึง
