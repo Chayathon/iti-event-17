@@ -17,6 +17,7 @@ export type ReservationTableData = {
   slip?: string;
   method?: PaymentMethod;
   status?: StatusPayment;
+  nickname?: string;
 };
 
 export default class ReservationTable {
@@ -106,6 +107,7 @@ export default class ReservationTable {
         generation: reservation.generation,
         method: reservation.method,
         status: reservation.status,
+        nickname: reservation.nickname,
       };
 
       const { data, error } = await supabase

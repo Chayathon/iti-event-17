@@ -20,6 +20,7 @@ const schema = yup
     tableId: yup.string().required("กรุณาเลือกโต๊ะ"),
     firstName: yup.string().required("กรุณากรอกชื่อจริง"),
     lastName: yup.string().required("กรุณากรอกนามสกุล"),
+    nickname: yup.string().required("กรุณากรอกชื่อเล่น"),
     email: yup
       .string()
       .required("กรุณากรอกอีเมล")
@@ -41,6 +42,7 @@ type FormValues = {
   tableId?: string;
   firstName?: string;
   lastName?: string;
+  nickname?: string;
   email?: string;
   phone?: string;
   generation?: number;
@@ -229,6 +231,27 @@ export default function TableLayout({ data }: Props) {
               </div>
               <div className="sm:col-span-2">
                 <label
+                  htmlFor="nickname"
+                  className="block text-sm font-semibold leading-6 text-gray-900"
+                >
+                  ชื่อเล่น*
+                </label>
+                <div className="mt-2.5">
+                  <input
+                    type="text"
+                    {...register("nickname", { required: true })}
+                    id="nickname"
+                    autoComplete="nickname"
+                    placeholder="ชื่อเล่น: พี่เจมส์ พี่บี"
+                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                  <span className="text-red-600">
+                    {errors.nickname?.message}
+                  </span>
+                </div>
+              </div>
+              <div className="sm:col-span-2">
+                <label
                   htmlFor="email"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
@@ -240,6 +263,7 @@ export default function TableLayout({ data }: Props) {
                     {...register("email", { required: true })}
                     id="email"
                     autoComplete="email"
+                    placeholder="อีเมล: "
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                   <span className="text-red-600">{errors.email?.message}</span>
@@ -257,6 +281,7 @@ export default function TableLayout({ data }: Props) {
                   {...register("phone", { required: true })}
                   id="phone"
                   autoComplete="off"
+                  placeholder="เบอร์โทรศัพท์: 0812345678"
                   className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 <span className="text-red-600">{errors.phone?.message}</span>

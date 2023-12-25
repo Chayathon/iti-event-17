@@ -8,6 +8,7 @@ import {
   FaComment,
   FaHandshake,
   FaCircleQuestion,
+  FaUtensils
 } from "react-icons/fa6";
 
 type Props = {};
@@ -27,11 +28,23 @@ const MENU: Menu[] = [
     icon: <FaHouse />,
   },
   {
-    title: "รายชื่อผู้เข้าร่วมงาน",
-    href: "/participants",
+    title: "การจองโต๊ะ",
+    href: "/reservation",
     target: "_self",
-    icon: <FaClipboard />,
+    icon: <FaUtensils />,
   },
+  {
+    title: "ตรวจสอบดำเนินการ",
+    href: "/reservation",
+    target: "_self",
+    icon: <FaMagnifyingGlass />,
+  },
+  // {
+  //   title: "รายชื่อผู้เข้าร่วมงาน",
+  //   href: "/participants",
+  //   target: "_self",
+  //   icon: <FaClipboard />,
+  // },
   //   {
   //     title: "ตารางการแข่งขัน",
   //     href: "/schedule",
@@ -48,21 +61,21 @@ const MENU: Menu[] = [
   //     title: "สถิติการแข่งขัน",
   //     href: "/statistics",
   //   },
-  {
-    title: "สถานที่จัดงาน",
-    href: "/location",
-    target: "_self",
-    icon: <FaLocationPin />,
-  },
-  {
-    title: "คำถามที่พบบ่อย",
-    href: "/faq",
-    target: "_self",
-    icon: <FaCircleQuestion />,
-  },
+  // {
+  //   title: "สถานที่จัดงาน",
+  //   href: "/location",
+  //   target: "_self",
+  //   icon: <FaLocationPin />,
+  // },
+  // {
+  //   title: "คำถามที่พบบ่อย",
+  //   href: "/faq",
+  //   target: "_self",
+  //   icon: <FaCircleQuestion />,
+  // },
   {
     title: "ติดต่อเรา",
-    href: "/contact",
+    href: "https://www.facebook.com/itis16/",
     target: "_blank",
     icon: <FaComment />,
   },
