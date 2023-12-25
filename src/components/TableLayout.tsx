@@ -72,7 +72,7 @@ export default function TableLayout({ data }: Props) {
     }
 
     if (table.isReserved) {
-      return "bg-green-500 text-white cursor-not-allowed";
+      return "bg-green-500 text-white cursor-pointer";
       //cursor-not-allowed
     }
 
@@ -81,23 +81,18 @@ export default function TableLayout({ data }: Props) {
 
   async function onClick(table: TableData) {
     if (table.isReserved || !table.isAvailable) {
-      // const res = await (
-      //   await axios.post(`/reservation/nickname`, {
-      //     tableId: table.id,
-      //   })
-      // ).data;
 
-      // const data = res.data;
+      const infoTable = nickname?.find((item) => item.tableId.id === table.id);
 
-      // Swal.fire({
-      //   title: "โต๊ะนี้ถูกจองแล้ว",
-      //   html: `<b class="font-xl">${data.nickname} รุ่นที่ ${data.generation}
-      //     <br />
-      //   `,
-      //   // เมื่อ ${moment(data.generation).locale("th").format("l")}
-      //   icon: "info",
-      //   timer: 3000,
-      // });
+      Swal.fire({
+        title: "โต๊ะนี้ถูกจองแล้ว",
+        html: `<b class="font-xl">${infoTable.nickname} รุ่นที่ ${infoTable.generation}
+          <br />
+        `,
+        // เมื่อ ${moment(data.generation).locale("th").format("l")}
+        icon: "info",
+        timer: 3000,
+      });
 
       return;
     }
