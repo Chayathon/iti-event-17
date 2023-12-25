@@ -81,7 +81,6 @@ export default function TableLayout({ data }: Props) {
 
   async function onClick(table: TableData) {
     if (table.isReserved || !table.isAvailable) {
-
       const infoTable = nickname?.find((item) => item.tableId.id === table.id);
 
       Swal.fire({
@@ -170,7 +169,10 @@ export default function TableLayout({ data }: Props) {
         handleClose();
         Swal.fire({
           title: "บันทึกข้อมูลสำเร็จ",
-          html: `คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resdata?.data?.phone}" target="_blank" class="underline">ตรวจสอบดำเนินการ</a> หรือตรวจสอบได้ที่เมนู "ตรวจสอบดำเนินการ"
+          html: `
+          <b>กรุณาชำระภายใน 3 วัน</b>
+          <br />
+          คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resdata?.data?.phone}" target="_blank" class="underline">ตรวจสอบดำเนินการ</a> หรือตรวจสอบได้ที่เมนู "ตรวจสอบดำเนินการ"
                   `,
           icon: "success",
         }).then(() => {
