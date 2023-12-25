@@ -136,6 +136,7 @@ export default function TableLayout({ data }: Props) {
         generation: data.generation,
         method: data.method as PaymentMethod,
         name: `${data.firstName} ${data.lastName}`,
+        nickname: data.nickname,
       };
 
       const res = await axios.post("/reservation", payload);

@@ -135,7 +135,7 @@ export default function CardTable({ data, callback }: CardTableProps) {
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">โต๊ะที่จอง</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            ({table.index}) {table.name}
+            ({table.index}) {table.name} <b>(ราคา 4,500.- บาท)</b>
           </dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
@@ -155,7 +155,7 @@ export default function CardTable({ data, callback }: CardTableProps) {
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">ชื่อ-นามสกุล</dt>
-          <dd className="text-gray-700 sm:col-span-2">{data.name}</dd>
+          <dd className="text-gray-700 sm:col-span-2">({data.nickname}) {data.name}</dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">เบอร์โทรศัพท์</dt>
@@ -169,6 +169,7 @@ export default function CardTable({ data, callback }: CardTableProps) {
           <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
           <dd className="text-gray-700 sm:col-span-2">
             {paymentMethod(data.method)}
+            <span className="ml-5  text-blue-500">ธนาคารกรุงไทย <b>663-2-44989-1</b> (นางสาวสุภาวดี นพพันธ์)</span> 
           </dd>
         </div>
         {data.method !== " ONSIDE" && (
