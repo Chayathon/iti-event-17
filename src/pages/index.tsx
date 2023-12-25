@@ -33,13 +33,13 @@ export default function Home() {
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                   href="/reservation"
                 >
-                  <span className="inline-flex gap-2">
+                  <span className="inline-flex gap-2 text-xl">
                     <FaUtensils />
                     จองโต๊ะอาหาร
                   </span>
                 </Link>
 
-                <Link
+                {/* <Link
                   className="inline-block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
                   href="/shop"
                 >
@@ -47,7 +47,7 @@ export default function Home() {
                     <FaShirt />
                     สั่งซื้อเสื้อ
                   </span>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
