@@ -15,9 +15,10 @@ const config: Config = {
       },
     },
     daisyui: {
-      themes: ["dark", "light", "night"],
+      themes: ["dark"],
     },
   },
+  darkMode: ['class', '[data-mode="dark"]'],
   plugins: [require("daisyui"), require("@tailwindcss/forms")],
 };
 export default config;

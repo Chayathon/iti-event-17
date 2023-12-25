@@ -7,6 +7,7 @@ import Head from "next/head";
 import "@/styles/background.css";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
+import { ThemeProvider } from "next-themes";
 
 const kanit = Kanit({
   weight: ["400", "500", "600"],
@@ -35,10 +36,12 @@ export default function App({
         supabaseClient={supabaseClient}
         initialSession={pageProps.initialSession}
       >
-        <main className={kanit.className} data-theme="night">
-          <Component {...pageProps} />
-          <Analytics />
-        </main>
+        <ThemeProvider defaultTheme="dark">
+          <main className={`${kanit.className} dark`} data-theme="night">
+            <Component {...pageProps} />
+            <Analytics />
+          </main>
+        </ThemeProvider>
       </SessionContextProvider>
     </React.Fragment>
   );

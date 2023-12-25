@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="th">
+    <Html lang="th" className="dark">
       <Head>
         <meta
           name="description"
@@ -41,7 +41,7 @@ export default function Document() {
         />
         <meta property="twitter:image" content="/homescreen.png" />
       </Head>
-      <body>
+      <body className="dark">
         <Main />
         <NextScript />
       </body>
