@@ -16,11 +16,6 @@ type Props = {
 };
 
 export default function Booking({ tables }: Props) {
-  // const {
-  //   data: tables,
-  //   error,
-  //   isLoading,
-  // } = useSWR<TableData[]>("/tables", fetcher);
 
   return (
     <HomeLayout>
@@ -45,17 +40,17 @@ export default function Booking({ tables }: Props) {
             <div>
               <p className="font-bold">โปรดทราบ</p>
               <p className="text-sm">
-                ➡️ โต๊ะจะแบ่งเป็น 6 แถว แถวละ 8 โต๊ะ รวมทั้งสิ้น 48 โต๊ะ
+                ➡️ โต๊ะจะแบ่งเป็น 5 แถว แถวละ 8 โต๊ะ รวมทั้งสิ้น 40 โต๊ะ
               </p>
               <p className="text-sm">
                 ➡️ <b>การเหมาโต๊ะ</b> จะเป็นการซื้อบัตรจองโต๊ะนั้น ๆ
                 โต๊ะสามารถนั้งได้ 8 คน ราคา
-                <b className="text-red-700"> 4,000.- </b>บาท / โต๊ะ
+                <b className="text-red-700"> 4,500.- </b>บาท / โต๊ะ
               </p>
               <p className="text-sm">
                 ➡️ <b>โต๊ะรวม</b> จะเป็นนั่งรวมกับผู้อื่น
                 สามารถซื้อบัตรรายบุคคลได้ในราคา
-                <b className="text-red-700"> 380.- </b>บาท / คน{" "}
+                <b className="text-red-700"> 570.- </b>บาท / คน{" "}
                 <b>สามารถซื้อบัตรรายบุคคล หน้างานครับ</b>
               </p>
             </div>
