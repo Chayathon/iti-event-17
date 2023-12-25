@@ -14,11 +14,15 @@ export default async function handler(
 ) {
   try {
     switch (req.method) {
-    //   case "GET":
-    //     break;
-      case "POST":
-        const tableId = req.body.tableId as string;
-        const reservation = await Reservation.getReservationByNickname(tableId);
+      //   case "GET":
+      //     break;
+      case "GET":
+        const reservation = await Reservation.getReservationByNickname();
+        res.setHeader(
+          "Cache-Control",
+          "public, s-maxage=86400, stale-while-revalidate=43200"
+        );
+
         res.status(200).json({ message: "success", data: reservation });
         break;
       default:

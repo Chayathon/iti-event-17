@@ -3,9 +3,9 @@ import { type TableData } from "@/classes/Table";
 import { PaymentMethod } from "@/interfaces/Payment.type";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import { useForm } from "react-hook-form";
-import axios from "@/libs/axios";
+import axios, { fetcher } from "@/libs/axios";
 import Swal from "sweetalert2";
-import { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import * as yup from "yup";
@@ -54,6 +54,7 @@ type FormValues = {
 export default function TableLayout({ data }: Props) {
   const router = useRouter();
   const { mutate } = useSWRConfig();
+  const { data: nickname } = useSWR("/reservation/nickname", fetcher);
   const [isloading, setIsloading] = useState(false);
   const {
     register,
@@ -66,8 +67,12 @@ export default function TableLayout({ data }: Props) {
   });
   const [selected, setSelected] = useState<TableData>();
   function getTableStatus(table: TableData) {
+    if (!table.isAvailable) {
+      return "bg-neutral text-white cursor-not-allowed";
+    }
+
     if (table.isReserved) {
-      return "bg-green-500 text-white cursor-pointer";
+      return "bg-green-500 text-white cursor-not-allowed";
       //cursor-not-allowed
     }
 
@@ -76,23 +81,23 @@ export default function TableLayout({ data }: Props) {
 
   async function onClick(table: TableData) {
     if (table.isReserved || !table.isAvailable) {
-      const res = await (
-        await axios.post(`/reservation/nickname`, {
-          tableId: table.id,
-        })
-      ).data;
+      // const res = await (
+      //   await axios.post(`/reservation/nickname`, {
+      //     tableId: table.id,
+      //   })
+      // ).data;
 
-      const data = res.data;
+      // const data = res.data;
 
-      Swal.fire({
-        title: "โต๊ะนี้ถูกจองแล้ว",
-        html: `<b class="font-xl">${data.nickname} รุ่นที่ ${data.generation}           
-          <br />
-        `,
-        // เมื่อ ${moment(data.generation).locale("th").format("l")}
-        icon: "info",
-        timer: 3000,
-      });
+      // Swal.fire({
+      //   title: "โต๊ะนี้ถูกจองแล้ว",
+      //   html: `<b class="font-xl">${data.nickname} รุ่นที่ ${data.generation}
+      //     <br />
+      //   `,
+      //   // เมื่อ ${moment(data.generation).locale("th").format("l")}
+      //   icon: "info",
+      //   timer: 3000,
+      // });
 
       return;
     }
@@ -174,7 +179,7 @@ export default function TableLayout({ data }: Props) {
                   `,
           icon: "success",
         }).then(() => {
-          // mutate("/tables");
+          mutate("/reservation/nickname");
           router.push(`/tracking?search=${resdata?.data?.phone}`);
         });
       }
@@ -402,6 +407,7 @@ export default function TableLayout({ data }: Props) {
           </div>
         </div>
       </dialog>
+      {/* {JSON.stringify(nickname)} */}
       <div className="p-0 md:p-10">
         <div className="w-full text-center bg-blue-800 my-5">
           <h1 className="text-white text-xl p-5">หน้าเวที</h1>
@@ -433,10 +439,14 @@ export default function TableLayout({ data }: Props) {
                 {table.name}
               </p>
               <span className="hidden sm:block ">
-                {table.isReserved ? (
+                {table.isReserved && table.isAvailable && (
                   <b className="text-lg lg:text-2xl text-white">จองแล้ว</b>
-                ) : (
+                )}
+                {!table.isReserved && table.isAvailable && (
                   <b className="text-lg lg:text-2xl">ว่าง</b>
+                )}
+                {!table.isAvailable && (
+                  <b className="text-lg lg:text-xl">ไม่พร้อมให้บริการ</b>
                 )}
               </span>
             </div>

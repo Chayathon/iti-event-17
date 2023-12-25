@@ -203,16 +203,13 @@ export default class ReservationTable {
   }
 
   //get by nickname
-  public static async getReservationByNickname(tableId: string) {
-    const { data, error } = await supabase
-      .from("reservationTable")
-      .select(
-        `
+  public static async getReservationByNickname() {
+    const { data, error } = await supabase.from("reservationTable").select(
+      `
                     id,nickname,generation,created_at,
-                    tableId (id,index,name) as table
+                    tableId (id,index,name) as table,
                     `
-      )
-      .eq("tableId", tableId).single();
+    );
 
     if (error) {
       throw error;
