@@ -117,12 +117,12 @@ export default function CartPage({}: Props) {
                           <div className="inline-flex items-center px-4 font-semibold text-white border border-gray-200 rounded-md dark:border-gray-700 ">
                             <button
                               onClick={() => decreaseQuantity(item)}
-                              className="py-2 hover:text-gray-700 "
+                              className="py-2 "
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width={16}
-                                height={16}
+                                width={32}
+                                height={32}
                                 fill="currentColor"
                                 className="bi bi-dash"
                                 viewBox="0 0 16 16"
@@ -132,17 +132,18 @@ export default function CartPage({}: Props) {
                             </button>
                             <input
                               type="number"
-                              className="w-12 px-2 py-4 text-center border-0 rounded-md dark:bg-gray-800 bg-gray-50  md:text-right"
+                              readOnly
+                              className="w-12 px-2 py-4 text-xl text-black text-center border-0 rounded-md bg-gray-50  md:text-right  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                               placeholder={item.quantity.toString()}
                             />
                             <button
                               onClick={() => increaseQuantity(item)}
-                              className="py-2 hover:text-gray-700 "
+                              className="py-2 text-white"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width={16}
-                                height={16}
+                                width={32}
+                                height={32}
                                 fill="currentColor"
                                 className="bi bi-plus"
                                 viewBox="0 0 16 16"
