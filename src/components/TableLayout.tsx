@@ -10,6 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import * as yup from "yup";
 import BankInfo from "./BankInfo";
+import moment from "moment";
+import "moment/locale/th";
 
 const LAST_GENERATION = 28;
 
@@ -65,14 +67,35 @@ export default function TableLayout({ data }: Props) {
   const [selected, setSelected] = useState<TableData>();
   function getTableStatus(table: TableData) {
     if (table.isReserved) {
-      return "bg-green-500 text-white cursor-not-allowed";
+      return "bg-green-500 text-white cursor-pointer";
+      //cursor-not-allowed
     }
 
     return "cursor-pointer";
   }
 
-  function onClick(table: TableData) {
-    if (table.isReserved || !table.isAvailable) return;
+  async function onClick(table: TableData) {
+    if (table.isReserved || !table.isAvailable) {
+      const res = await (
+        await axios.post(`/reservation/nickname`, {
+          tableId: table.id,
+        })
+      ).data;
+
+      const data = res.data;
+
+      Swal.fire({
+        title: "โต๊ะนี้ถูกจองแล้ว",
+        html: `<b class="font-xl">${data.nickname} รุ่นที่ ${data.generation}           
+          <br />
+        `,
+        // เมื่อ ${moment(data.generation).locale("th").format("l")}
+        icon: "info",
+        timer: 3000,
+      });
+
+      return;
+    }
 
     const modalElement = document.getElementById(
       "reservationModal"

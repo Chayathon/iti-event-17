@@ -113,7 +113,8 @@ export default class ReservationTable {
       const { data, error } = await supabase
         .from("reservationTable")
         .insert(payload)
-        .select("created_at").single();
+        .select("created_at")
+        .single();
 
       const tableReservated = (
         await Table.updateTable({
@@ -134,7 +135,7 @@ export default class ReservationTable {
         throw error;
       }
 
-      return {...data, phone: payload.phone};
+      return { ...data, phone: payload.phone };
     } catch (error) {
       throw error;
     }
@@ -145,7 +146,8 @@ export default class ReservationTable {
       .from("reservationTable")
       .update(reservation)
       .eq("id", reservation.id)
-      .select(`*,tableId (id,index,name) as table`).single();
+      .select(`*,tableId (id,index,name) as table`)
+      .single();
 
     if (error) {
       throw error;
@@ -158,6 +160,59 @@ export default class ReservationTable {
       .from("reservationTable")
       .delete()
       .eq("id", id);
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  //optional
+  public static async getReservationByStatus(status: StatusPayment) {
+    const { data, error } = await supabase
+      .from("reservationTable")
+      .select(
+        `
+                    *,
+                    tableId (id,index,name) as table
+                    `
+      )
+      .eq("status", status);
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  public static async getReservationByMethod(method: PaymentMethod) {
+    const { data, error } = await supabase
+      .from("reservationTable")
+      .select(
+        `
+                    *,
+                    tableId (id,index,name) as table
+                    `
+      )
+      .eq("method", method);
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  //get by nickname
+  public static async getReservationByNickname(tableId: string) {
+    const { data, error } = await supabase
+      .from("reservationTable")
+      .select(
+        `
+                    id,nickname,generation,created_at,
+                    tableId (id,index,name) as table
+                    `
+      )
+      .eq("tableId", tableId).single();
 
     if (error) {
       throw error;
