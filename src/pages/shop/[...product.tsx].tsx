@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
@@ -7,6 +7,7 @@ import { type ProductData } from "@/classes/Product";
 import { type ProductOptionData } from "@/classes/ProductOption";
 import Swal from "sweetalert2";
 import { type Cart } from "@/interfaces/Cart.type";
+import Link from "next/link";
 import { FaCartPlus, FaCartShopping } from "react-icons/fa6";
 type Props = {
   productData: ProductData;
@@ -23,8 +24,7 @@ export default function Product({ productData }: Props) {
 }
 
 export const ProductCard = ({ data }: { data?: ProductData }) => {
-  const router = useRouter();
-
+  const [count, setCount] = useState("0");
   const [optionSelect, setOptionSelect] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -76,6 +76,8 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
           },
         ])
       );
+
+      setCount("1");
     } else {
       let cartData = JSON.parse(cart);
 
@@ -99,6 +101,8 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
           quantity: quantity,
           optionSelect: optionSelect,
         });
+
+        setCount((parseInt(count) + 1).toString());
       }
 
       localStorage.setItem("cart", JSON.stringify(cartData));
@@ -111,6 +115,23 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
       timer: 1500,
     });
   };
+
+  useEffect(() => {
+    let cart = localStorage.getItem("cart");
+
+    if (cart !== null) {
+      let cartData = JSON.parse(cart);
+
+      let count = cartData.reduce(
+        (sum: number, item: Cart) => sum + item.quantity,
+        0
+      );
+
+      setCount(count.toString());
+    }
+
+    return () => {};
+  }, []);
 
   return (
     <React.Fragment>
@@ -248,13 +269,16 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   </button>
                 </div>
                 <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
-                  <button
-                    onClick={handleAddToCart}
-                    className="flex items-center justify-center w-full p-4 text-white border border-blue-500 bg-blue-600 hover:bg-blue-800 hover:border-blue-800 rounded-md "
+                  <Link
+                    href={"/cart"}
+                    className="flex items-center justify-center w-full p-4 text-white border border-blue-500  hover:bg-blue-600 hover:border-blue-800 rounded-md "
                   >
                     <FaCartShopping />
                     <span className="ml-2">ดูตะกร้าสินค้า</span>
-                  </button>
+                    <div className="badge bg-white ml-2 text-black">
+                      {count}
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>
