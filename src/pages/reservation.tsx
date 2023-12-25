@@ -16,7 +16,6 @@ type Props = {
 };
 
 export default function Booking({ tables }: Props) {
-
   return (
     <HomeLayout>
       <div className="flex mt-14 justify-center">
@@ -48,10 +47,11 @@ export default function Booking({ tables }: Props) {
                 <b className="text-red-700"> 4,500.- </b>บาท / โต๊ะ
               </p>
               <p className="text-sm">
-                ➡️ <b>โต๊ะรวม</b> จะเป็นนั่งรวมกับผู้อื่น
+                {/* ➡️ <b>โต๊ะรวม</b> จะเป็นนั่งรวมกับผู้อื่น
                 สามารถซื้อบัตรรายบุคคลได้ในราคา
                 <b className="text-red-700"> 570.- </b>บาท / คน{" "}
-                <b>สามารถซื้อบัตรรายบุคคล หน้างานครับ</b>
+                <b>สามารถซื้อบัตรรายบุคคล หน้างานครับ</b> */}
+                ➡️ <b>โต๊ะรวม</b> <span className="text-red-700">ทางเราจะแจ้งให้ทราบภายหลัง</span>
               </p>
             </div>
           </div>
