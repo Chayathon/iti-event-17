@@ -18,10 +18,6 @@ export default async function handler(
       //     break;
       case "GET":
         const reservation = await Reservation.getReservationByNickname();
-        res.setHeader(
-          "Cache-Control",
-          "public, s-maxage=86400, stale-while-revalidate=43200"
-        );
 
         res.status(200).json({ message: "success", data: reservation });
         break;
