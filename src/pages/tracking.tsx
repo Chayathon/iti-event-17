@@ -9,6 +9,7 @@ import { type ReservationTableData } from "@/classes/ReservationTable";
 import ReservationListCard from "@/components/Cards/ReservationListCard";
 import BankInfo from "@/components/BankInfo";
 
+
 type Props = {};
 
 type FormValues = {

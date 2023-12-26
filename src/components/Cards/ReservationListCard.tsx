@@ -13,6 +13,7 @@ import moment from "moment";
 import "moment/locale/th";
 import axios from "@/libs/axios";
 import supabase from "@/libs/supabase";
+import TagePayment from "@/components/Tage/TagePayment";
 
 type CallbackData = {
   id: string;
@@ -148,14 +149,14 @@ export default function CardTable({ data, callback }: CardTableProps) {
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">สถานะการจอง</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            <div className={`badge ${statusOrderColor(data.status)}`}>
-              {statusOrder(data.status)}
-            </div>
+            <TagePayment status={data.status} />
           </dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">ชื่อ-นามสกุล</dt>
-          <dd className="text-gray-700 sm:col-span-2">({data.nickname}) {data.name}</dd>
+          <dd className="text-gray-700 sm:col-span-2">
+            ({data.nickname}) {data.name}
+          </dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">เบอร์โทรศัพท์</dt>
@@ -169,7 +170,9 @@ export default function CardTable({ data, callback }: CardTableProps) {
           <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
           <dd className="text-gray-700 sm:col-span-2">
             {paymentMethod(data.method)}
-            <span className="ml-5  text-blue-500">ธนาคารกรุงไทย <b>663-2-44989-1</b> (นางสาวสุภาวดี นพพันธ์)</span> 
+            <span className="ml-5  text-blue-500">
+              ธนาคารกรุงไทย <b>663-2-44989-1</b> (นางสาวสุภาวดี นพพันธ์)
+            </span>
           </dd>
         </div>
         {data.method !== " ONSIDE" && (
