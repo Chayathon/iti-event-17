@@ -31,8 +31,12 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
   const [optionSelect, setOptionSelect] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  const handleOptionSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOptionSelect(e.target.value);
+  // const handleOptionSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setOptionSelect(e.target.value);
+  // };
+
+  const handleOptionSelect = (item: ProductOptionData) => {
+    console.log(item);
   };
 
   const addQuantity = () => {
@@ -201,7 +205,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                             name="productOption"
                             value={item.name}
                             id={item.id}
-                            onChange={handleOptionSelect}
+                            onChange={() => handleOptionSelect(item)}
                             className="peer hidden"
                           />
 

@@ -6,6 +6,7 @@ import BankInfo from "@/components/BankInfo";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { type Cart } from "@/interfaces/Cart.type";
 import { type ReservationProductData } from "@/classes/ReservationProduct";
+import { type ReservationProductItemData } from "@/classes/ReservationProductItem";
 import { calculateSubtotal, calculateTotal } from "@/helpers/calculateProduct";
 import { PaymentMethod } from "@/interfaces/Payment.type";
 
@@ -33,11 +34,14 @@ const schema = yup
   })
   .required("กรุณากรอกข้อมูลให้ครบถ้วน");
 
-type Props = {
-  data?: {
-    id: string;
-    status: string;
-  };
+type Props = {};
+
+type ProductItem = {
+  id: string;
+  productId: string;
+  option: string;
+  quantity: number;
+  price: number;
 };
 
 type FormValues = {
@@ -50,7 +54,7 @@ type FormValues = {
   address?: string;
 };
 
-export default function ProductModal({ data }: Props) {
+export default function ProductModal({}: Props) {
   const [isloading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<Cart[]>([]);
   const [subtotal, setSubtotal] = useState(0.0);
@@ -96,15 +100,28 @@ export default function ProductModal({ data }: Props) {
   }
 
   async function onSubmit(dataFrom: FormValues) {
-    const productOptions = {};
-    const payload: ReservationProductData = {
+    let productsItem: ReservationProductItemData[] = [];
+    const reservationProduct: ReservationProductData = {
       name: dataFrom.firstName + " " + dataFrom.lastName,
       email: dataFrom.email,
       phone: dataFrom.phone,
       generation: dataFrom.generation,
       method: dataFrom.method,
       address: dataFrom.address,
-      
+    };
+
+    products.forEach((item) => {
+      productsItem.push({
+        productId: item.id,
+        option: item.optionSelect,
+        quantity: item.quantity,
+        price: item.price,
+      });
+    });
+
+    const payload = {
+      ...reservationProduct,
+      productsItem,
     };
 
     console.log(payload);
@@ -336,7 +353,7 @@ export default function ProductModal({ data }: Props) {
             <div className="mt-5">
               <button
                 type="submit"
-                disabled={isloading}
+                disabled={isloading || !products.length || !total}
                 className={`block w-full rounded-md ${
                   isloading ? "bg-gray-600" : "bg-indigo-600"
                 }  px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
