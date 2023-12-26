@@ -12,7 +12,7 @@ export default function CartPage({}: Props) {
   const [Cart, setCart] = useState<Cart[]>([]);
   const [subtotal, setSubtotal] = useState(0.0);
   const [total, setTotal] = useState(0.0);
-  const [Shipping, setShipping] = useState(0);
+  const [shipping, setShipping] = useState(0);
 
   function increaseQuantity(item: Cart) {
     const newCart = [...Cart];
@@ -60,7 +60,7 @@ export default function CartPage({}: Props) {
 
   function calculateProduct() {
     const subtotal = calculateSubtotal(Cart);
-    const total = calculateTotal(Cart, Shipping);
+    const total = calculateTotal(Cart, shipping);
     setSubtotal(subtotal);
     setTotal(total);
   }

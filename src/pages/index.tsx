@@ -11,6 +11,7 @@ const TypingEffect = dynamic(() => import("@/components/TypingEffect"), {
 export default function Home() {
   return (
     <HomeLayout>
+      
       <div>
         <section className="mt-36">
           <div className="float-none mx-auto px-4 lg:flex  lg:items-center">

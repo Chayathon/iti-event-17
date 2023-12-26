@@ -5,6 +5,7 @@ import * as yup from "yup";
 import BankInfo from "@/components/BankInfo";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { type Cart } from "@/interfaces/Cart.type";
+import { calculateSubtotal, calculateTotal } from "@/helpers/calculateProduct";
 
 const LAST_GENERATION = 28;
 
@@ -53,6 +54,7 @@ export default function ProductModal({ data }: Props) {
   const [products, setProducts] = useState<Cart[]>([]);
   const [subtotal, setSubtotal] = useState(0.0);
   const [total, setTotal] = useState(0.0);
+  const [shipping, setShipping] = useState(0);
 
   const {
     register,
@@ -79,9 +81,15 @@ export default function ProductModal({ data }: Props) {
   }
 
   function loadProducts() {
-    const cart = localStorage.getItem("cart");
+    const cart = JSON.parse(localStorage.getItem("cart"));
     if (cart) {
-      setProducts(JSON.parse(cart));
+      setProducts(cart);
+
+      const subtotal = calculateSubtotal(cart);
+      const total = calculateTotal(cart, 0);
+
+      setSubtotal(subtotal);
+      setTotal(total);
     }
   }
 
@@ -273,6 +281,58 @@ export default function ProductModal({ data }: Props) {
               </div> */}
             </div>
             <BankInfo />
+            {/* loop products */}
+
+            <details className="collapse bg-gray-200">
+              <summary className="collapse-title text-xl font-medium">
+                คลิกเพื่อดูรายละเอียดสินค้า
+              </summary>
+              <div className="collapse-content">
+                {products.map((item, index) => (
+                  <div key={`list-${item.id}-${index}`} className="mb-2">
+                    <h3 className="text-sm text-gray-900">{item.name}</h3>
+
+                    <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+                      <div>
+                        <dt className="inline">Option: </dt>
+                        <dd className="inline">
+                          {item.optionSelect} x {item.quantity}
+                        </dd>
+                      </div>
+
+                      <div>
+                        <dt className="inline">ราคา: </dt>
+                        <dd className="inline">{item.price}.-</dd>
+                      </div>
+
+                      <div>
+                        <dt className="inline">ราคารวม: </dt>
+                        <dd className="inline">{item.price * item.quantity}.-</dd>
+                      </div>
+                    </dl>
+                  </div>
+                ))}
+              </div>
+            </details>
+
+            <div className="mt-5">
+              <div className="flex justify-between items-center">
+                <h3 className="font-bold text-lg">สรุปรายการสั่งซื้อ</h3>
+                <p className="text-lg font-bold text-gray-900">
+                  {subtotal}.- บาท
+                </p>
+              </div>
+              <div className="flex justify-between items-center">
+                <h3 className="font-bold text-lg">ค่าจัดส่ง</h3>
+                <p className="text-lg font-bold text-gray-900">
+                  {shipping}.- บาท
+                </p>
+              </div>
+              <div className="flex justify-between items-center">
+                <h3 className="font-bold text-lg">รวมทั้งหมด</h3>
+                <p className="text-lg font-bold text-gray-900">{total}.- บาท</p>
+              </div>
+            </div>
             <div className="mt-5">
               <button
                 type="submit"
