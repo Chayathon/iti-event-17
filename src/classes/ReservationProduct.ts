@@ -114,7 +114,7 @@ export default class ReservationProduct {
 
       console.log("totalPrice", totalPrice);
 
-      await ReservationProduct.updateReservation(oriderId, {
+      const resData = await ReservationProduct.updateReservation(oriderId, {
         totalPrice: totalPrice,
       });
 
@@ -123,7 +123,7 @@ export default class ReservationProduct {
       if (error) {
         throw error;
       }
-      return res;
+      return resData;
     } catch (error) {
       console.error(error);
     }
@@ -133,15 +133,17 @@ export default class ReservationProduct {
     id: string,
     data: ReservationProductData
   ) {
-    const { error } = await supabase
+    const { data: res, error } = await supabase
       .from("reservationProduct")
       .update(data)
-      .eq("id", id);
+      .eq("id", id)
+      .select(`*`)
+      .single();
 
     if (error) {
       throw error;
     }
-    return data;
+    return res;
   }
 
   public static async deleteReservation(id: string) {
