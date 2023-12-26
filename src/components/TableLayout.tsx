@@ -186,7 +186,7 @@ export default function TableLayout({ data }: Props) {
 
       Swal.fire({
         title: "บันทึกข้อมูลไม่สำเร็จ",
-        text: error.response.data.message as string,
+        text: error?.response.data.message as string,
         icon: "error",
         timer: 3000,
       });
