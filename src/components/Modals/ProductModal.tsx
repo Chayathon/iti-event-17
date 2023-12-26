@@ -9,6 +9,7 @@ import { type ReservationProductData } from "@/classes/ReservationProduct";
 import { type ReservationProductItemData } from "@/classes/ReservationProductItem";
 import { calculateSubtotal, calculateTotal } from "@/helpers/calculateProduct";
 import { PaymentMethod } from "@/interfaces/Payment.type";
+import axios from "@/libs/axios";
 
 const LAST_GENERATION = 28;
 
@@ -124,6 +125,9 @@ export default function ProductModal({}: Props) {
     };
 
     console.log(payload);
+    const resData = (await axios.post("/reservation/product", payload)).data;
+
+    console.log(resData);
   }
 
   return (
@@ -323,7 +327,8 @@ export default function ProductModal({}: Props) {
               </div>
             </details>
             <p className="text-red-600 font-bold my-2">
-              *รับสินค้าหน้างาน ขออภัยไม่มีบริการจัดส่งสินค้า/หากมีการแก้ไขจะแจ้งให้ทราบ
+              *รับสินค้าหน้างาน
+              ขออภัยไม่มีบริการจัดส่งสินค้า/หากมีการแก้ไขจะแจ้งให้ทราบ
             </p>
             <div className="mt-5">
               <div className="flex justify-between items-center">

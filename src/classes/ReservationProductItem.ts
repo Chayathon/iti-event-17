@@ -3,7 +3,7 @@ import ShortUniqueId from "short-unique-id";
 
 export type ReservationProductItemData = {
   id?: string;
-  reservationProductId?: string;
+  orderId?: string; //orderId
   productId?: string;
   optionId?: string;
   price?: number;
@@ -81,6 +81,21 @@ export default class ReservationProductItem {
           quantity,
         },
       ]);
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  // make many insert at once
+  public static async createReservationProductItems(
+    // reservationProductId: string,
+    productItems: ReservationProductItemData[]
+  ) {
+    const { data, error } = await supabase
+      .from("reservationProductItem")
+      .insert(productItems);
 
     if (error) {
       throw error;

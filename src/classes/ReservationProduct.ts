@@ -1,7 +1,10 @@
 import supabase from "@/libs/supabase";
-import Table, { TableData } from "@/classes/Table";
 import notify from "@/libs/notify";
-import { type ReservationProductItemData } from "./ReservationProductItem";
+import ProductItem, {
+  type ReservationProductItemData,
+} from "./ReservationProductItem";
+import ShortUniqueId from "short-unique-id";
+import ProductOption, { type ProductOptionData } from "./ProductOption";
 
 import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
 
@@ -21,6 +24,7 @@ export type ReservationProductData = {
   trackingCode?: string;
   address?: string;
   options?: ReservationProductItemData | ReservationProductItemData[];
+  productsItem?: ReservationProductItemData | ReservationProductItemData[];
 };
 
 export default class ReservationProduct {
@@ -73,12 +77,56 @@ export default class ReservationProduct {
   }
 
   public static async createReservation(data: ReservationProductData) {
-    const { error } = await supabase.from("reservationProduct").insert([data]);
+    try {
+      const ProductOptionDB = await ProductOption.getProductOptions();
+      const productItem = data.productsItem as ReservationProductItemData[];
+      delete data.productsItem;
 
-    if (error) {
-      throw error;
+      data.id = new ShortUniqueId().rnd(10);
+
+      const { data: res, error } = await supabase
+        .from("reservationProduct")
+        .insert([data])
+        .select(`*`)
+        .single();
+
+      const oriderId = res.id;
+      let totalPrice = 0;
+
+      const options = productItem.map((item) => {
+        const productOption = ProductOptionDB.find(
+          (option) => option.id === item.optionId
+        ) as ProductOptionData;
+
+        const price = productOption.price || 0;
+        // data.totalPrice +=  * item.quantity;
+        console.log("total", price, item.quantity);
+        totalPrice += price * item.quantity;
+
+        return {
+          orderId: oriderId,
+          productId: item.productId,
+          optionId: item.optionId,
+          price,
+          quantity: item.quantity,
+        };
+      });
+
+      console.log("totalPrice", totalPrice);
+
+      await ReservationProduct.updateReservation(oriderId, {
+        totalPrice: totalPrice,
+      });
+
+      await ProductItem.createReservationProductItems(options);
+
+      if (error) {
+        throw error;
+      }
+      return res;
+    } catch (error) {
+      console.error(error);
     }
-    return data;
   }
 
   public static async updateReservation(

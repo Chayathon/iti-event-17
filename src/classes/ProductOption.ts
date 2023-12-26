@@ -11,7 +11,23 @@ export type ProductOptionData = {
 };
 
 export default class ProductOption {
-  public static async getProductOptions(productId: string) {
+  public static async getProductOptions() {
+    const { data, error } = await supabase
+      .from("productOption")
+      .select(
+        `
+                    *
+                    `
+      )
+      .order("index", { ascending: true });
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  public static async getProductOption(productId: string) {
     const { data, error } = await supabase
       .from("productOption")
       .select(

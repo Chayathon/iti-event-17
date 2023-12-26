@@ -14,7 +14,10 @@ export type NotifyData = {
 };
 
 const LINE_API_URL = "https://notify-api.line.me/api/notify";
-const LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
+const LINE_TOKEN =
+  process.env.NODE_ENV === "production"
+    ? process.env.LINE_NOTIFY_TOKEN
+    : process.env.LINE_NOTIFY_TOKEN_DEV;
 
 export default async function notify(data: NotifyData) {
   try {

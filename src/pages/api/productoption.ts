@@ -13,9 +13,7 @@ export default async function handler(
 ) {
   switch (req.method) {
     case "GET":
-      const allProductOption = await ProductOption.getProductOptions(
-        req.query.productId as string
-      );
+      const allProductOption = await ProductOption.getProductOptions();
       res.status(200).json({ message: "Success", data: allProductOption });
       break;
     case "POST":
