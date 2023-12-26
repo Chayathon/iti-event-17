@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaCircleCheck, FaCropSimple } from "react-icons/fa6";
+import { FaCircleCheck } from "react-icons/fa6";
 import * as yup from "yup";
 import BankInfo from "@/components/BankInfo";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,6 +10,8 @@ import { type ReservationProductItemData } from "@/classes/ReservationProductIte
 import { calculateSubtotal, calculateTotal } from "@/helpers/calculateProduct";
 import { PaymentMethod } from "@/interfaces/Payment.type";
 import axios from "@/libs/axios";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 const LAST_GENERATION = 28;
 
@@ -56,6 +58,7 @@ type FormValues = {
 };
 
 export default function ProductModal({}: Props) {
+  const router = useRouter();
   const [isloading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<Cart[]>([]);
   const [subtotal, setSubtotal] = useState(0.0);
@@ -100,34 +103,85 @@ export default function ProductModal({}: Props) {
     }
   }
 
-  async function onSubmit(dataFrom: FormValues) {
-    let productsItem: ReservationProductItemData[] = [];
-    const reservationProduct: ReservationProductData = {
-      name: dataFrom.firstName + " " + dataFrom.lastName,
-      email: dataFrom.email,
-      phone: dataFrom.phone,
-      generation: dataFrom.generation,
-      method: dataFrom.method,
-      address: dataFrom.address,
-    };
+  function onSubmit(dataFrom: FormValues) {
+    handleClose();
+    Swal.fire({
+      title: "ยืนยันการจอง",
+      text: "คุณได้ตรวจสอบข้อมูลว่าถูกต้องแล้วใช่หรือไม่?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "ใช่, ยืนยัน",
+      cancelButtonText: "ไม่แน่ใจ, ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "กำลังบันทึกข้อมูล...",
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
 
-    products.forEach((item) => {
-      productsItem.push({
-        productId: item.id,
-        optionId: item.optionId,
-        quantity: item.quantity,
-      });
+        onSave(dataFrom);
+      }
+      if (result.isDismissed) {
+        handleOpen();
+      }
     });
+  }
 
-    const payload = {
-      ...reservationProduct,
-      productsItem,
-    };
+  async function onSave(dataFrom: FormValues) {
+    try {
+      setIsLoading(true);
 
-    console.log(payload);
-    const resData = (await axios.post("/reservation/product", payload)).data;
+      let productsItem: ReservationProductItemData[] = [];
+      const reservationProduct: ReservationProductData = {
+        name: dataFrom.firstName + " " + dataFrom.lastName,
+        email: dataFrom.email,
+        phone: dataFrom.phone,
+        generation: dataFrom.generation,
+        method: dataFrom.method,
+        address: dataFrom.address,
+      };
 
-    console.log(resData);
+      products.forEach((item) => {
+        productsItem.push({
+          productId: item.id,
+          optionId: item.optionId,
+          quantity: item.quantity,
+        });
+      });
+
+      const payload = {
+        ...reservationProduct,
+        productsItem,
+      };
+
+      const resData = (await axios.post("/reservation/product", payload)).data;
+
+      if (resData.message === "success") {
+        handleClose();
+        Swal.fire({
+          title: "บันทึกข้อมูลสำเร็จ",
+          html: `
+          <b>กรุณาชำระภายใน 3 วัน</b>
+          <br />
+          คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ตรวจสอบดำเนินการ</a> หรือตรวจสอบได้ที่เมนู "ตรวจสอบดำเนินการ"
+                  `,
+          icon: "success",
+        }).then(() => {
+          router.push(`/tracking?search=${resData?.data?.phone}`);
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "เกิดข้อผิดพลาด",
+        text: error.message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (

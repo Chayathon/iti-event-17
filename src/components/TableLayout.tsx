@@ -163,21 +163,21 @@ export default function TableLayout({ data }: Props) {
 
       const res = await axios.post("/reservation", payload);
 
-      const resdata = await res.data;
+      const resData = await res.data;
 
-      if (resdata.message === "success") {
+      if (resData.message === "success") {
         handleClose();
         Swal.fire({
           title: "บันทึกข้อมูลสำเร็จ",
           html: `
           <b>กรุณาชำระภายใน 3 วัน</b>
           <br />
-          คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resdata?.data?.phone}" target="_blank" class="underline">ตรวจสอบดำเนินการ</a> หรือตรวจสอบได้ที่เมนู "ตรวจสอบดำเนินการ"
+          คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ตรวจสอบดำเนินการ</a> หรือตรวจสอบได้ที่เมนู "ตรวจสอบดำเนินการ"
                   `,
           icon: "success",
         }).then(() => {
           mutate("/reservation/nickname");
-          router.push(`/tracking?search=${resdata?.data?.phone}`);
+          router.push(`/tracking?search=${resData?.data?.phone}`);
         });
       }
     } catch (error) {
