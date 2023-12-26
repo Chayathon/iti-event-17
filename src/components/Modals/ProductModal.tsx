@@ -115,7 +115,6 @@ export default function ProductModal({}: Props) {
         productId: item.id,
         optionId: item.optionId,
         quantity: item.quantity,
-        price: item.price,
       });
     });
 
@@ -182,14 +181,6 @@ export default function ProductModal({}: Props) {
                     {errors.lastName?.message}
                   </span>
                 </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="nickname"
-                  className="block text-sm font-semibold leading-6 text-gray-900"
-                >
-                  ชื่อเล่น*
-                </label>
               </div>
               <div className="sm:col-span-2">
                 <label
@@ -311,7 +302,7 @@ export default function ProductModal({}: Props) {
                       <div>
                         <dt className="inline">Option: </dt>
                         <dd className="inline">
-                          {item.name} x {item.quantity}
+                          {item.optionName} x {item.quantity}
                         </dd>
                       </div>
 
@@ -331,7 +322,9 @@ export default function ProductModal({}: Props) {
                 ))}
               </div>
             </details>
-
+            <p className="text-red-600 font-bold my-2">
+              *รับสินค้าหน้างาน ขออภัยไม่มีบริการจัดส่งสินค้า/หากมีการแก้ไขจะแจ้งให้ทราบ
+            </p>
             <div className="mt-5">
               <div className="flex justify-between items-center">
                 <h3 className="font-bold text-lg">สรุปรายการสั่งซื้อ</h3>
