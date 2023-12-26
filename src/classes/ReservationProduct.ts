@@ -1,18 +1,9 @@
 import supabase from "@/libs/supabase";
 import Table, { TableData } from "@/classes/Table";
 import notify from "@/libs/notify";
-import ShortUniqueId from "short-unique-id";
+import { type ReservationProductItemData } from "./ReservationProductItem";
 
 import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
-
-export type ReservationProductItemData = {
-  id?: string;
-  reservationProductId?: string;
-  productId?: string;
-  option?: string;
-  price?: number;
-  quantity?: number;
-};
 
 export type ReservationProductData = {
   id?: string;
