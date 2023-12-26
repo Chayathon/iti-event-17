@@ -17,7 +17,7 @@ export default function CartPage({}: Props) {
   function increaseQuantity(item: Cart) {
     const newCart = [...Cart];
     const foundIndex = newCart.findIndex(
-      (x) => x.id === item.id && x.optionSelect === item.optionSelect
+      (x) => x.id === item.id && x.optionId === item.optionId
     );
     newCart[foundIndex].quantity++;
     setCart(newCart);
@@ -27,7 +27,7 @@ export default function CartPage({}: Props) {
   function decreaseQuantity(item: Cart) {
     const newCart = [...Cart];
     const foundIndex = newCart.findIndex(
-      (x) => x.id === item.id && x.optionSelect === item.optionSelect
+      (x) => x.id === item.id && x.optionId === item.optionId
     );
     if (newCart[foundIndex].quantity > 1) {
       newCart[foundIndex].quantity--;
@@ -41,7 +41,7 @@ export default function CartPage({}: Props) {
   function removeItem(item: Cart) {
     const newCart = [...Cart];
     const foundIndex = newCart.findIndex(
-      (x) => x.id === item.id && x.optionSelect === item.optionSelect
+      (x) => x.id === item.id && x.optionId === item.optionId
     );
     newCart.splice(foundIndex, 1);
     setCart(newCart);
@@ -123,7 +123,7 @@ export default function CartPage({}: Props) {
                                 {item.name}
                               </h2>
                               <p className="text-white  ">
-                                Option: {item.optionSelect}
+                                Option: {item.optionName}
                               </p>
                             </div>
                           </div>

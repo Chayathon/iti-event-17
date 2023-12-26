@@ -28,7 +28,7 @@ export default function Product({ productData }: Props) {
 
 export const ProductCard = ({ data }: { data?: ProductData }) => {
   const [count, setCount] = useState("0");
-  const [optionSelect, setOptionSelect] = useState("");
+  const [optionSelect, setOptionSelect] = useState<ProductOptionData>();
   const [quantity, setQuantity] = useState(1);
 
   // const handleOptionSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +36,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
   // };
 
   const handleOptionSelect = (item: ProductOptionData) => {
-    console.log(item);
+    setOptionSelect(item);
   };
 
   const addQuantity = () => {
@@ -50,11 +50,11 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
   };
 
   const handleAddToCart = () => {
-    if (optionSelect === "") {
+    if (optionSelect === undefined) {
       Swal.fire({
         icon: "error",
         title: "แจ้งเตือน",
-        text: "กรุณาเลือกขนาดสินค้า",
+        text: "กรุณาเลือก ตัวเลือกสินค้า",
       });
       return;
     }
@@ -75,7 +75,8 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
       name: data.name,
       price: data.price,
       quantity: quantity,
-      optionSelect: optionSelect,
+      optionName: optionSelect.name,
+      optionId: optionSelect.id,
       image: data.image1,
     };
 
@@ -88,13 +89,13 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
 
       let isExist = cartData.find(
         (item: Cart) =>
-          item.id === data.id && item.optionSelect === optionSelect
+          item.id === data.id && item.optionId === optionSelect.id
       );
 
       if (isExist) {
         let index = cartData.findIndex(
           (item: Cart) =>
-            item.id === data.id && item.optionSelect === optionSelect
+            item.id === data.id && item.optionId === optionSelect.id
         );
 
         cartData[index].quantity += quantity;

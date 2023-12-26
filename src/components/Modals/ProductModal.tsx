@@ -113,7 +113,7 @@ export default function ProductModal({}: Props) {
     products.forEach((item) => {
       productsItem.push({
         productId: item.id,
-        option: item.optionSelect,
+        optionId: item.optionId,
         quantity: item.quantity,
         price: item.price,
       });
@@ -311,7 +311,7 @@ export default function ProductModal({}: Props) {
                       <div>
                         <dt className="inline">Option: </dt>
                         <dd className="inline">
-                          {item.optionSelect} x {item.quantity}
+                          {item.name} x {item.quantity}
                         </dd>
                       </div>
 

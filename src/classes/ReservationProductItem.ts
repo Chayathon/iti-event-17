@@ -5,7 +5,7 @@ export type ReservationProductItemData = {
   id?: string;
   reservationProductId?: string;
   productId?: string;
-  option?: string;
+  optionId?: string;
   price?: number;
   quantity?: number;
 };
@@ -64,7 +64,7 @@ export default class ReservationProductItem {
   public static async createReservationProductItem(
     reservationProductId: string,
     productId: string,
-    option: string,
+    optionId: string,
     price: number,
     quantity: number
   ) {
@@ -76,7 +76,7 @@ export default class ReservationProductItem {
           id,
           reservationProductId,
           productId,
-          option,
+          optionId,
           price,
           quantity,
         },

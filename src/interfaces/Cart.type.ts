@@ -5,5 +5,7 @@ export interface Cart {
   quantity?: number;
   image?: string;
   description?: string;
-  optionSelect?: string;
+  optionName?: string;
+  optionPrice?: number;
+  optionId?: string;
 }
