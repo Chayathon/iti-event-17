@@ -221,7 +221,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   htmlFor="quantity"
                   className="w-full text-xl font-semibold  text-white"
                 >
-                  Quantity
+                  จำนวน
                 </label>
                 <div className="relative flex flex-row w-full h-10 mt-4 bg-transparent rounded-lg">
                   <button
@@ -234,7 +234,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   </button>
                   <input
                     type="number"
-                    className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                    className="flex items-center w-full font-semibold text-center text-black placeholder-black bg-gray-300 outline-none  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                     defaultValue={1}
                     value={quantity}
                     readOnly

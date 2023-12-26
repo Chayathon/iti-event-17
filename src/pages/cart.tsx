@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { type Cart } from "@/interfaces/Cart.type";
 import Image from "next/image";
+import BankInfo from "@/components/BankInfo";
+import ProductModal from "@/components/Modals/ProductModal";
+import { calculateSubtotal, calculateTotal } from "@/helpers/calculateProduct";
 
 type Props = {};
 
 export default function CartPage({}: Props) {
   const [Cart, setCart] = useState<Cart[]>([]);
+  const [subtotal, setSubtotal] = useState(0.0);
+  const [total, setTotal] = useState(0.0);
+  const [Shipping, setShipping] = useState(0);
 
   function increaseQuantity(item: Cart) {
     const newCart = [...Cart];
@@ -47,8 +53,16 @@ export default function CartPage({}: Props) {
     if (cart) {
       setCart(JSON.parse(cart));
     }
+    calculateProduct();
 
     return [];
+  }
+
+  function calculateProduct() {
+    const subtotal = calculateSubtotal(Cart);
+    const total = calculateTotal(Cart, Shipping);
+    setSubtotal(subtotal);
+    setTotal(total);
   }
 
   useEffect(() => {
@@ -165,51 +179,32 @@ export default function CartPage({}: Props) {
                 <div className="w-full px-4 xl:w-4/12">
                   <div className="p-6 border border-blue-100 dark:bg-gray-900 dark:border-gray-900 bg-blue-50 md:p-8">
                     <h2 className="mb-8 text-3xl font-bold text-gray-700 ">
-                      Order Summary
+                      สรุปคำสั่งจอง
                     </h2>
                     <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
-                      <span className="text-gray-700 ">Subtotal</span>
+                      <span className="text-gray-700 ">ยอดรวม</span>
                       <span className="text-xl font-bold text-gray-700  ">
-                        $99
+                        {subtotal}.- บาท
                       </span>
                     </div>
                     <div className="flex items-center justify-between pb-4 mb-4 ">
-                      <span className="text-gray-700  ">Shipping</span>
+                      <span className="text-gray-700  ">ค่าส่ง</span>
                       <span className="text-xl font-bold text-gray-700  ">
                         Free
                       </span>
                     </div>
                     <div className="flex items-center justify-between pb-4 mb-4 ">
-                      <span className="text-gray-700 ">Order Total</span>
+                      <span className="text-gray-700 ">ราคาสุทธิ</span>
                       <span className="text-xl font-bold text-gray-700 ">
-                        $99.00
+                        {total}.- บาท
                       </span>
                     </div>
-                    <h2 className="text-lg text-white ">We offer:</h2>
+                    <h2 className="text-lg text-black ">การชำระเงิน:</h2>
                     <div className="flex items-center mb-4 ">
-                      <a href="#">
-                        <img
-                          src="https://i.postimg.cc/g22HQhX0/70599-visa-curved-icon.png"
-                          className="object-cover h-16 mr-2 w-26"
-                        />
-                      </a>
-                      <a href="#">
-                        <img
-                          src="https://i.postimg.cc/HW38JkkG/38602-mastercard-curved-icon.png"
-                          className="object-cover h-16 mr-2 w-26"
-                        />
-                      </a>
-                      <a href="#">
-                        <img
-                          src="https://i.postimg.cc/HL57j0V3/38605-paypal-straight-icon.png"
-                          className="object-cover h-16 mr-2 w-26"
-                        />
-                      </a>
+                      <BankInfo />
                     </div>
                     <div className="flex items-center justify-between ">
-                      <button className="block w-full py-4 font-bold text-center text-gray-100 uppercase bg-blue-500 rounded-md hover:bg-blue-600">
-                        Checkout
-                      </button>
+                      <ProductModal />
                     </div>
                   </div>
                 </div>
