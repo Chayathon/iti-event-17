@@ -7,6 +7,7 @@ export type ProductOptionData = {
   name?: string;
   price?: number;
   productId?: string;
+  index?: number;
 };
 
 export default class ProductOption {

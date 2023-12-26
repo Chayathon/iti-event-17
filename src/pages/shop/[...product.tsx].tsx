@@ -190,35 +190,37 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
               </div>
               <div className="flex items-center mb-8">
                 <h2 className="w-16 text-xl font-bold  text-white">Options:</h2>
-                <div className="flex flex-wrap ml-6">
-                  <fieldset className="flex flex-wrap gap-3">
-                    <legend className="sr-only">Options</legend>
-                    {data.productOption
-                      .sort(
-                        (a: ProductOptionData, b: ProductOptionData) =>
-                          parseInt(a.id) - parseInt(b.id)
-                      )
-                      .map((item) => (
-                        <div key={`${item.name}-${item.id}`}>
-                          <input
-                            type="radio"
-                            name="productOption"
-                            value={item.name}
-                            id={item.id}
-                            onChange={() => handleOptionSelect(item)}
-                            className="peer hidden"
-                          />
+              </div>
+              <div className="flex flex-wrap ml-6">
+                <fieldset>
+                  <legend className="sr-only">Options</legend>
+                </fieldset>
+              </div>
+              <div className="flex flex-wrap gap-4 mb-4">
+                {data.productOption
+                  .sort(
+                    (a: ProductOptionData, b: ProductOptionData) =>
+                      a.index - b.index
+                  )
+                  .map((item) => (
+                    <div key={`${item.name}-${item.id}`}>
+                      <input
+                        type="radio"
+                        name="productOption"
+                        value={item.name}
+                        id={item.id}
+                        onChange={() => handleOptionSelect(item)}
+                        className="peer hidden"
+                      />
 
-                          <label
-                            htmlFor={item.id}
-                            className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-500 peer-checked:text-white"
-                          >
-                            <p className="text-sm font-medium">{item.name}</p>
-                          </label>
-                        </div>
-                      ))}
-                  </fieldset>
-                </div>
+                      <label
+                        htmlFor={item.id}
+                        className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-500 peer-checked:text-white"
+                      >
+                        <p className="text-sm font-medium">{item.name}</p>
+                      </label>
+                    </div>
+                  ))}
               </div>
               <div className="w-32 mb-8 ">
                 <label

@@ -22,7 +22,7 @@ export default class Product {
       .select(
         `
                     *
-        ,productOption(id, name, price,productId)
+        ,productOption(id, index, name, price)
                     `
       )
       .order("created_at", { ascending: true });
