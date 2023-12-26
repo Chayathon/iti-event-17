@@ -52,21 +52,27 @@ export default function CartPage({}: Props) {
     const cart = localStorage.getItem("cart");
     if (cart) {
       setCart(JSON.parse(cart));
+      calculateProduct();
     }
-    calculateProduct();
 
     return [];
   }
 
   function calculateProduct() {
-    const subtotal = calculateSubtotal(Cart);
-    const total = calculateTotal(Cart, shipping);
-    setSubtotal(subtotal);
-    setTotal(total);
+    if (Cart) {
+      const subtotal = calculateSubtotal(Cart);
+      const total = calculateTotal(Cart, shipping);
+      setSubtotal(subtotal);
+      setTotal(total);
+    }
   }
 
   useEffect(() => {
     getCart();
+  }, []);
+
+  useEffect(() => {
+    calculateProduct();
   }, [Cart]);
 
   return (

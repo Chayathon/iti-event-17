@@ -5,6 +5,15 @@ import ShortUniqueId from "short-unique-id";
 
 import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
 
+export type ReservationProductItemData = {
+  id?: string;
+  reservationProductId?: string;
+  productId?: string;
+  option?: string;
+  price?: number;
+  quantity?: number;
+};
+
 export type ReservationProductData = {
   id?: string;
   tableId?: string;
@@ -20,9 +29,7 @@ export type ReservationProductData = {
   totalPrice?: number;
   trackingCode?: string;
   address?: string;
-  options?: {
-    [key: string]: number;
-  };
+  options?: ReservationProductItemData | ReservationProductItemData[];
 };
 
 export default class ReservationProduct {

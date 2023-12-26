@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { FaCircleCheck } from "react-icons/fa6";
+import { FaCircleCheck, FaCropSimple } from "react-icons/fa6";
 import * as yup from "yup";
 import BankInfo from "@/components/BankInfo";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { type Cart } from "@/interfaces/Cart.type";
+import { type ReservationProductData } from "@/classes/ReservationProduct";
 import { calculateSubtotal, calculateTotal } from "@/helpers/calculateProduct";
+import { PaymentMethod } from "@/interfaces/Payment.type";
 
 const LAST_GENERATION = 28;
 
@@ -13,10 +15,8 @@ const phoneRegex = /^0[0-9]{9}$/;
 
 const schema = yup
   .object({
-    tableId: yup.string().required("กรุณาเลือกโต๊ะ"),
     firstName: yup.string().required("กรุณากรอกชื่อจริง"),
     lastName: yup.string().required("กรุณากรอกนามสกุล"),
-    nickname: yup.string().required("กรุณากรอกชื่อเล่น"),
     email: yup
       .string()
       .required("กรุณากรอกอีเมล")
@@ -26,7 +26,9 @@ const schema = yup
       .required("กรุณากรอกเบอร์โทรศัพท์")
       .matches(phoneRegex, "กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง"),
     generation: yup.number().required("กรุณาเลือกรุ่นการศึกษา"),
-    method: yup.string().required("กรุณาเลือกวิธีการชำระเงิน"),
+    method: yup
+      .string()
+      .required("กรุณาเลือกวิธีการชำระเงิน") as yup.StringSchema<PaymentMethod>,
     address: yup.string(),
   })
   .required("กรุณากรอกข้อมูลให้ครบถ้วน");
@@ -41,11 +43,10 @@ type Props = {
 type FormValues = {
   firstName?: string;
   lastName?: string;
-  nickname?: string;
   email?: string;
   phone?: string;
   generation?: number;
-  method?: string;
+  method?: PaymentMethod;
   address?: string;
 };
 
@@ -78,6 +79,7 @@ export default function ProductModal({ data }: Props) {
       "ProductModal"
     ) as HTMLDialogElement | null;
     modalElement.showModal();
+    loadProducts();
   }
 
   function loadProducts() {
@@ -93,11 +95,20 @@ export default function ProductModal({ data }: Props) {
     }
   }
 
-  async function onSubmit(data: any) {}
+  async function onSubmit(dataFrom: FormValues) {
+    const productOptions = {};
+    const payload: ReservationProductData = {
+      name: dataFrom.firstName + " " + dataFrom.lastName,
+      email: dataFrom.email,
+      phone: dataFrom.phone,
+      generation: dataFrom.generation,
+      method: dataFrom.method,
+      address: dataFrom.address,
+      
+    };
 
-  useEffect(() => {
-    loadProducts();
-  }, []);
+    console.log(payload);
+  }
 
   return (
     <React.Fragment>
@@ -162,19 +173,6 @@ export default function ProductModal({ data }: Props) {
                 >
                   ชื่อเล่น*
                 </label>
-                <div className="mt-2.5">
-                  <input
-                    type="text"
-                    {...register("nickname", { required: true })}
-                    id="nickname"
-                    autoComplete="nickname"
-                    placeholder="ชื่อเล่น: พี่เจมส์ พี่บี"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                  <span className="text-red-600">
-                    {errors.nickname?.message}
-                  </span>
-                </div>
               </div>
               <div className="sm:col-span-2">
                 <label
@@ -307,7 +305,9 @@ export default function ProductModal({ data }: Props) {
 
                       <div>
                         <dt className="inline">ราคารวม: </dt>
-                        <dd className="inline">{item.price * item.quantity}.-</dd>
+                        <dd className="inline">
+                          {item.price * item.quantity}.-
+                        </dd>
                       </div>
                     </dl>
                   </div>
