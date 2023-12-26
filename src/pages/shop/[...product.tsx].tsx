@@ -8,12 +8,15 @@ import { type ProductData } from "@/classes/Product";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { FaCartPlus, FaCartShopping } from "react-icons/fa6";
 import { type ProductOptionData } from "@/classes/ProductOption";
+import { useRouter } from "next/router";
 
 type Props = {
   productData: ProductData;
 };
 
 export default function Product({ productData }: Props) {
+  const router = useRouter();
+
   return (
     <HomeLayout titile={productData.name}>
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-9 md:py-1 lg:max-w-7xl lg:px-8">
@@ -172,24 +175,20 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                 <span className="text-lg font-medium text-rose-500 dark:text-rose-200">
                   New
                 </span>
-                <h2 className="max-w-xl mt-2 mb-6 text-2xl font-bold dark:text-white md:text-4xl">
+                <h2 className="max-w-xl mt-2 mb-6 text-2xl font-bold  text-white md:text-4xl">
                   {data.name}
                 </h2>
 
-                <p className="max-w-md mb-8 text-gray-700 dark:text-white">
-                  {data.details}
-                </p>
-                <p className="inline-block mb-8 text-4xl font-bold text-gray-700 dark:text-white ">
+                <p className="max-w-md mb-8  text-white">{data.details}</p>
+                <p className="inline-block mb-8 text-4xl font-bold  text-white ">
                   <span>ราคา {data.price}.- บาท</span>
                 </p>
               </div>
               <div className="flex items-center mb-8">
-                <h2 className="w-16 text-xl font-bold dark:text-white">
-                  Size:
-                </h2>
-                <div className="flex flex-wrap -mx-2 -mb-2">
+                <h2 className="w-16 text-xl font-bold  text-white">Options:</h2>
+                <div className="flex flex-wrap ml-6">
                   <fieldset className="flex flex-wrap gap-3">
-                    <legend className="sr-only">Color</legend>
+                    <legend className="sr-only">Options</legend>
                     {data.productOption
                       .sort(
                         (a: ProductOptionData, b: ProductOptionData) =>
@@ -220,7 +219,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
               <div className="w-32 mb-8 ">
                 <label
                   htmlFor="quantity"
-                  className="w-full text-xl font-semibold text-gray-700 dark:text-white"
+                  className="w-full text-xl font-semibold  text-white"
                 >
                   Quantity
                 </label>
