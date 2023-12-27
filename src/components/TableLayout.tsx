@@ -54,7 +54,7 @@ type FormValues = {
 export default function TableLayout({ data }: Props) {
   const router = useRouter();
   const { mutate } = useSWRConfig();
-  const { data: nickname } = useSWR("/reservation/nickname", fetcher);
+  // const { data: nickname } = useSWR("/reservation/nickname", fetcher);
   const [isloading, setIsloading] = useState(false);
   const {
     register,
@@ -68,21 +68,19 @@ export default function TableLayout({ data }: Props) {
   const [selected, setSelected] = useState<TableData>();
 
   function getTableStatus(table: TableData) {
-    const thisTable = nickname?.find((item) => item.tableId.id === table.id);
+    // const thisTable = nickname?.find((item) => item.tableId.id === table.id);
 
-    if (nickname) {
-      if (thisTable?.status === "PENDING") {
-        return "bg-blue-400 text-white cursor-pointer";
-      }
+    // if (thisTable?.status === "PENDING") {
+    //   return "bg-blue-400 text-white cursor-pointer";
+    // }
 
-      if (!table.isAvailable) {
-        return "bg-neutral text-white cursor-not-allowed";
-      }
+    if (!table.isAvailable) {
+      return "bg-neutral text-white cursor-not-allowed";
+    }
 
-      if (table.isReserved) {
-        return "bg-green-500 text-white cursor-pointer";
-        //cursor-not-allowed
-      }
+    if (table.isReserved) {
+      return "bg-green-500 text-white cursor-pointer";
+      //cursor-not-allowed
     }
 
     return "cursor-pointer";
@@ -90,17 +88,17 @@ export default function TableLayout({ data }: Props) {
 
   async function onClick(table: TableData) {
     if (table.isReserved || !table.isAvailable) {
-      const infoTable = nickname?.find((item) => item.tableId.id === table.id);
+      // const infoTable = nickname?.find((item) => item.tableId.id === table.id);
 
-      Swal.fire({
-        title: "โต๊ะนี้ถูกจองแล้ว",
-        html: `<b class="font-xl">${infoTable.nickname} รุ่นที่ ${infoTable.generation}
-          <br />
-        `,
-        // เมื่อ ${moment(data.generation).locale("th").format("l")}
-        icon: "info",
-        timer: 3000,
-      });
+      // Swal.fire({
+      //   title: "โต๊ะนี้ถูกจองแล้ว",
+      //   html: `<b class="font-xl">${infoTable.nickname} รุ่นที่ ${infoTable.generation}
+      //     <br />
+      //   `,
+      //   // เมื่อ ${moment(data.generation).locale("th").format("l")}
+      //   icon: "info",
+      //   timer: 3000,
+      // });
 
       return;
     }
@@ -420,12 +418,9 @@ export default function TableLayout({ data }: Props) {
             🔔 กรุณาชำระภายใน 3 วัน หลังจากการจองโต๊ะ
           </b>
           <br />
-          <span
-            title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"
-            className="text-xs text-white"
-          >
+          <span title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"  className="text-xs text-white">
             หากไม่ชำระภายในเวลาที่กำหนด <br />
-            หลังจากนั้นถือว่าหลุดจองโต๊ะครับ 🙏
+            หลังจากนั่นถือว่าหลุดจองโต๊ะครับ 🙏
           </span>
         </div>
         <div className="w-full text-center bg-blue-800 my-5">
