@@ -216,7 +216,6 @@ export default function TableLayout({ data, nickname }: Props) {
 
   return (
     <React.Fragment>
-      {JSON.stringify(nickname[0])}
       <dialog
         id="reservationModal"
         className="modal modal-bottom sm:modal-middle "
