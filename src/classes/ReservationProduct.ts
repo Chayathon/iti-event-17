@@ -64,12 +64,10 @@ export default class ReservationProduct {
       .from("reservationProduct")
       .select(
         `
-      *, reservationProductItem(*)
+      *, reservationProductItem(*,optionId(name,price))
         `
       )
       .eq(keyword, value);
-    
-      // const items = await ProductItem.getReservationProductItems();
 
     if (error) {
       throw error;

@@ -61,6 +61,25 @@ export default class ReservationProductItem {
     return data;
   }
 
+  //get by orderId
+  public static async getReservationProductItemByOrderId(orderId: string) {
+    const { data, error } = await supabase
+      .from("reservationProductItem")
+      .select(
+        `
+                        *,
+                        productId(*),
+                        optionId(*)
+                        `
+      )
+      .eq("orderId", orderId);
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
   public static async createReservationProductItem(
     reservationProductId: string,
     productId: string,
