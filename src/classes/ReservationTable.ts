@@ -206,8 +206,8 @@ export default class ReservationTable {
   public static async getReservationByNickname() {
     const { data, error } = await supabase.from("reservationTable").select(
       `
-                    id,nickname,generation,created_at,
-                    tableId (id,index,name) as table,
+        id,nickname,generation,created_at,status,
+         tableId (id,index,name) as table,
                     `
     );
 

@@ -66,7 +66,14 @@ export default function TableLayout({ data }: Props) {
     resolver: yupResolver<FormValues>(schema),
   });
   const [selected, setSelected] = useState<TableData>();
+
   function getTableStatus(table: TableData) {
+    const thisTable = nickname?.find((item) => item.tableId.id === table.id);
+
+    if (thisTable?.status === "PENDING") {
+      return "bg-blue-400 text-white cursor-pointer";
+    }
+
     if (!table.isAvailable) {
       return "bg-neutral text-white cursor-not-allowed";
     }
@@ -412,6 +419,9 @@ export default function TableLayout({ data }: Props) {
         <div className="mb-2 flex gap-2">
           <div className="badge badge-neutral bg-gray-200 p-2 text-black">
             ว่าง
+          </div>
+          <div className="badge badge-neutral bg-blue-400 p-2 text-white">
+            รอชำระ
           </div>
           <div className="badge badge-neutral bg-green-500 p-2 text-white">
             จองแล้ว
