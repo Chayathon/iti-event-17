@@ -69,7 +69,6 @@ export default function Tracking({}: Props) {
 
   return (
     <HomeLayout titile="ตรวจสอบดำเนินการ">
-      {JSON.stringify(Data)}
       <div className="text-center ">
         <p className="text-white text-lg md:text-2xl mt-5">
           ตรวจสอบสถานะการดำเนินการของการจองของคุณ
