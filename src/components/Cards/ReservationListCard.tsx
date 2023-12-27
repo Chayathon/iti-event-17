@@ -76,7 +76,7 @@ export default function CardTable({
         .from("iti-event")
         .upload(`slip/${data.id}`, Selectedfile);
 
-      //get url file
+      // //get url file
       const { data: publicURL } = supabase.storage
         .from("iti-event")
         .getPublicUrl(`slip/${data.id}`);
@@ -88,7 +88,7 @@ export default function CardTable({
       };
 
       const res = await (
-        await axios.patch("/reservation/upload", payload)
+        await axios.patch("/reservation/product/upload", payload)
       ).data;
 
       Swal.fire({
@@ -304,8 +304,8 @@ export default function CardTable({
                 // @ts-ignore
                 cur.optionId.price * cur.quantity,
               0
-            )}.-{" "}
-            บาท
+            )}
+            .- บาท
           </dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">

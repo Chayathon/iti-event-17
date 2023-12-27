@@ -113,8 +113,9 @@ export default class ReservationProduct {
 
       console.log("totalPrice", totalPrice);
 
-      const resData = await ReservationProduct.updateReservation(oriderId, {
-        totalPrice: totalPrice,
+      const resData = await ReservationProduct.updateReservation({
+        id: oriderId,
+        totalPrice,
       });
 
       await ProductItem.createReservationProductItems(options);
@@ -128,14 +129,11 @@ export default class ReservationProduct {
     }
   }
 
-  public static async updateReservation(
-    id: string,
-    data: ReservationProductData
-  ) {
+  public static async updateReservation(data: ReservationProductData): Promise<ReservationProductData> {
     const { data: res, error } = await supabase
       .from("reservationProduct")
       .update(data)
-      .eq("id", id)
+      .eq("id", data.id)
       .select(`*`)
       .single();
 
