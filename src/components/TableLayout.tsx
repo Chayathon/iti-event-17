@@ -413,8 +413,18 @@ export default function TableLayout({ data }: Props) {
       </dialog>
       {/* {JSON.stringify(nickname)} */}
       <div className="p-0 md:p-10">
+        <div className="text-center sm:mt-1 mt-4">
+          <b className="text-xl md:text-3xl   text-amber-400  w-full">
+            🔔 กรุณาชำระภายใน 3 วัน หลังจากการจองโต๊ะ
+          </b>
+          <br />
+          <span title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"  className="text-xs text-white">
+            หากไม่ชำระภายในเวลาที่กำหนด <br />
+            หลังจากนั้นถือว่าหลุดจองโต๊ะครับ 🙏
+          </span>
+        </div>
         <div className="w-full text-center bg-blue-800 my-5">
-          <h1 className="text-white text-xl p-5">หน้าเวที</h1>
+          <h1 className="text-white text-xl p-5">🎤 หน้าเวที 👯‍♂️</h1>
         </div>
         <div className="mb-2 flex gap-2">
           <div className="badge badge-neutral bg-gray-200 p-2 text-black">

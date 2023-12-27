@@ -51,8 +51,11 @@ export default function Booking({ tables }: Props) {
                 สามารถซื้อบัตรรายบุคคลได้ในราคา
                 <b className="text-red-700"> 570.- </b>บาท / คน{" "}
                 <b>สามารถซื้อบัตรรายบุคคล หน้างานครับ</b> */}
-                ➡️ <b>โต๊ะรวม</b> <span className="text-red-700">ทางเราจะแจ้งให้ทราบภายหลัง</span>
+                ➡️ <b>โต๊ะรวม</b>{" "}
+                <span className="text-red-700">ทางเราจะแจ้งให้ทราบภายหลัง</span>
+                <br />
               </p>
+
             </div>
           </div>
         </div>
