@@ -11,11 +11,21 @@ const TableLayout = dynamic(() => import("@/components/TableLayout"), {
   loading: () => <div className="text-center">Loading...</div>,
 });
 
-type Props = {
-  tables: TableData[];
+type nickname = {
+  id: string;
+  nickname: string;
+  generation: number;
+  created_at: string;
+  status: string;
+  tableId: string;
 };
 
-export default function Booking({ tables }: Props) {
+type Props = {
+  tables: TableData[];
+  nickname: nickname[];
+};
+
+export default function Booking({ tables, nickname }: Props) {
   return (
     <HomeLayout>
       <div className="flex mt-14 justify-center">
@@ -65,7 +75,7 @@ export default function Booking({ tables }: Props) {
         </div>
       )} */}
       <Suspense fallback={<div className="text-center">Loading...</div>}>
-        <TableLayout data={tables ?? []} />
+        <TableLayout data={tables ?? []} nickname={nickname} />
       </Suspense>
     </HomeLayout>
   );
@@ -74,8 +84,9 @@ export default function Booking({ tables }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // const BASE_URL = process.env.BASE_URL || "http://localhost:3000/api";
 
-  const res = await axios.get(`/tables`);
-  const tables = await res.data;
+  const nickname = (await axios.get(`/reservation/nickname`)).data.data;
+
+  const tables = await (await axios.get(`/tables`)).data.data;
 
   context.res.setHeader(
     "Cache-Control",
@@ -83,6 +94,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   return {
-    props: { tables: tables.data },
+    props: { tables: tables, nickname: nickname },
   };
 };

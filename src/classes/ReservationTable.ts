@@ -214,6 +214,19 @@ export default class ReservationTable {
     if (error) {
       throw error;
     }
-    return data;
+
+    let newData = data.map((item) => {
+      return {
+        //@ts-ignore
+        ...item,
+        //@ts-ignore
+
+        tableId: item.tableId.id
+      };
+    });
+
+    console.log(newData);
+
+    return newData;
   }
 }

@@ -36,8 +36,18 @@ const schema = yup
   })
   .required("กรุณากรอกข้อมูลให้ครบถ้วน");
 
+type nickname = {
+  id: string;
+  nickname: string;
+  generation: number;
+  created_at: string;
+  status: string;
+  tableId: string;
+};
+
 type Props = {
   data: TableData[];
+  nickname?: nickname[];
 };
 
 type FormValues = {
@@ -51,7 +61,7 @@ type FormValues = {
   method?: string;
 };
 
-export default function TableLayout({ data }: Props) {
+export default function TableLayout({ data, nickname }: Props) {
   const router = useRouter();
   const { mutate } = useSWRConfig();
   // const { data: nickname } = useSWR("/reservation/nickname", fetcher);
@@ -68,11 +78,11 @@ export default function TableLayout({ data }: Props) {
   const [selected, setSelected] = useState<TableData>();
 
   function getTableStatus(table: TableData) {
-    // const thisTable = nickname?.find((item) => item.tableId.id === table.id);
+    const thisTable = nickname?.find((item) => item.tableId === table.id);
 
-    // if (thisTable?.status === "PENDING") {
-    //   return "bg-blue-400 text-white cursor-pointer";
-    // }
+    if (thisTable?.status === "PENDING") {
+      return "bg-blue-400 text-white cursor-pointer";
+    }
 
     if (!table.isAvailable) {
       return "bg-neutral text-white cursor-not-allowed";
@@ -83,22 +93,22 @@ export default function TableLayout({ data }: Props) {
       //cursor-not-allowed
     }
 
-    return "cursor-pointer";
+    return "bg-gray-200  cursor-pointer";
   }
 
   async function onClick(table: TableData) {
     if (table.isReserved || !table.isAvailable) {
-      // const infoTable = nickname?.find((item) => item.tableId.id === table.id);
+      const thisTable = nickname?.find((item) => item.tableId === table.id);
 
-      // Swal.fire({
-      //   title: "โต๊ะนี้ถูกจองแล้ว",
-      //   html: `<b class="font-xl">${infoTable.nickname} รุ่นที่ ${infoTable.generation}
-      //     <br />
-      //   `,
-      //   // เมื่อ ${moment(data.generation).locale("th").format("l")}
-      //   icon: "info",
-      //   timer: 3000,
-      // });
+      Swal.fire({
+        title: "โต๊ะนี้ถูกจองแล้ว",
+        html: `<b class="font-xl">${thisTable.nickname} รุ่นที่ ${thisTable.generation}</b>
+          <br />
+        `,
+        // เมื่อ ${moment(data.generation).locale("th").format("l")}
+        icon: "info",
+        timer: 3000,
+      });
 
       return;
     }
@@ -206,6 +216,7 @@ export default function TableLayout({ data }: Props) {
 
   return (
     <React.Fragment>
+      {JSON.stringify(nickname[0])}
       <dialog
         id="reservationModal"
         className="modal modal-bottom sm:modal-middle "
@@ -411,14 +422,16 @@ export default function TableLayout({ data }: Props) {
           </div>
         </div>
       </dialog>
-      {/* {JSON.stringify(nickname)} */}
       <div className="p-0 md:p-10">
         <div className="text-center sm:mt-1 mt-4">
           <b className="text-xl md:text-3xl   text-amber-400  w-full">
             🔔 กรุณาชำระภายใน 3 วัน หลังจากการจองโต๊ะ
           </b>
           <br />
-          <span title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"  className="text-xs text-white">
+          <span
+            title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"
+            className="text-xs text-white"
+          >
             หากไม่ชำระภายในเวลาที่กำหนด <br />
             หลังจากนั่นถือว่าหลุดจองโต๊ะครับ 🙏
           </span>
@@ -450,7 +463,7 @@ export default function TableLayout({ data }: Props) {
               onClick={() => onClick(table)}
               className={`flex-1 p-2 ${getTableStatus(
                 table
-              )}  rounded-md bg-gray-200  text-black text-center lg:w-full lg:h-20 md:w-20 md:h-20 sm:h-12 sm:w-2/3`}
+              )}  rounded-md  text-black text-center lg:w-full lg:h-20 md:w-20 md:h-20 sm:h-12 sm:w-2/3`}
             >
               <p className={table.isReserved ? "text-white" : undefined}>
                 {table.name}
