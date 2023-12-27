@@ -228,8 +228,6 @@ export default class ReservationTable {
       };
     });
 
-    console.log(newData);
-
     return newData;
   }
 }

@@ -87,9 +87,15 @@ export default function CardTable({
         status: "WAIT",
       };
 
-      const res = await (
-        await axios.patch("/reservation/product/upload", payload)
-      ).data;
+      if (isProduct) {
+        await (
+          await axios.patch("/reservation/product/upload", payload)
+        ).data;
+      } else {
+        await (
+          await axios.patch("/reservation/upload", payload)
+        ).data;
+      }
 
       Swal.fire({
         icon: "success",

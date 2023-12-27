@@ -128,18 +128,25 @@ export default class ReservationProduct {
     }
   }
 
-  public static async updateReservation(data: ReservationProductData): Promise<ReservationProductData> {
-    const { data: res, error } = await supabase
-      .from("reservationProduct")
-      .update(data)
-      .eq("id", data.id)
-      .select(`*`)
-      .single();
+  public static async updateReservation(
+    data: ReservationProductData
+  ): Promise<ReservationProductData> {
+    try {
+      const { data: res, error } = await supabase
+        .from("reservationProduct")
+        .update(data)
+        .eq("id", data.id)
+        .select(`*`)
+        .single();
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+      return res;
+    } catch (error) {
+      console.log(error)
       throw error;
     }
-    return res;
   }
 
   public static async deleteReservation(id: string) {
