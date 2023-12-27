@@ -9,7 +9,6 @@ import { type ReservationTableData } from "@/classes/ReservationTable";
 import ReservationListCard from "@/components/Cards/ReservationListCard";
 import BankInfo from "@/components/BankInfo";
 
-
 type Props = {};
 
 type FormValues = {
@@ -18,7 +17,7 @@ type FormValues = {
 
 type DataResopnse = {
   table: ReservationTableData[];
-  prodicts: ReservationProductData[];
+  product: ReservationProductData[];
 };
 
 export default function Tracking({}: Props) {
@@ -70,9 +69,9 @@ export default function Tracking({}: Props) {
 
   return (
     <HomeLayout titile="ตรวจสอบดำเนินการ">
-      {/* {JSON.stringify(Data)} */}
+      {JSON.stringify(Data)}
       <div className="text-center ">
-        <p className="text-white text-lg md:text-2xl">
+        <p className="text-white text-lg md:text-2xl mt-5">
           ตรวจสอบสถานะการดำเนินการของการจองของคุณ
         </p>
       </div>
@@ -105,8 +104,6 @@ export default function Tracking({}: Props) {
         {Data?.table.length > 0 && (
           <h1 className="text-2xl text-white my-5">🍽️ รายการจองโต๊ะอาหาร</h1>
         )}
-
-        {/* {JSON.stringify(Data?.table)} */}
         <div className="flex gap-4 flex-col">
           {Data &&
             Data?.table.map((item) => (
@@ -117,19 +114,28 @@ export default function Tracking({}: Props) {
               />
             ))}
         </div>
-        {!loading &&
-          Data?.table?.length !== 0 &&
-          Data?.prodicts?.length === 0 && (
-            <div>
-              <BankInfo />
-            </div>
-          )}
-        {/* {Data?.prodicts.length === 0 && Data?.table.length === 0 && (
-          <div className="text-center mt-10 text-white">
-            <h1 className="text-xl">ไม่พบข้อมูลการจองของคุณ</h1>
-          </div>
-        )} */}
       </div>
+      <div className="px-2 md:px-10">
+        {Data?.product.length > 0 && (
+          <h1 className="text-2xl text-white my-5">📦 รายการจองสินค้า</h1>
+        )}
+        <div className="flex gap-4 flex-col">
+          {Data?.product.length > 0 &&
+            Data?.product.map((item) => (
+              <ReservationListCard
+                data={item}
+                key={item.id}
+                isProduct
+                callback={handlePaid}
+              />
+            ))}
+        </div>
+      </div>
+      {!loading && Data?.table?.length !== 0 && Data?.product?.length === 0 && (
+        <div>
+          <BankInfo />
+        </div>
+      )}
     </HomeLayout>
   );
 }

@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import ReservationTable, {
   type ReservationTableData,
 } from "@/classes/ReservationTable";
-import ReservationShirt from "@/classes/ReservationProduct";
+import ReservationProduct from "@/classes/ReservationProduct";
 
 type Data = {
   message: string;
@@ -36,7 +36,7 @@ export default async function handler(
 
 async function getTracking(search: string) {
   try {
-    const shirt = await ReservationShirt.getReservationByKeyword(
+    const product = await ReservationProduct.getReservationByKeyword(
       "phone",
       search
     );
@@ -47,7 +47,7 @@ async function getTracking(search: string) {
     );
 
     const data = {
-      shirt: shirt,
+      product: product,
       table: table,
     };
 
