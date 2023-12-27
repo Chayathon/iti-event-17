@@ -70,17 +70,19 @@ export default function TableLayout({ data }: Props) {
   function getTableStatus(table: TableData) {
     const thisTable = nickname?.find((item) => item.tableId.id === table.id);
 
-    if (thisTable?.status === "PENDING") {
-      return "bg-blue-400 text-white cursor-pointer";
-    }
+    if (nickname) {
+      if (thisTable?.status === "PENDING") {
+        return "bg-blue-400 text-white cursor-pointer";
+      }
 
-    if (!table.isAvailable) {
-      return "bg-neutral text-white cursor-not-allowed";
-    }
+      if (!table.isAvailable) {
+        return "bg-neutral text-white cursor-not-allowed";
+      }
 
-    if (table.isReserved) {
-      return "bg-green-500 text-white cursor-pointer";
-      //cursor-not-allowed
+      if (table.isReserved) {
+        return "bg-green-500 text-white cursor-pointer";
+        //cursor-not-allowed
+      }
     }
 
     return "cursor-pointer";
@@ -418,7 +420,10 @@ export default function TableLayout({ data }: Props) {
             🔔 กรุณาชำระภายใน 3 วัน หลังจากการจองโต๊ะ
           </b>
           <br />
-          <span title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"  className="text-xs text-white">
+          <span
+            title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"
+            className="text-xs text-white"
+          >
             หากไม่ชำระภายในเวลาที่กำหนด <br />
             หลังจากนั้นถือว่าหลุดจองโต๊ะครับ 🙏
           </span>
