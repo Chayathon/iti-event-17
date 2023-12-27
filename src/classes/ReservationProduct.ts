@@ -5,7 +5,6 @@ import ProductItem, {
 } from "./ReservationProductItem";
 import ShortUniqueId from "short-unique-id";
 import ProductOption, { type ProductOptionData } from "./ProductOption";
-
 import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
 
 export type ReservationProductData = {
@@ -65,10 +64,12 @@ export default class ReservationProduct {
       .from("reservationProduct")
       .select(
         `
-      *,reservationProductItem(productId)
+      *, reservationProductItem(*)
         `
       )
       .eq(keyword, value);
+    
+      // const items = await ProductItem.getReservationProductItems();
 
     if (error) {
       throw error;
