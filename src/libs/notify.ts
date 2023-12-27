@@ -19,21 +19,22 @@ type TypeMode = "dinner" | "product" | "donate";
 
 export default async function notify(data: NotifyData, type: TypeMode) {
   try {
-    let LINE_TOKEN = "";
-
-    switch (type) {
-      case "dinner":
-        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_TABLE;
-        break;
-      case "product":
-        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_PRODUCT;
-        break;
-      case "donate":
-        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_DONATE;
-        break;
-      default:
-        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_DEV;
-        break;
+    let LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_DEV;
+    if (process.env.NODE_ENV === "production") {
+      switch (type) {
+        case "dinner":
+          LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_TABLE;
+          break;
+        case "product":
+          LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_PRODUCT;
+          break;
+        case "donate":
+          LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_DONATE;
+          break;
+        default:
+          LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_DEV;
+          break;
+      }
     }
 
     const payload: NotifyData = data.stickerId

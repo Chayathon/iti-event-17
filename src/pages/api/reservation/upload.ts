@@ -30,7 +30,7 @@ export default async function handler(
           message: `\n💵 มีการแจ้งการชำระเงิน\nโต๊ะที่: ${table.index}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nURL: ${data.slip}`,
         };
 
-        notify(LINEPayload).then((res) =>
+        notify(LINEPayload,"dinner").then((res) =>
           console.log(`send notify: การชำระเงินเรียบร้อย`)
         );
 

@@ -57,14 +57,25 @@ export default function Tracking({}: Props) {
 
   function handlePaid(data: { id: string; status: string }) {
     const { id, status } = data;
-    const newData = Data?.table.map((item) => {
+    const newDataTable = Data?.table.map((item) => {
       if (item.id === id) {
         return { ...item, status };
       }
       return item;
     });
 
-    setData({ ...Data, table: newData } as DataResopnse);
+    const newDataProduct = Data?.product.map((item) => {
+      if (item.id === id) {
+        return { ...item, status };
+      }
+      return item;
+    });
+
+    setData({
+      ...Data,
+      table: newDataTable,
+      product: newDataProduct,
+    } as DataResopnse);
   }
 
   return (
