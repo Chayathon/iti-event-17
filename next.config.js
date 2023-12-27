@@ -2,7 +2,7 @@
 
 // const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL || 'http://localhost:3000'
 
-let BASE_URL = "http://172.20.10.3:3000/api"
+let BASE_URL = "http://localhost:3000/api"
 
 //check env dev or prod
 if (process.env.NODE_ENV !== 'development') {
