@@ -79,7 +79,7 @@ export default function Tracking({}: Props) {
   }
 
   return (
-    <HomeLayout titile="ตรวจสอบดำเนินการ">
+    <HomeLayout titile="ยืนยันการชำระเงิน">
       <div className="text-center ">
         <p className="text-white text-lg md:text-2xl mt-5">
           ตรวจสอบสถานะการดำเนินการของการจองของคุณ

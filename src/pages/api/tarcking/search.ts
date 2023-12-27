@@ -53,7 +53,7 @@ async function getTracking(search: string) {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return "ไม่พบข้อมูล (Error)";
   }
 }

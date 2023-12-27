@@ -8,7 +8,7 @@ import {
   FaComment,
   FaHandshake,
   FaCircleQuestion,
-  FaUtensils
+  FaUtensils,
 } from "react-icons/fa6";
 
 type Props = {};
@@ -86,7 +86,12 @@ export default function Navbar({}: Props) {
     <div className="navbar bg-blue-900 text-white shadow-lg p-0">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} accessKey="btn-bumberger" role="button" className="btn btn-ghost lg:hidden">
+          <div
+            tabIndex={0}
+            accessKey="btn-bumberger"
+            role="button"
+            className="btn btn-ghost lg:hidden"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -135,10 +140,10 @@ export default function Navbar({}: Props) {
         <Link
           target="_blank"
           href={"/tracking"}
-          className="btn btn-info btn-sm text-white mr-11 sm:mr-4"
+          className="btn bg-amber-400 hover:bg-amber-600 btn-sm text-black mr-11 sm:mr-4"
         >
           <FaMagnifyingGlass />
-          ตรวจสอบดำเนินการ
+          ยืนยันการชำระเงิน
         </Link>
       </div>
     </div>
