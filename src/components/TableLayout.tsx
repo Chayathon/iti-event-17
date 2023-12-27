@@ -198,7 +198,6 @@ export default function TableLayout({ data, nickname }: Props) {
         });
       }
     } catch (error) {
-      console.log(error);
       handleClose();
 
       Swal.fire({

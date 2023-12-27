@@ -99,7 +99,6 @@ export default class ReservationProduct {
 
         const price = productOption.price || 0;
         // data.totalPrice +=  * item.quantity;
-        console.log("total", price, item.quantity);
         totalPrice += price * item.quantity;
 
         return {

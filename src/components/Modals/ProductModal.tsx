@@ -170,6 +170,7 @@ export default function ProductModal({}: Props) {
                   `,
           icon: "success",
         }).then(() => {
+          localStorage.removeItem("cart");
           router.push(`/tracking?search=${resData?.data?.phone}`);
         });
       }

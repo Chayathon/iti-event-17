@@ -18,8 +18,6 @@ export default class FAQ {
       )
       .order("created_at", { ascending: true });
 
-    console.log(data);
-
     if (error) {
       throw error;
     }

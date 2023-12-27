@@ -42,7 +42,7 @@ export default function Tracking({}: Props) {
       setData(resData.data as DataResopnse);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }

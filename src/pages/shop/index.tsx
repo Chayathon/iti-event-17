@@ -18,11 +18,9 @@ export default function ShopPage({}: Props) {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log(process.env);
       setloading(true);
       const res = await axios.get(`/product`);
       const product = await res.data;
-      console.log(product);
       setProducts(product.data);
       setloading(false);
       // .......
