@@ -107,6 +107,8 @@ export default function Tracking({}: Props) {
           {Data &&
             Data?.table.map((item) => (
               <ReservationListCard
+                //@ts-ignore
+
                 data={item}
                 key={item.id}
                 callback={handlePaid}
@@ -122,6 +124,7 @@ export default function Tracking({}: Props) {
           {Data?.product.length > 0 &&
             Data?.product.map((item) => (
               <ReservationListCard
+                //@ts-ignore
                 data={item}
                 key={item.id}
                 isProduct

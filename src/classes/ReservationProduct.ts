@@ -64,7 +64,7 @@ export default class ReservationProduct {
       .from("reservationProduct")
       .select(
         `
-      *, reservationProductItem(*,optionId(name,price))
+      *, reservationProductItem(*,optionId(name,price),productId(name))
         `
       )
       .eq(keyword, value);

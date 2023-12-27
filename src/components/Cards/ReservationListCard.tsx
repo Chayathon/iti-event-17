@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { type ReservationProductData } from "@/classes/ReservationProduct";
 import { type ReservationTableData } from "@/classes/ReservationTable";
+import { type ReservationProductItemData } from "@/classes/ReservationProductItem";
+import { type ProductData } from "@/classes/Product";
 import {
   statusOrderColor,
   statusOrder,
@@ -25,8 +27,14 @@ type CardShirtProps = {
   callback?: (data: CallbackData) => void;
 };
 
+interface newReservationTableData extends ReservationTableData {
+  reservationProductItem: ReservationProductItemData[];
+  productId: ProductData;
+  optionId: any;
+}
+
 type CardTableProps = {
-  data: ReservationTableData;
+  data: newReservationTableData;
   callback?: (data: CallbackData) => void;
   isProduct?: boolean;
 };
@@ -268,6 +276,37 @@ export default function CardTable({
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">อีเมล</dt>
           <dd className="text-gray-700 sm:col-span-2">{data.email}</dd>
+        </div>
+        <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+          <dt className="font-medium text-gray-900">รายการสินค้า</dt>
+          <dd className="text-gray-700 sm:col-span-2">
+            {data.reservationProductItem.map((item, index) => (
+              <div className="flex gap-2" key={item.id}>
+                {/* @ts-ignore */}
+                <p className="text-gray-700">{item?.productId?.name}</p>
+                <p className="text-gray-700">
+                  {/* @ts-ignore */}
+                  {item.optionId.name}
+                </p>
+                <p>x {item.quantity} ชิ้น</p>
+                {/* @ts-ignore */}
+                {item.optionId.price * item.quantity} บาท
+              </div>
+            ))}
+          </dd>
+        </div>
+        <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+          <dt className="font-medium text-gray-900">ราคาสุทธิ</dt>
+          <dd className="text-gray-700 sm:col-span-2">
+            {data.reservationProductItem.reduce(
+              (prev, cur) =>
+                prev +
+                // @ts-ignore
+                cur.optionId.price * cur.quantity,
+              0
+            )}.-{" "}
+            บาท
+          </dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
