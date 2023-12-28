@@ -130,7 +130,7 @@ export default class ReservationProduct {
       });
 
       const linePayload: NotifyData = {
-        message: `มีการจองสินค้า\nรหัสการจอง: ${resData.id}\nชื่อ: ${resData.name}\nเบอร์โทร: ${resData.phone}\nอีเมล: ${resData.email}\nที่อยู่: ${resData.address}\nราคา: ${resData.totalPrice} บาท\nวิธีการชำระเงิน: ${resData.method} 
+        message: `มีการจองสินค้า\nรหัสการจอง: ${resData.id}\nชื่อ: ${resData.name}\nรุ่น: ${resData.generation}\nเบอร์โทร: ${resData.phone}\nอีเมล: ${resData.email}\nที่อยู่: ${resData.address}\nราคา: ${resData.totalPrice} บาท\nวิธีการชำระเงิน: ${resData.method} 
         \nรายการสินค้า: ${itemList}
         `,
         stickerId: 51626507,
