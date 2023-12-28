@@ -207,12 +207,15 @@ export default class ReservationTable {
 
   //get by nickname
   public static async getReservationByNickname() {
-    const { data, error } = await supabase.from("reservationTable").select(
-      `
+    const { data, error } = await supabase
+      .from("reservationTable")
+      .select(
+        `
         id,nickname,generation,created_at,status,
          tableId (id,index,name) as table,
                     `
-    );
+      )
+      .not("status", "eq", "FAILS");
 
     if (error) {
       throw error;
