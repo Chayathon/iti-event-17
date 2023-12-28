@@ -36,7 +36,7 @@ export default function Booking({ tables, nickname }: Props) {
 
       setTableData(tables.data);
 
-      setNickName(nickname);
+      setNickName(nickname.data);
     } catch (error) {
       console.error(error);
     }
@@ -104,11 +104,10 @@ export default function Booking({ tables, nickname }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // const BASE_URL = process.env.BASE_URL || "http://localhost:3000/api";
 
-  // const nickname = (await axios.get(`/reservation/nickname`)).data;
+  // const nickname = (await axios.get(`/reservation/nickname`)).data.data;
 
-  // const tables = await (await axios.get(`/tables`)).data;
+  // const tables = await (await axios.get(`/tables`)).data.data;
 
-  // console.log(tables.data);
 
   return {
     props: { tables: [], nickname: [] },
