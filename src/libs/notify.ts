@@ -49,7 +49,6 @@ export default async function notify(data: NotifyData, type: TypeMode) {
           message: `${data.message}`,
         };
 
-    console.log(LINE_TOKEN);
     await axios.post(LINE_API_URL, payload, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
