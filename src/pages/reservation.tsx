@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { type TableData } from "@/classes/Table";
@@ -26,6 +26,26 @@ type Props = {
 };
 
 export default function Booking({ tables, nickname }: Props) {
+  const [TableData, setTableData] = useState([]);
+  const [NickName, setNickName] = useState([]);
+
+  async function getData() {
+    try {
+      const tables = (await axios.get("/tables")).data;
+      const nickname = (await axios.get("/reservation/nickname")).data;
+
+      setTableData(tables.data);
+
+      setNickName(nickname);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <HomeLayout>
       <div className="flex mt-14 justify-center">
@@ -75,7 +95,7 @@ export default function Booking({ tables, nickname }: Props) {
         </div>
       )} */}
       <Suspense fallback={<div className="text-center">Loading...</div>}>
-        <TableLayout data={tables ?? []} nickname={nickname} />
+        <TableLayout data={TableData ?? []} nickname={NickName} />
       </Suspense>
     </HomeLayout>
   );
@@ -84,16 +104,13 @@ export default function Booking({ tables, nickname }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // const BASE_URL = process.env.BASE_URL || "http://localhost:3000/api";
 
-  const nickname = (await axios.get(`/reservation/nickname`)).data.data;
+  // const nickname = (await axios.get(`/reservation/nickname`)).data;
 
-  const tables = await (await axios.get(`/tables`)).data.data;
+  // const tables = await (await axios.get(`/tables`)).data;
 
-  context.res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=300, stale-while-revalidate=59"
-  );
+  // console.log(tables.data);
 
   return {
-    props: { tables: tables, nickname: nickname },
+    props: { tables: [], nickname: [] },
   };
 };
