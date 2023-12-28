@@ -9,7 +9,12 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   try {
-    res.status(200).json({ message: "success", data: "Data" });
+
+    // headers Authorization token
+    const authToken = req.headers.authorization;
+
+
+    res.status(200).json({ message: "success", data: `Data ${authToken}` });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
