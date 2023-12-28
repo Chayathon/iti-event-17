@@ -34,7 +34,7 @@ const MENU: Menu[] = [
     icon: <FaUtensils />,
   },
   {
-    title: "ตรวจสอบดำเนินการ",
+    title: "ยืนยันการชำระ",
     href: "/tracking",
     target: "_self",
     icon: <FaMagnifyingGlass />,

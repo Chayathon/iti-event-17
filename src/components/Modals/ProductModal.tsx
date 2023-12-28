@@ -166,7 +166,7 @@ export default function ProductModal({}: Props) {
           html: `
           <b>กรุณาชำระภายใน 3 วัน</b>
           <br />
-          คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ตรวจสอบดำเนินการ</a> หรือตรวจสอบได้ที่เมนู "ตรวจสอบดำเนินการ"
+          คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ยืนยันการชำระ</a> หรือตรวจสอบได้ที่เมนู "ยืนยันการชำระ"
                   `,
           icon: "success",
         }).then(() => {
