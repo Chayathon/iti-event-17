@@ -24,10 +24,9 @@ export default async function handler(
         const table = data.tableId as TableData;
 
         const LINEPayload: NotifyData = {
-          imageFile: data.slip,
+          message: `\n💵 มีการแจ้งการชำระเงิน\nโต๊ะที่: ${table.index}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nURL: ${data.slip}`,
           stickerId: 16581273,
           stickerPackageId: 8522,
-          message: `\n💵 มีการแจ้งการชำระเงิน\nโต๊ะที่: ${table.index}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nURL: ${data.slip}`,
         };
 
         notify(LINEPayload,"dinner").then((res) =>

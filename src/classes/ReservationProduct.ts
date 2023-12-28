@@ -1,5 +1,5 @@
 import supabase from "@/libs/supabase";
-import notify from "@/libs/notify";
+import notify, { type NotifyData } from "@/libs/notify";
 import ProductItem, {
   type ReservationProductItemData,
 } from "./ReservationProductItem";
@@ -115,7 +115,31 @@ export default class ReservationProduct {
         totalPrice,
       });
 
-      await ProductItem.createReservationProductItems(options);
+      const resItem = await ProductItem.createReservationProductItems(options);
+
+      let itemList: string = ``;
+      let total: number = 0;
+
+      resItem.forEach((item: any) => {
+        itemList += `\n${item.productId.name}`;
+        itemList += `\n${item.optionId.name} x ${item.quantity} ชิ้น`;
+
+        total += item.price * item.quantity;
+
+        itemList += `\nราคา ${item.price * item.quantity} บาท\n`;
+      });
+
+      const linePayload: NotifyData = {
+        message: `มีการจองสินค้า\nรหัสการจอง: ${resData.id}\nชื่อ: ${resData.name}\nเบอร์โทร: ${resData.phone}\nอีเมล: ${resData.email}\nที่อยู่: ${resData.address}\nราคา: ${resData.totalPrice} บาท\nวิธีการชำระเงิน: ${resData.method} 
+        \nรายการสินค้า: ${itemList}
+        `,
+        stickerId: 51626507,
+        stickerPackageId: 11538,
+      };
+
+      notify(linePayload, "product").then((res) =>
+        console.log(`send notify: การจองสินค้า ${resData.trackingCode}`)
+      );
 
       if (error) {
         throw error;
@@ -142,7 +166,7 @@ export default class ReservationProduct {
       }
       return res;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       throw error;
     }
   }

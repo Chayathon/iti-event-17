@@ -112,14 +112,20 @@ export default class ReservationProductItem {
     // reservationProductId: string,
     productItems: ReservationProductItemData[]
   ) {
-    const { data, error } = await supabase
-      .from("reservationProductItem")
-      .insert(productItems);
+    try {
+      const { data, error } = await supabase
+        .from("reservationProductItem")
+        .insert(productItems)
+        .select(`*, optionId(name,price), productId(name)`);
 
-    if (error) {
-      throw error;
+      if (error) {
+        throw error;
+      }
+      return data;
+    } catch (error) {
+      console.error(error);
+      return error;
     }
-    return data;
   }
 
   public static async updateReservationProductItem(
