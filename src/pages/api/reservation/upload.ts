@@ -24,12 +24,12 @@ export default async function handler(
         const table = data.tableId as TableData;
 
         const LINEPayload: NotifyData = {
-          message: `\n💵 มีการแจ้งการชำระเงิน\nโต๊ะที่: ${table.index}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nURL: ${data.slip}`,
+          message: `\n💵 มีการแจ้งการชำระเงิน\nรหัสการจ้อง: ${data.id}\nโต๊ะที่: ${table.index}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nURL: ${data.slip}`,
           stickerId: 16581273,
           stickerPackageId: 8522,
         };
 
-        notify(LINEPayload,"dinner").then((res) =>
+        notify(LINEPayload, "dinner").then((res) =>
           console.log(`send notify: การชำระเงินเรียบร้อย`)
         );
 
