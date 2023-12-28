@@ -17,20 +17,24 @@ export default async function handler(
   try {
     switch (req.method) {
       case "PATCH":
-        const data = await Reservation.updateReservation(req.body);
+        try {
+          const data = await Reservation.updateReservation(req.body);
 
-        const LINEPayload: NotifyData = {
-          imageFile: data.slip,
-          stickerId: 16581273,
-          stickerPackageId: 8522,
-          message: `\n💵 มีการแจ้งการชำระเงิน\nรหัสการซื้อ: ${data.id}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nราคา:${data.totalPrice}\nURL: ${data.slip}`,
-        };
+          const LINEPayload: NotifyData = {
+            imageFile: data.slip,
+            stickerId: 16581273,
+            stickerPackageId: 8522,
+            message: `\n💵 มีการแจ้งการชำระเงิน\nรหัสการซื้อ: ${data.id}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nราคา:${data.totalPrice}\nURL: ${data.slip}`,
+          };
 
-        notify(LINEPayload, "product").then((res) =>
-          console.log(`send notify: การชำระเงินเรียบร้อย`)
-        );
+          notify(LINEPayload, "product")
+            .then((res) => console.log(`send notify: การชำระเงินเรียบร้อย`))
+            .catch((err) => console.log(err));
 
-        res.status(200).json({ message: "success", data: data });
+          res.status(200).json({ message: "success", data: data });
+        } catch (error) {
+          res.status(400).json({ message: error.message });
+        }
         break;
       default:
         res.status(405).json({ message: "Method not allowed" });
