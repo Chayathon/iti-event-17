@@ -26,25 +26,25 @@ type Props = {
 };
 
 export default function Booking({ tables, nickname }: Props) {
-  const [TableData, setTableData] = useState([]);
-  const [NickName, setNickName] = useState([]);
+  // const [TableData, setTableData] = useState([]);
+  // const [NickName, setNickName] = useState([]);
 
-  async function getData() {
-    try {
-      const tables = (await axios.get("/tables")).data;
-      const nickname = (await axios.get("/reservation/nickname")).data;
+  // async function getData() {
+  //   try {
+  //     const tables = (await axios.get("/tables")).data;
+  //     const nickname = (await axios.get("/reservation/nickname")).data;
 
-      setTableData(tables.data);
+  //     setTableData(tables.data);
 
-      setNickName(nickname.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  //     setNickName(nickname.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <HomeLayout>
@@ -95,21 +95,19 @@ export default function Booking({ tables, nickname }: Props) {
         </div>
       )} */}
       <Suspense fallback={<div className="text-center">Loading...</div>}>
-        <TableLayout data={TableData ?? []} nickname={NickName} />
+        <TableLayout data={tables ?? []} nickname={nickname} />
       </Suspense>
     </HomeLayout>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // const BASE_URL = process.env.BASE_URL || "http://localhost:3000/api";
 
-  // const nickname = (await axios.get(`/reservation/nickname`)).data.data;
+  const nickname = (await axios.get(`/reservation/nickname`)).data.data;
 
-  // const tables = await (await axios.get(`/tables`)).data.data;
-
+  const tables = await (await axios.get(`/tables`)).data.data;
 
   return {
-    props: { tables: [], nickname: [] },
+    props: { tables: tables, nickname: nickname },
   };
 };
