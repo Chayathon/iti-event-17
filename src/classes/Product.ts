@@ -10,6 +10,7 @@ export type ProductData = {
   image1?: string;
   image2?: string;
   image3?: string;
+  image4?: string;
   details?: string;
   isActive?: boolean;
   productOption?: ProductOptionData[];
@@ -49,11 +50,22 @@ export default class Product {
   }
 
   public static async createProduct(data: ProductData) {
-    const uid = new ShortUniqueId();
-    data.id = uid.randomUUID(6);
-    const { error } = await supabase.from("products").insert([data]);
+    try {
+      const uid = new ShortUniqueId();
+      data.id = uid.randomUUID(6);
+      const { data: product, error } = await supabase
+        .from("products")
+        .insert([data])
+        .select("*")
+        .single();
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+
+      return product;
+    } catch (error) {
+      console.log(error);
       throw error;
     }
   }
@@ -73,5 +85,4 @@ export default class Product {
       throw error;
     }
   }
-  
 }

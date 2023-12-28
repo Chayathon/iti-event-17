@@ -28,12 +28,17 @@ export default function Product({ productData }: Props) {
 
 export const ProductCard = ({ data }: { data?: ProductData }) => {
   const [count, setCount] = useState("0");
+  const [setSelectImage, setSetselectImage] = useState(data?.image3);
   const [optionSelect, setOptionSelect] = useState<ProductOptionData>();
   const [quantity, setQuantity] = useState(1);
 
   // const handleOptionSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setOptionSelect(e.target.value);
   // };
+
+  function handleImageSelect(image: string) {
+    setSetselectImage(image);
+  }
 
   const handleOptionSelect = (item: ProductOptionData) => {
     setOptionSelect(item);
@@ -88,8 +93,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
       let cartData = JSON.parse(cart);
 
       let isExist = cartData.find(
-        (item: Cart) =>
-          item.id === data.id && item.optionId === optionSelect.id
+        (item: Cart) => item.id === data.id && item.optionId === optionSelect.id
       );
 
       if (isExist) {
@@ -141,35 +145,59 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
             <div className="sticky top-0 z-50 overflow-hidden ">
               <div className="relative mb-6 lg:mb-10 lg:h-2/4 ">
                 <img
-                  src={data.image3}
+                  src={setSelectImage}
                   alt=""
                   className="object-cover w-full lg:h-full "
                 />
               </div>
               <div className="flex-wrap hidden md:flex ">
                 <div className="w-1/2 p-2 sm:w-1/4">
-                  <a
-                    href="#"
-                    className="block border border-blue-300 dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
+                  <div
+                    onClick={()=>handleImageSelect(data.image1)}
+                    className="block border cursor-pointer border-blue-300 dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
                   >
                     <img
                       src={data.image1}
                       alt=""
                       className="object-cover w-full lg:h-20"
                     />
-                  </a>
+                  </div>
                 </div>
                 <div className="w-1/2 p-2 sm:w-1/4">
-                  <a
-                    href="#"
-                    className="block border border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
+                  <div
+                    onClick={()=>handleImageSelect(data.image2)}
+                    className="block border cursor-pointer border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
                   >
                     <img
                       src={data.image2}
                       alt=""
                       className="object-cover w-full lg:h-20"
                     />
-                  </a>
+                  </div>
+                </div>
+                <div className="w-1/2 p-2 sm:w-1/4">
+                  <div
+                    onClick={()=>handleImageSelect(data.image3)}
+                    className="block border cursor-pointer border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
+                  >
+                    <img
+                      src={data.image3}
+                      alt=""
+                      className="object-cover w-full lg:h-20"
+                    />
+                  </div>
+                </div>
+                <div className="w-1/2 p-2 sm:w-1/4">
+                  <div
+                    onClick={()=>handleImageSelect(data.image4)}
+                    className="block border cursor-pointer border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
+                  >
+                    <img
+                      src={data.image4}
+                      alt=""
+                      className="object-cover w-full lg:h-20"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

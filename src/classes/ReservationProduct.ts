@@ -110,8 +110,6 @@ export default class ReservationProduct {
         };
       });
 
-      console.log("totalPrice", totalPrice);
-
       const resData = await ReservationProduct.updateReservation({
         id: oriderId,
         totalPrice,
