@@ -1,8 +1,13 @@
 import React from "react";
-import { FaCircleCheck, FaClock, FaExclamation } from "react-icons/fa6";
+import { FaCircleCheck, FaClock, FaExclamation, FaCashRegister } from "react-icons/fa6";
 
 type Props = {
-  data?: any;
+  data?: {
+    success?: number;
+    wait?: number;
+    pending?: number;
+    failed?: number;
+  };
 };
 
 export default function Stat({ data }: Props) {
@@ -14,7 +19,16 @@ export default function Stat({ data }: Props) {
             <FaCircleCheck />
           </div>
           <div className="stat-title text-black">ยืนยันการชำระเงินแล้ว</div>
-          <div className="stat-value text-green-400">25.6K</div>
+          <div className="stat-value text-green-400">{data.success}</div>
+          <div className="stat-desc text-black">โต๊ะ/รายการสินค้า</div>
+        </div>
+
+        <div className="stat bg-slate-50  text-blue-400 ">
+          <div className="stat-figure text-3xl  ">
+            <FaCashRegister />
+          </div>
+          <div className="stat-title text-black">รอการตรวจสอบ</div>
+          <div className="stat-value">{data.wait}</div>
           <div className="stat-desc text-black">โต๊ะ/รายการสินค้า</div>
         </div>
 
@@ -22,9 +36,11 @@ export default function Stat({ data }: Props) {
           <div className="stat-figure text-3xl  ">
             <FaClock />
           </div>
-          <div className="stat-title text-black">รอการตรวจสอบ</div>
-          <div className="stat-value">25.6K</div>
-          <div className="stat-desc text-black">โต๊ะ/รายการสินค้า</div>
+          <div className="stat-title text-black">ค้างชำระ</div>
+          <div className="stat-value">{data.pending}</div>
+          <div className="stat-desc text-black">
+            หลุดจอง/ข้อมูลไม่ถูกต้อง/อื่น ๆ
+          </div>
         </div>
 
         <div className="stat bg-slate-50  text-red-400 ">
@@ -32,7 +48,7 @@ export default function Stat({ data }: Props) {
             <FaExclamation />
           </div>
           <div className="stat-title text-black">ล้มเหลว</div>
-          <div className="stat-value">25.6K</div>
+          <div className="stat-value">{data.failed}</div>
           <div className="stat-desc text-black">
             หลุดจอง/ข้อมูลไม่ถูกต้อง/อื่น ๆ
           </div>
