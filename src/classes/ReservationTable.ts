@@ -61,7 +61,8 @@ export default class ReservationTable {
                 *
                 `
       )
-      .eq("tableId", tableId);
+      .eq("tableId", tableId)
+      .not("status", "eq", "FAILS");
 
     if (error) {
       throw error;
