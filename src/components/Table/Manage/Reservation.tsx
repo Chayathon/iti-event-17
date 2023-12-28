@@ -48,9 +48,11 @@ export default function ReservationTable({ data }: Props) {
           <thead>
             <tr className="text-black text-center">
               <th>ชื่อ-นามสกุล</th>
-              <th>ข้อมูลติดต่อ</th>
+              <th className="hidden md:block">ข้อมูลติดต่อ</th>
               <th>ประเภทรายการ</th>
-              <th>เมื่อ</th>
+              <th className="hidden md:block">เมื่อ</th>
+              <th>ตรวจสอบรายการชำระเงิน</th>
+              <th>ตัวเลือก</th>
               <th></th>
             </tr>
           </thead>
@@ -59,14 +61,6 @@ export default function ReservationTable({ data }: Props) {
               <tr key={item.id}>
                 <td>
                   <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src="/tailwind-css-component-profile-2@56w.png"
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
-                    </div>
                     <div className="text-black">
                       <div className="font-bold">{item.name}</div>
                       <div className="text-sm opacity-50">
@@ -76,7 +70,7 @@ export default function ReservationTable({ data }: Props) {
                     </div>
                   </div>
                 </td>
-                <td>
+                <td className="hidden md:block">
                   <a
                     className="text-black font-bold"
                     href={`tel:${item.phone}`}
@@ -106,9 +100,18 @@ export default function ReservationTable({ data }: Props) {
                     {item.method}
                   </span>
                 </td>
-                <td className="text-black text-center">
+                <td className="text-black text-center hidden md:block">
                   {moment(item.created_at).format("lll น.")}
                 </td>
+                <td>
+                  <Link
+                    href={`/manage/reservation/${item.id}`}
+                    className="btn btn-sm btn-block btn-primary text-white"
+                  >
+                    ตรวจสอบ
+                  </Link>
+                </td>
+                <td>...</td>
                 <th></th>
               </tr>
             ))}
