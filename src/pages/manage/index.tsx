@@ -11,7 +11,11 @@ type Props = {};
 export default function Manage({}: Props) {
   const { data: stat, error } = useSWR<Data>("/admin/reservation", fetcher);
 
-  console.log(stat);
+  if (error) {
+    console.error(error);
+    return <div>failed to load</div>;
+  }
+  
   return (
     <AdminLayout titile="ตรวจสอบรายการชำระเงิน">
       {/* {JSON.stringify(stat)} */}

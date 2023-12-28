@@ -18,6 +18,7 @@ export type ReservationTableData = {
   method?: PaymentMethod;
   status?: StatusPayment;
   nickname?: string;
+  type?: string;
 };
 
 export default class ReservationTable {

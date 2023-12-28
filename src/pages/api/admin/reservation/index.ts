@@ -10,10 +10,6 @@ type Data = {
   data?: any;
 };
 
-interface NewReservation extends ReservationTableData {
-  tableId: string; // Update the type of 'tableId' property to be 'string'
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
@@ -37,7 +33,7 @@ export default async function handler(
 async function getReservation(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
     const product = await ReservationProduct.getReservations();
-    const table = await ReservationTable.getReservations();
+    const table = await ReservationTable.getReservations() as ReservationTableData[];
 
     let success = [];
     let wait = [];
@@ -45,7 +41,7 @@ async function getReservation(req: NextApiRequest, res: NextApiResponse<Data>) {
     let fails = [];
 
     product.forEach((item: ReservationTableData) => {
-      //@ts-ignore
+    
       item.type = "PRODUCT";
       if (item.status === "COMPLETE") {
         success.push(item);
@@ -58,9 +54,8 @@ async function getReservation(req: NextApiRequest, res: NextApiResponse<Data>) {
       }
     });
 
-    //@ts-ignore
-    table.forEach((item: ReservationTableData) => {
-      //@ts-ignore
+
+    table.forEach((item) => {
       item.type = "TABLE";
       if (item.status === "COMPLETE") {
         success.push(item);
