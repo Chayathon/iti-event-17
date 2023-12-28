@@ -20,7 +20,7 @@ export default function AdminLayout({ children, titile }: Props) {
   useEffect(() => {
     async function loadData() {
       const res = await ReservationTable.getReservations();
-      setData(res);
+      // setData(res);
     }
     // Only run query once user is logged in.
     if (user) loadData();
