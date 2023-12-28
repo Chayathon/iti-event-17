@@ -41,6 +41,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
   }
 
   const handleOptionSelect = (item: ProductOptionData) => {
+    setQuantity(1);
     setOptionSelect(item);
   };
 

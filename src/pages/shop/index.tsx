@@ -51,9 +51,12 @@ export function ProductCard({ product }: { product: ProductData }) {
   return (
     <div className="group relative bg-white rounded-lg">
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none  lg:h-80">
-        <img
+        <Image
           src={`${product.image1}`}
           alt={product.name}
+          width={500}
+          height={500}
+          lazyRoot="lazy-shop"
           className="h-full w-full object-cover object-center group-hover:scale-125 lg:h-full lg:w-full"
         />
       </div>

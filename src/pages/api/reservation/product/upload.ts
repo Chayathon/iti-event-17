@@ -23,7 +23,7 @@ export default async function handler(
           imageFile: data.slip,
           stickerId: 16581273,
           stickerPackageId: 8522,
-          message: `\n💵 มีการแจ้งการชำระเงิน\nรหัสการซื้อ: ${data.id}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nURL: ${data.slip}`,
+          message: `\n💵 มีการแจ้งการชำระเงิน\nรหัสการซื้อ: ${data.id}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nราคา:${data.totalPrice}\nURL: ${data.slip}`,
         };
 
         notify(LINEPayload, "product").then((res) =>

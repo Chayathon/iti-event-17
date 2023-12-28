@@ -11,7 +11,6 @@ const TypingEffect = dynamic(() => import("@/components/TypingEffect"), {
 export default function Home() {
   return (
     <HomeLayout>
-      
       <div>
         <section className="mt-36">
           <div className="float-none mx-auto px-4 lg:flex  lg:items-center">
@@ -40,15 +39,15 @@ export default function Home() {
                   </span>
                 </Link>
 
-                {/* <Link
-                  className="inline-block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+                <Link
+                  className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                   href="/shop"
                 >
-                  <span className="inline-flex gap-2">
+                  <span className="inline-flex gap-2 text-xl">
                     <FaShirt />
-                    สั่งซื้อเสื้อ
+                    จองเสื้อ
                   </span>
-                </Link> */}
+                </Link>
               </div>
             </div>
           </div>
