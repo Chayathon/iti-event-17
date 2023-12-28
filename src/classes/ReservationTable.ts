@@ -26,7 +26,7 @@ export default class ReservationTable {
       .from("reservationTable")
       .select(
         `
-            *
+            *,tableId (id,index,name) as table
             `
       )
       .order("created_at", { ascending: true });

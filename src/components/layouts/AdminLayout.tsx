@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HomeNavbar from "@/components/Navbar/HomeNavbar";
+import AdminNavbar from "@/components/Navbar/AdminNavbar";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
@@ -29,7 +29,7 @@ export default function AdminLayout({ children, titile }: Props) {
   if (!user)
     return (
       <Auth
-        redirectTo="http://localhost:3000/"
+        redirectTo="/"
         appearance={{ theme: ThemeSupa }}
         providers={[]}
         supabaseClient={supabaseClient}
@@ -40,7 +40,7 @@ export default function AdminLayout({ children, titile }: Props) {
 
   return (
     <React.Fragment>
-      <HomeNavbar />
+      <AdminNavbar />
       {titile && (
         <div className="flex flex-col items-center justify-center w-full h-20">
           <h1 className="text-3xl font-bold text-white mt-20 sm:mt-auto text-center  ">
@@ -48,7 +48,7 @@ export default function AdminLayout({ children, titile }: Props) {
           </h1>
         </div>
       )}
-      {children}
+      <div className="py-10 px-2 md:py-4 md:p-4">{children}</div>
     </React.Fragment>
   );
 }
