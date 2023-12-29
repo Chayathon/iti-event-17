@@ -26,6 +26,10 @@ export default function ReservationCheckPage() {
     fetcher
   );
 
+  if (!data) {
+    return <div className="text-center max-h-screen">404</div>;
+  }
+
   if (isLoading) {
     return (
       <AdminLayout>
