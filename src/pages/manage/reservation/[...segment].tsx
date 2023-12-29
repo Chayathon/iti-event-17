@@ -26,7 +26,7 @@ export default function ReservationCheckPage() {
     fetcher
   );
 
-  if (!data) {
+  if (!data && !isLoading) {
     return <div className="text-center max-h-screen">404</div>;
   }
 
