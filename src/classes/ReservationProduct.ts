@@ -21,6 +21,7 @@ export type ReservationProductData = {
   status?: StatusPayment;
   totalPrice?: number;
   trackingCode?: string;
+  quantity?: number;
   address?: string;
   options?: ReservationProductItemData | ReservationProductItemData[];
   productsItem?: ReservationProductItemData | ReservationProductItemData[];
@@ -48,10 +49,11 @@ export default class ReservationProduct {
       .from("reservationProduct")
       .select(
         `
-                    *
+                    *,reservationProductItem(*,optionId(name,price),productId(name))
                     `
       )
-      .eq("id", id);
+      .eq("id", id)
+      .single();
 
     if (error) {
       throw error;

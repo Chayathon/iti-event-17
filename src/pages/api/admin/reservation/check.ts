@@ -32,6 +32,7 @@ export default async function handler(
           reservationData = await ReservationProduct.getReservation(id);
         }
 
+        console.log(reservationData);
         res.status(200).json({ message: "success", data: reservationData });
 
         break;
