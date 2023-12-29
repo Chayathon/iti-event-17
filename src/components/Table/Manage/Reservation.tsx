@@ -20,7 +20,7 @@ export default function ReservationTable({ data }: Props) {
 
   return (
     <div>
-      {/* {JSON.stringify(ReservationData)} */}
+      {/* {JSON.stringify(ReservationData[Status])} */}
       <div className="w-full md:w-52 my-2 flex items-center gap-4">
         <label
           htmlFor="selectStatus"
@@ -84,14 +84,14 @@ export default function ReservationTable({ data }: Props) {
                 <td>
                   {
                     <Link
-                      href={`/manage/reservation/${item.id}`}
+                      href={`/manage/reservation/view/${item.id}`}
                       className={`        ${
-                        item.type === "TABLE"
+                        item.type === "table"
                           ? "text-green-600"
                           : "text-blue-600"
                       } font-bold`}
                     >
-                      {item.type === "TABLE" ? "จองโต๊ะ" : "จอง/ซื้อสินค้า"}
+                      {item.type === "table" ? "จองโต๊ะ" : "จอง/ซื้อสินค้า"}
                     </Link>
                   }
                   <br />
@@ -104,7 +104,7 @@ export default function ReservationTable({ data }: Props) {
                 </td>
                 <td>
                   <Link
-                    href={`/manage/reservation/${item.id}`}
+                    href={`/manage/reservation/approved/${item.id}`}
                     className="btn btn-sm btn-block btn-primary text-white"
                   >
                     ตรวจสอบ
