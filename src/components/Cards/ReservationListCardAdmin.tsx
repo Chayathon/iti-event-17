@@ -29,12 +29,14 @@ type CardTableProps = {
   data: ReservationTableJoinTableData;
   callback?: (data: any) => void;
   isProduct?: boolean;
+  readOnly?: boolean;
 };
 
 export default function CardTable({
   data,
   callback,
   isProduct = false,
+  readOnly,
 }: CardTableProps) {
   const table = data.tableId as TableData;
   const [loading, setLoading] = useState(false);
@@ -162,37 +164,41 @@ export default function CardTable({
           <dt className="font-medium text-gray-900">อีเมล</dt>
           <dd className="text-gray-700 sm:col-span-2">{data.email}</dd>
         </div>
-        <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">รายการสินค้า</dt>
-          <dd className="text-gray-700 sm:col-span-2">
-            {data.reservationProductItem.map((item, index) => (
-              <div className="flex gap-2" key={item.id}>
-                {/* @ts-ignore */}
-                <p className="text-gray-700">{item?.productId?.name}</p>
-                <p className="text-gray-700">
-                  {/* @ts-ignore */}
-                  {item.optionId.name}
-                </p>
-                <p>x {item.quantity} ชิ้น</p>
-                {/* @ts-ignore */}
-                {item.optionId.price * item.quantity} บาท
-              </div>
-            ))}
-          </dd>
-        </div>
-        <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">ราคาสุทธิ</dt>
-          <dd className="text-gray-700 sm:col-span-2">
-            {data.reservationProductItem.reduce(
-              (prev, cur) =>
-                prev +
-                // @ts-ignore
-                cur.optionId.price * cur.quantity,
-              0
-            )}
-            .- บาท
-          </dd>
-        </div>
+        {isProduct && (
+          <>
+            <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900">รายการสินค้า</dt>
+              <dd className="text-gray-700 sm:col-span-2">
+                {data?.reservationProductItem?.map((item, index) => (
+                  <div className="flex gap-2" key={item.id}>
+                    {/* @ts-ignore */}
+                    <p className="text-gray-700">{item?.productId?.name}</p>
+                    <p className="text-gray-700">
+                      {/* @ts-ignore */}
+                      {item.optionId.name}
+                    </p>
+                    <p>x {item.quantity} ชิ้น</p>
+                    {/* @ts-ignore */}
+                    {item.optionId.price * item.quantity} บาท
+                  </div>
+                ))}
+              </dd>
+            </div>
+            <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900">ราคาสุทธิ</dt>
+              <dd className="text-gray-700 sm:col-span-2">
+                {data?.reservationProductItem?.reduce(
+                  (prev, cur) =>
+                    prev +
+                    // @ts-ignore
+                    cur.optionId.price * cur.quantity,
+                  0
+                )}
+                .- บาท
+              </dd>
+            </div>
+          </>
+        )}
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
           <dd className="text-gray-700 sm:col-span-2">
@@ -230,32 +236,35 @@ export default function CardTable({
             </dd>
           </div>
         )}
-        <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">ตัวเลือก</dt>
-          <dd className="text-gray-700 sm:col-span-2 ">
-            <div className="flex flex-col gap-4 w-full md:w-2/5">
-              {data.status === "WAIT" && (
+
+        {!readOnly && (
+          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-900">ตัวเลือก</dt>
+            <dd className="text-gray-700 sm:col-span-2 ">
+              <div className="flex flex-col gap-4 w-full md:w-2/5">
+                {data.status === "WAIT" && (
+                  <button
+                    onClick={onApprove}
+                    disabled={loading}
+                    className="btn btn-sm w-full md:w-auto text-white hover:bg-green-700 bg-green-600 border-green-600"
+                  >
+                    <FaCheckCircle /> ยืนยันการชำระเงิน
+                  </button>
+                )}
                 <button
-                  onClick={onApprove}
+                  onClick={onCancel}
                   disabled={loading}
-                  className="btn btn-sm w-full md:w-auto text-white hover:bg-green-700 bg-green-600 border-green-600"
+                  className="btn btn-sm w-full md:w-auto text-white hover:bg-red-700 bg-red-600 border-red-600"
                 >
-                  <FaCheckCircle /> ยืนยันการชำระเงิน
+                  <FaBan /> ยกเลิกการชำระเงิน
                 </button>
-              )}
-              <button
-                onClick={onCancel}
-                disabled={loading}
-                className="btn btn-sm w-full md:w-auto text-white hover:bg-red-700 bg-red-600 border-red-600"
-              >
-                <FaBan /> ยกเลิกการชำระเงิน
-              </button>
-              <span className="text-sm text-center">
-                (อยู่ในสถานะล้มเหลวการชำระ)
-              </span>
-            </div>
-          </dd>
-        </div>
+                <span className="text-sm text-center">
+                  (อยู่ในสถานะล้มเหลวการชำระ)
+                </span>
+              </div>
+            </dd>
+          </div>
+        )}
       </dl>
     </div>
   );

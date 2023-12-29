@@ -37,12 +37,12 @@ export default function ReservationCheckPage() {
   }
 
   return (
-    <AdminLayout
-      titile="
-    ตรวจสอบการชำระเงิน
-    "
-    >
-      <ReservationListCard data={data} isProduct={type === "product"} />
+    <AdminLayout titile={` ตรวจสอบการชำระเงิน`}>
+      <ReservationListCard
+        data={data}
+        readOnly={mode === "view"}
+        isProduct={type === "product"}
+      />
     </AdminLayout>
   );
 }
