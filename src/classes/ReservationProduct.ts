@@ -36,7 +36,7 @@ export default class ReservationProduct {
                 *
                 `
       )
-      .order("created_at", { ascending: true });
+      .order("created_at", { ascending: false });
 
     if (error) {
       throw error;
@@ -168,7 +168,7 @@ export default class ReservationProduct {
       }
       return res;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw error;
     }
   }

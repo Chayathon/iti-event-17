@@ -28,7 +28,7 @@ export default async function handler(
 
           notify(LINEPayload, "product")
             .then((res) => console.log(`send notify: การชำระเงินเรียบร้อย`))
-            .catch((err) => console.log(err));
+            .catch((err) => console.error(err));
 
           res.status(200).json({ message: "success", data: data });
         } catch (error) {

@@ -49,13 +49,13 @@ export async function mail(data: MailData) {
       .replace(/#RESERVATION_TYPE#/g, reservationType)
       .replace(/#GENERATION#/g, data.generation.toString())
       .replace(/#DETAIL#/g, detail),
-    attachments: [
-      {
-        filename: `thank-you.png`,
-        content: image,
-        contentType: "image/png",
-      },
-    ],
+    // attachments: [
+    //   {
+    //     filename: `thank-you.png`,
+    //     content: image,
+    //     contentType: "image/png",
+    //   },
+    // ],
   };
 
   return sendMail(mailOptions);

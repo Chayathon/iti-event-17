@@ -32,6 +32,14 @@ type CardTableProps = {
   readOnly?: boolean;
 };
 
+type payload = {
+  id: string;
+  refId: string;
+  status: StatusPayment;
+  tableId: string;
+  type: "table" | "product" | string;
+};
+
 export default function CardTable({
   data,
   callback,
@@ -41,10 +49,35 @@ export default function CardTable({
   const table = data.tableId as TableData;
   const [loading, setLoading] = useState(false);
 
-  function handlePreview(url: string) {}
+  async function onSave(payload: payload) {
+    try {
+      setLoading(true);
+      const resData = await (
+        await axios.patch(`/admin/reservation`, payload)
+      ).data;
 
-  function onApprove() {
-    // call swal input string
+      if (resData) {
+        mutate(`/admin/reservation/check?type=${data.type}&id=${data.id}`);
+        Swal.fire({
+          title: "สำเร็จ",
+          text: "ทำรายการสำเร็จ",
+          icon: "success",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "เกิดข้อผิดพลาด",
+        text: "ทำรายการไม่สำเร็จ",
+        icon: "error",
+      });
+
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function onApprove() {
     Swal.fire({
       title: "ยืนยันการชำระเงิน",
       text: "กรุณากรอกหมายเลขอ้างอิงการชำระเงิน",
@@ -60,63 +93,24 @@ export default function CardTable({
         if (!ref) {
           Swal.showValidationMessage(`กรุณากรอกหมายเลขอ้างอิงการชำระเงิน`);
         }
+        return ref;
       },
       allowOutsideClick: () => !Swal.isLoading(),
-    })
-      .then((result) => {
-        if (result.isConfirmed) {
-          const refId = result.value;
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const refId = result.value;
 
-          Swal.fire({
-            title: "กำลังบันทึกข้อมูล",
-            didOpen: () => {
-              Swal.showLoading();
-            },
+        const payload = {
+          id: data.id,
+          refId,
+          status: "COMPLETE" as StatusPayment,
+          tableId: data.tableId ? data.tableId.id : "",
+          type: isProduct ? "product" : "table",
+        };
 
-            allowOutsideClick: () => !Swal.isLoading(),
-          });
-
-          const payload = {
-            id: data.id,
-            refId,
-            status: "COMPLETE" as StatusPayment,
-            tableId: data.tableId.id,
-            type: isProduct ? "product" : "table",
-          };
-
-          console.log(payload);
-
-          axios
-            .patch(`/admin/reservation`, payload)
-            .then((res) => {
-              mutate(
-                `/admin/reservation/check?type=${data.type}&id=${data.id}`
-              );
-              Swal.fire({
-                icon: "success",
-                title: "บันทึกข้อมูลสำเร็จ",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-            })
-            .catch((err) => {
-              Swal.fire({
-                icon: "error",
-                title: "บันทึกข้อมูลไม่สำเร็จ",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-            });
-        }
-      })
-      .catch((err) => {
-        !Swal.isLoading();
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-        !Swal.isLoading();
-      });
+        await onSave(payload);
+      }
+    });
   }
 
   function onCancel() {}
