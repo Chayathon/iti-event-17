@@ -73,13 +73,18 @@ export default function CardTable({
             allowOutsideClick: () => !Swal.isLoading(),
           });
 
+          const payload = {
+            id: data.id,
+            refId,
+            status: "COMPLETE" as StatusPayment,
+            tableId: data.tableId.id,
+            type: isProduct ? "product" : "table",
+          };
+
+          console.log(payload);
+
           axios
-            .patch(`/admin/reservation`, {
-              id: data.id,
-              refId,
-              status: "COMPLETE" as StatusPayment,
-              tableId: data.tableId.id,
-            })
+            .patch(`/admin/reservation`, payload)
             .then((res) => {
               mutate(
                 `/admin/reservation/check?type=${data.type}&id=${data.id}`
