@@ -43,10 +43,11 @@ export default class ReservationTable {
       .from("reservationTable")
       .select(
         `
-                *
+                *,tableId (id,index,name) as table
                 `
       )
-      .eq("id", id);
+      .eq("id", id)
+      .single();
 
     if (error) {
       throw error;

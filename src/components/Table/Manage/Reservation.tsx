@@ -14,8 +14,6 @@ type Props = {
 export default function ReservationTable({ data }: Props) {
   const [Status, setStatus] = useState<StatusPayment>("WAIT");
 
-  if (!data) return <div>loading...</div>;
-
   const ReservationData = splitReservationStatus(data);
 
   return (
@@ -38,8 +36,8 @@ export default function ReservationTable({ data }: Props) {
         >
           <option value="WAIT">รอตรวจสอบ</option>
           <option value="PENDING">รอชำระเงิน</option>
-          <option value="SUCCESS">ชำระเงินสำเร็จ</option>
-          <option value="FAILED">ชำระเงินไม่สำเร็จ</option>
+          <option value="COMPLETE">ชำระเงินสำเร็จ</option>
+          <option value="FAILS">ชำระเงินไม่สำเร็จ</option>
         </select>
       </div>
       <div className="overflow-x-auto">
@@ -84,7 +82,7 @@ export default function ReservationTable({ data }: Props) {
                 <td>
                   {
                     <Link
-                      href={`/manage/reservation/view/${item.id}`}
+                      href={`/manage/reservation/view/${item.type}/${item.id}`}
                       className={`        ${
                         item.type === "table"
                           ? "text-green-600"
@@ -104,7 +102,7 @@ export default function ReservationTable({ data }: Props) {
                 </td>
                 <td>
                   <Link
-                    href={`/manage/reservation/approved/${item.id}`}
+                    href={`/manage/reservation/approved/${item.type}/${item.id}`}
                     className="btn btn-sm btn-block btn-primary text-white"
                   >
                     ตรวจสอบ
