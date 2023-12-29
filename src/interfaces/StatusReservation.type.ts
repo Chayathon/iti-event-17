@@ -8,6 +8,7 @@ export interface Root {
   PENDING: ReservationStatus[];
 }
 
+//@ts-ignore
 export interface ReservationStatus
   extends ReservationProductData,
     ReservationTableData {
