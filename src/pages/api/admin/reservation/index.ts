@@ -30,43 +30,48 @@ export default async function handler(
   }
 }
 
+const processReservations = async (
+  reservations: ReservationTableData[],
+  type: string,
+  success: ReservationTableData[],
+  wait: ReservationTableData[],
+  pending: ReservationTableData[],
+  fails: ReservationTableData[]
+) => {
+  reservations.forEach((item: ReservationTableData) => {
+    item.type = type;
+    if (item.status === "COMPLETE") {
+      success.push(item);
+    } else if (item.status === "WAIT") {
+      wait.push(item);
+    } else if (item.status === "PENDING") {
+      pending.push(item);
+    } else if (item.status === "FAILS") {
+      fails.push(item);
+    }
+  });
+};
+
 async function getReservation(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
     const product = await ReservationProduct.getReservations();
-    const table = await ReservationTable.getReservations() as ReservationTableData[];
+    const table =
+      (await ReservationTable.getReservations()) as ReservationTableData[];
 
-    let success = [];
-    let wait = [];
-    let pending = [];
-    let fails = [];
+    const success = [];
+    const wait = [];
+    const pending = [];
+    const fails = [];
 
-    product.forEach((item: ReservationTableData) => {
-    
-      item.type = "PRODUCT";
-      if (item.status === "COMPLETE") {
-        success.push(item);
-      } else if (item.status === "WAIT") {
-        wait.push(item);
-      } else if (item.status === "PENDING") {
-        pending.push(item);
-      } else if (item.status === "FAILS") {
-        fails.push(item);
-      }
-    });
-
-
-    table.forEach((item) => {
-      item.type = "TABLE";
-      if (item.status === "COMPLETE") {
-        success.push(item);
-      } else if (item.status === "WAIT") {
-        wait.push(item);
-      } else if (item.status === "PENDING") {
-        pending.push(item);
-      } else if (item.status === "FAILS") {
-        fails.push(item);
-      }
-    });
+    await processReservations(
+      product,
+      "PRODUCT",
+      success,
+      wait,
+      pending,
+      fails
+    );
+    await processReservations(table, "TABLE", success, wait, pending, fails);
 
     const data = {
       SUCCESS: success,
