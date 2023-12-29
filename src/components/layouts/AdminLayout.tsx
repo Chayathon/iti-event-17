@@ -26,7 +26,7 @@ export default function AdminLayout({ children, titile }: Props) {
     if (user) loadData();
   }, [user]);
 
-  if (!user)
+  if (!user) {
     return (
       <Auth
         redirectTo="/"
@@ -37,18 +37,19 @@ export default function AdminLayout({ children, titile }: Props) {
         showLinks={false}
       />
     );
-
-  return (
-    <React.Fragment>
-      <AdminNavbar />
-      {titile && (
-        <div className="flex flex-col items-center justify-center w-full h-20">
-          <h1 className="text-3xl font-bold text-white mt-20 sm:mt-auto text-center  ">
-            {titile}
-          </h1>
-        </div>
-      )}
-      <div className="py-10 px-2 md:py-4 md:p-4">{children}</div>
-    </React.Fragment>
-  );
+  } else {
+    return (
+      <React.Fragment>
+        <AdminNavbar />
+        {titile && (
+          <div className="flex flex-col items-center justify-center w-full h-20">
+            <h1 className="text-3xl font-bold text-white mt-20 sm:mt-auto text-center  ">
+              {titile}
+            </h1>
+          </div>
+        )}
+        <div className="py-10 px-2 md:py-4 md:p-4">{children}</div>
+      </React.Fragment>
+    );
+  }
 }
