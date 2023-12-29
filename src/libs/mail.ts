@@ -71,7 +71,7 @@ async function sendMail(mailOptions: SMTPTransport.MailOptions) {
   });
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log("Mail sent:", info);
+    // console.log("Mail sent:", info);
 
     return info.response;
   } catch (err) {

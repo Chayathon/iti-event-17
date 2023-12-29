@@ -115,11 +115,13 @@ export default function ReservationTable({ data }: Props) {
           </tbody>
           {/* foot */}
           <tfoot>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+            <tr className="text-black">
+              <th>ชื่อ-นามสกุล</th>
+              <th className="hidden md:block">ข้อมูลติดต่อ</th>
+              <th>ประเภทรายการ</th>
+              <th className="hidden md:block">เมื่อ</th>
+              <th>ตรวจสอบรายการชำระเงิน</th>
+              <th>ตัวเลือก</th>
               <th></th>
             </tr>
           </tfoot>

@@ -39,9 +39,11 @@ export default async function handler(
 
         let reservation = null;
         if (type === "table") {
-          const reservationTable = await ReservationTable.updateReservation(
-            req.body as ReservationTableData
-          );
+          const reservationTable = await ReservationTable.updateReservation({
+            id: req.body.id,
+            status: req.body.status,
+            refId: req.body.refId,
+          });
           await Table.updateTable({
             id: req.body.tableId,
             isReserved: convertReserved(req.body.status),
