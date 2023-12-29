@@ -4,23 +4,24 @@ import nodemailer from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export interface MailData {
-  email: string;
-  name: string;
-  date: string;
-  paymentMethod: string;
-  reservationId: string;
-  reservationtype: "จองโต๊ะ" | "จองสินค้า";
-  detail: string;
+  email?: string;
+  name?: string;
+  date?: string;
+  paymentMethod?: string;
+  reservationId?: string;
+  reservationType?: "จองโต๊ะ" | "จองสินค้า";
+  detail?: string;
+  generation: number;
 }
 
-export default async function mail(data: MailData) {
+export async function mail(data: MailData) {
   const {
     email,
     name,
     date,
     paymentMethod,
     reservationId,
-    reservationtype,
+    reservationType,
     detail,
   } = data;
 
@@ -35,7 +36,7 @@ export default async function mail(data: MailData) {
       address: process.env.EMAIL_FROM as string,
     }, // Replace with your email address
     to: email,
-    subject: process.env.NEXT_PUBLIC_EVENT_NAME as string,
+    subject: "🤝 ขอบคุณที่ชำระเงินการจองโต๊ะงานสานสัมพันธ์ ครั้งที่ 16",
     envelope: {
       from: process.env.EMAIL_FROM as string,
       to: email,
@@ -45,7 +46,8 @@ export default async function mail(data: MailData) {
       .replace(/#DATETIME#/g, date)
       .replace(/#METHOD_PAYMENT#/g, paymentMethod)
       .replace(/#RESERVATION_ID#/g, reservationId)
-      .replace(/#RESERVATION_TYPE#/g, reservationtype)
+      .replace(/#RESERVATION_TYPE#/g, reservationType)
+      .replace(/#GENERATION#/g, data.generation.toString())
       .replace(/#DETAIL#/g, detail),
     attachments: [
       {
