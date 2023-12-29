@@ -1,27 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Data } from "@/interfaces/Stat.type";
 import { StatusPayment } from "@/interfaces/Payment.type";
-import { type ReservationTableData } from "@/classes/ReservationTable";
+import { type ReservationStatus } from "@/interfaces/StatusReservation.type";
+import { splitReservationStatus } from "@/libs/spitReservationStatus";
 import Link from "next/link";
 import moment from "moment";
 import "moment/locale/th";
-
+import { Root } from "@/interfaces/StatusReservation.type";
 type Props = {
   data: Data;
 };
-
-interface newReservationTableData extends ReservationTableData {
-  type: string;
-}
 
 export default function ReservationTable({ data }: Props) {
   const [Status, setStatus] = useState<StatusPayment>("WAIT");
 
   if (!data) return <div>loading...</div>;
 
+  const ReservationData = splitReservationStatus(data);
+
   return (
     <div>
-      {/* {JSON.stringify(data[Status])} */}
+      {/* {JSON.stringify(ReservationData)} */}
       <div className="w-full md:w-52 my-2 flex items-center gap-4">
         <label
           htmlFor="selectStatus"
@@ -57,7 +56,7 @@ export default function ReservationTable({ data }: Props) {
             </tr>
           </thead>
           <tbody>
-            {data[Status]?.map((item: newReservationTableData) => (
+            {ReservationData[Status]?.map((item: ReservationStatus) => (
               <tr key={item.id}>
                 <td>
                   <div className="flex items-center gap-3">

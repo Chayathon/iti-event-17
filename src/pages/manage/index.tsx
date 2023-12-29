@@ -29,6 +29,7 @@ export default function Manage({}: Props) {
       ) : (
         <Stat data={stat} />
       )}
+      <ReservationTable data={stat} />
     </AdminLayout>
   );
 }
