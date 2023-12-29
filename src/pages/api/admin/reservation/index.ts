@@ -58,26 +58,24 @@ async function getReservation(req: NextApiRequest, res: NextApiResponse<Data>) {
     const table =
       (await ReservationTable.getReservations()) as ReservationTableData[];
 
-    const success = [];
-    const wait = [];
-    const pending = [];
-    const fails = [];
+    // const success = [];
+    // const wait = [];
+    // const pending = [];
+    // const fails = [];
 
-    await processReservations(
-      product,
-      "PRODUCT",
-      success,
-      wait,
-      pending,
-      fails
-    );
-    await processReservations(table, "TABLE", success, wait, pending, fails);
+    // await processReservations(
+    //   product,
+    //   "PRODUCT",
+    //   success,
+    //   wait,
+    //   pending,
+    //   fails
+    // );
+    // await processReservations(table, "TABLE", success, wait, pending, fails);
 
     const data = {
-      SUCCESS: success,
-      WAIT: wait,
-      PENDING: pending,
-      FAILS: fails,
+      product,
+      table,
     };
 
     res.status(200).json({ message: "success", data: data });
