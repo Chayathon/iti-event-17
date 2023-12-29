@@ -15,16 +15,6 @@ type Props = {
 export default function AdminLayout({ children, titile }: Props) {
   const supabaseClient = useSupabaseClient();
   const user = useUser();
-  const [data, setData] = useState<ReservationTableData[]>();
-
-  useEffect(() => {
-    async function loadData() {
-      const res = await ReservationTable.getReservations();
-      // setData(res);
-    }
-    // Only run query once user is logged in.
-    if (user) loadData();
-  }, [user]);
 
   if (!user) {
     return (

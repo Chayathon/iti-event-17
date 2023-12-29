@@ -15,11 +15,6 @@ export default function Manage({}: Props) {
     isLoading,
   } = useSWR<Data>("/admin/reservation", fetcher);
 
-  if (error) {
-    console.error(error);
-    return <div>failed to load</div>;
-  }
-
   if (isLoading)
     return (
       <AdminLayout titile="ตรวจสอบรายการชำระเงิน">
