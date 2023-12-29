@@ -29,6 +29,7 @@ export default async function handler(
         break;
 
       default:
+        res.status(400).json({ message: "Bad Request" });
         break;
     }
   } catch (error) {
