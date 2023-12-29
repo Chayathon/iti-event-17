@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import AdminLayout from "@/components/layouts/AdminLayout";
 import { fetcher } from "@/libs/axios";
+import ReservationListCard from "@/components/Cards/ReservationListCardAdmin";
 import useSWR from "swr";
 
 type Mode = "view" | "approved" | "cancel" | "delete";
@@ -35,5 +36,13 @@ export default function ReservationCheckPage() {
     );
   }
 
-  return <AdminLayout></AdminLayout>;
+  return (
+    <AdminLayout
+      titile="
+    ตรวจสอบการชำระเงิน
+    "
+    >
+      <ReservationListCard data={data} isProduct={type === "product"} />
+    </AdminLayout>
+  );
 }
