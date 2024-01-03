@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { type TableData } from "@/classes/Table";
+import { type TableData, TableWithReservation } from "@/classes/Table";
 import Swal from "sweetalert2";
-import PaidModal from '@/components/Modals/PaidModal';
+import PaidModal from "@/components/Modals/PaidModal";
 
 type nickname = {
   id: string;
@@ -39,9 +39,10 @@ export default function TableLayout({ data, nickname }: Props) {
     return "bg-gray-200  cursor-pointer";
   }
 
-  async function onClick(table: TableData) {
-    if (table.isReserved || !table.isAvailable) {
-      const thisTable = nickname?.find((item) => item.tableId === table.id);
+  async function onClick(table: TableWithReservation) {
+    if ((table.isReserved && !table.isRetail) || !table.isAvailable) {
+      // const thisTable = nickname?.find((item) => item.tableId === table.id);
+      const thisTable = table.reservation[0];
 
       Swal.fire({
         title: "โต๊ะนี้ถูกจองแล้ว",

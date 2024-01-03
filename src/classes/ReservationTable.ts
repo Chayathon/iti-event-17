@@ -27,7 +27,7 @@ export default class ReservationTable {
       .from("reservationTable")
       .select(
         `
-        id,tableId,nickname,nickname
+        id,tableId,nickname,nickname,generation,created_at,status
             `
       ).not("status", "eq", "FAILS")
       .order("created_at", { ascending: false });

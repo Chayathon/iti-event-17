@@ -3,7 +3,7 @@ import * as yup from "yup";
 import BankInfo from "@/components/BankInfo";
 import { useForm, type UseFormHandleSubmit } from "react-hook-form";
 import axios, { fetcher } from "@/libs/axios";
-import { type TableData } from "@/classes/Table";
+import { type TableWithReservation } from "@/classes/Table";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import useSWR, { useSWRConfig } from "swr";
@@ -12,6 +12,7 @@ import { PaymentMethod } from "@/interfaces/Payment.type";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import moment from "moment";
 import Swal from "sweetalert2";
+import { table } from "console";
 
 const LAST_GENERATION = 28;
 
@@ -47,7 +48,7 @@ type FormValues = {
 };
 
 type Props = {
-  selected?: TableData;
+  selected?: TableWithReservation;
 };
 
 const MAX_PEOPLE = 8;
@@ -174,8 +175,12 @@ export default function PaidModal({ selected }: Props) {
             <div className="my-4 font-bold md:text-xl">
               {/* <PeoplePosition register={register} /> */}
               จำนวนคนที่จองปัจจุบัน:{" "}
-              <span className="text-green-600">1 / {MAX_PEOPLE} </span> คน
+              <span className="text-green-600">
+                {selected?.reservation.length} / {MAX_PEOPLE}{" "}
+              </span>{" "}
+              คน
             </div>
+            <PeopleList people={selected?.reservation} />
             <input
               type="hidden"
               {...register("tableId")}
@@ -378,6 +383,29 @@ export default function PaidModal({ selected }: Props) {
 type PeoplePosition = {
   register: UseFormHandleSubmit<FormValues>;
 };
+
+export function PeopleList({ people }: { people: ReservationTableData[] }) {
+  return (
+    <details className="collapse collapse-arrow bg-gray-200 my-5">
+      <summary className="collapse-title font-medium">
+        คลิกเพื่อดูรายชื่อผู้จองท่านอื่น
+      </summary>
+      <div className="collapse-content">
+        {people?.map((reservation) => (
+          <div key={reservation.id}>
+            <p className="text-sm">
+              {" "}
+              <span className="font-bold">
+                (รุ่นที่ {reservation.generation})
+              </span>{" "}
+              {reservation.nickname}{" "}
+            </p>
+          </div>
+        ))}
+      </div>
+    </details>
+  );
+}
 
 export function PeoplePosition({ register }) {
   const MAX_PEOPLE = 8;

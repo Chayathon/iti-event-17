@@ -4,6 +4,7 @@ import HomeLayout from "@/components/layouts/HomeLayout";
 import { type TableData } from "@/classes/Table";
 import axios, { fetcher } from "@/libs/axios";
 import { GetServerSideProps } from "next";
+import useSWR from "swr";
 
 const TableLayout = dynamic(() => import("@/components/TableLayout"), {
   ssr: false,
@@ -24,7 +25,9 @@ type Props = {
   nickname: nickname[];
 };
 
-export default function Booking({ tables, nickname }: Props) {
+export default function Booking({}: Props) {
+  const { data: tables, error, isLoading } = useSWR("/tables", fetcher);
+
   return (
     <HomeLayout>
       <div className="flex mt-14 justify-center">
@@ -68,24 +71,20 @@ export default function Booking({ tables, nickname }: Props) {
           </div>
         </div>
       </div>
-      {/* {isLoading && (
-        <div className="flex justify-center mt-4">
-          <div className="w-12 h-12 border-t-2 border-gray-900 rounded-full animate-spin"></div>
+      {isLoading ? (
+        <div className="flex flex-col">
+          <div className="flex justify-center mt-4 ">
+            <div className="w-16 h-16 border-t-2 border-white rounded-full animate-spin"></div>
+          </div>
+          <div>
+            <p className="text-center text-white py-2">กำลังโหลดข้อมูล...</p>
+          </div>
         </div>
-      )} */}
-      <Suspense fallback={<div className="text-center">Loading...</div>}>
-        <TableLayout data={tables ?? []} nickname={nickname} />
-      </Suspense>
+      ) : (
+        <TableLayout data={tables ?? []} nickname={[]} />
+      )}
+      {/* <Suspense fallback={<div className="text-center">Loading...</div>}>
+      </Suspense> */}
     </HomeLayout>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const nickname = (await axios.get(`/reservation/nickname`)).data.data;
-
-  const tables = await (await axios.get(`/tables`)).data.data;
-
-  return {
-    props: { tables: tables, nickname: nickname },
-  };
-};

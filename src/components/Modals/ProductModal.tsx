@@ -348,7 +348,7 @@ export default function ProductModal({}: Props) {
             <BankInfo />
             {/* loop products */}
 
-            <details className="collapse bg-gray-200">
+            <details className="collapse collapse-arrow bg-gray-200">
               <summary className="collapse-title text-xl font-medium">
                 คลิกเพื่อดูรายละเอียดสินค้า
               </summary>
