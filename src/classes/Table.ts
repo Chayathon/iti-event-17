@@ -1,4 +1,7 @@
 import supabase from "@/libs/supabase";
+import ReservationTable, {
+  type ReservationTableData,
+} from "./ReservationTable";
 
 export type TableData = {
   id?: string;
@@ -6,23 +9,52 @@ export type TableData = {
   name?: string;
   isAvailable?: boolean;
   isReserved?: boolean;
+  isRetail?: boolean;
+};
+
+export type TableWithReservation = {
+  id?: string;
+  index?: number;
+  name?: string;
+  isAvailable?: boolean;
+  isReserved?: boolean;
+  isRetail?: boolean;
+  reservation?: ReservationTableData[];
 };
 
 export default class Table {
   public static async getTables() {
-    const { data, error } = await supabase
-      .from("tables")
-      .select(
-        `
-        *
-        `
-      )
-      .order("index", { ascending: true });
+    try {
+      const { data, error } = await supabase
+        .from("tables")
+        .select("*")
+        .order("index", { ascending: true });
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+
+      // Fetch all reservations at once
+      const reservations = await ReservationTable.getPublicReservations();
+
+      // Map reservations to tables
+      const newData: TableWithReservation[] = data.map(
+        (table: TableWithReservation) => {
+          if (table.isRetail || !table.isRetail) {
+            table.reservation = reservations.filter(
+              (reservation: ReservationTableData) => {
+                return reservation.tableId === table.id;
+              }
+            );
+          }
+          return table;
+        }
+      );
+
+      return newData;
+    } catch (error) {
       throw error;
     }
-    return data;
   }
 
   public static async getTable(id: string) {

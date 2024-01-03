@@ -1,9 +1,8 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { type TableData } from "@/classes/Table";
 import axios, { fetcher } from "@/libs/axios";
-import useSWR from "swr";
 import { GetServerSideProps } from "next";
 
 const TableLayout = dynamic(() => import("@/components/TableLayout"), {
@@ -26,26 +25,6 @@ type Props = {
 };
 
 export default function Booking({ tables, nickname }: Props) {
-  // const [TableData, setTableData] = useState([]);
-  // const [NickName, setNickName] = useState([]);
-
-  // async function getData() {
-  //   try {
-  //     const tables = (await axios.get("/tables")).data;
-  //     const nickname = (await axios.get("/reservation/nickname")).data;
-
-  //     setTableData(tables.data);
-
-  //     setNickName(nickname.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
   return (
     <HomeLayout>
       <div className="flex mt-14 justify-center">
@@ -102,7 +81,6 @@ export default function Booking({ tables, nickname }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-
   const nickname = (await axios.get(`/reservation/nickname`)).data.data;
 
   const tables = await (await axios.get(`/tables`)).data.data;

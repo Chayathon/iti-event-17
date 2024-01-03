@@ -22,12 +22,28 @@ export type ReservationTableData = {
 };
 
 export default class ReservationTable {
+  public static async getPublicReservations() {
+    const { data, error } = await supabase
+      .from("reservationTable")
+      .select(
+        `
+        id,tableId,nickname,nickname
+            `
+      ).not("status", "eq", "FAILS")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
   public static async getReservations() {
     const { data, error } = await supabase
       .from("reservationTable")
       .select(
         `
-            *
+               *
             `
       )
       .order("created_at", { ascending: false });
@@ -235,5 +251,21 @@ export default class ReservationTable {
     });
 
     return newData;
+  }
+
+  public static async countReservationByField(field: string, value: string) {
+    const { data, error } = await supabase
+      .from("reservationTable")
+      .select(
+        `
+                    *
+                    `
+      )
+      .eq(field, value);
+
+    if (error) {
+      throw error;
+    }
+    return data.length;
   }
 }
