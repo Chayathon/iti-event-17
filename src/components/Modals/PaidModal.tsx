@@ -12,7 +12,6 @@ import { PaymentMethod } from "@/interfaces/Payment.type";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import moment from "moment";
 import Swal from "sweetalert2";
-import { table } from "console";
 
 const LAST_GENERATION = 28;
 
@@ -20,7 +19,7 @@ const phoneRegex = /^0[0-9]{9}$/;
 
 const schema = yup
   .object({
-    tableId: yup.string().required("กรุณาเลือกโต๊ะ"),
+    tableId: yup.string(),
     firstName: yup.string().required("กรุณากรอกชื่อจริง"),
     lastName: yup.string().required("กรุณากรอกนามสกุล"),
     nickname: yup.string().required("กรุณากรอกชื่อเล่น"),
@@ -112,7 +111,7 @@ export default function PaidModal({ selected }: Props) {
         setIsloading(true);
 
         const payload: ReservationTableData = {
-          tableId: selected.isRetail ? null : data.tableId,
+          tableId: null || selected?.id,
           email: data.email,
           phone: data.phone,
           generation: data.generation,
@@ -137,7 +136,7 @@ export default function PaidModal({ selected }: Props) {
                     `,
             icon: "success",
           }).then(() => {
-            mutate("/reservation/nickname");
+            mutate("/tables");
             router.push(`/tracking?search=${resData?.data?.phone}`);
           });
         }
@@ -180,6 +179,7 @@ export default function PaidModal({ selected }: Props) {
               type="hidden"
               {...register("tableId")}
               value={selected?.id}
+              defaultValue={selected?.id}
             />
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div className="sm:col-span-2">

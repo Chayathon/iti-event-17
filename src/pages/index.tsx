@@ -1,16 +1,33 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { FaUtensils, FaShirt } from "react-icons/fa6";
+import { FaUtensils, FaShirt, FaPerson } from "react-icons/fa6";
 import HomeLayout from "@/components/layouts/HomeLayout";
+import PaidModal from "@/components/Modals/PaidModal";
+import { type ReservationTableData } from "@/classes/ReservationTable";
 
 const TypingEffect = dynamic(() => import("@/components/TypingEffect"), {
   ssr: false,
 });
 
+const optionModal: ReservationTableData = {
+  isRetail: true,
+  tableId: null,
+};
+
 export default function Home() {
+  function onClickRetailTable() {
+    const modalElement = document.getElementById(
+      "reservationModal"
+    ) as HTMLDialogElement | null;
+    if (modalElement) {
+      modalElement.showModal();
+    }
+  }
+
   return (
     <HomeLayout>
+      <PaidModal selected={optionModal} />
       <div>
         <section className="mt-36">
           <div className="float-none mx-auto px-4 lg:flex  lg:items-center">
@@ -38,6 +55,15 @@ export default function Home() {
                     จองโต๊ะอาหาร
                   </span>
                 </Link>
+                <button
+                  className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                  onClick={onClickRetailTable}
+                >
+                  <span className="inline-flex gap-2 text-xl">
+                    <FaPerson />
+                    จองที่นั่งเดี่ยว
+                  </span>
+                </button>
 
                 <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"

@@ -62,7 +62,6 @@ export default function TableLayout({ data, nickname }: Props) {
     ) as HTMLDialogElement | null;
     if (modalElement) {
       setSelected(table);
-      console.log(table);
       modalElement.showModal();
     }
   }
