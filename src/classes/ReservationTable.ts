@@ -30,7 +30,8 @@ export default class ReservationTable {
         `
         id,tableId,nickname,nickname,generation,created_at,status
             `
-      ).not("status", "eq", "FAILS")
+      )
+      .not("status", "eq", "FAILS")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -60,7 +61,7 @@ export default class ReservationTable {
       .from("reservationTable")
       .select(
         `
-                *,tableId (id,index,name) as table
+                *,tableId (id,index,name, ) as table
                 `
       )
       .eq("id", id)
@@ -120,7 +121,7 @@ export default class ReservationTable {
 
       const payload = {
         id: new ShortUniqueId().rnd(10),
-        tableId: reservation.tableId,
+        tableId: null || reservation.tableId,
         name: reservation.name,
         phone: reservation.phone,
         email: reservation.email,
@@ -143,9 +144,11 @@ export default class ReservationTable {
         })
       )[0] as TableData;
 
+      const LINEMSG = reservation.isRetail ? "👨‍💼 การจองรายคน" : "🍽️ การจองโต๊ะ";
+
       notify(
         {
-          message: `🍽️ การจองโต๊ะ (${payload.id}) \nโต๊ะที่: ${tableReservated.index} ถูกจองแล้ว \nโดย: ${reservation.name} \nเบอร์โทร: ${reservation.phone} \nอีเมล: ${reservation.email} \nรุ่น: ${reservation.generation} \nวิธีการชำระเงิน: ${reservation.method}`,
+          message: `${LINEMSG} \n(${payload.id}) \nโต๊ะที่: ${tableReservated.index} ถูกจองแล้ว \nโดย: ${reservation.name} \nเบอร์โทร: ${reservation.phone} \nอีเมล: ${reservation.email} \nรุ่น: ${reservation.generation} \nวิธีการชำระเงิน: ${reservation.method}`,
           stickerId: 51626507,
           stickerPackageId: 11538,
         },

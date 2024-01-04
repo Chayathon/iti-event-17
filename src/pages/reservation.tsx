@@ -5,6 +5,7 @@ import { type TableData } from "@/classes/Table";
 import axios, { fetcher } from "@/libs/axios";
 import { GetServerSideProps } from "next";
 import useSWR from "swr";
+import Link from 'next/link';
 
 const TableLayout = dynamic(() => import("@/components/TableLayout"), {
   ssr: false,
@@ -59,12 +60,11 @@ export default function Booking({}: Props) {
                 <b className="text-red-700"> 4,500.- </b>บาท / โต๊ะ
               </p>
               <p className="text-sm">
-                {/* ➡️ <b>โต๊ะรวม</b> จะเป็นนั่งรวมกับผู้อื่น
+                ➡️ <b>โต๊ะรวม</b> จะเป็นนั่งรวมกับผู้อื่น
                 สามารถซื้อบัตรรายบุคคลได้ในราคา
-                <b className="text-red-700"> 570.- </b>บาท / คน{" "}
-                <b>สามารถซื้อบัตรรายบุคคล หน้างานครับ</b> */}
-                ➡️ <b>โต๊ะรวม</b>{" "}
-                <span className="text-red-700">ทางเราจะแจ้งให้ทราบภายหลัง</span>
+                <b className="text-red-700"> 650.- </b>บาท / คน{" "}
+                {/* ➡️ <b>โต๊ะรวม</b>{" "}
+                <span className="text-red-700">ทางเราจะแจ้งให้ทราบภายหลัง</span> */}
                 <br />
               </p>
             </div>

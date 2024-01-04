@@ -12,7 +12,8 @@ const TypingEffect = dynamic(() => import("@/components/TypingEffect"), {
 
 const optionModal: ReservationTableData = {
   isRetail: true,
-  tableId: null,
+  tableId: "963731bb-839f-46ae-92d5-09833a755857",
+  id: "963731bb-839f-46ae-92d5-09833a755857",
 };
 
 export default function Home() {

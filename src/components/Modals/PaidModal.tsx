@@ -111,7 +111,7 @@ export default function PaidModal({ selected }: Props) {
         setIsloading(true);
 
         const payload: ReservationTableData = {
-          tableId: null || selected?.id,
+          tableId: selected?.id,
           email: data.email,
           phone: data.phone,
           generation: data.generation,

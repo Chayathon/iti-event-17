@@ -10,6 +10,7 @@ export type TableData = {
   isAvailable?: boolean;
   isReserved?: boolean;
   isRetail?: boolean;
+  isHidden?: boolean;
 };
 
 export type TableWithReservation = {
@@ -28,7 +29,8 @@ export default class Table {
       const { data, error } = await supabase
         .from("tables")
         .select("*")
-        .order("index", { ascending: true });
+        .order("index", { ascending: true })
+        .not("isHidden", "eq", true);
 
       if (error) {
         throw error;

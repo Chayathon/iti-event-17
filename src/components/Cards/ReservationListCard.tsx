@@ -8,7 +8,7 @@ import {
   statusOrder,
   paymentMethod,
 } from "@/helpers/statusOrder";
-import { TableData } from "@/classes/Table";
+import { type TableData } from "@/classes/Table";
 import { FaUpload, FaCheckCircle, FaBan } from "react-icons/fa";
 import Swal from "sweetalert2";
 import moment from "moment";
@@ -153,12 +153,22 @@ export default function CardTable({
             <dt className="font-medium text-gray-900">รหัสการจอง</dt>
             <dd className="text-gray-700 sm:col-span-2">{data.id}</dd>
           </div>
-          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">โต๊ะที่จอง</dt>
-            <dd className="text-gray-700 sm:col-span-2">
-              ({table.index}) {table.name} <b>(ราคา 4,500.- บาท)</b>
-            </dd>
-          </div>
+          {table.isHidden && table.isRetail ? (
+            <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900">โต๊ะที่จอง</dt>
+              <dd className="text-gray-700 sm:col-span-2">
+                ({table.index}) {table.name} <b>(ราคา 4,500.- บาท)</b>
+              </dd>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900">ลักษระการจอง</dt>
+              <dd className="text-gray-700 sm:col-span-2">
+                รายบุคคล <b>(ราคา 650.- บาท)</b>
+              </dd>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">เมื่อวันที่</dt>
             <dd className="text-gray-700 sm:col-span-2">
