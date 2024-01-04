@@ -46,7 +46,7 @@ export default function TableLayout({ data }: Props) {
 
       Swal.fire({
         title: "โต๊ะนี้ถูกจองแล้ว",
-        html: `<b class="font-xl">${thisTable.nickname} รุ่นที่ ${thisTable.generation}</b>
+        html: `<b class="font-xl">${thisTable?.nickname} รุ่นที่ ${thisTable?.generation}</b>
           <br />
         `,
         // เมื่อ ${moment(data.generation).locale("th").format("l")}

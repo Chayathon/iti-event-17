@@ -61,7 +61,7 @@ export default class ReservationTable {
       .from("reservationTable")
       .select(
         `
-                *,tableId (id,index,name, ) as table
+                *,tableId (id,index,name,isRetail ) as table
                 `
       )
       .eq("id", id)
@@ -96,7 +96,7 @@ export default class ReservationTable {
       .select(
         `
                     *,
-                    tableId (id,index,name) as table
+                    tableId (id,index,name,isRetail,isHidden) as table
                     `
       )
       .eq(keyword, value);
