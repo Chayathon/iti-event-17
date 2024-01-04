@@ -19,6 +19,7 @@ export type ReservationTableData = {
   status?: StatusPayment;
   nickname?: string;
   type?: string;
+  isRetail?: boolean;
 };
 
 export default class ReservationTable {

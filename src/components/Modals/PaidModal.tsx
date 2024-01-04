@@ -112,18 +112,15 @@ export default function PaidModal({ selected }: Props) {
         setIsloading(true);
 
         const payload: ReservationTableData = {
-          tableId: data.tableId,
+          tableId: selected.isRetail ? null : data.tableId,
           email: data.email,
           phone: data.phone,
           generation: data.generation,
           method: data.method as PaymentMethod,
           name: `${data.firstName} ${data.lastName}`,
           nickname: data.nickname,
+          isRetail: selected.isRetail,
         };
-
-        console.log(payload);
-
-        return;
 
         const res = await axios.post("/reservation", payload);
 
@@ -166,21 +163,19 @@ export default function PaidModal({ selected }: Props) {
         className="modal modal-bottom sm:modal-middle "
       >
         <div className="modal-box lg:w-11/12 lg:max-w-5xl no-scrollbar  overflow-y-auto bg-white text-black ">
-          <h3 className="font-bold text-lg">หน้าต่างการจอง {selected?.name}</h3>
-
+          <h3 className="font-bold text-lg">
+            หน้าต่างการจอง {selected?.name}{" "}
+          </h3>
+          {selected?.isRetail
+            ? "โต๊ะสำหรับจองรายบุคคล 650.- บาท/คน"
+            : "สำหรับเหมาทั้งโต๊ะ 4,500.- บาท / โต๊ะ"}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="mx-auto max-w-xl sm:mt-10"
           >
-            <div className="my-4 font-bold md:text-xl">
-              {/* <PeoplePosition register={register} /> */}
-              จำนวนคนที่จองปัจจุบัน:{" "}
-              <span className="text-green-600">
-                {selected?.reservation.length} / {MAX_PEOPLE}{" "}
-              </span>{" "}
-              คน
-            </div>
-            <PeopleList people={selected?.reservation} />
+            {/* {selected?.isRetail && (
+              <PeopleList people={selected?.reservation} />
+            )} */}
             <input
               type="hidden"
               {...register("tableId")}
@@ -386,24 +381,34 @@ type PeoplePosition = {
 
 export function PeopleList({ people }: { people: ReservationTableData[] }) {
   return (
-    <details className="collapse collapse-arrow bg-gray-200 my-5">
-      <summary className="collapse-title font-medium">
-        คลิกเพื่อดูรายชื่อผู้จองท่านอื่น
-      </summary>
-      <div className="collapse-content">
-        {people?.map((reservation) => (
-          <div key={reservation.id}>
-            <p className="text-sm">
-              {" "}
-              <span className="font-bold">
-                (รุ่นที่ {reservation.generation})
-              </span>{" "}
-              {reservation.nickname}{" "}
-            </p>
-          </div>
-        ))}
+    <div>
+      <div className="my-4 font-bold md:text-xl">
+        {/* <PeoplePosition register={register} /> */}
+        จำนวนคนที่จองปัจจุบัน:{" "}
+        <span className="text-green-600">
+          {people.length} / {MAX_PEOPLE}{" "}
+        </span>{" "}
+        คน
       </div>
-    </details>
+      <details className="collapse collapse-arrow bg-gray-200 my-5">
+        <summary className="collapse-title font-medium">
+          คลิกเพื่อดูรายชื่อผู้จองท่านอื่น
+        </summary>
+        <div className="collapse-content">
+          {people?.map((reservation) => (
+            <div key={reservation.id}>
+              <p className="text-sm">
+                {" "}
+                <span className="font-bold">
+                  (รุ่นที่ {reservation.generation})
+                </span>{" "}
+                {reservation.nickname}{" "}
+              </p>
+            </div>
+          ))}
+        </div>
+      </details>
+    </div>
   );
 }
 
