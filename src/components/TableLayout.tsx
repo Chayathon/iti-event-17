@@ -13,15 +13,15 @@ type nickname = {
 };
 
 type Props = {
-  data: TableData[];
+  data: TableWithReservation[];
   nickname?: nickname[];
 };
 
-export default function TableLayout({ data, nickname }: Props) {
-  const [Selected, setSelected] = useState<TableData>(null);
+export default function TableLayout({ data }: Props) {
+  const [Selected, setSelected] = useState<TableWithReservation>(null);
 
-  function getTableStatus(table: TableData) {
-    const thisTable = nickname?.find((item) => item.tableId === table.id);
+  function getTableStatus(table: TableWithReservation) {
+    const thisTable = table.reservation[0]
 
     if (thisTable?.status === "PENDING") {
       return "bg-blue-400 text-white cursor-pointer";
@@ -108,12 +108,12 @@ export default function TableLayout({ data, nickname }: Props) {
         <div className="grid grid-cols-8 gap-2 w-full">
           {data?.map((table) => (
             <div
-              key={table.id}
-              onClick={() => onClick(table)}
-              className={`flex-1 p-2 ${getTableStatus(
-                table
+            key={table.id}
+            onClick={() => onClick(table)}
+            className={`flex-1 p-2 ${getTableStatus(
+              table
               )}  rounded-md  text-black text-center lg:w-full lg:h-20 md:w-20 md:h-20 sm:h-12 sm:w-2/3`}
-            >
+              >
               <p className={table.isReserved ? "text-white" : undefined}>
                 {table.name}
               </p>
