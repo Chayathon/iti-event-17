@@ -20,6 +20,7 @@ export type TableWithReservation = {
   isAvailable?: boolean;
   isReserved?: boolean;
   isRetail?: boolean;
+  isHidden?: boolean;
   reservation?: ReservationTableData[];
 };
 

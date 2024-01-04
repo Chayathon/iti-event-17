@@ -20,6 +20,7 @@ export type ReservationTableData = {
   nickname?: string;
   type?: string;
   isRetail?: boolean;
+  isHidden?: boolean;
 };
 
 export default class ReservationTable {
@@ -61,7 +62,7 @@ export default class ReservationTable {
       .from("reservationTable")
       .select(
         `
-                *,tableId (id,index,name,isRetail ) as table
+                *,tableId (id,index,name,isRetail,isHidden ) as table
                 `
       )
       .eq("id", id)
@@ -109,15 +110,15 @@ export default class ReservationTable {
 
   public static async createReservation(reservation: ReservationTableData) {
     try {
-      const isReserved = await ReservationTable.getReservationByTableId(
-        reservation.tableId as string
-      );
+      // const isReserved = await ReservationTable.getReservationByTableId(
+      //   reservation.tableId as string
+      // );
 
-      if (isReserved.length > 0) {
-        throw {
-          message: "โต๊ะนี้ถูกจองแล้ว",
-        };
-      }
+      // if (isReserved.length > 0) {
+      //   throw {
+      //     message: "โต๊ะนี้ถูกจองแล้ว",
+      //   };
+      // }
 
       const payload = {
         id: new ShortUniqueId().rnd(10),
@@ -146,16 +147,16 @@ export default class ReservationTable {
 
       const LINEMSG = reservation.isRetail ? "👨‍💼 การจองรายคน" : "🍽️ การจองโต๊ะ";
 
-      notify(
-        {
-          message: `${LINEMSG} \n(${payload.id}) \nโต๊ะที่: ${tableReservated.index} ถูกจองแล้ว \nโดย: ${reservation.name} \nเบอร์โทร: ${reservation.phone} \nอีเมล: ${reservation.email} \nรุ่น: ${reservation.generation} \nวิธีการชำระเงิน: ${reservation.method}`,
-          stickerId: 51626507,
-          stickerPackageId: 11538,
-        },
-        "dinner"
-      ).then((res) =>
-        console.log(`send notify: การจองโต๊ะ ${tableReservated.index}`)
-      );
+      // notify(
+      //   {
+      //     message: `${LINEMSG} \n(${payload.id}) \nโต๊ะที่: ${tableReservated.index} ถูกจองแล้ว \nโดย: ${reservation.name} \nเบอร์โทร: ${reservation.phone} \nอีเมล: ${reservation.email} \nรุ่น: ${reservation.generation} \nวิธีการชำระเงิน: ${reservation.method}`,
+      //     stickerId: 51626507,
+      //     stickerPackageId: 11538,
+      //   },
+      //   "dinner"
+      // ).then((res) =>
+      //   console.log(`send notify: การจองโต๊ะ ${tableReservated.index}`)
+      // );
 
       if (error) {
         throw error;

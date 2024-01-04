@@ -3,7 +3,7 @@ import { type ReservationProductData } from "@/classes/ReservationProduct";
 import { type ReservationTableData } from "@/classes/ReservationTable";
 import { type ReservationProductItemData } from "@/classes/ReservationProductItem";
 import { type ProductData } from "@/classes/Product";
-import { type TableData } from "@/classes/Table";
+import { type TableData, TableWithReservation } from "@/classes/Table";
 import {
   statusOrderColor,
   statusOrder,
@@ -46,7 +46,7 @@ export default function CardTable({
   isProduct = false,
   readOnly,
 }: CardTableProps) {
-  const table = data.tableId as TableData;
+  const table = data.tableId as TableWithReservation;
   const [loading, setLoading] = useState(false);
 
   async function onSave(payload: payload) {
@@ -122,11 +122,19 @@ export default function CardTable({
           <dt className="font-medium text-gray-900">รหัสการจอง</dt>
           <dd className="text-gray-700 sm:col-span-2">{data.id}</dd>
         </div>
-        {table && (
+        {table && !table.isHidden && !table.isRetail && (
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">โต๊ะที่จอง</dt>
             <dd className="text-gray-700 sm:col-span-2">
               ({table.index}) {table.name} <b>(ราคา 4,500.- บาท)</b>
+            </dd>
+          </div>
+        )}
+        {table && table.isRetail && (
+          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-900">ลักษระการจอง</dt>
+            <dd className="text-gray-700 sm:col-span-2">
+              รายบุคคล <b>(ราคา 650.- บาท)</b>
             </dd>
           </div>
         )}
@@ -202,22 +210,25 @@ export default function CardTable({
             </span>
           </dd>
         </div>
-        <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">หลักฐานการชำระเงิน</dt>
-          <dd className="text-gray-700 sm:col-span-2">
-            <Link href={data.slip} target="_blank">
-              <Image
-                src={data.slip}
-                alt=""
-                className="rounded-lg object-cover md:w-44  cursor-pointer shadow-xl"
-                width={500}
-                height={500}
-                quality={50}
-                loading="lazy"
-              />
-            </Link>
-          </dd>
-        </div>
+        {data.slip && (
+          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-900">หลักฐานการชำระเงิน</dt>
+            <dd className="text-gray-700 sm:col-span-2">
+              <Link href={data.slip} target="_blank">
+                <Image
+                  src={data.slip}
+                  alt=""
+                  className="rounded-lg object-cover md:w-44  cursor-pointer shadow-xl"
+                  width={500}
+                  height={500}
+                  quality={50}
+                  loading="lazy"
+                />
+              </Link>
+            </dd>
+          </div>
+        )}
+
         {data.refId && (
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">

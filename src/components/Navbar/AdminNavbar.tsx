@@ -84,7 +84,7 @@ export default function AdminNavbar({}: Props) {
             ))}
           </ul>
         </div>
-        <Link href={"/"} className="btn btn-ghost text-xl hidden md:flex">
+        <Link href={"/manage"} className="btn btn-ghost text-xl hidden md:flex">
           <FaHandshake />
           งานสานสัมพันธ์ ครั้งที่ 16
         </Link>
