@@ -1,7 +1,13 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { FaUtensils, FaShirt, FaPerson } from "react-icons/fa6";
+import {
+  FaUtensils,
+  FaShirt,
+  FaPerson,
+  FaMedal,
+  FaGuitar,
+} from "react-icons/fa6";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import PaidModal from "@/components/Modals/PaidModal";
 import { type ReservationTableData } from "@/classes/ReservationTable";
@@ -73,6 +79,28 @@ export default function Home() {
                   <span className="inline-flex gap-2 text-xl">
                     <FaShirt />
                     จองเสื้อ
+                  </span>
+                </Link>
+
+                <Link
+                  className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                  target="_blank"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSfiaW0CGh-7JTbXUI16jF-SSAFPpg5oR-9WFyeNvX6vnl8O8Q/viewform?fbclid=IwAR37Qfb08F2CoJTI-C-aqh8YL7TxH5CpUS3BcXnvtWmulbtkKh4f96W7Eu8"
+                >
+                  <span className="inline-flex gap-2 text-xl">
+                    <FaMedal />
+                    ทะเบียนกิจกรรมกีฬาสาย
+                  </span>
+                </Link>
+
+                <Link
+                  className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                  target="_blank"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSfiaW0CGh-7JTbXUI16jF-SSAFPpg5oR-9WFyeNvX6vnl8O8Q/viewform?fbclid=IwAR37Qfb08F2CoJTI-C-aqh8YL7TxH5CpUS3BcXnvtWmulbtkKh4f96W7Eu8"
+                >
+                  <span className="inline-flex gap-2 text-xl">
+                    <FaGuitar />
+                    สมัครนักดนตรี
                   </span>
                 </Link>
               </div>

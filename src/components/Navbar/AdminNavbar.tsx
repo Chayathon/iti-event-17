@@ -28,8 +28,8 @@ const MENU: Menu[] = [
     // icon: <FaHouse />,
   },
   {
-    title: "ตารางจองโต๊ะ",
-    href: "/manage/reservation",
+    title: "การจองโต๊ะ",
+    href: "/manage/table",
     target: "_self",
     // icon: <FaUtensils />,
   },

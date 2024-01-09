@@ -3,31 +3,50 @@ import AdminLayout from "@/components/layouts/AdminLayout";
 import Stat from "@/components/Cards/Manage/Stat";
 import { Data } from "@/interfaces/Stat.type";
 import ReservationTable from "@/components/Table/Manage/Reservation";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import axios, { fetcher } from "@/libs/axios";
 import useSWR from "swr";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 type Props = {};
 
 export default function Manage({}: Props) {
-  const {
-    data: stat,
-    error,
-    isLoading,
-  } = useSWR<Data>("/admin/reservation", fetcher);
+  const supabaseClient = useSupabaseClient();
+  const user = useUser();
 
-  if (isLoading)
+  if (!user) {
+    return (
+      <Auth
+        redirectTo="/"
+        appearance={{ theme: ThemeSupa }}
+        providers={[]}
+        supabaseClient={supabaseClient}
+        socialLayout="horizontal"
+        showLinks={false}
+      />
+    );
+  } else {
+    const {
+      data: stat,
+      error,
+      isLoading,
+    } = useSWR<Data>("/admin/reservation", fetcher);
+
+    if (isLoading)
+      return (
+        <AdminLayout titile="ตรวจสอบรายการชำระเงิน">
+          <div className="flex justify-center items-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white-900"></div>
+          </div>
+        </AdminLayout>
+      );
+
     return (
       <AdminLayout titile="ตรวจสอบรายการชำระเงิน">
-        <div className="flex justify-center items-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white-900"></div>
-        </div>
+        <Stat data={stat} />
+        <ReservationTable data={stat} />
       </AdminLayout>
     );
-
-  return (
-    <AdminLayout titile="ตรวจสอบรายการชำระเงิน">
-      <Stat data={stat} />
-      <ReservationTable data={stat} />
-    </AdminLayout>
-  );
+  }
 }
