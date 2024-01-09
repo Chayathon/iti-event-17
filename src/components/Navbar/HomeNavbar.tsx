@@ -47,7 +47,7 @@ const MENU: Menu[] = [
   },
   {
     title: "สมัครนักดนตรี",
-    href: "https://docs.google.com/forms/d/e/1FAIpQLSe5LBbWai6KiC32_LQCVmH82ERz3vfeJQ4U8VTL14qWFdnYSw/viewform?fbclid=IwAR3QEsLL7RryTcKDaYa_uETFF2eoIjYChPHd7QHBlPP3hK9oKYMDsgtipJ0",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSe5LBbWai6KiC32_LQCVmH82ERz3vfeJQ4U8VTL14qWFdnYSw/viewform?fbclid=IwAR0p0SA8AL7e9onQbQhZa-68Xu6CjIDZ5GThkE9HYzTHu7Lu4Oli1hdAItk",
     target: "_target",
     icon: <FaGuitar />,
   },

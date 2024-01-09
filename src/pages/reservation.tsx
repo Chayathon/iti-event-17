@@ -81,7 +81,7 @@ export default function Booking({}: Props) {
           </div>
         </div>
       ) : (
-        <TableLayout data={tables ?? []} nickname={[]} />
+        <TableLayout data={tables ?? []} />
       )}
       {/* <Suspense fallback={<div className="text-center">Loading...</div>}>
       </Suspense> */}
