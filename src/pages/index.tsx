@@ -7,6 +7,7 @@ import {
   FaPerson,
   FaMedal,
   FaGuitar,
+  FaTag,
 } from "react-icons/fa6";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import PaidModal from "@/components/Modals/PaidModal";
@@ -101,6 +102,17 @@ export default function Home() {
                   <span className="inline-flex gap-2 text-xl">
                     <FaGuitar />
                     สมัครนักดนตรี
+                  </span>
+                </Link>
+
+                <Link
+                  className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                  target="_blank"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLScRFWZqzQhp7SWuTsH3MDPXwaaYNQm8YahddUVKRK5PVchBxg/viewform?fbclid=IwAR0udRDSbMDWzyg6LdU11RI4Y7uZBybIhWojc40qIwBKHfBOo6R9YzPDTCI"
+                >
+                  <span className="inline-flex gap-2 text-xl">
+                    <FaTag />
+                    สลักพวงกุญเเจ
                   </span>
                 </Link>
               </div>
