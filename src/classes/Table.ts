@@ -4,13 +4,13 @@ import ReservationTable, {
 } from "./ReservationTable";
 
 export type TableData = {
-  id: string;
-  index: number;
-  name: string;
-  isAvailable: boolean;
-  isReserved: boolean;
-  isRetail: boolean;
-  isHidden: boolean;
+  id?: string;
+  index?: number;
+  name?: string;
+  isAvailable?: boolean;
+  isReserved?: boolean;
+  isRetail?: boolean;
+  isHidden?: boolean;
 };
 
 export type TableWithReservation = {
