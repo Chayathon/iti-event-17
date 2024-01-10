@@ -53,8 +53,9 @@ export default function Home() {
               <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed text-white">
                 ทุกช่วงเวลา ร้อยเรียงเป็นเรื่องราวให้เราได้คิดถึง
               </p>
-              <p className="my-4 font-bold text-amber-300 text-2xl">
-                แล้วพบกันวันที่ 03 กุมภาพันธ์ 2567 <br /> เวลา 18:00 น.
+              <p className="my-4 font-bold text-red-600 text-3xl md:text-4xl">
+                ยกเลิกกิจกรรมช่วงกลางวัน <br /> แล้วพบกันวันที่ 03 กุมภาพันธ์
+                2567 <br /> เวลา 18:00 น.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <Link
