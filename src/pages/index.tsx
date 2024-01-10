@@ -73,7 +73,7 @@ export default function Home() {
                   </span>
                 </button>
 
-                <Link
+                {/* <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                   href="/shop"
                 >
@@ -81,7 +81,7 @@ export default function Home() {
                     <FaShirt />
                     จองเสื้อ
                   </span>
-                </Link>
+                </Link> */}
 
                 <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"

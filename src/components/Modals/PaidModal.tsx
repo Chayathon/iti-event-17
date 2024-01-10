@@ -167,7 +167,7 @@ export default function PaidModal({ selected }: Props) {
           </h3>
           {selected?.isRetail
             ? "โต๊ะสำหรับจองรายบุคคล 650.- บาท/คน"
-            : "สำหรับเหมาทั้งโต๊ะ 4,500.- บาท / โต๊ะ"}
+            : "สำหรับเหมาทั้งโต๊ะ 4,000.- บาท / โต๊ะ"}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="mx-auto max-w-xl sm:mt-10"
