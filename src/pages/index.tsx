@@ -53,6 +53,9 @@ export default function Home() {
               <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed text-white">
                 ทุกช่วงเวลา ร้อยเรียงเป็นเรื่องราวให้เราได้คิดถึง
               </p>
+              <p className="my-4 font-bold text-amber-300 text-2xl">
+                แล้วพบกันวันที่ 03 กุมภาพันธ์ 2567 <br /> เวลา 18:00 น.
+              </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
@@ -83,7 +86,7 @@ export default function Home() {
                   </span>
                 </Link> */}
 
-                <Link
+                {/* <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                   target="_blank"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSfiaW0CGh-7JTbXUI16jF-SSAFPpg5oR-9WFyeNvX6vnl8O8Q/viewform?fbclid=IwAR37Qfb08F2CoJTI-C-aqh8YL7TxH5CpUS3BcXnvtWmulbtkKh4f96W7Eu8"
@@ -92,7 +95,7 @@ export default function Home() {
                     <FaMedal />
                     ทะเบียนกิจกรรมกีฬาสาย
                   </span>
-                </Link>
+                </Link> */}
 
                 <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"

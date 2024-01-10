@@ -33,12 +33,12 @@ const MENU: Menu[] = [
     target: "_self",
     icon: <FaUtensils />,
   },
-  {
-    title: "ทะเบียนกิจกรรมกีฬาสาย",
-    href: "https://docs.google.com/forms/d/e/1FAIpQLSfiaW0CGh-7JTbXUI16jF-SSAFPpg5oR-9WFyeNvX6vnl8O8Q/viewform?fbclid=IwAR37Qfb08F2CoJTI-C-aqh8YL7TxH5CpUS3BcXnvtWmulbtkKh4f96W7Eu8",
-    target: "_target",
-    icon: <FaMedal />,
-  },
+  // {
+  //   title: "ทะเบียนกิจกรรมกีฬาสาย",
+  //   href: "https://docs.google.com/forms/d/e/1FAIpQLSfiaW0CGh-7JTbXUI16jF-SSAFPpg5oR-9WFyeNvX6vnl8O8Q/viewform?fbclid=IwAR37Qfb08F2CoJTI-C-aqh8YL7TxH5CpUS3BcXnvtWmulbtkKh4f96W7Eu8",
+  //   target: "_target",
+  //   icon: <FaMedal />,
+  // },
   {
     title: "จองที่นั่งเดี่ยว",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSe5LBbWai6KiC32_LQCVmH82ERz3vfeJQ4U8VTL14qWFdnYSw/viewform?fbclid=IwAR3QEsLL7RryTcKDaYa_uETFF2eoIjYChPHd7QHBlPP3hK9oKYMDsgtipJ0",
