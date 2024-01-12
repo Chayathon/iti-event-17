@@ -288,11 +288,13 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
               <div className="flex flex-wrap items-center -mx-4 ">
                 <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
                   <button
-                    onClick={handleAddToCart}
-                    className="flex items-center justify-center w-full p-4 text-white border border-blue-500 bg-blue-600 hover:bg-blue-800 hover:border-blue-800 rounded-md "
-                  >
+                    // onClick={handleAddToCart}
+                    disabled
+                    className="flex items-center cursor-not-allowed justify-center w-full p-4 text-white border border-blue-500 bg-blue-600  hover:border-blue-800 rounded-md "
+                //  hover:bg-blue-800
+                 >
                     <FaCartPlus />
-                    <span className="ml-2">เพิ่มสินค้าลงตะกร้า</span>
+                    <span className="ml-2">(ไม่รับการจองเพิ่มแล้ว)</span>
                   </button>
                 </div>
                 <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
