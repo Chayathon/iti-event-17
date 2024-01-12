@@ -294,7 +294,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                 //  hover:bg-blue-800
                  >
                     <FaCartPlus />
-                    <span className="ml-2">(ไม่รับการจองเพิ่มแล้ว)</span>
+                    <span className="ml-2">(ไม่รับการจองเพิ่มแล้ว Sold Out)</span>
                   </button>
                 </div>
                 <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
