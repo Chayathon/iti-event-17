@@ -166,7 +166,7 @@ export default function PaidModal({ selected }: Props) {
             หน้าต่างการจอง {selected?.name}{" "}
           </h3>
           {selected?.isRetail
-            ? "โต๊ะสำหรับจองรายบุคคล 650.- บาท/คน"
+            ? "โต๊ะสำหรับจองรายบุคคล 500.- บาท/คน"
             : "สำหรับเหมาทั้งโต๊ะ 4,000.- บาท / โต๊ะ"}
           <form
             onSubmit={handleSubmit(onSubmit)}

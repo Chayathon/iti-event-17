@@ -164,7 +164,7 @@ export default function CardTable({
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">ลักษระการจอง</dt>
               <dd className="text-gray-700 sm:col-span-2">
-                รายบุคคล <b>(ราคา 650.- บาท)</b>
+                รายบุคคล <b>(ราคา 500.- บาท)</b>
               </dd>
             </div>
           )}
