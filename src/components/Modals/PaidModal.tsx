@@ -178,8 +178,8 @@ export default function PaidModal({ selected }: Props) {
             <input
               type="hidden"
               {...register("tableId")}
-              value={selected?.id}
-              defaultValue={selected?.id}
+              value={selected?.id || ""}
+              defaultValue={selected?.id || ""}
             />
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div className="sm:col-span-2">

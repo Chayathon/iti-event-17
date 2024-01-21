@@ -97,7 +97,7 @@ export default function Home() {
                   </span>
                 </Link> */}
 
-                <Link
+                {/* <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                   target="_blank"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSe5LBbWai6KiC32_LQCVmH82ERz3vfeJQ4U8VTL14qWFdnYSw/viewform?fbclid=IwAR0p0SA8AL7e9onQbQhZa-68Xu6CjIDZ5GThkE9HYzTHu7Lu4Oli1hdAItk"
@@ -117,7 +117,7 @@ export default function Home() {
                     <FaTag />
                     สลักพวงกุญเเจ
                   </span>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
