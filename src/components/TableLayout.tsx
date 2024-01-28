@@ -62,6 +62,16 @@ export default function TableLayout({ data, admin }: Props) {
       return;
     }
 
+    Swal.fire({
+      //หมดเขตการจอง
+      title: "ขออภัย",
+      html: `<b class="font-xl">ระบบปิดการจองแล้ว</b>`,
+      icon: "info",
+      timer: 3000,
+    });
+
+    return;
+
     const modalElement = document.getElementById(
       "reservationModal"
     ) as HTMLDialogElement | null;
@@ -86,10 +96,9 @@ export default function TableLayout({ data, admin }: Props) {
               <br />
               <span
                 title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"
-                className="text-xs text-white"
+                className="text-xl text-white mt-4"
               >
-                หากไม่ชำระภายในเวลาที่กำหนด <br />
-                หลังจากนั่นถือว่าโต๊ะนั้นหลุดจองครับ 🙏
+               ⛔ ระบบปิดการจองแล้ว ⛔
               </span>
             </div>
             <div className="w-full text-center bg-blue-800 my-5">

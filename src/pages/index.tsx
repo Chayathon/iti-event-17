@@ -63,7 +63,7 @@ export default function Home() {
                 >
                   <span className="inline-flex gap-2 text-xl">
                     <FaUtensils />
-                    จองโต๊ะอาหาร
+                    ดูโต๊ะอาหาร
                   </span>
                 </Link>
                 <button

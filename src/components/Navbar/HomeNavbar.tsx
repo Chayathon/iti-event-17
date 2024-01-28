@@ -28,7 +28,7 @@ const MENU: Menu[] = [
     icon: <FaHouse />,
   },
   {
-    title: "การจองโต๊ะ",
+    title: "ดูโต๊ะอาหาร",
     href: "/reservation",
     target: "_self",
     icon: <FaUtensils />,
