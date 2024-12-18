@@ -115,8 +115,8 @@ export default function TableLayout({ data, admin }: Props) {
                 จองแล้ว
               </div>
               {/* <div className="badge badge-neutral p-2 bg-blue-800 text-white">
-          อาจารย์
-        </div> */}
+                อาจารย์
+              </div> */}
               <div className="badge badge-neutral p-2 bg-neutral text-white">
                 ไม่พร้อมให้บริการ
               </div>

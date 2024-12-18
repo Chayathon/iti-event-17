@@ -43,7 +43,7 @@ export default function Home() {
               <h1 className="sm:text-5xl text-3xl ">
                 🎈
                 <span className="from-green-300 mx-2 via-blue-500 to-purple-600 bg-gradient-to-r  bg-clip-text font-extrabold text-transparent ">
-                  งานสานสัมพันธ์ ครั้งที่ 16
+                  งานสานสัมพันธ์ ครั้งที่ 17
                 </span>
                 🎈
               </h1>
@@ -54,7 +54,7 @@ export default function Home() {
                 ทุกช่วงเวลา ร้อยเรียงเป็นเรื่องราวให้เราได้คิดถึง
               </p>
               <p className="my-4 font-bold text-white text-3xl md:text-4xl">
-                แล้วพบกันวันที่ 03 กุมภาพันธ์ 2567 <br /> เวลา 18:00 น.
+                แล้วพบกันวันที่ 1 มีนาคม 2568 <br /> เวลา 18:00 น.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <Link
