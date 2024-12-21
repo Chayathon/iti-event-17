@@ -70,8 +70,6 @@ export default function TableLayout({ data, admin }: Props) {
       timer: 3000,
     });
 
-    return;
-
     const modalElement = document.getElementById(
       "reservationModal"
     ) as HTMLDialogElement | null;

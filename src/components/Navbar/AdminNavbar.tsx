@@ -86,7 +86,7 @@ export default function AdminNavbar({}: Props) {
         </div>
         <Link href={"/manage"} className="btn btn-ghost text-xl hidden md:flex">
           <FaHandshake />
-          งานสานสัมพันธ์ ครั้งที่ 16
+          งานสานสัมพันธ์ ครั้งที่ 17
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex lg:bg-blue-900">
