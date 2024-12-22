@@ -101,7 +101,7 @@ export default function TableModal({ selected }: Props) {
                   desc=" โต๊ะนี้เป็นโต๊ะขายปลีก ไม่สามารถจองได้ รายบุคคล"
                   mt="mt-[20px]"
                   mb="mb-[0px]"
-                  disabled={true}
+                  // disabled={true}
                   {...register("isRetail")}
                 />
               </div>
@@ -112,7 +112,7 @@ export default function TableModal({ selected }: Props) {
                   desc=" สถานะการจองโต๊อาหาร โต๊ะนี้ถูกจองไปแล้วหรือไม่"
                   mt="mt-[20px]"
                   mb="mb-[0px]"
-                  disabled={true}
+                  // disabled={true}
                   {...register("isReserved")}
                 />
               </div>
@@ -123,7 +123,7 @@ export default function TableModal({ selected }: Props) {
                   desc=" ซ่อนโต๊ะอาหาร ไม่แสดงในหน้าจอ"
                   mt="mt-[20px]"
                   mb="mb-[0px]"
-                  disabled={true}
+                  // disabled={true}
                   {...register("isHidden")}
                 />
               </div>
