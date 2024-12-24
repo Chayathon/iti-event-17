@@ -15,7 +15,7 @@ const nextConfig = {
     BASE_URL,
   },
   images: {
-    domains: ['gvasxyypgldgbgdmtaxd.supabase.co'],
+    domains: ['jpajjgeqekhebztqwhkr.supabase.co'],
   },
   rewrites: async () => [
     {
@@ -25,7 +25,7 @@ const nextConfig = {
     },
     {
       source: `/storage/:path*`,
-      destination: `https://gvasxyypgldgbgdmtaxd.supabase.co/storage/v1/object/public/:path*`,
+      destination: `https://jpajjgeqekhebztqwhkr.supabase.co/storage/v1/object/public/:path*`,
     }
   ],
 }
