@@ -62,13 +62,13 @@ export default function TableLayout({ data, admin }: Props) {
       return;
     }
 
-    Swal.fire({
-      //หมดเขตการจอง
-      title: "ขออภัย",
-      html: `<b class="font-xl">ระบบปิดการจองแล้ว</b>`,
-      icon: "info",
-      timer: 3000,
-    });
+    // Swal.fire({
+    //   //หมดเขตการจอง
+    //   title: "ขออภัย",
+    //   html: `<b class="font-xl">ระบบปิดการจองแล้ว</b>`,
+    //   icon: "info",
+    //   timer: 3000,
+    // });
 
     const modalElement = document.getElementById(
       "reservationModal"
