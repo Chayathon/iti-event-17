@@ -23,13 +23,13 @@ export default function App({
   const [supabaseClient] = useState(() =>
     createPagesBrowserClient({
       supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-      supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_KEY as string,
+      supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
     })
   );
   return (
     <React.Fragment>
       <Head>
-        <title>งานสานสัมพันธ์ ITI ครั้งที่ 16</title>
+        <title>งานสานสัมพันธ์ ITI ครั้งที่ 17</title>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <SessionContextProvider
