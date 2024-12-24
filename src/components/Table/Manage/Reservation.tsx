@@ -114,7 +114,7 @@ export default function ReservationTable({ data }: Props) {
             ))}
           </tbody>
           {/* foot */}
-          <tfoot>
+          {/* <tfoot>
             <tr className="text-black">
               <th>ชื่อ-นามสกุล</th>
               <th className="hidden md:block">ข้อมูลติดต่อ</th>
@@ -124,7 +124,7 @@ export default function ReservationTable({ data }: Props) {
               <th>ตัวเลือก</th>
               <th></th>
             </tr>
-          </tfoot>
+          </tfoot> */}
         </table>
       </div>
     </div>

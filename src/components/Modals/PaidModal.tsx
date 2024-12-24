@@ -13,7 +13,7 @@ import { type ReservationTableData } from "@/classes/ReservationTable";
 import moment from "moment";
 import Swal from "sweetalert2";
 
-const LAST_GENERATION = 28;
+const LAST_GENERATION = 29;
 
 const phoneRegex = /^0[0-9]{9}$/;
 
@@ -31,7 +31,7 @@ const schema = yup
       .string()
       .required("กรุณากรอกเบอร์โทรศัพท์")
       .matches(phoneRegex, "กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง"),
-    generation: yup.number().required("กรุณาเลือกรุ่นการศึกษา"),
+    generation: yup.string().required("กรุณาเลือกรุ่นการศึกษา"),
     method: yup.string().required("กรุณาเลือกวิธีการชำระเงิน"),
   })
   .required("กรุณากรอกข้อมูลให้ครบถ้วน");
@@ -42,7 +42,7 @@ type FormValues = {
   nickname?: string;
   email?: string;
   phone?: string;
-  generation?: number;
+  generation?: string;
   method?: string;
 };
 
@@ -112,12 +112,13 @@ export default function PaidModal({ selected }: Props) {
 
         const payload: ReservationTableData = {
           tableId: selected?.id,
+          name: `${data.firstName} ${data.lastName}`,
+          nickname: data.nickname,
           email: data.email,
           phone: data.phone,
           generation: data.generation,
           method: data.method as PaymentMethod,
-          name: `${data.firstName} ${data.lastName}`,
-          nickname: data.nickname,
+          status: "PENDING",
           isRetail: selected.isRetail,
         };
 
@@ -178,7 +179,6 @@ export default function PaidModal({ selected }: Props) {
             <input
               type="hidden"
               {...register("tableId")}
-              value={selected?.id || ""}
               defaultValue={selected?.id || ""}
             />
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -187,7 +187,7 @@ export default function PaidModal({ selected }: Props) {
                   htmlFor="firstName"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  ชื่อจริง*
+                  ชื่อจริง <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -207,7 +207,7 @@ export default function PaidModal({ selected }: Props) {
                   htmlFor="lastName"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  นามสกุลจริง*
+                  นามสกุล <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -227,7 +227,7 @@ export default function PaidModal({ selected }: Props) {
                   htmlFor="nickname"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  ชื่อเล่น*
+                  ชื่อเล่น <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -248,7 +248,7 @@ export default function PaidModal({ selected }: Props) {
                   htmlFor="email"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  อีเมล*
+                  อีเมล <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -267,7 +267,7 @@ export default function PaidModal({ selected }: Props) {
                   htmlFor="phone"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  เบอร์โทรศัพท์*
+                  เบอร์โทรศัพท์ <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="tel"
@@ -285,7 +285,7 @@ export default function PaidModal({ selected }: Props) {
                     htmlFor="generation"
                     className="block text-sm font-semibold leading-6 text-gray-900"
                   >
-                    รุ่นการศึกษา*
+                    รุ่นการศึกษา <span className="text-red-700">*</span>
                   </label>
                 </div>
                 <select
@@ -302,9 +302,7 @@ export default function PaidModal({ selected }: Props) {
                     )
                   )}
                 </select>
-                <span className="text-red-600">
-                  {errors.generation?.message}
-                </span>
+                <span className="text-red-600">{errors.generation?.message}</span>
 
                 {/* <div className="label">
                   <span className="label-text-alt">Alt label</span>

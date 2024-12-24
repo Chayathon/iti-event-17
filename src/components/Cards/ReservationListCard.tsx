@@ -73,12 +73,12 @@ export default function CardTable({
       setLoading(true);
 
       await supabase.storage
-        .from("iti-event")
+        .from("attachments")
         .upload(`slip/${data.id}`, Selectedfile);
 
       // //get url file
       const { data: publicURL } = supabase.storage
-        .from("iti-event")
+        .from("attachments")
         .getPublicUrl(`slip/${data.id}`);
 
       const payload = {
@@ -162,7 +162,7 @@ export default function CardTable({
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-              <dt className="font-medium text-gray-900">ลักษระการจอง</dt>
+              <dt className="font-medium text-gray-900">ลักษณะการจอง</dt>
               <dd className="text-gray-700 sm:col-span-2">
                 รายบุคคล <b>(ราคา 500.- บาท)</b>
               </dd>
@@ -205,7 +205,7 @@ export default function CardTable({
               </span>
             </dd>
           </div>
-          {data.method !== " ONSIDE" && (
+          {data.status !== "COMPLETE" && (
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">แนบหลักฐานการชำระ</dt>
               <dd className="text-gray-700 sm:col-span-2">
@@ -242,7 +242,7 @@ export default function CardTable({
                     </React.Fragment>
                   )}
 
-                  {data.status === "WAIT" && <h1>รอการตรวจสอบการชำระเงิน</h1>}
+                  {data.status === "WAIT" && <b>รอตรวจสอบการชำระเงิน</b>}
 
                   {!preview && data.status === "PENDING" && (
                     <button

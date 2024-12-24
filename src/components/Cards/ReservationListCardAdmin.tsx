@@ -256,7 +256,7 @@ export default function CardTable({
                     <FaCheckCircle /> ยืนยันการชำระเงิน
                   </button>
                 )}
-                <button
+                {/* <button
                   onClick={onCancel}
                   disabled={loading}
                   className="btn btn-sm w-full md:w-auto text-white hover:bg-red-700 bg-red-600 border-red-600"
@@ -265,7 +265,7 @@ export default function CardTable({
                 </button>
                 <span className="text-sm text-center">
                   (อยู่ในสถานะล้มเหลวการชำระ)
-                </span>
+                </span> */}
               </div>
             </dd>
           </div>
