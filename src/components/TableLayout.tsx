@@ -28,11 +28,11 @@ export default function TableLayout({ data, admin }: Props) {
     }
 
     if (!table.isAvailable) {
-      return "bg-neutral text-white cursor-not-allowed";
+      return "bg-green-500 text-white cursor-not-allowed";
     }
 
     if (table.isReserved) {
-      return "bg-green-500 text-white cursor-pointer";
+      return "bg-orange-500 text-white cursor-pointer";
       //cursor-not-allowed
     }
 
@@ -96,25 +96,25 @@ export default function TableLayout({ data, admin }: Props) {
                 title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"
                 className="text-xl text-white mt-4"
               >
-               ⛔ ระบบปิดการจองแล้ว ⛔
+               {/* ⛔ ระบบปิดการจองแล้ว ⛔ */}
               </span>
             </div>
             <div className="w-full text-center bg-blue-800 my-5">
               <h1 className="text-white text-xl p-5">👯‍♂️ STAGE 👯‍♂️</h1>
             </div>
             <div className="mb-2 flex gap-2">
-              <div className="badge badge-neutral bg-gray-200 p-2 text-black">
+              <div className="badge badge-neutral bg-green-500 p-2 text-black">
                 ว่าง
               </div>
               <div className="badge badge-neutral bg-blue-400 p-2 text-white">
                 รอชำระ
               </div>
-              <div className="badge badge-neutral bg-green-500 p-2 text-white">
+              <div className="badge badge-neutral bg-orange-500 p-2 text-white">
                 จองแล้ว
               </div>
-              {/* <div className="badge badge-neutral p-2 bg-blue-800 text-white">
+              <div className="badge badge-neutral p-2 bg-blue-800 text-white">
                 อาจารย์
-              </div> */}
+              </div>
               <div className="badge badge-neutral p-2 bg-neutral text-white">
                 ไม่พร้อมให้บริการ
               </div>
