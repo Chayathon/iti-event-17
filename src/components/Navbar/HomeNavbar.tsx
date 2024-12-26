@@ -9,6 +9,7 @@ import {
   FaHandshake,
   FaMedal,
   FaUtensils,
+  FaUserTie,
 } from "react-icons/fa6";
 
 type Props = {};
@@ -148,15 +149,19 @@ export default function Navbar({}: Props) {
           ))}
         </ul>
       </div>
-      <div className="navbar-end">
-        <Link
+      <div className="navbar-end px-4">
+        <Link href={"/manage"} className="btn btn-sm btn-outline">
+          <FaUserTie />
+          ทีมงาน
+        </Link>
+        {/* <Link
           target="_blank"
           href={"/tracking"}
           className="btn bg-amber-400 hover:bg-amber-600 btn-sm text-black mr-11 sm:mr-4"
         >
           <FaMagnifyingGlass />
           ยืนยันการชำระเงิน
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

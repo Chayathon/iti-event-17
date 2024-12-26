@@ -8,6 +8,7 @@ import axios, { fetcher } from "@/libs/axios";
 import useSWR from "swr";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
+import HomeLayout from "@/components/layouts/HomeLayout";
 
 type Props = {};
 
@@ -17,14 +18,19 @@ export default function Manage({}: Props) {
 
   if (!user) {
     return (
-      <Auth
-        redirectTo="/"
-        appearance={{ theme: ThemeSupa }}
-        providers={[]}
-        supabaseClient={supabaseClient}
-        socialLayout="horizontal"
-        showLinks={false}
-      />
+      <HomeLayout>
+        <div className="grid h-[80vh]">
+          <div className="my-auto 2xl:mx-60 xl:mx-40 md:mx-20 sm:mx-10 mx-6">
+            <Auth
+              appearance={{ theme: ThemeSupa }}
+              supabaseClient={supabaseClient}
+              providers={[]}
+              showLinks={false}
+              theme="dark"
+            />
+          </div>
+        </div>
+      </HomeLayout>
     );
   } else {
     const {
@@ -35,7 +41,7 @@ export default function Manage({}: Props) {
 
     if (isLoading)
       return (
-        <AdminLayout titile="ตรวจสอบรายการชำระเงิน">
+        <AdminLayout title="ตรวจสอบรายการชำระเงิน">
           <div className="flex justify-center items-center">
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white-900"></div>
           </div>
@@ -43,7 +49,7 @@ export default function Manage({}: Props) {
       );
 
     return (
-      <AdminLayout titile="ตรวจสอบรายการชำระเงิน">
+      <AdminLayout title="ตรวจสอบรายการชำระเงิน">
         <Stat data={stat} />
         <ReservationTable data={stat} />
       </AdminLayout>

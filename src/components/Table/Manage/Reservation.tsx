@@ -41,7 +41,7 @@ export default function ReservationTable({ data }: Props) {
         </select>
       </div>
       <div className="overflow-x-auto">
-        <table className="table bg-white rounded-md">
+        <table className="table bg-white rounded-2xl">
           <thead>
             <tr className="text-black text-center">
               <th>ชื่อ-นามสกุล</th>

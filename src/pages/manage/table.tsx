@@ -23,7 +23,7 @@ export default function Table({}: Props) {
   }
 
   return (
-    <AdminLayout titile="การจัดการจองโต๊ะ">
+    <AdminLayout title="การจัดการจองโต๊ะ">
       <TableModal />
       <div className="flex flex-col my-3 md:my-0">
         <button className="btn btn-success text-white" onClick={handleAddTable}>เพิ่มโต๊ะ</button>

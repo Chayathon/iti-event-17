@@ -9,32 +9,35 @@ import ReservationTable, {
 
 type Props = {
   children?: React.ReactNode;
-  titile?: string;
+  title?: string;
 };
 
-export default function AdminLayout({ children, titile }: Props) {
+export default function AdminLayout({ children, title }: Props) {
   const supabaseClient = useSupabaseClient();
   const user = useUser();
 
   if (!user) {
     return (
-      <Auth
-        redirectTo="/"
-        appearance={{ theme: ThemeSupa }}
-        providers={[]}
-        supabaseClient={supabaseClient}
-        socialLayout="horizontal"
-        showLinks={false}
-      />
+      <div className="grid h-[100vh]">
+        <div className="my-auto 2xl:mx-60 xl:mx-40 md:mx-20 sm:mx-10">
+          <Auth
+            appearance={{ theme: ThemeSupa }}
+            supabaseClient={supabaseClient}
+            providers={[]}
+            showLinks={false}
+            theme="dark"
+          />
+        </div>
+      </div>
     );
   } else {
     return (
       <React.Fragment>
         <AdminNavbar />
-        {titile && (
+        {title && (
           <div className="flex flex-col items-center justify-center w-full h-20">
             <h1 className="text-3xl font-bold text-white mt-20 sm:mt-auto text-center  ">
-              {titile}
+              {title}
             </h1>
           </div>
         )}

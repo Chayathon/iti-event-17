@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/navigation";
 import {
   FaMagnifyingGlass,
   FaHouse,
@@ -9,6 +11,7 @@ import {
   FaHandshake,
   FaCircleQuestion,
   FaUtensils,
+  FaArrowRightFromBracket,
 } from "react-icons/fa6";
 
 type Props = {};
@@ -46,6 +49,13 @@ const MENU: Menu[] = [
 ];
 
 export default function AdminNavbar({}: Props) {
+  const supabase = useSupabaseClient();
+
+  const handleSignout = async () => {
+    await supabase.auth.signOut();
+    // await router.push("/manage");
+  }
+
   return (
     <div className="navbar bg-blue-900 text-white shadow-lg p-0">
       <div className="navbar-start">
@@ -100,15 +110,8 @@ export default function AdminNavbar({}: Props) {
           ))}
         </ul>
       </div>
-      <div className="navbar-end">
-        <Link
-          target="_blank"
-          href={"/tracking"}
-          className="btn bg-amber-400 hover:bg-amber-600 btn-sm text-black mr-11 sm:mr-4"
-        >
-          <FaMagnifyingGlass />
-          ยืนยันการชำระเงิน
-        </Link>
+      <div className="navbar-end px-4">
+        <button onClick={handleSignout} className="btn btn-sm btn-outline"><FaArrowRightFromBracket /> ออกจากระบบ</button>
       </div>
     </div>
   );
