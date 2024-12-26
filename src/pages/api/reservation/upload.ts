@@ -24,7 +24,15 @@ export default async function handler(
         const table = data.tableId as TableData;
 
         const LINEPayload: NotifyData = {
-          message: `\n💵 มีการแจ้งการชำระเงิน\nรหัสการจ้อง: ${data.id}\nโต๊ะที่: ${table.index}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nURL: ${data.slip}`,
+          message: `\n💵 มีการแจ้งการชำระเงิน
+                    \n\nรหัสการจ้อง: ${data.id}
+                    \n\nโต๊ะที่: ${table.index}
+                    \n\nโดย: ${data.name}
+                    \n\nเบอร์โทร: ${data.phone}
+                    \n\nอีเมล: ${data.email}
+                    \n\nรุ่นที่: ${data.generation}
+                    \n\nวิธีการชำระเงิน: ${data.method}
+                    \n\nสลิป: ${data.slip}`,
           stickerId: 16581273,
           stickerPackageId: 8522,
         };

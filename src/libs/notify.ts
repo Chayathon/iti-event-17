@@ -19,20 +19,20 @@ type TypeMode = "dinner" | "product" | "donate";
 
 export default async function notify(data: NotifyData, type: TypeMode) {
   try {
-    let LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_DEV;
+    let LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
     // if (process.env.NODE_ENV === "production") {
     switch (type) {
       case "dinner":
-        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_TABLE;
+        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
         break;
       case "product":
-        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_PRODUCT;
+        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
         break;
       case "donate":
-        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_FOR_DONATE;
+        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
         break;
       default:
-        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN_DEV;
+        LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
         break;
     }
     // }
