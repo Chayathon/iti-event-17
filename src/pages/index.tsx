@@ -56,9 +56,9 @@ export default function Home() {
               <p className="my-4 font-bold text-white text-3xl md:text-4xl">
                 แล้วพบกันวันที่ 1 มีนาคม 2568 <br /> เวลา 18:00 น.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <div className="mt-8 flex flex-wrap justify-center gap-6">
                 <Link
-                  className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                   href="/reservation"
                 >
                   <span className="inline-flex gap-2 text-xl">
@@ -67,7 +67,7 @@ export default function Home() {
                   </span>
                 </Link>
                 <button
-                  className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                   onClick={onClickRetailTable}
                 >
                   <span className="inline-flex gap-2 text-xl">

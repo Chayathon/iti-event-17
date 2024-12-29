@@ -19,6 +19,7 @@ import TagePayment from "@/components/Tage/TagePayment";
 import Link from "next/link";
 import axios from "@/libs/axios";
 import { mutate } from "swr";
+import { useRouter } from "next/navigation";
 
 interface ReservationTableJoinTableData extends ReservationTableData {
   reservationProductItem: ReservationProductData[];
@@ -34,7 +35,6 @@ type CardTableProps = {
 
 type payload = {
   id: string;
-  refId: string;
   status: StatusPayment;
   tableId: string;
   type: "table" | "product" | string;
@@ -49,6 +49,8 @@ export default function CardTable({
   const table = data.tableId as TableWithReservation;
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   async function onSave(payload: payload) {
     try {
       setLoading(true);
@@ -60,10 +62,12 @@ export default function CardTable({
         mutate(`/admin/reservation/check?type=${data.type}&id=${data.id}`);
         Swal.fire({
           title: "สำเร็จ",
-          text: "ทำรายการสำเร็จ",
+          text: "ยืนยันการชำระเงินเรียบร้อยแล้ว",
           icon: "success",
+          timer: 1500,
         });
       }
+      router.back();
     } catch (error) {
       Swal.fire({
         title: "เกิดข้อผิดพลาด",
@@ -80,29 +84,16 @@ export default function CardTable({
   async function onApprove() {
     Swal.fire({
       title: "ยืนยันการชำระเงิน",
-      text: "กรุณากรอกหมายเลขอ้างอิงการชำระเงิน",
-      input: "text",
-      inputAttributes: {
-        autocapitalize: "off",
-      },
+      text: "ตรวจสอบข้อมูลการชำระเงิน ว่าเงินเข้าแล้วใช่หรือไม่?",
       showCancelButton: true,
       confirmButtonText: "ยืนยัน",
       cancelButtonText: "ยกเลิก",
       showLoaderOnConfirm: true,
-      preConfirm: async (ref) => {
-        if (!ref) {
-          Swal.showValidationMessage(`กรุณากรอกหมายเลขอ้างอิงการชำระเงิน`);
-        }
-        return ref;
-      },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const refId = result.value;
-
         const payload = {
           id: data.id,
-          refId,
           status: "COMPLETE" as StatusPayment,
           tableId: data.tableId ? data.tableId.id : "",
           type: isProduct ? "product" : "table",
@@ -225,19 +216,6 @@ export default function CardTable({
                   loading="lazy"
                 />
               </Link>
-            </dd>
-          </div>
-        )}
-
-        {data.refId && (
-          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">
-              หมายเลขอ้างอิงการชำระเงิน
-            </dt>
-            <dd className="text-gray-700 sm:col-span-2 ">
-              <div className="flex flex-col gap-4 w-full md:w-2/5">
-                <b> {data.refId}</b>
-              </div>
             </dd>
           </div>
         )}

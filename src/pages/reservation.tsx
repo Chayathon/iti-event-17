@@ -62,9 +62,7 @@ export default function Booking({}: Props) {
               <p className="text-sm">
                 ➡️ <b>โต๊ะรวม</b> จะเป็นนั่งรวมกับผู้อื่น
                 สามารถซื้อบัตรรายบุคคลได้ในราคา
-                <b className="text-red-700"> 500.- </b>บาท / คน{" "}
-                {/* ➡️ <b>โต๊ะรวม</b>{" "}
-                <span className="text-red-700">ทางเราจะแจ้งให้ทราบภายหลัง</span> */}
+                <b className="text-red-700"> 500.- </b>บาท / คน
                 <br />
               </p>
             </div>

@@ -32,7 +32,7 @@ export default function TableLayout({ data, admin }: Props) {
     }
 
     if (table.isReserved) {
-      return "bg-orange-500 text-white cursor-pointer";
+      return "bg-blue-500 text-white cursor-pointer";
     }
 
     return "bg-green-500 text-white cursor-pointer";
@@ -53,7 +53,6 @@ export default function TableLayout({ data, admin }: Props) {
         html: `<b class="font-xl">${thisTable?.nickname} รุ่นที่ ${thisTable?.generation}</b>
           <br />
         `,
-        // เมื่อ ${moment(data.generation).locale("th").format("l")}
         icon: "info",
         timer: 3000,
       });
