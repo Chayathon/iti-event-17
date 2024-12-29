@@ -131,7 +131,7 @@ export default function PaidModal({ selected }: Props) {
           Swal.fire({
             title: "บันทึกข้อมูลสำเร็จ",
             html: `
-            <b>กรุณาชำระภายใน 3 วัน</b>
+            <b>กรุณาชำระเงินภายใน 3 วัน</b>
             <br />
             คุณสามารถส่งหลักฐานการชำระเงินได้ที่ <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ยืนยันการชำระเงิน</a>
             `,

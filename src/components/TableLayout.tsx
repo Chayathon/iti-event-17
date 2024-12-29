@@ -24,7 +24,7 @@ export default function TableLayout({ data, admin }: Props) {
     const thisTable = table.reservation[0];
 
     if (thisTable?.status === "PENDING") {
-      return "bg-blue-400 text-white cursor-pointer";
+      return "bg-yellow-500 text-white cursor-pointer";
     }
 
     if (!table.isAvailable) {
@@ -33,10 +33,9 @@ export default function TableLayout({ data, admin }: Props) {
 
     if (table.isReserved) {
       return "bg-orange-500 text-white cursor-pointer";
-      //cursor-not-allowed
     }
 
-    return "bg-gray-200 cursor-pointer";
+    return "bg-green-500 text-white cursor-pointer";
   }
 
   async function onClick(table: TableWithReservation) {
@@ -88,8 +87,8 @@ export default function TableLayout({ data, admin }: Props) {
         {!admin && (
           <div>
             <div className="text-center sm:mt-1 mt-4">
-              <b className="text-xl md:text-3xl   text-amber-400  w-full">
-                🔔 กรุณาชำระภายใน 3 วัน หลังจากการจองโต๊ะ
+              <b className="text-xl md:text-3xl text-amber-400 w-full">
+                🔔 กรุณาชำระเงินภายใน 3 วัน หลังจากการจองโต๊ะ
               </b>
               <br />
               <span
@@ -99,17 +98,17 @@ export default function TableLayout({ data, admin }: Props) {
                {/* ⛔ ระบบปิดการจองแล้ว ⛔ */}
               </span>
             </div>
-            <div className="w-full text-center bg-blue-800 my-5">
-              <h1 className="text-white text-xl p-5">👯‍♂️ STAGE 👯‍♂️</h1>
+            <div className="w-full text-center bg-blue-800 rounded-2xl my-5">
+              <h1 className="text-white text-xl p-5">👯‍♂️ 👯‍♂️ &emsp; STAGE &emsp; 👯‍♂️ 👯‍♂️</h1>
             </div>
             <div className="mb-2 flex gap-2">
-              <div className="badge badge-neutral bg-green-500 p-2 text-black">
+              <div className="badge badge-neutral bg-green-500 p-2 text-white">
                 ว่าง
               </div>
-              <div className="badge badge-neutral bg-blue-400 p-2 text-white">
+              <div className="badge badge-neutral bg-yellow-500 p-2 text-white">
                 รอชำระ
               </div>
-              <div className="badge badge-neutral bg-orange-500 p-2 text-white">
+              <div className="badge badge-neutral bg-blue-500 p-2 text-white">
                 จองแล้ว
               </div>
               <div className="badge badge-neutral p-2 bg-blue-800 text-white">
@@ -122,14 +121,14 @@ export default function TableLayout({ data, admin }: Props) {
           </div>
         )}
 
-        <div className="grid grid-cols-8 gap-2 w-full">
+        <div className="grid grid-cols-8 gap-4 w-full">
           {data?.map((table) => (
             <div
               key={table.id}
               onClick={() => onClick(table)}
               className={`flex-1 p-2 ${getTableStatus(
                 table
-              )}  rounded-md  text-black text-center lg:w-full lg:h-20 md:w-20 md:h-20 sm:h-12 sm:w-2/3`}
+              )}  rounded-2xl text-black text-center lg:w-full lg:h-20 md:w-20 md:h-20 sm:h-12 sm:w-2/3`}
             >
               <p className={table.isReserved ? "text-white" : undefined}>
                 {table.name}
