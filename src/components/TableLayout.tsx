@@ -36,7 +36,7 @@ export default function TableLayout({ data, admin }: Props) {
       //cursor-not-allowed
     }
 
-    return "bg-gray-200  cursor-pointer";
+    return "bg-gray-200 cursor-pointer";
   }
 
   async function onClick(table: TableWithReservation) {

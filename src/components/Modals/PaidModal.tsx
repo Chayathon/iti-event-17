@@ -133,8 +133,8 @@ export default function PaidModal({ selected }: Props) {
             html: `
             <b>กรุณาชำระภายใน 3 วัน</b>
             <br />
-            คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ยืนยันการชำระ</a> หรือตรวจสอบได้ที่เมนู "ยืนยันการชำระ"
-                    `,
+            คุณสามารถส่งหลักฐานการชำระเงินได้ที่ <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ยืนยันการชำระเงิน</a>
+            `,
             icon: "success",
           }).then(() => {
             mutate("/tables");
@@ -303,10 +303,6 @@ export default function PaidModal({ selected }: Props) {
                   )}
                 </select>
                 <span className="text-red-600">{errors.generation?.message}</span>
-
-                {/* <div className="label">
-                  <span className="label-text-alt">Alt label</span>
-                </div> */}
               </label>
               <div className="sm:col-span-2 flex ">
                 <div className="flex items-center gap-2">
