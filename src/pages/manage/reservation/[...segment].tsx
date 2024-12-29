@@ -41,7 +41,7 @@ export default function ReservationCheckPage() {
   }
 
   return (
-    <AdminLayout titile={` ตรวจสอบการชำระเงิน`}>
+    <AdminLayout title={`ตรวจสอบการชำระเงิน`}>
       <ReservationListCard
         data={data}
         readOnly={mode === "view"}

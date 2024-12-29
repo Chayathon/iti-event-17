@@ -32,11 +32,11 @@ export async function mail(data: MailData) {
 
   const mailOptions: SMTPTransport.MailOptions = {
     from: {
-      name: `🤝 ขอบคุณที่ชำระเงินการจองโต๊ะงานสานสัมพันธ์ ครั้งที่ 16`,
+      name: `🤝 ขอบคุณสำหรับการชำระเงิน งานสานสัมพันธ์ ครั้งที่ 17`,
       address: process.env.EMAIL_FROM as string,
     }, // Replace with your email address
     to: email,
-    subject: "🤝 ขอบคุณที่ชำระเงินการจองโต๊ะงานสานสัมพันธ์ ครั้งที่ 16",
+    subject: "🤝 ขอบคุณสำหรับการชำระเงิน งานสานสัมพันธ์ ครั้งที่ 17",
     envelope: {
       from: process.env.EMAIL_FROM as string,
       to: email,
@@ -63,7 +63,7 @@ export async function mail(data: MailData) {
 
 async function sendMail(mailOptions: SMTPTransport.MailOptions) {
   const transporter = nodemailer.createTransport({
-    service: "Gmail", // e.g., 'Gmail' or use a custom SMTP configuration
+    service: "gmail", // e.g., 'Gmail' or use a custom SMTP configuration
     auth: {
       user: process.env.EMAIL_FROM as string, // Replace with your email address
       pass: process.env.EMAIL_SERVER_PASSWORD as string, // Replace with your email password or an app password for security
