@@ -32,7 +32,7 @@ export async function mail(data: MailData) {
 
   const mailOptions: SMTPTransport.MailOptions = {
     from: {
-      name: `🤝 ขอบคุณสำหรับการชำระเงิน งานสานสัมพันธ์ ครั้งที่ 17`,
+      name: `ITI สานสัมพันธ์ ครั้งที่ 17`,
       address: process.env.EMAIL_FROM as string,
     }, // Replace with your email address
     to: email,
@@ -49,13 +49,6 @@ export async function mail(data: MailData) {
       .replace(/#RESERVATION_TYPE#/g, reservationType)
       .replace(/#GENERATION#/g, data.generation.toString())
       .replace(/#DETAIL#/g, detail),
-    // attachments: [
-    //   {
-    //     filename: `thank-you.png`,
-    //     content: image,
-    //     contentType: "image/png",
-    //   },
-    // ],
   };
 
   return sendMail(mailOptions);
