@@ -57,6 +57,8 @@ export default function PaidModal({ selected }: Props) {
   const { mutate } = useSWRConfig();
   const [isloading, setIsloading] = useState(false);
 
+  const isDisabled = selected?.reservation?.length >= MAX_PEOPLE;
+
   const {
     register,
     handleSubmit,
@@ -84,7 +86,7 @@ export default function PaidModal({ selected }: Props) {
     modalElement.close();
     Swal.fire({
       title: "ยืนยันการจอง",
-      text: "คุณได้ตรวจสอบข้อมูลว่าถูกต้องแล้วใช่หรือไม่?",
+      text: "คุณได้ตรวจสอบข้อมูล ว่าถูกต้องแล้วใช่หรือไม่?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "ใช่, ยืนยัน",
@@ -162,20 +164,20 @@ export default function PaidModal({ selected }: Props) {
         id="reservationModal"
         className="modal modal-bottom sm:modal-middle "
       >
-        <div className="modal-box lg:w-11/12 lg:max-w-5xl no-scrollbar  overflow-y-auto bg-white text-black ">
+        <div className="modal-box lg:w-11/12 lg:max-w-5xl no-scrollbar overflow-y-auto bg-white text-black ">
           <h3 className="font-bold text-lg">
             หน้าต่างการจอง {selected?.name}{" "}
           </h3>
           {selected?.isRetail
-            ? "โต๊ะสำหรับจองรายบุคคล 500.- บาท/คน"
+            ? "โต๊ะสำหรับจองรายบุคคล 500.- บาท / คน"
             : "สำหรับเหมาทั้งโต๊ะ 4,000.- บาท / โต๊ะ"}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="mx-auto max-w-xl sm:mt-10"
           >
-            {/* {selected?.isRetail && (
+            {selected?.isRetail && (
               <PeopleList people={selected?.reservation} />
-            )} */}
+            )}
             <input
               type="hidden"
               {...register("tableId")}
@@ -194,8 +196,10 @@ export default function PaidModal({ selected }: Props) {
                     type="text"
                     {...register("firstName", { required: true })}
                     id="firstName"
+                    placeholder="กรุณากรอกชื่อจริง"
                     autoComplete="firstName"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    disabled={isDisabled}
+                    className={`${isDisabled ? "opacity-60 cursor-not-allowed" : "opacity-100"} block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                   />
                   <span className="text-red-600">
                     {errors.firstName?.message}
@@ -214,8 +218,10 @@ export default function PaidModal({ selected }: Props) {
                     type="text"
                     {...register("lastName", { required: true })}
                     id="lastName"
+                    placeholder="กรุณากรอกนามสกุล"
                     autoComplete="lastName"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    disabled={isDisabled}
+                  className={`${isDisabled ? "opacity-60 cursor-not-allowed" : "opacity-100"} block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                   />
                   <span className="text-red-600">
                     {errors.lastName?.message}
@@ -235,8 +241,9 @@ export default function PaidModal({ selected }: Props) {
                     {...register("nickname", { required: true })}
                     id="nickname"
                     autoComplete="nickname"
-                    placeholder="ชื่อเล่น: พี่เจมส์ พี่บี"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="กรุณากรอกชื่อเล่น"
+                    disabled={isDisabled}
+                    className={`${isDisabled ? "opacity-60 cursor-not-allowed" : "opacity-100"} block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                   />
                   <span className="text-red-600">
                     {errors.nickname?.message}
@@ -256,8 +263,9 @@ export default function PaidModal({ selected }: Props) {
                     {...register("email", { required: true })}
                     id="email"
                     autoComplete="email"
-                    placeholder="อีเมล: "
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="กรุณากรอกอีเมล"
+                    disabled={isDisabled}
+                    className={`${isDisabled ? "opacity-60 cursor-not-allowed" : "opacity-100"} block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                   />
                   <span className="text-red-600">{errors.email?.message}</span>
                 </div>
@@ -274,8 +282,9 @@ export default function PaidModal({ selected }: Props) {
                   {...register("phone", { required: true })}
                   id="phone"
                   autoComplete="off"
-                  placeholder="เบอร์โทรศัพท์: 0812345678"
-                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="กรุณากรอกเบอร์โทรศัพท์"
+                  disabled={isDisabled}
+                  className={`${isDisabled ? "opacity-60 cursor-not-allowed" : "opacity-100"} block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                 />
                 <span className="text-red-600">{errors.phone?.message}</span>
               </div>
@@ -291,6 +300,7 @@ export default function PaidModal({ selected }: Props) {
                 <select
                   className="select select-bordered bg-white"
                   id="generation"
+                  disabled={isDisabled}
                   {...register("generation", { required: true })}
                 >
                   <option value="">กรุณาเลือก</option>
@@ -334,9 +344,10 @@ export default function PaidModal({ selected }: Props) {
             <div className="mt-5">
               <button
                 type="submit"
-                disabled={isloading}
+                disabled={isloading || isDisabled}
                 className={`block w-full rounded-md ${
-                  isloading ? "bg-gray-600" : "bg-indigo-600"
+                  isloading || isDisabled
+                  ? "bg-gray-600 opacity-75 cursor-not-allowed hover:bg-gray-600" : "bg-indigo-600"
                 }  px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
               >
                 {isloading ? "กำลังบันทึก..." : "บันทึก"}
@@ -379,7 +390,7 @@ export function PeopleList({ people }: { people: ReservationTableData[] }) {
       <div className="my-4 font-bold md:text-xl">
         {/* <PeoplePosition register={register} /> */}
         จำนวนคนที่จองปัจจุบัน:{" "}
-        <span className="text-green-600">
+        <span className={`${people.length >= MAX_PEOPLE ? "text-red-600" : "text-green-600"}`}>
           {people.length} / {MAX_PEOPLE}{" "}
         </span>{" "}
         คน
