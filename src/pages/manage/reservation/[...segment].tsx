@@ -3,6 +3,7 @@ import AdminLayout from "@/components/layouts/AdminLayout";
 import { fetcher } from "@/libs/axios";
 import ReservationListCard from "@/components/Cards/ReservationListCardAdmin";
 import useSWR from "swr";
+import { FaAngleLeft } from "react-icons/fa6";
 
 type Mode = "view" | "approved" | "cancel" | "delete";
 type Type = "table" | "product";
@@ -26,6 +27,10 @@ export default function ReservationCheckPage() {
     fetcher
   );
 
+  const handleBack = () => {
+    router.back();
+  };
+
   if (!data && !isLoading) {
     return <div className="text-center max-h-screen">404</div>;
   }
@@ -41,7 +46,8 @@ export default function ReservationCheckPage() {
   }
 
   return (
-    <AdminLayout title={`ตรวจสอบการชำระเงิน`}>
+    <AdminLayout title="ตรวจสอบการชำระเงิน">
+      <button onClick={handleBack} className="btn btn-outline btn-sm mb-2"><FaAngleLeft/>ย้อนกลับ</button>
       <ReservationListCard
         data={data}
         readOnly={mode === "view"}
