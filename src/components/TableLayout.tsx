@@ -120,27 +120,27 @@ export default function TableLayout({ data, admin }: Props) {
           </div>
         )}
 
-        <div className="grid grid-cols-8 gap-4 w-full">
+        <div className="grid grid-cols-8 w-full lg:gap-4 gap-2">
           {data?.map((table) => (
             <div
               key={table.id}
               onClick={() => onClick(table)}
               className={`flex-1 p-2 ${getTableStatus(
                 table
-              )}  rounded-2xl text-black text-center lg:w-full lg:h-20 md:w-20 md:h-20 sm:h-12 sm:w-2/3`}
+              )}  rounded-2xl text-black text-center lg:w-full lg:h-20 md:w-20 md:h-20 sm:h-8 sm:w-18`}
             >
-              <p className={table.isReserved ? "text-white" : undefined}>
+              <p className={"text-white text-xs md:text-md lg:text-lg"}>
                 {table.name}
               </p>
-              <span className="hidden sm:block ">
+              <span className="hidden md:block">
                 {table.isReserved && table.isAvailable && (
-                  <b className="text-lg lg:text-2xl text-white">จองแล้ว</b>
+                  <b className="text-lg lg:text-2xl md:text-lg text-white">จองแล้ว</b>
                 )}
                 {!table.isReserved && table.isAvailable && (
-                  <b className="text-lg lg:text-2xl">ว่าง</b>
+                  <b className="text-lg lg:text-2xl md:text-lg">ว่าง</b>
                 )}
                 {!table.isAvailable && (
-                  <b className="text-lg lg:text-xl">ไม่พร้อมให้บริการ</b>
+                  <b className="text-lg lg:text-xl md:text-sm">ไม่พร้อมให้บริการ</b>
                 )}
               </span>
             </div>

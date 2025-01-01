@@ -384,7 +384,7 @@ type PeoplePosition = {
   register: UseFormHandleSubmit<FormValues>;
 };
 
-export function PeopleList({ people }: { people: ReservationTableData[] }) {
+export function PeopleList({ people = [] }: { people: ReservationTableData[] }) {
   return (
     <div>
       <div className="my-4 font-bold md:text-xl">
