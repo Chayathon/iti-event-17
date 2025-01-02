@@ -103,7 +103,7 @@ export default function ProductModal({}: Props) {
     }
   }
 
-  function onSubmit(dataFrom: FormValues) {
+  function onSubmit(data: FormValues) {
     handleClose();
     Swal.fire({
       title: "ยืนยันการจอง",
@@ -122,7 +122,7 @@ export default function ProductModal({}: Props) {
           },
         });
 
-        onSave(dataFrom);
+        onSave(data);
       }
       if (result.isDismissed) {
         handleOpen();
@@ -130,18 +130,19 @@ export default function ProductModal({}: Props) {
     });
   }
 
-  async function onSave(dataFrom: FormValues) {
+  async function onSave(data: FormValues) {
     try {
       setIsLoading(true);
 
       let productsItem: ReservationProductItemData[] = [];
       const reservationProduct: ReservationProductData = {
-        name: dataFrom.firstName + " " + dataFrom.lastName,
-        email: dataFrom.email,
-        phone: dataFrom.phone,
-        generation: dataFrom.generation,
-        method: dataFrom.method,
-        address: dataFrom.address,
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        phone: data.phone,
+        generation: data.generation,
+        method: data.method,
+        address: data.address,
+        status: "PENDING",
       };
 
       products.forEach((item) => {
@@ -156,8 +157,11 @@ export default function ProductModal({}: Props) {
         ...reservationProduct,
         productsItem,
       };
+      console.log(payload);
 
-      const resData = (await axios.post("/reservation/product", payload)).data;
+      const res = (await axios.post("/reservation/product", payload));
+
+      const resData = await res.data;
 
       if (resData.message === "success") {
         handleClose();

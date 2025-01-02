@@ -85,9 +85,19 @@ export default class ReservationProduct {
 
       data.id = new ShortUniqueId().rnd(10);
 
+      const payload = {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        generation: data.generation,
+        method: data.method,
+        address: data.address,
+        status: data.status,
+      };
+
       const { data: res, error } = await supabase
         .from("reservationProduct")
-        .insert([data])
+        .insert(payload)
         .select(`*`)
         .single();
 
@@ -131,16 +141,23 @@ export default class ReservationProduct {
         itemList += `\nราคา ${item.price * item.quantity} บาท\n`;
       });
 
-      const linePayload: NotifyData = {
-        message: `มีการจองสินค้า\nรหัสการจอง: ${resData.id}\nชื่อ: ${resData.name}\nรุ่น: ${resData.generation}\nเบอร์โทร: ${resData.phone}\nอีเมล: ${resData.email}\nที่อยู่: ${resData.address}\nราคา: ${resData.totalPrice} บาท\nวิธีการชำระเงิน: ${resData.method} 
-        \nรายการสินค้า: ${itemList}
-        `,
-        stickerId: 51626507,
-        stickerPackageId: 11538,
-      };
-
-      notify(linePayload, "product").then((res) =>
-        console.log(`send notify: การจองสินค้า ${resData.trackingCode}`)
+      notify(
+        {
+          message: `📦 การจองสินค้า
+                  \n\nรหัสการจอง: ${resData.id}
+                  \n\nชื่อ: ${resData.name}
+                  \n\nเบอร์โทร: ${resData.phone}
+                  \n\nอีเมล: ${resData.email}
+                  \n\nรุ่น: ${resData.generation}
+                  \n\nที่อยู่: ${resData.address}
+                  \n\nรายการสินค้า: ${itemList}
+                  \nราคาสุทธิ: ${resData.totalPrice}`,
+          stickerId: 51626507,
+          stickerPackageId: 11538,
+        },
+        "product"
+      ).then((res) =>
+        console.log(`send notify: การจองสินค้า ${resData.id}`)
       );
 
       if (error) {

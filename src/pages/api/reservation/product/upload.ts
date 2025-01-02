@@ -21,7 +21,14 @@ export default async function handler(
           const data = await Reservation.updateReservation(req.body);
 
           const LINEPayload: NotifyData = {
-            message: `\n💵 มีการแจ้งการชำระเงิน\nรหัสการซื้อ: ${data.id}\nโดย: ${data.name}\nเบอร์โทร: ${data.phone}\nอีเมล: ${data.email}\nรุ่นที่: ${data.generation}\nวิธีการชำระเงิน: ${data.method}\nราคา:${data.totalPrice}\nURL: ${data.slip}`,
+            message: `\n💵 มีการแจ้งการชำระเงิน
+                      \n\nรหัสการซื้อ: ${data.id}
+                      \n\nชื่อ: ${data.name}
+                      \n\nเบอร์โทร: ${data.phone}
+                      \n\nอีเมล: ${data.email}
+                      \n\nรุ่นที่: ${data.generation}
+                      \n\nราคา:${data.totalPrice}
+                      \n\nสลิป: ${data.slip}`,
             stickerId: 16581273,
             stickerPackageId: 8522,
           };
