@@ -19,16 +19,17 @@ type Props = {
 
 export default function TableLayout({ data, admin }: Props) {
   const [Selected, setSelected] = useState<TableWithReservation>(null);
+  let thisTable = null;
 
   function getTableStatus(table: TableWithReservation) {
-    const thisTable = table.reservation[0];
+    thisTable = table.reservation[0];
 
     if (thisTable?.status === "PENDING") {
       return "bg-yellow-500 text-white cursor-pointer";
     }
 
     if (!table.isAvailable) {
-      return "bg-green-500 text-white cursor-not-allowed";
+      return "bg-neutral text-white cursor-not-allowed";
     }
 
     if (table.isReserved) {
@@ -97,7 +98,7 @@ export default function TableLayout({ data, admin }: Props) {
                {/* ⛔ ระบบปิดการจองแล้ว ⛔ */}
               </span>
             </div>
-            <div className="w-full text-center bg-blue-800 rounded-2xl my-5">
+            <div className="w-full text-center bg-slate-600 rounded-2xl my-5">
               <h1 className="text-white text-xl p-5">👯‍♂️ 👯‍♂️ &emsp; STAGE &emsp; 👯‍♂️ 👯‍♂️</h1>
             </div>
             <div className="mb-2 flex gap-2">
@@ -105,7 +106,7 @@ export default function TableLayout({ data, admin }: Props) {
                 ว่าง
               </div>
               <div className="badge badge-neutral bg-yellow-500 p-2 text-white">
-                รอชำระ
+                รอชำระเงิน
               </div>
               <div className="badge badge-neutral bg-blue-500 p-2 text-white">
                 จองแล้ว
@@ -133,14 +134,17 @@ export default function TableLayout({ data, admin }: Props) {
                 {table.name}
               </p>
               <span className="hidden md:block">
-                {table.isReserved && table.isAvailable && (
+                {table.isAvailable && table.isReserved && thisTable?.status === "COMPLETE" && (
                   <b className="text-lg lg:text-2xl md:text-lg text-white">จองแล้ว</b>
                 )}
-                {!table.isReserved && table.isAvailable && (
+                {table.isAvailable && table.isReserved && (thisTable?.status === "PENDING" || thisTable?.status === "WAIT") && (
+                  <b className="text-lg xl:text-lg lg:text-md md:text-sm text-white">รอชำระเงิน</b>
+                )}
+                {table.isAvailable && !table.isReserved && (
                   <b className="text-lg lg:text-2xl md:text-lg">ว่าง</b>
                 )}
                 {!table.isAvailable && (
-                  <b className="text-lg lg:text-xl md:text-sm">ไม่พร้อมให้บริการ</b>
+                  <b className="text-lg xl:text-lg lg:text-md md:text-sm">ไม่พร้อมให้บริการ</b>
                 )}
               </span>
             </div>
