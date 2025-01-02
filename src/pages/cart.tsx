@@ -123,7 +123,7 @@ export default function CartPage({}: Props) {
                                 {item.name}
                               </h2>
                               <p className="text-white  ">
-                                Option: {item.optionName}
+                                ตัวเลือก: {item.optionName}
                               </p>
                             </div>
                           </div>
@@ -153,7 +153,7 @@ export default function CartPage({}: Props) {
                             <input
                               type="number"
                               readOnly
-                              className="w-12 px-2 py-4 text-xl text-black text-center border-0 rounded-md bg-gray-50  md:text-right  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                              className="w-8 px-2 py-4 text-xl text-black text-center border-0 rounded-md bg-gray-50  md:text-right  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                               placeholder={item.quantity.toString()}
                             />
                             <button

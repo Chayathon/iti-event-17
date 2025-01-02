@@ -6,6 +6,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import ReservationTable, {
   type ReservationTableData,
 } from "@/classes/ReservationTable";
+import HomeLayout from "./HomeLayout";
 
 type Props = {
   children?: React.ReactNode;
@@ -18,17 +19,19 @@ export default function AdminLayout({ children, title }: Props) {
 
   if (!user) {
     return (
-      <div className="grid h-[100vh]">
-        <div className="my-auto 2xl:mx-60 xl:mx-40 md:mx-20 sm:mx-10">
-          <Auth
-            appearance={{ theme: ThemeSupa }}
-            supabaseClient={supabaseClient}
-            providers={[]}
-            showLinks={false}
-            theme="dark"
-          />
+      <HomeLayout>
+        <div className="grid h-[80vh]">
+          <div className="my-auto 2xl:mx-60 xl:mx-40 md:mx-20 sm:mx-10 mx-6">
+            <Auth
+              appearance={{ theme: ThemeSupa }}
+              supabaseClient={supabaseClient}
+              providers={[]}
+              showLinks={false}
+              theme="dark"
+            />
+          </div>
         </div>
-      </div>
+      </HomeLayout>
     );
   } else {
     return (

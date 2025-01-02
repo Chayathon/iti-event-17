@@ -219,7 +219,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                 </p>
               </div>
               <div className="flex items-center mb-8">
-                <h2 className="w-16 text-xl font-bold  text-white">Options:</h2>
+                <h2 className="w-20 text-xl font-bold  text-white">ตัวเลือก:</h2>
               </div>
               <div className="flex flex-wrap ml-6">
                 <fieldset>
@@ -288,13 +288,11 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
               <div className="flex flex-wrap items-center -mx-4 ">
                 <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
                   <button
-                    // onClick={handleAddToCart}
-                    disabled
-                    className="flex items-center cursor-not-allowed justify-center w-full p-4 text-white border border-blue-500 bg-blue-600  hover:border-blue-800 rounded-md "
-                //  hover:bg-blue-800
-                 >
+                    onClick={handleAddToCart}
+                    className="flex items-center justify-center w-full p-4 text-white border border-blue-500 bg-blue-600  hover:border-blue-800 rounded-md hover:bg-blue-800"
+                  >
                     <FaCartPlus />
-                    <span className="ml-2">(ไม่รับการจองเพิ่มแล้ว Sold Out)</span>
+                    {/* <span className="ml-2">(ไม่รับการจองเพิ่มแล้ว Sold Out)</span> */}
                   </button>
                 </div>
                 <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
