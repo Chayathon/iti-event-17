@@ -30,13 +30,10 @@ export default function Booking({}: Props) {
   const { data: tables, error, isLoading } = useSWR("/tables", fetcher);
 
   return (
-    <HomeLayout>
-      <div className="flex mt-14 justify-center">
-        <h1 className="text-4xl font-bold text-white">จองโต๊ะอาหาร</h1>
-      </div>
+    <HomeLayout title="จองโต๊ะอาหาร">
       <div className="w-full justify-center flex">
         <div
-          className="bg-white lg:w-2/4 w-full border-t mt-4 border-b border-blue-500 text-blue-700 px-4 py-3 rounded-md shadow-md"
+          className="bg-white lg:w-2/4 w-full border-t border-b border-blue-500 text-blue-700 px-4 py-3 rounded-md shadow-md"
           role="alert"
         >
           <div className="flex items-center">

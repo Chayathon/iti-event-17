@@ -3,17 +3,17 @@ import HomeNavbar from "@/components/Navbar/HomeNavbar";
 
 type Props = {
   children?: React.ReactNode;
-  titile?: string;
+  title?: string;
 };
 
-export default function HomeLayout({ children, titile }: Props) {
+export default function HomeLayout({ children, title }: Props) {
   return (
     <React.Fragment>
         <HomeNavbar />
-        {titile && (
-          <div className="flex flex-col items-center justify-center w-full h-20">
-            <h1 className="text-3xl font-bold text-white mt-20 sm:mt-auto text-center  ">
-              {titile}
+        {title && (
+          <div className="flex flex-col items-center justify-center w-full mt-4 h-20">
+            <h1 className="text-4xl font-bold text-white text-center">
+              {title}
             </h1>
           </div>
         )}

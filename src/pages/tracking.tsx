@@ -79,10 +79,10 @@ export default function Tracking({}: Props) {
   }
 
   return (
-    <HomeLayout titile="ยืนยันการชำระเงิน">
+    <HomeLayout title="ยืนยันการชำระเงิน">
       <div className="text-center ">
         <p className="text-white text-lg md:text-2xl mt-5">
-          ตรวจสอบสถานะการดำเนินการของการจองของคุณ
+          ตรวจสอบสถานะการดำเนินการ ของการจองของคุณ
         </p>
       </div>
       <div className="max-w-md mx-auto p-6  ">
@@ -119,7 +119,6 @@ export default function Tracking({}: Props) {
             Data?.table.map((item) => (
               <ReservationListCard
                 //@ts-ignore
-
                 data={item}
                 key={item.id}
                 callback={handlePaid}
@@ -144,8 +143,8 @@ export default function Tracking({}: Props) {
             ))}
         </div>
       </div>
-      {!loading && Data?.table?.length !== 0 && Data?.product?.length === 0 && (
-        <div>
+      {!loading && (Data?.table?.length > 0 || Data?.product?.length > 0) && (
+        <div className="mx-auto w-11/12">
           <BankInfo />
         </div>
       )}
