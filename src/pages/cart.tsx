@@ -5,10 +5,13 @@ import Image from "next/image";
 import BankInfo from "@/components/BankInfo";
 import ProductModal from "@/components/Modals/ProductModal";
 import { calculateSubtotal, calculateTotal } from "@/helpers/calculateProduct";
+import { useRouter } from "next/router";
+import { FaAngleLeft } from "react-icons/fa";
 
 type Props = {};
 
 export default function CartPage({}: Props) {
+  const router = useRouter();
   const [Cart, setCart] = useState<Cart[]>([]);
   const [subtotal, setSubtotal] = useState(0.0);
   const [total, setTotal] = useState(0.0);
@@ -67,6 +70,10 @@ export default function CartPage({}: Props) {
     }
   }
 
+  const handleBack = () => {
+    router.back();
+  };
+
   useEffect(() => {
     getCart();
   }, []);
@@ -76,10 +83,11 @@ export default function CartPage({}: Props) {
   }, [Cart]);
 
   return (
-    <HomeLayout titile="🛒 ตะกร้าสินค้า">
+    <HomeLayout title="🛒 ตะกร้าสินค้า">
       <div>
         <section className="flex items-center ">
           <div className="justify-center flex-1 px-4 py-6 mx-auto max-w-7xl lg:py-4 md:px-6">
+          <button onClick={handleBack} className="hidden sm:btn sm:btn-outline sm:btn-sm sm:mb-2"><FaAngleLeft/>ย้อนกลับ</button>
             <div className="p-8 bg-gray-700">
               <div className="flex flex-wrap -mx-4">
                 <div className="w-full px-4 mb-8 xl:w-8/12 xl:mb-0">

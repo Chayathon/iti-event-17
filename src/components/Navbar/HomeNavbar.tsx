@@ -9,6 +9,7 @@ import {
   FaHandshake,
   FaMedal,
   FaUtensils,
+  FaBagShopping,
   FaUserTie,
 } from "react-icons/fa6";
 
@@ -33,6 +34,12 @@ const MENU: Menu[] = [
     href: "/reservation",
     target: "_self",
     icon: <FaUtensils />,
+  },
+  {
+    title: "ดูสินค้า",
+    href: "/shop",
+    target: "_self",
+    icon: <FaBagShopping />,
   },
   // {
   //   title: "ทะเบียนกิจกรรมกีฬาสาย",

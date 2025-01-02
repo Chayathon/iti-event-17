@@ -9,6 +9,7 @@ import HomeLayout from "@/components/layouts/HomeLayout";
 import { FaCartPlus, FaCartShopping } from "react-icons/fa6";
 import { type ProductOptionData } from "@/classes/ProductOption";
 import { useRouter } from "next/router";
+import { FaAngleLeft } from "react-icons/fa";
 
 type Props = {
   productData: ProductData;
@@ -18,7 +19,7 @@ export default function Product({ productData }: Props) {
   const router = useRouter();
 
   return (
-    <HomeLayout titile={productData.name}>
+    <HomeLayout>
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-9 md:py-1 lg:max-w-7xl lg:px-8">
         <ProductCard data={productData} />
       </div>
@@ -27,6 +28,7 @@ export default function Product({ productData }: Props) {
 }
 
 export const ProductCard = ({ data }: { data?: ProductData }) => {
+  const router = useRouter();
   const [count, setCount] = useState("0");
   const [setSelectImage, setSetselectImage] = useState(data?.image3);
   const [optionSelect, setOptionSelect] = useState<ProductOptionData>();
@@ -121,6 +123,10 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
     });
   };
 
+  const handleBack = () => {
+    router.back();
+  };
+
   useEffect(() => {
     let cart = localStorage.getItem("cart");
 
@@ -141,8 +147,9 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
   return (
     <React.Fragment>
       <div className="max-w-6xl px-4 mx-auto lg:py-8 md:px-6">
+      <button onClick={handleBack} className="hidden sm:btn sm:btn-outline sm:btn-sm sm:mb-2"><FaAngleLeft/>ย้อนกลับ</button>
         <div className="flex flex-wrap -mx-4">
-          <div className="w-full px-4 md:w-1/2 ">
+          <div className="w-full px-4 md:w-1/2">
             <div className="sticky top-0 z-50 overflow-hidden ">
               <div className="relative mb-6 lg:mb-10 lg:h-2/4 ">
                 <img
@@ -151,7 +158,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   className="object-cover w-full lg:h-full "
                 />
               </div>
-              <div className="flex-wrap hidden md:flex ">
+              <div className="flex-wrap flex">
                 <div className="w-1/2 p-2 sm:w-1/4">
                   <div
                     onClick={()=>handleImageSelect(data.image1)}
@@ -160,7 +167,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                     <img
                       src={data.image1}
                       alt=""
-                      className="object-cover w-full lg:h-20"
+                      className="object-cover w-full lg:h-28 md:h-14 h-24"
                     />
                   </div>
                 </div>
@@ -172,7 +179,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                     <img
                       src={data.image2}
                       alt=""
-                      className="object-cover w-full lg:h-20"
+                      className="object-cover w-full lg:h-28 md:h-14 h-24"
                     />
                   </div>
                 </div>
@@ -184,7 +191,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                     <img
                       src={data.image3}
                       alt=""
-                      className="object-cover w-full lg:h-20"
+                      className="object-cover w-full lg:h-28 md:h-14 h-24"
                     />
                   </div>
                 </div>
@@ -196,7 +203,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                     <img
                       src={data.image4}
                       alt=""
-                      className="object-cover w-full lg:h-20"
+                      className="object-cover w-full lg:h-28 md:h-14 h-24"
                     />
                   </div>
                 </div>
@@ -223,7 +230,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
               </div>
               <div className="flex flex-wrap ml-6">
                 <fieldset>
-                  <legend className="sr-only">Options</legend>
+                  <legend className="sr-only">ตัวเลือก</legend>
                 </fieldset>
               </div>
               <div className="flex flex-wrap gap-4 mb-4">
@@ -285,20 +292,20 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   </button>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center -mx-4 ">
-                <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
+              <div className="flex flex-wrap flex-row items-center gap-4">
+                <div>
                   <button
                     onClick={handleAddToCart}
-                    className="flex items-center justify-center w-full p-4 text-white border border-blue-500 bg-blue-600  hover:border-blue-800 rounded-md hover:bg-blue-800"
+                    className="btn flex items-center justify-center w-fit text-white border border-blue-500 bg-blue-600  hover:border-blue-800 hover:bg-blue-800 rounded-xl"
                   >
-                    <FaCartPlus />
+                    <FaCartPlus className="w-5 h-5" />
                     {/* <span className="ml-2">(ไม่รับการจองเพิ่มแล้ว Sold Out)</span> */}
                   </button>
                 </div>
-                <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
+                <div>
                   <Link
                     href={"/cart"}
-                    className="flex items-center justify-center w-full p-4 text-white border border-blue-500  hover:bg-blue-600 hover:border-blue-800 rounded-md "
+                    className="btn flex items-center justify-center w-fit text-white border border-blue-500  hover:bg-blue-600 hover:border-blue-800 rounded-xl"
                   >
                     <FaCartShopping />
                     <span className="ml-2">ดูตะกร้าสินค้า</span>
