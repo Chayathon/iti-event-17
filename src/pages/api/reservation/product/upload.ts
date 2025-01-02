@@ -21,13 +21,13 @@ export default async function handler(
           const data = await Reservation.updateReservation(req.body);
 
           const LINEPayload: NotifyData = {
-            message: `\n💵 มีการแจ้งการชำระเงิน
+            message: `\n💵 มีการแจ้งชำระเงินการจองสินค้า 📦
                       \n\nรหัสการซื้อ: ${data.id}
                       \n\nชื่อ: ${data.name}
                       \n\nเบอร์โทร: ${data.phone}
                       \n\nอีเมล: ${data.email}
                       \n\nรุ่นที่: ${data.generation}
-                      \n\nราคา:${data.totalPrice}
+                      \n\nราคา: ${data.totalPrice}
                       \n\nสลิป: ${data.slip}`,
             stickerId: 16581273,
             stickerPackageId: 8522,

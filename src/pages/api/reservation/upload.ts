@@ -24,7 +24,7 @@ export default async function handler(
         const table = data.tableId as TableData;
 
         const LINEPayload: NotifyData = {
-          message: `\n💵 มีการแจ้งการชำระเงิน
+          message: `\n💵 มีการแจ้งชำระเงินการจองโต๊ะ 🍽️
                     \n\nรหัสการจอง: ${data.id}
                     \n\nโต๊ะที่: ${table.index}
                     \n\nชื่อ: ${data.name}
