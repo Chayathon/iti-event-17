@@ -13,7 +13,7 @@ import axios from "@/libs/axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 
-const LAST_GENERATION = 28;
+const LAST_GENERATION = 29;
 
 const phoneRegex = /^0[0-9]{9}$/;
 
@@ -166,7 +166,7 @@ export default function ProductModal({}: Props) {
           html: `
           <b>กรุณาชำระภายใน 3 วัน</b>
           <br />
-          คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ยืนยันการชำระ</a> หรือตรวจสอบได้ที่เมนู "ยืนยันการชำระ"
+          คุณสามารถส่งหลักฐานการชำระเงินได้ที่หน้า <a href="/tracking?search=${resData?.data?.phone}" target="_blank" class="underline">ยืนยันการชำระ</a>"
                   `,
           icon: "success",
         }).then(() => {
@@ -206,13 +206,14 @@ export default function ProductModal({}: Props) {
                   htmlFor="firstName"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  ชื่อจริง*
+                  ชื่อจริง <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-2.5">
                   <input
                     type="text"
                     {...register("firstName", { required: true })}
                     id="firstName"
+                    placeholder="กรุณากรอกชื่อจริง"
                     autoComplete="firstName"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -226,13 +227,14 @@ export default function ProductModal({}: Props) {
                   htmlFor="lastName"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  นามสกุลจริง*
+                  นามสกุล <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-2.5">
                   <input
                     type="text"
                     {...register("lastName", { required: true })}
                     id="lastName"
+                    placeholder="กรุณากรอกนามสกุล"
                     autoComplete="lastName"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -246,7 +248,7 @@ export default function ProductModal({}: Props) {
                   htmlFor="email"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  อีเมล*
+                  อีเมล <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -254,7 +256,7 @@ export default function ProductModal({}: Props) {
                     {...register("email", { required: true })}
                     id="email"
                     autoComplete="email"
-                    placeholder="อีเมล: "
+                    placeholder="กรุณากรอกอีเมล"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                   <span className="text-red-600">{errors.email?.message}</span>
@@ -265,14 +267,14 @@ export default function ProductModal({}: Props) {
                   htmlFor="phone"
                   className="block text-sm font-semibold leading-6 text-gray-900"
                 >
-                  เบอร์โทรศัพท์*
+                  เบอร์โทรศัพท์ <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="tel"
                   {...register("phone", { required: true })}
                   id="phone"
                   autoComplete="off"
-                  placeholder="เบอร์โทรศัพท์: 0812345678"
+                  placeholder="กรุณากรอกเบอร์โทรศัพท์"
                   className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 <span className="text-red-600">{errors.phone?.message}</span>
@@ -283,7 +285,7 @@ export default function ProductModal({}: Props) {
                     htmlFor="generation"
                     className="block text-sm font-semibold leading-6 text-gray-900"
                   >
-                    รุ่นการศึกษา*
+                    รุ่นการศึกษา <span className="text-red-700">*</span>
                   </label>
                 </div>
                 <select
@@ -304,6 +306,21 @@ export default function ProductModal({}: Props) {
                   {errors.generation?.message}
                 </span>
               </label>
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="address"
+                  className="block text-sm font-semibold leading-6 text-gray-900"
+                >
+                  ที่อยู่จัดส่งสินค้า
+                </label>
+                <textarea
+                  {...register("address", { required: true })}
+                  id="address"
+                  autoComplete="off"
+                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+                <span className="text-red-600">{errors.address?.message}</span>
+              </div>
               <div className="sm:col-span-2 flex ">
                 <div className="flex items-center gap-2">
                   <input
@@ -329,21 +346,7 @@ export default function ProductModal({}: Props) {
                   </div> */}
                 </div>
               </div>
-              {/* <div className="sm:col-span-2">
-                <label
-                  htmlFor="address"
-                  className="block text-sm font-semibold leading-6 text-gray-900"
-                >
-                  ที่อยู่จัดส่งสินค้า
-                </label>
-                <textarea
-                  {...register("address", { required: true })}
-                  id="address"
-                  autoComplete="off"
-                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-                <span className="text-red-600">{errors.address?.message}</span>
-              </div> */}
+              
             </div>
             <BankInfo />
             {/* loop products */}
@@ -381,10 +384,10 @@ export default function ProductModal({}: Props) {
                 ))}
               </div>
             </details>
-            <p className="text-red-600 font-bold my-2">
+            {/* <p className="text-red-600 font-bold my-2">
               *รับสินค้าหน้างาน
               ขออภัยไม่มีบริการจัดส่งสินค้า/หากมีการแก้ไขจะแจ้งให้ทราบ
-            </p>
+            </p> */}
             <div className="mt-5">
               <div className="flex justify-between items-center">
                 <h3 className="font-bold text-lg">สรุปรายการสั่งซื้อ</h3>
