@@ -150,11 +150,10 @@ export default class ReservationTable {
         {
           message: `${LINEMSG}
                   \n\nโต๊ะที่: ${tableReservated.index}
-                  \n\nโดย: ${reservation.name}
+                  \n\nชื่อ: ${reservation.name}
                   \n\nเบอร์โทร: ${reservation.phone}
                   \n\nอีเมล: ${reservation.email}
-                  \n\nรุ่น: ${reservation.generation}
-                  \n\nวิธีการชำระเงิน: ${reservation.method}`,
+                  \n\nรุ่น: ${reservation.generation}`,
           stickerId: 51626507,
           stickerPackageId: 11538,
         },

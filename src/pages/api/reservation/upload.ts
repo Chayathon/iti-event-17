@@ -25,13 +25,12 @@ export default async function handler(
 
         const LINEPayload: NotifyData = {
           message: `\n💵 มีการแจ้งการชำระเงิน
-                    \n\nรหัสการจ้อง: ${data.id}
+                    \n\nรหัสการจอง: ${data.id}
                     \n\nโต๊ะที่: ${table.index}
-                    \n\nโดย: ${data.name}
+                    \n\nชื่อ: ${data.name}
                     \n\nเบอร์โทร: ${data.phone}
                     \n\nอีเมล: ${data.email}
                     \n\nรุ่นที่: ${data.generation}
-                    \n\nวิธีการชำระเงิน: ${data.method}
                     \n\nสลิป: ${data.slip}`,
           stickerId: 16581273,
           stickerPackageId: 8522,

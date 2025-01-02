@@ -73,7 +73,7 @@ export default async function handler(
 
             detail += `<br />ราคา ${item.price * item.quantity} บาท<br />`;
           });
-          detail += `<br />ราคารวม ${total} บาท<br />`;
+          detail += `<br />ราคาสุทธิ ${total} บาท<br />`;
 
           reservation = reservationProduct;
         } else {
