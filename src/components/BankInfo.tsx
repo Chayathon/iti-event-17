@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaCopy, FaCheck } from "react-icons/fa6";
 
 type Props = {};
 
 export default function BankInfo({}: Props) {
+  const [isCopied, setIsCopied] = useState(false);
+
   function copyClipBord() {
     //check if browser support clipboard api
     if (!navigator.clipboard) {
       return;
     }
-    navigator.clipboard.writeText("6632449891");
+    navigator.clipboard.writeText("6632449891").then(() => {
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    });
   }
 
   return (
@@ -55,13 +61,22 @@ export default function BankInfo({}: Props) {
         </svg>
 
         <span>
-          ธนาคารกรุงไทย สาขาโรบินสัน ปราจีนบุรี <br />
+          ธนาคารกรุงไทย<br />
           <b onClick={copyClipBord} className="text-lg hover:cursor-pointer">
             663-2-44989-1
+            &ensp;
+            <button onClick={copyClipBord} type="button" className="text-sm transition hover:scale-110 sm:hidden">
+              {isCopied ? <FaCheck /> : <FaCopy />}
+            </button>
           </b>{" "}
           <br className="flex md:hidden" />
           (นางสาวสุภาวดี นพพันธ์)
         </span>
+        <div className="pr-2 pt-2 text-3xl hidden sm:block">
+          <button onClick={copyClipBord} type="button" className="transition hover:scale-110">
+            {isCopied ? <FaCheck /> : <FaCopy />}
+          </button>
+        </div>
       </div>
     </React.Fragment>
   );
