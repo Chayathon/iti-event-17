@@ -162,48 +162,48 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                 <div className="w-1/2 p-2 sm:w-1/4">
                   <div
                     onClick={()=>handleImageSelect(data.image1)}
-                    className="block border cursor-pointer border-blue-300 dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
+                    className="block border cursor-pointer rounded-xl bordlg-blue-300 dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
                   >
                     <img
                       src={data.image1}
                       alt=""
-                      className="object-cover w-full lg:h-28 md:h-14 h-24"
+                      className="object-cover w-full rounded-lg lg:h-28 md:h-14 h-24"
                     />
                   </div>
                 </div>
                 <div className="w-1/2 p-2 sm:w-1/4">
                   <div
                     onClick={()=>handleImageSelect(data.image2)}
-                    className="block border cursor-pointer border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
+                    className="block border cursor-pointer rounded-lg border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
                   >
                     <img
                       src={data.image2}
                       alt=""
-                      className="object-cover w-full lg:h-28 md:h-14 h-24"
+                      className="object-cover w-full rounded-lg lg:h-28 md:h-14 h-24"
                     />
                   </div>
                 </div>
                 <div className="w-1/2 p-2 sm:w-1/4">
                   <div
                     onClick={()=>handleImageSelect(data.image3)}
-                    className="block border cursor-pointer border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
+                    className="block border cursor-pointer rounded-lg border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
                   >
                     <img
                       src={data.image3}
                       alt=""
-                      className="object-cover w-full lg:h-28 md:h-14 h-24"
+                      className="object-cover w-full rounded-lg lg:h-28 md:h-14 h-24"
                     />
                   </div>
                 </div>
                 <div className="w-1/2 p-2 sm:w-1/4">
                   <div
                     onClick={()=>handleImageSelect(data.image4)}
-                    className="block border cursor-pointer border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
+                    className="block border cursor-pointer rounded-lg border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
                   >
                     <img
                       src={data.image4}
                       alt=""
-                      className="object-cover w-full lg:h-28 md:h-14 h-24"
+                      className="object-cover w-full rounded-lg lg:h-28 md:h-14 h-24"
                     />
                   </div>
                 </div>

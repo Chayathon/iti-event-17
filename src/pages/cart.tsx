@@ -88,7 +88,7 @@ export default function CartPage({}: Props) {
         <section className="flex items-center ">
           <div className="justify-center flex-1 px-4 py-6 mx-auto max-w-7xl lg:py-4 md:px-6">
           <button onClick={handleBack} className="hidden sm:btn sm:btn-outline sm:btn-sm sm:mb-2"><FaAngleLeft/>ย้อนกลับ</button>
-            <div className="p-8 bg-gray-700">
+            <div className="p-8 bg-gray-700 rounded-xl">
               <div className="flex flex-wrap -mx-4">
                 <div className="w-full px-4 mb-8 xl:w-8/12 xl:mb-0">
                   <div className="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
@@ -122,7 +122,7 @@ export default function CartPage({}: Props) {
                                   width={300}
                                   height={300}
                                   alt="Picture of item cart"
-                                  className="object-cover w-full h-full"
+                                  className="object-cover w-full h-full rounded-lg"
                                 />
                               </div>
                             </div>
@@ -138,19 +138,19 @@ export default function CartPage({}: Props) {
                         </div>
                         <div className="hidden px-4 lg:block lg:w-2/12">
                           <p className="text-lg font-bold text-white ">
-                            {item.price}.- บาท
+                            {item.price}.-
                           </p>
                         </div>
                         <div className="w-auto px-4 md:w-1/6 lg:w-2/12 ">
-                          <div className="inline-flex items-center px-4 font-semibold text-white border border-gray-200 rounded-md dark:border-gray-700 ">
+                          <div className="inline-flex items-center px-2 font-semibold text-white border border-gray-200 rounded-md dark:border-gray-700 ">
                             <button
                               onClick={() => decreaseQuantity(item)}
                               className="py-2 "
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width={32}
-                                height={32}
+                                width={28}
+                                height={28}
                                 fill="currentColor"
                                 className="bi bi-dash"
                                 viewBox="0 0 16 16"
@@ -161,7 +161,7 @@ export default function CartPage({}: Props) {
                             <input
                               type="number"
                               readOnly
-                              className="w-8 px-2 py-4 text-xl text-black text-center border-0 rounded-md bg-gray-50  md:text-right  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                              className="w-12 py-3 text-sm text-black text-center border-0 bg-gray-50 sm:text-sm [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                               placeholder={item.quantity.toString()}
                             />
                             <button
@@ -170,8 +170,8 @@ export default function CartPage({}: Props) {
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width={32}
-                                height={32}
+                                width={28}
+                                height={28}
                                 fill="currentColor"
                                 className="bi bi-plus"
                                 viewBox="0 0 16 16"
@@ -183,7 +183,7 @@ export default function CartPage({}: Props) {
                         </div>
                         <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 ">
                           <p className="text-lg font-bold text-amber-400 ">
-                            {item.price * item.quantity}.- บาท
+                            {item.price * item.quantity}.-
                           </p>
                         </div>
                       </div>
@@ -191,14 +191,14 @@ export default function CartPage({}: Props) {
                   </div>
                 </div>
                 <div className="w-full px-4 xl:w-4/12">
-                  <div className="p-6 border border-blue-100 dark:bg-gray-900 dark:border-gray-900 bg-blue-50 md:p-8">
+                  <div className="p-6 border border-blue-100 rounded-xl dark:bg-gray-900 dark:border-gray-900 bg-blue-50 md:p-8">
                     <h2 className="mb-8 text-3xl font-bold text-gray-700 ">
                       สรุปคำสั่งจอง
                     </h2>
                     <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
                       <span className="text-gray-700 ">ยอดรวม</span>
                       <span className="text-xl font-bold text-gray-700  ">
-                        {subtotal}.- บาท
+                        {subtotal} บาท
                       </span>
                     </div>
                     <div className="flex items-center justify-between pb-4 mb-4 ">
@@ -210,7 +210,7 @@ export default function CartPage({}: Props) {
                     <div className="flex items-center justify-between pb-4 mb-4 ">
                       <span className="text-gray-700 ">ราคาสุทธิ</span>
                       <span className="text-xl font-bold text-gray-700 ">
-                        {total}.- บาท
+                        {total} บาท
                       </span>
                     </div>
                     <h2 className="text-lg text-black ">การชำระเงิน:</h2>

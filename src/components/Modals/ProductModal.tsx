@@ -192,7 +192,7 @@ export default function ProductModal({}: Props) {
   return (
     <React.Fragment>
       <button
-        className="flex justify-center items-center gap-2 w-full py-4 font-bold text-center text-gray-100 uppercase bg-blue-500 rounded-md hover:bg-blue-600"
+        className="flex justify-center items-center gap-2 w-full py-4 font-bold text-center text-gray-100 uppercase bg-blue-500 rounded-xl hover:bg-blue-600"
         onClick={handleOpen}
       >
         <FaCircleCheck /> ชำระเงิน
