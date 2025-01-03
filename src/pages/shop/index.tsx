@@ -22,7 +22,7 @@ export default function ShopPage({}: Props) {
     const cartItem = localStorage.getItem("cart")
     const cart = JSON.parse(cartItem);
     setCount(cart.length);
-  }, [localStorage.getItem("cart")])
+  }, [])
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -70,13 +70,12 @@ export default function ShopPage({}: Props) {
 export function ProductCard({ product }: { product: ProductData }) {
   return (
     <div className="group relative bg-white rounded-xl">
-      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-xl bg-gray-200 lg:aspect-none  lg:h-80">
-        <Image
+      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-xl bg-gray-200 lg:aspect-none lg:h-80">
+        <img
           src={`${product.image1}`}
           alt={product.name}
           width={500}
           height={500}
-          lazyRoot="lazy-shop"
           className="h-full w-full object-cover object-center group-hover:scale-125 transition lg:h-full lg:w-full"
         />
       </div>

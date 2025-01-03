@@ -364,9 +364,9 @@ export default function ProductModal({}: Props) {
                   <div key={`list-${item.id}-${index}`} className="mb-2">
                     <h3 className="text-sm text-gray-900">{item.name}</h3>
 
-                    <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+                    <dl className="mt-0.5 space-y-px text-xs text-gray-600">
                       <div>
-                        <dt className="inline">Option: </dt>
+                        <dt className="inline">ตัวเลือก: </dt>
                         <dd className="inline">
                           {item.optionName} x {item.quantity}
                         </dd>
@@ -414,7 +414,7 @@ export default function ProductModal({}: Props) {
               <button
                 type="submit"
                 disabled={isloading || !products.length || !total}
-                className={`block w-full rounded-md ${
+                className={`block w-full rounded-xl ${
                   isloading ? "bg-gray-600" : "bg-indigo-600"
                 }  px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
               >
@@ -428,7 +428,7 @@ export default function ProductModal({}: Props) {
                 type="button"
                 onClick={handleClose}
                 disabled={isloading}
-                className="btn btn-sm  btn-circle btn-ghost absolute right-2 top-2"
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
               >
                 ✕
               </button>

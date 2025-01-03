@@ -117,7 +117,7 @@ export default function CartPage({}: Props) {
                           <div className="flex flex-wrap items-center -mx-4">
                             <div className="w-full px-4 mb-3 md:w-1/3">
                               <div className="w-full h-96 md:h-24 md:w-24">
-                                <Image
+                                <img
                                   src={item.image}
                                   width={300}
                                   height={300}

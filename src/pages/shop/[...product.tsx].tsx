@@ -278,7 +278,6 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                   <input
                     type="number"
                     className="flex items-center w-full font-semibold text-center text-black placeholder-black bg-gray-300 outline-none  [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-                    defaultValue={1}
                     value={quantity}
                     readOnly
                   />
