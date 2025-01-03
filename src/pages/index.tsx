@@ -40,48 +40,48 @@ export default function Home() {
         <section className="mt-36">
           <div className="float-none mx-auto px-4 lg:flex  lg:items-center">
             <div className="mx-auto max-w-3xl text-center">
-              <h1 className="sm:text-5xl text-3xl ">
+              <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl">
                 🎈
-                <span className="from-green-300 mx-2 via-blue-500 to-purple-600 bg-gradient-to-r  bg-clip-text font-extrabold text-transparent ">
+                <span className="bg-gradient-to-r bg-clip-text font-extrabold text-transparent from-green-300 mx-2 via-blue-500 to-purple-600">
                   งานสานสัมพันธ์ ครั้งที่ 17
                 </span>
                 🎈
               </h1>
-              <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text font-bold whitespace-nowrap text-transparent md:text-4xl sm:text-2xl text-xl">
+              <h1 className="bg-gradient-to-r bg-clip-text font-bold whitespace-nowrap text-transparent text-lg sm:text-2xl md:text-4xl from-green-300 via-blue-500 to-purple-600">
                 <TypingEffect text={["Information Technology for Industry"]} />
               </h1>
               <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed text-white">
                 ทุกช่วงเวลา ร้อยเรียงเป็นเรื่องราวให้เราได้คิดถึง
               </p>
-              <p className="my-4 font-bold text-white text-3xl md:text-4xl">
+              <p className="my-4 font-bold text-white text-xl sm:text-3xl md:text-4xl">
                 แล้วพบกันวันที่ 1 มีนาคม 2568 <br /> เวลา 18:00 น.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-6">
                 <Link
-                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-10 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   href="/reservation"
                 >
                   <span className="inline-flex gap-2 text-xl">
-                    <FaUtensils />
+                    <FaUtensils className="translate-y-1" />
                     ดูโต๊ะอาหาร
                   </span>
                 </Link>
                 <Link
-                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-10 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   href="/reservation"
                 >
                   <span className="inline-flex gap-2 text-xl">
-                    <FaPerson />
+                    <FaPerson className="translate-y-1" />
                     จองที่นั่งเดี่ยว
                   </span>
                 </Link>
 
                 <Link
-                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-10 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   href="/shop"
                 >
                   <span className="inline-flex gap-2 text-xl">
-                    <FaShirt />
+                    <FaShirt className="translate-y-1" />
                     จองเสื้อ
                   </span>
                 </Link>
