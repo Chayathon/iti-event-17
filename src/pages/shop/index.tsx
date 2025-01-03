@@ -6,6 +6,7 @@ import { GetServerSideProps } from "next";
 import axios, { fetcher } from "@/libs/axios";
 import { type ProductData } from "@/classes/Product";
 import useSWR from "swr";
+import { FaCartShopping } from "react-icons/fa6";
 
 type Props = {
   products: ProductData[];
@@ -15,6 +16,13 @@ export default function ShopPage({}: Props) {
   // const { data: products, error } = useSWR(`/api/product`, fetcher);
   const [products, setProducts] = useState([]);
   const [loading, setloading] = useState(false);
+  const [count, setCount] = useState("0");
+  
+  useEffect(() => {
+    const cartItem = localStorage.getItem("cart")
+    const cart = JSON.parse(cartItem);
+    setCount(cart.length);
+  }, [localStorage.getItem("cart")])
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,13 +38,25 @@ export default function ShopPage({}: Props) {
 
   return (
     <HomeLayout title="สั่งซื้อสินค้า">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 py-10 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         {loading && (
           // title loading
           <div className="text-center ">
             <p className="text-white text-lg md:text-2xl">Loading...</p>
           </div>
         )}
+        <div className="flex justify-end">
+          <Link
+            href={"/cart"}
+            className="btn btn-sm md:btn-md flex items-center justify-center w-fit text-white border border-blue-500  hover:bg-blue-600 hover:border-blue-800 rounded-xl"
+          >
+            <FaCartShopping />
+            <span className="ml-2 text-xs md:text-lg">ดูตะกร้าสินค้า</span>
+            <div className="badge bg-white ml-2 text-black">
+              {count}
+            </div>
+          </Link>
+        </div>
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {products?.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -49,31 +69,31 @@ export default function ShopPage({}: Props) {
 
 export function ProductCard({ product }: { product: ProductData }) {
   return (
-    <div className="group relative bg-white rounded-lg">
-      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none  lg:h-80">
+    <div className="group relative bg-white rounded-xl">
+      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-xl bg-gray-200 lg:aspect-none  lg:h-80">
         <Image
           src={`${product.image1}`}
           alt={product.name}
           width={500}
           height={500}
           lazyRoot="lazy-shop"
-          className="h-full w-full object-cover object-center group-hover:scale-125 lg:h-full lg:w-full"
+          className="h-full w-full object-cover object-center group-hover:scale-125 transition lg:h-full lg:w-full"
         />
       </div>
       <div className="mt-4 flex justify-between p-2">
         <div>
-          <h3 className="text-lg md:text-sm text-black">
+          <p className="text-lg font-bold text-black">
             <Link href={`/shop/${product.id}`}>
               <span aria-hidden="true" className="absolute inset-0" />
               {product.name}
             </Link>
-          </h3>
+          </p>
           <p className="mt-1 text-sm text-gray-500 overflow-hidden">
             {product.details}
           </p>
         </div>
-        <p className="text-lg md:text-sm font-medium text-gray-900">
-          {product.price}
+        <p className="text-lg font-medium text-gray-900">
+          {product.price} .-
         </p>
       </div>
     </div>
