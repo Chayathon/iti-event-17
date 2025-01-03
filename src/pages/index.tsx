@@ -17,25 +17,25 @@ const TypingEffect = dynamic(() => import("@/components/TypingEffect"), {
   ssr: false,
 });
 
-const optionModal: ReservationTableData = {
-  isRetail: true,
-  tableId: "963731bb-839f-46ae-92d5-09833a755857",
-  id: "963731bb-839f-46ae-92d5-09833a755857",
-};
+// const optionModal: ReservationTableData = {
+//   isRetail: true,
+//   tableId: "963731bb-839f-46ae-92d5-09833a755857",
+//   id: "963731bb-839f-46ae-92d5-09833a755857",
+// };
 
 export default function Home() {
-  function onClickRetailTable() {
-    const modalElement = document.getElementById(
-      "reservationModal"
-    ) as HTMLDialogElement | null;
-    if (modalElement) {
-      modalElement.showModal();
-    }
-  }
+  // function onClickRetailTable() {
+  //   const modalElement = document.getElementById(
+  //     "reservationModal"
+  //   ) as HTMLDialogElement | null;
+  //   if (modalElement) {
+  //     modalElement.showModal();
+  //   }
+  // }
 
   return (
     <HomeLayout>
-      <PaidModal selected={optionModal} />
+      {/* <PaidModal selected={optionModal} /> */}
       <div>
         <section className="mt-36">
           <div className="float-none mx-auto px-4 lg:flex  lg:items-center">
@@ -58,7 +58,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-6">
                 <Link
-                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   href="/reservation"
                 >
                   <span className="inline-flex gap-2 text-xl">
@@ -66,18 +66,18 @@ export default function Home() {
                     ดูโต๊ะอาหาร
                   </span>
                 </Link>
-                <button
-                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
-                  onClick={onClickRetailTable}
+                <Link
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
+                  href="/reservation"
                 >
                   <span className="inline-flex gap-2 text-xl">
                     <FaPerson />
                     จองที่นั่งเดี่ยว
                   </span>
-                </button>
+                </Link>
 
                 <Link
-                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   href="/shop"
                 >
                   <span className="inline-flex gap-2 text-xl">
