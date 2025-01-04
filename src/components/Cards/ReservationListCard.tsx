@@ -16,6 +16,9 @@ import "moment/locale/th";
 import axios from "@/libs/axios";
 import supabase from "@/libs/supabase";
 import TagePayment from "@/components/Tage/TagePayment";
+import { StatusItem } from "@/interfaces/ItemType.type";
+import TageItem from "../Tage/TageItem";
+import { FaCheck, FaCopy } from "react-icons/fa6";
 
 type CallbackData = {
   id: string;
@@ -29,6 +32,8 @@ type CardShirtProps = {
 
 interface newReservationTableData extends ReservationTableData {
   reservationProductItem: ReservationProductItemData[];
+  item_status: StatusItem;
+  trackingCode: String;
   productId: ProductData;
   optionId: any;
 }
@@ -48,6 +53,8 @@ export default function CardTable({
   const [preview, setPreview] = useState<string>();
   const fileInput = useRef<HTMLInputElement>(null);
   const table = data.tableId as TableData;
+
+  const [isCopied, setIsCopied] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -143,6 +150,17 @@ export default function CardTable({
     };
 
     setSelectedfile(file);
+  }
+  
+  function copyClipBord() {
+    //check if browser support clipboard api
+    if (!navigator.clipboard) {
+      return;
+    }
+    navigator.clipboard.writeText(`${data.trackingCode}`).then(() => {
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    });
   }
 
   if (!isProduct) {
@@ -293,6 +311,27 @@ export default function CardTable({
           <dt className="font-medium text-gray-900">อีเมล</dt>
           <dd className="text-gray-700 sm:col-span-2">{data.email}</dd>
         </div>
+        <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+          <dt className="font-medium text-gray-900">สถานะสินค้า</dt>
+          <dd className="text-gray-700 sm:col-span-2">
+            <TageItem status={data.item_status} />
+          </dd>
+        </div>
+        {data.trackingCode && (
+          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+          <dt className="font-medium text-gray-900">หมายเลขพัสดุ</dt>
+          <dd className="text-gray-700 sm:col-span-2">
+            <div className="flex">
+              {data.trackingCode}
+              <div className="pt-1 pl-2 text-xs sm:text-sm">
+                <button onClick={copyClipBord} type="button" className="transition hover:scale-110">
+                  {isCopied ? <FaCheck /> : <FaCopy />}
+                </button>
+              </div>
+            </div>
+          </dd>
+        </div>
+        )}
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">รายการสินค้า</dt>
           <dd className="text-gray-700 sm:col-span-2">

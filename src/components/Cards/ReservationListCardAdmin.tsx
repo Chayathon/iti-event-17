@@ -10,19 +10,23 @@ import {
   paymentMethod,
 } from "@/helpers/statusOrder";
 import { StatusPayment } from "@/interfaces/Payment.type";
-import { FaCheckCircle, FaBan } from "react-icons/fa";
+import { FaCheckCircle, FaBan, FaTruck } from "react-icons/fa";
 import Swal from "sweetalert2";
 import moment from "moment";
 import "moment/locale/th";
 import Image from "next/image";
 import TagePayment from "@/components/Tage/TagePayment";
+import TageItem from "@/components/Tage/TageItem";
 import Link from "next/link";
 import axios from "@/libs/axios";
 import { mutate } from "swr";
 import { useRouter } from "next/navigation";
+import { StatusItem } from "@/interfaces/ItemType.type";
 
 interface ReservationTableJoinTableData extends ReservationTableData {
   reservationProductItem: ReservationProductData[];
+  item_status?: StatusItem;
+  trackingCode?: String;
   tableId?: TableData;
 }
 
@@ -37,6 +41,13 @@ type payload = {
   id: string;
   status: StatusPayment;
   tableId: string;
+  type: "table" | "product" | string;
+};
+
+type payloadProduct = {
+  id: string;
+  status: StatusItem;
+  trackingCode: string;
   type: "table" | "product" | string;
 };
 
@@ -81,6 +92,36 @@ export default function CardTable({
     }
   }
 
+  async function onSaveProduct(payload: payloadProduct) {
+    try {
+      setLoading(true);
+      const resData = await (
+        await axios.patch(`/admin/reservation/product`, payload)
+      ).data;
+
+      if (resData) {
+        // mutate(`/admin/reservation/check?type=${data.type}&id=${data.id}`);
+        Swal.fire({
+          title: "สำเร็จ",
+          text: "จัดส่งสินค้าเรียบร้อยแล้ว",
+          icon: "success",
+          timer: 1500,
+        });
+      }
+      router.back();
+    } catch (error) {
+      Swal.fire({
+        title: "เกิดข้อผิดพลาด",
+        text: "ทำรายการไม่สำเร็จ",
+        icon: "error",
+      });
+
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function onApprove() {
     Swal.fire({
       title: "ยืนยันการชำระเงิน",
@@ -104,6 +145,41 @@ export default function CardTable({
     });
   }
 
+  async function onShipped() {
+    Swal.fire({
+      title: "จัดส่งสินค้าแล้ว",
+      text: "กรุณากรอกหมายพัสดุ",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "ยืนยัน",
+      cancelButtonText: "ยกเลิก",
+      showLoaderOnConfirm: true,
+      preConfirm: async (trackingCode) => {
+        if (!trackingCode) {
+          Swal.showValidationMessage(`กรุณากรอกหมายพัสดุ`);
+        }
+        return trackingCode;
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const trackingCode = result.value;
+
+        const payloadProduct = {
+          id: data.id,
+          status: "SHIPPED" as StatusItem,
+          trackingCode,
+          type: isProduct ? "product" : "table",
+        };
+
+        await onSaveProduct(payloadProduct);
+      }
+    });
+  }
+
   function onCancel() {}
 
   return (
@@ -123,7 +199,7 @@ export default function CardTable({
         )}
         {table && table.isRetail && (
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">ลักษระการจอง</dt>
+            <dt className="font-medium text-gray-900">ลักษณะการจอง</dt>
             <dd className="text-gray-700 sm:col-span-2">
               รายบุคคล <b>(ราคา 500.- บาท)</b>
             </dd>
@@ -190,6 +266,20 @@ export default function CardTable({
                 .- บาท
               </dd>
             </div>
+            <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900">สถานะสินค้า</dt>
+              <dd className="text-gray-700 sm:col-span-2">
+                <TageItem status={data.item_status} />
+              </dd>
+            </div>
+            {data.trackingCode && (
+              <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900">หมายเลขพัสดุ</dt>
+              <dd className="text-gray-700 sm:col-span-2">
+                {data.trackingCode}
+              </dd>
+            </div>
+            )}
           </>
         )}
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
@@ -244,6 +334,15 @@ export default function CardTable({
                 <span className="text-sm text-center">
                   (อยู่ในสถานะล้มเหลวการชำระ)
                 </span> */}
+                {(isProduct && data.item_status === "PREPARING" && data.status === "COMPLETE") && (
+                  <button
+                    onClick={onShipped}
+                    disabled={loading}
+                    className="btn btn-sm w-full md:w-auto text-white hover:bg-green-700 bg-green-600 border-green-600"
+                  >
+                    <FaTruck /> จัดส่งสินค้าแล้ว
+                  </button>
+                )}
               </div>
             </dd>
           </div>

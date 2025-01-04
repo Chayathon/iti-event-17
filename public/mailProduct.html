@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shipped Confirmation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url("https://media.istockphoto.com/id/1035676256/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B9%81%E0%B8%A5%E0%B8%84%E0%B8%8B%E0%B8%B5%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%94%E0%B8%B2%E0%B8%A7.jpg?s=612x612&w=0&k=20&c=R05RycV66Xlg1DV4X_wP81slM80wDWmJGB3phhSu9b0=")
+          no-repeat center center fixed;
+        background-size: cover;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* White background with transparency */
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .message {
+        text-align: left;
+        color: #000; /* Set text color to black for better contrast */
+      }
+
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="message">
+        <p><b>เรียนคุณ #NAME#</b></p>
+        <p>
+          สินค้าของคุณ กำลังจัดส่ง<br>
+          หมายเลขพัสดุของคุณคือ <b>#TRACKING_CODE#</b>
+        </p>
+        <p align="right">
+          ขอแสดงความนับถือ,<br>
+          <b>ทีมงาน ITI สานสัมพันธ์ ครั้งที่ 17</b>
+        </p>
+        <br>
+        <!-- ... (existing content) ... -->
+        <h3>ข้อมูลการ#RESERVATION_TYPE#</h3>
+        <p>ชื่อ: #NAME#</p>
+        <p>เบอร์โทรศัพท์: #PHONE#</p>
+        <p>ที่อยู่: #ADDRESS#</p>
+        <div>
+            รายการสินค้า:
+            #DETAIL#
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
