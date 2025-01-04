@@ -1,45 +1,77 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Data } from "@/interfaces/Stat.type";
 import { StatusPayment } from "@/interfaces/Payment.type";
+import { ReservationType } from "@/interfaces/ItemType.type";
 import { type ReservationStatus } from "@/interfaces/StatusReservation.type";
 import { splitReservationStatus } from "@/libs/spitReservationStatus";
 import Link from "next/link";
 import moment from "moment";
 import "moment/locale/th";
 import { Root } from "@/interfaces/StatusReservation.type";
+
 type Props = {
   data: Data;
 };
 
 export default function ReservationTable({ data }: Props) {
-  const [Status, setStatus] = useState<StatusPayment>("WAIT");
+  const [status, setStatus] = useState<StatusPayment>("WAIT");
+  const [type, setType] = useState<ReservationType>("all");
 
-  const ReservationData = splitReservationStatus(data);
+  const reservationData = splitReservationStatus(data);
+
+  // Filter data based on both status and type
+  const filteredData = reservationData[status]?.filter((item: ReservationStatus) => {
+    if (type === "all") return true;
+    return item.type === type;
+  });
 
   return (
     <div>
-      {/* {JSON.stringify(ReservationData[Status])} */}
-      <div className="w-full md:w-52 my-2 flex items-center gap-4">
-        <label
-          htmlFor="selectStatus"
-          className="block text-sm font-medium text-white"
-        >
-          สถานะ
-        </label>
+      <div className="flex justify-between flex-col md:flex-row gap-2">
+        <div className="w-full md:w-52 my-2 flex items-center gap-4">
+          <label
+            htmlFor="selectStatus"
+            className="block text-sm font-medium text-white"
+          >
+            สถานะ
+          </label>
 
-        <select
-          name="selectStatus"
-          id="selectStatus"
-          defaultValue={Status}
-          onChange={(e) => setStatus(e.target.value as StatusPayment)}
-          className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
-        >
-          <option value="WAIT">รอตรวจสอบ</option>
-          <option value="PENDING">รอชำระเงิน</option>
-          <option value="COMPLETE">ชำระเงินสำเร็จ</option>
-          <option value="FAILS">ชำระเงินไม่สำเร็จ</option>
-        </select>
+          <select
+            name="selectStatus"
+            id="selectStatus"
+            value={status}
+            onChange={(e) => setStatus(e.target.value as StatusPayment)}
+            className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+          >
+            <option value="WAIT">รอตรวจสอบ</option>
+            <option value="PENDING">รอชำระเงิน</option>
+            <option value="COMPLETE">ชำระเงินสำเร็จ</option>
+            <option value="FAILS">ชำระเงินไม่สำเร็จ</option>
+          </select>
+        </div>
+
+        <div className="w-full md:w-52 my-2 flex items-center gap-4">
+          <label
+            htmlFor="selectType"
+            className="block text-sm font-medium text-white"
+          >
+            ประเภท
+          </label>
+
+          <select
+            name="selectType"
+            id="selectType"
+            value={type}
+            onChange={(e) => setType(e.target.value as ReservationType)}
+            className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+          >
+            <option value="all">ทั้งหมด</option>
+            <option value="table">จองโต๊ะ</option>
+            <option value="product">จอง/ซื้อสินค้า</option>
+          </select>
+        </div>
       </div>
+
       <div className="overflow-x-auto">
         <table className="table bg-white rounded-2xl">
           <thead>
@@ -54,7 +86,7 @@ export default function ReservationTable({ data }: Props) {
             </tr>
           </thead>
           <tbody>
-            {ReservationData[Status]?.map((item: ReservationStatus) => (
+            {filteredData?.map((item: ReservationStatus) => (
               <tr key={item.id}>
                 <td>
                   <div className="flex items-center gap-3">
@@ -83,7 +115,7 @@ export default function ReservationTable({ data }: Props) {
                   {
                     <Link
                       href={`/manage/reservation/view/${item.type}/${item.id}`}
-                      className={`        ${
+                      className={`${
                         item.type === "table"
                           ? "text-green-600"
                           : "text-blue-600"
@@ -108,7 +140,16 @@ export default function ReservationTable({ data }: Props) {
                     ตรวจสอบ
                   </Link>
                 </td>
-                <td>...</td>
+                <td>
+                  {item.type === "product" && (
+                    <Link
+                      href={`/manage/product/${item.id}`}
+                      className="btn btn-sm btn-block btn-secondary text-white"
+                    >
+                      จัดการสินค้า
+                    </Link>
+                  )}
+                </td>
                 <th></th>
               </tr>
             ))}
