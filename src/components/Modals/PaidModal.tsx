@@ -120,7 +120,6 @@ export default function PaidModal({ selected }: Props) {
           phone: data.phone,
           generation: data.generation,
           method: data.method as PaymentMethod,
-          status: "PENDING",
           isRetail: selected.isRetail,
         };
 
