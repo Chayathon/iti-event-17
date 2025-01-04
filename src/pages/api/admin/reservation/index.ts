@@ -42,7 +42,6 @@ export default async function handler(
           const reservationTable = await ReservationTable.updateReservation({
             id: req.body.id,
             status: req.body.status,
-            refId: req.body.refId,
           });
           await Table.updateTable({
             id: req.body.tableId,
@@ -55,7 +54,6 @@ export default async function handler(
             {
               id: req.body.id,
               status: req.body.status,
-              refId: req.body.refId,
             }
           );
           const resItem =

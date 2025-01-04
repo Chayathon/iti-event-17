@@ -137,12 +137,11 @@ export default function ProductModal({}: Props) {
       let productsItem: ReservationProductItemData[] = [];
       const reservationProduct: ReservationProductData = {
         name: `${data.firstName} ${data.lastName}`,
-        email: data.email,
         phone: data.phone,
+        email: data.email,
         generation: data.generation,
         method: data.method,
         address: data.address,
-        status: "PENDING",
       };
 
       products.forEach((item) => {
@@ -157,7 +156,6 @@ export default function ProductModal({}: Props) {
         ...reservationProduct,
         productsItem,
       };
-      console.log(payload);
 
       const res = (await axios.post("/reservation/product", payload));
 

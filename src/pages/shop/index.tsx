@@ -20,8 +20,8 @@ export default function ShopPage({}: Props) {
   
   useEffect(() => {
     const cartItem = localStorage.getItem("cart")
-    const cart = JSON.parse(cartItem);
-    setCount(cart.length);
+    const cart = cartItem ? JSON.parse(cartItem) : [];
+    setCount(cart.length || 0);
   }, [])
 
   useEffect(() => {
