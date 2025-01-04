@@ -4,6 +4,7 @@ import { StatusPayment } from "@/interfaces/Payment.type";
 import { ReservationType } from "@/interfaces/ItemType.type";
 import { type ReservationStatus } from "@/interfaces/StatusReservation.type";
 import { splitReservationStatus } from "@/libs/spitReservationStatus";
+import TageItem from "@/components/Tage/TageItem";
 import Link from "next/link";
 import moment from "moment";
 import "moment/locale/th";
@@ -27,8 +28,8 @@ export default function ReservationTable({ data }: Props) {
 
   return (
     <div>
-      <div className="flex justify-between flex-col md:flex-row gap-2">
-        <div className="w-full md:w-52 my-2 flex items-center gap-4">
+      <div className="flex justify-between flex-col md:flex-row ">
+        <div className="w-full md:w-52 md:my-2 mt-2 flex items-center gap-4">
           <label
             htmlFor="selectStatus"
             className="block text-sm font-medium text-white"
@@ -41,7 +42,7 @@ export default function ReservationTable({ data }: Props) {
             id="selectStatus"
             value={status}
             onChange={(e) => setStatus(e.target.value as StatusPayment)}
-            className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+            className="mt-1.5 w-full rounded-xl border-gray-300 text-gray-700 sm:text-sm"
           >
             <option value="WAIT">รอตรวจสอบ</option>
             <option value="PENDING">รอชำระเงิน</option>
@@ -50,7 +51,7 @@ export default function ReservationTable({ data }: Props) {
           </select>
         </div>
 
-        <div className="w-full md:w-52 my-2 flex items-center gap-4">
+        <div className="w-full md:w-52 md:my-2 mb-2 flex items-center gap-2">
           <label
             htmlFor="selectType"
             className="block text-sm font-medium text-white"
@@ -63,7 +64,7 @@ export default function ReservationTable({ data }: Props) {
             id="selectType"
             value={type}
             onChange={(e) => setType(e.target.value as ReservationType)}
-            className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+            className="mt-1.5 w-full rounded-xl border-gray-300 text-gray-700 sm:text-sm"
           >
             <option value="all">ทั้งหมด</option>
             <option value="table">จองโต๊ะ</option>
@@ -77,12 +78,11 @@ export default function ReservationTable({ data }: Props) {
           <thead>
             <tr className="text-black text-center">
               <th>ชื่อ-นามสกุล</th>
-              <th className="hidden md:block">ข้อมูลติดต่อ</th>
+              <th className="hidden md:table-cell">ข้อมูลติดต่อ</th>
               <th>ประเภทรายการ</th>
-              <th className="hidden md:block">เมื่อ</th>
+              <th className="hidden lg:table-cell">สถานะสินค้า</th>
+              <th className="hidden lg:table-cell">เมื่อ</th>
               <th>ตรวจสอบรายการชำระเงิน</th>
-              <th>ตัวเลือก</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -99,7 +99,7 @@ export default function ReservationTable({ data }: Props) {
                     </div>
                   </div>
                 </td>
-                <td className="hidden md:block">
+                <td className="hidden md:table-cell">
                   <a
                     className="text-black font-bold"
                     href={`tel:${item.phone}`}
@@ -129,7 +129,15 @@ export default function ReservationTable({ data }: Props) {
                     {item.method}
                   </span>
                 </td>
-                <td className="text-black text-center hidden md:block">
+                <td className="text-black text-center hidden lg:table-cell">
+                  {item.type === "product" && (
+                    <TageItem status={item.item_status} />
+                  )}
+                  {item.type === "table" && (
+                    "-"
+                  )}
+                </td>
+                <td className="text-black text-center hidden lg:table-cell">
                   {moment(item.created_at).format("lll น.")}
                 </td>
                 <td>
@@ -139,16 +147,6 @@ export default function ReservationTable({ data }: Props) {
                   >
                     ตรวจสอบ
                   </Link>
-                </td>
-                <td>
-                  {item.type === "product" && (
-                    <Link
-                      href={`/manage/product/${item.id}`}
-                      className="btn btn-sm btn-block btn-secondary text-white"
-                    >
-                      จัดการสินค้า
-                    </Link>
-                  )}
                 </td>
                 <th></th>
               </tr>

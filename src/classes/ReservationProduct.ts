@@ -6,6 +6,7 @@ import ProductItem, {
 import ShortUniqueId from "short-unique-id";
 import ProductOption, { type ProductOptionData } from "./ProductOption";
 import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
+import { StatusItem } from "@/interfaces/ItemType.type";
 
 export type ReservationProductData = {
   id?: string;
@@ -15,11 +16,11 @@ export type ReservationProductData = {
   phone?: string;
   email?: string;
   generation?: number;
-  refId?: string;
   slip?: string;
   method?: PaymentMethod;
   status?: StatusPayment;
   totalPrice?: number;
+  item_status?: StatusItem;
   trackingCode?: string;
   quantity?: number;
   address?: string;
@@ -92,7 +93,6 @@ export default class ReservationProduct {
         generation: data.generation,
         method: data.method,
         address: data.address,
-        status: data.status,
       };
 
       const { data: res, error } = await supabase
