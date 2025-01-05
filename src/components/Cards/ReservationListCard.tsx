@@ -223,7 +223,7 @@ export default function CardTable({
               </span>
             </dd>
           </div>
-          {data.status !== "COMPLETE" && (
+          {data.status === "PENDING" && (
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">แนบหลักฐานการชำระ</dt>
               <dd className="text-gray-700 sm:col-span-2">
@@ -239,7 +239,7 @@ export default function CardTable({
                     <img src={preview} alt="slip" className="w-44" />
                   </div>
                 )}
-                <div className="flex flex-col mt-4 w-auto md:w-48  gap-4">
+                <div className="flex flex-col mt-4 w-auto md:w-48 gap-4">
                   {preview && data.status === "PENDING" && (
                     <React.Fragment>
                       <button
@@ -260,8 +260,6 @@ export default function CardTable({
                     </React.Fragment>
                   )}
 
-                  {data.status === "WAIT" && <b>รอตรวจสอบการชำระเงิน</b>}
-
                   {!preview && data.status === "PENDING" && (
                     <button
                       onClick={onClick}
@@ -271,6 +269,18 @@ export default function CardTable({
                     </button>
                   )}
                 </div>
+              </dd>
+            </div>
+          )}
+          {(data.status === "WAIT" || data.status === "COMPLETE") && (
+            <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900">หลักฐานการชำระเงิน</dt>
+              <dd className="text-gray-700 sm:col-span-2">
+                <img
+                  src={data.slip}
+                  alt=""
+                  className="rounded-lg object-cover w-40 md:w-48 shadow-xl"
+                />
               </dd>
             </div>
           )}

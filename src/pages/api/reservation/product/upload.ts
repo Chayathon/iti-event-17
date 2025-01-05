@@ -21,7 +21,7 @@ export default async function handler(
           const data = await Reservation.updateReservation(req.body);
 
           const LINEPayload: NotifyData = {
-            message: `\n💵 มีการแจ้งชำระเงินการจองสินค้า 📦
+            message: `\n💵 การชำระเงินการจองสินค้า 📦
                       \n\nรหัสการซื้อ: ${data.id}
                       \n\nชื่อ: ${data.name}
                       \n\nเบอร์โทร: ${data.phone}

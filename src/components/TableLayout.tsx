@@ -24,7 +24,7 @@ export default function TableLayout({ data, admin }: Props) {
   function getTableStatus(table: TableWithReservation) {
     thisTable = table.reservation[0];
 
-    if (thisTable?.status === "PENDING") {
+    if (thisTable?.status === "PENDING" || thisTable?.status === "WAIT") {
       return "bg-yellow-500 text-white cursor-pointer hover:scale-110 transition";
     }
 
@@ -32,7 +32,7 @@ export default function TableLayout({ data, admin }: Props) {
       return "bg-neutral text-white cursor-not-allowed";
     }
 
-    if (table.isReserved) {
+    if (table.isReserved && thisTable?.status === "COMPLETE") {
       return "bg-blue-500 text-white cursor-pointer hover:scale-110 transition";
     }
 
