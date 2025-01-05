@@ -6,7 +6,7 @@ import ProductItem, {
 import ShortUniqueId from "short-unique-id";
 import ProductOption, { type ProductOptionData } from "./ProductOption";
 import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
-import { StatusItem } from "@/interfaces/ItemType.type";
+import { DeliveryMethod, StatusItem } from "@/interfaces/Product.type";
 
 export type ReservationProductData = {
   id?: string;
@@ -21,6 +21,7 @@ export type ReservationProductData = {
   status?: StatusPayment;
   totalPrice?: number;
   item_status?: StatusItem;
+  delivery?: DeliveryMethod;
   trackingCode?: string;
   quantity?: number;
   address?: string;
@@ -92,6 +93,8 @@ export default class ReservationProduct {
         email: data.email,
         generation: data.generation,
         method: data.method,
+        delivery: data.delivery,
+        item_status: data.item_status,
         address: data.address,
       };
 
@@ -149,8 +152,19 @@ export default class ReservationProduct {
                   \n\nเบอร์โทร: ${resData.phone}
                   \n\nอีเมล: ${resData.email}
                   \n\nรุ่น: ${resData.generation}
-                  \n\nที่อยู่: ${resData.address}
-                  \n\nรายการสินค้า: ${itemList}
+                  \n\nวิธีรับสินค้า: ${
+                    resData.delivery === 'SHIPPING'
+                      ? 'จัดส่งสินค้า'
+                      : resData.delivery === 'PICKUP'
+                      ? 'รับสินค้าหน้างาน'
+                      : 'ไม่ระบุ'
+                  }
+                  ${
+                    resData.address
+                      ? `\n\nที่อยู่: ${resData.address}\n`
+                      : ''
+                  }
+                  \nรายการสินค้า: ${itemList}
                   \nราคาสุทธิ: ${resData.totalPrice}`,
           stickerId: 51626507,
           stickerPackageId: 11538,

@@ -12,6 +12,7 @@ import { PaymentMethod } from "@/interfaces/Payment.type";
 import axios from "@/libs/axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import { DeliveryMethod } from "@/interfaces/Product.type";
 
 const LAST_GENERATION = 29;
 
@@ -33,7 +34,14 @@ const schema = yup
     method: yup
       .string()
       .required("กรุณาเลือกวิธีการชำระเงิน") as yup.StringSchema<PaymentMethod>,
-    address: yup.string(),
+    deliveryMethod: yup
+      .string()
+      .required("กรุณาเลือกวิธีการรับสินค้า") as yup.StringSchema<DeliveryMethod>,
+    address: yup.string().when('deliveryMethod', {
+      is: 'shipping',
+      then: (schema) => schema.required("กรุณากรอกที่อยู่จัดส่งสินค้า"),
+      otherwise: (schema) => schema.optional(),
+    }),
   })
   .required("กรุณากรอกข้อมูลให้ครบถ้วน");
 
@@ -54,6 +62,7 @@ type FormValues = {
   phone?: string;
   generation?: number;
   method?: PaymentMethod;
+  deliveryMethod?: DeliveryMethod;
   address?: string;
 };
 
@@ -68,12 +77,15 @@ export default function ProductModal({}: Props) {
   const {
     register,
     handleSubmit,
+    watch,
     setValue,
     reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver<FormValues>(schema),
   });
+
+  const deliveryMethod = watch('deliveryMethod');
 
   function handleClose() {
     const modalElement = document.getElementById(
@@ -141,6 +153,8 @@ export default function ProductModal({}: Props) {
         email: data.email,
         generation: data.generation,
         method: data.method,
+        delivery: data.deliveryMethod,
+        item_status: data.deliveryMethod === "PICKUP" ? "PICKUP" : undefined,
         address: data.address,
       };
 
@@ -309,19 +323,58 @@ export default function ProductModal({}: Props) {
                 </span>
               </label>
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="address"
-                  className="block text-sm font-semibold leading-6 text-gray-900"
-                >
-                  ที่อยู่จัดส่งสินค้า
-                </label>
-                <textarea
-                  {...register("address", { required: true })}
-                  id="address"
-                  autoComplete="off"
-                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-                <span className="text-red-600">{errors.address?.message}</span>
+                <div className="label">
+                  <label className="block text-sm font-semibold leading-6 text-gray-900">
+                    วิธีการรับสินค้า <span className="text-red-700">*</span>
+                  </label>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      id="shipping"
+                      {...register("deliveryMethod")}
+                      value="SHIPPING"
+                    />
+                    <div className="relative flex items-center">
+                      <label htmlFor="shipping">จัดส่งสินค้า</label>
+                    </div>
+                  </div>
+                  {deliveryMethod === 'SHIPPING' && (
+                    <div className="mt-4">
+                      <label
+                        htmlFor="address"
+                        className="block text-sm font-semibold leading-6 text-gray-900"
+                      >
+                        ที่อยู่จัดส่งสินค้า <span className="text-red-700">*</span>
+                      </label>
+                      <textarea
+                        {...register("address")}
+                        id="address"
+                        rows={3}
+                        className="mt-2 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="กรุณากรอกที่อยู่สำหรับจัดส่งสินค้า"
+                      />
+                      <span className="text-red-600">
+                        {errors.address?.message}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      id="pickup"
+                      {...register("deliveryMethod")}
+                      value="PICKUP"
+                    />
+                    <div className="relative flex items-center">
+                      <label htmlFor="pickup">รับสินค้าหน้างาน</label>
+                    </div>
+                  </div>
+                  <span className="text-red-600">
+                    {errors.deliveryMethod?.message}
+                  </span>
+                </div>
               </div>
               <div className="sm:col-span-2 flex ">
                 <div className="flex items-center gap-2">
