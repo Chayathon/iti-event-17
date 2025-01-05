@@ -16,7 +16,7 @@ import "moment/locale/th";
 import axios from "@/libs/axios";
 import supabase from "@/libs/supabase";
 import TagePayment from "@/components/Tage/TagePayment";
-import { StatusItem } from "@/interfaces/ItemType.type";
+import { StatusItem } from "@/interfaces/Product.type";
 import TageItem from "../Tage/TageItem";
 import { FaCheck, FaCopy } from "react-icons/fa6";
 

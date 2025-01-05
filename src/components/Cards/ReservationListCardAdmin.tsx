@@ -21,7 +21,7 @@ import Link from "next/link";
 import axios from "@/libs/axios";
 import { mutate } from "swr";
 import { useRouter } from "next/navigation";
-import { StatusItem } from "@/interfaces/ItemType.type";
+import { StatusItem } from "@/interfaces/Product.type";
 
 interface ReservationTableJoinTableData extends ReservationTableData {
   reservationProductItem: ReservationProductData[];

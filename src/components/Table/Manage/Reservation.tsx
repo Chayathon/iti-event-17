@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Data } from "@/interfaces/Stat.type";
 import { StatusPayment } from "@/interfaces/Payment.type";
-import { ReservationType } from "@/interfaces/ItemType.type";
 import { type ReservationStatus } from "@/interfaces/StatusReservation.type";
 import { splitReservationStatus } from "@/libs/spitReservationStatus";
 import TageItem from "@/components/Tage/TageItem";
@@ -13,6 +12,8 @@ import { Root } from "@/interfaces/StatusReservation.type";
 type Props = {
   data: Data;
 };
+
+type ReservationType = "all" | "table" | "product";
 
 export default function ReservationTable({ data }: Props) {
   const [status, setStatus] = useState<StatusPayment>("WAIT");
