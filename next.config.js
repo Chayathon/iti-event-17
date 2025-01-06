@@ -2,7 +2,7 @@
 
 // const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL || 'http://localhost:3000'
 
-let BASE_URL = "http://localhost:3000/api"
+let BASE_URL = "https://iti-event.vercel.app/api"
 
 //check env dev or prod
 // if (process.env.NODE_ENV !== 'development') {
