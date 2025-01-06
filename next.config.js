@@ -5,9 +5,9 @@
 let BASE_URL = "http://localhost:3000/api"
 
 //check env dev or prod
-if (process.env.NODE_ENV !== 'development') {
-  BASE_URL = process.env.PROD_BASE_URL || process.env.VERCEL_URL
-}
+// if (process.env.NODE_ENV !== 'development') {
+//   BASE_URL = process.env.PROD_BASE_URL || process.env.VERCEL_URL
+// }
 
 const nextConfig = {
   reactStrictMode: true,
