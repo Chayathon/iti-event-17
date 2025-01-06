@@ -58,9 +58,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-6">
                 <Link
-                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-10 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   href="/reservation"
-                  replace
                 >
                   <span className="inline-flex gap-2 text-xl">
                     <FaUtensils className="translate-y-1" />
