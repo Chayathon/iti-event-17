@@ -27,11 +27,25 @@ const nextConfig = {
       source: `/storage/:path*`,
       destination: `https://jpajjgeqekhebztqwhkr.supabase.co/storage/v1/object/public/:path*`,
     },
+  ],
+  "redirects": [
     {
-      "source": "/(.*)",
-      "destination": "/",
+      "source": "/old-page",
+      "destination": "/new-page",
+      "permanent": true
     }
   ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Custom-Header",
+          "value": "MyValue"
+        }
+      ]
+    }
+  ]
 }
 
 module.exports = nextConfig
