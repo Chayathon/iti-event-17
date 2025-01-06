@@ -180,9 +180,9 @@ export default function CardTable({
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-              <dt className="font-medium text-gray-900">ลักษณะการจอง</dt>
+              <dt className="font-medium text-gray-900">โต๊ะที่จอง</dt>
               <dd className="text-gray-700 sm:col-span-2">
-                รายบุคคล <b>(ราคา 500.- บาท)</b>
+                ({table.index}) {table.name} <b>(ราคา 500.- บาท)</b>
               </dd>
             </div>
           )}
@@ -382,7 +382,7 @@ export default function CardTable({
             </span>
           </dd>
         </div>
-        {data.status !== "COMPLETE" && (
+        {data.status === "PENDING" && (
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">แนบหลักฐานการชำระ</dt>
             <dd className="text-gray-700 sm:col-span-2">
@@ -419,8 +419,6 @@ export default function CardTable({
                   </React.Fragment>
                 )}
 
-                {data.status === "WAIT" && <h1>รอการตรวจสอบการชำระเงิน</h1>}
-
                 {!preview && data.status === "PENDING" && (
                   <button
                     onClick={onClick}
@@ -430,6 +428,18 @@ export default function CardTable({
                   </button>
                 )}
               </div>
+            </dd>
+          </div>
+        )}
+        {(data.status === "WAIT" || data.status === "COMPLETE") && (
+          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-900">หลักฐานการชำระเงิน</dt>
+            <dd className="text-gray-700 sm:col-span-2">
+              <img
+                src={data.slip}
+                alt=""
+                className="rounded-lg object-cover w-40 md:w-48 shadow-xl"
+              />
             </dd>
           </div>
         )}
