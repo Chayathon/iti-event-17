@@ -28,9 +28,9 @@ const nextConfig = {
       destination: `https://jpajjgeqekhebztqwhkr.supabase.co/storage/v1/object/public/:path*`,
     },
     {
-      source: "/(.*)",
-      destination: "/",
-      permanent: true
+      "source": "/(.*)",
+      "destination": "/",
+      "permanent": true
     }
   ],
 }
