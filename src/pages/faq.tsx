@@ -9,7 +9,7 @@ type Props = {
 
 export default function FAQ({ faq }: Props) {
   return (
-    <HomeLayout titile="คำถามที่พบบ่อย">
+    <HomeLayout title="คำถามที่พบบ่อย">
       {faq?.map((item) => (
         <div key={item.id} className="space-y-4 p-4">
           <details
