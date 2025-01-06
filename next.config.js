@@ -17,14 +17,22 @@ const nextConfig = {
   images: {
     domains: ['jpajjgeqekhebztqwhkr.supabase.co'],
   },
-  async rewrites() {
-    return [
-        {
-            source: "/(.*)",
-            destination: "/",
-        },
-    ];
-  },
+  rewrites: async () => [
+    {
+      source: `/api/:path*`,
+      destination: `${BASE_URL}/:path*`,
+
+    },
+    {
+      source: `/storage/:path*`,
+      destination: `https://jpajjgeqekhebztqwhkr.supabase.co/storage/v1/object/public/:path*`,
+    },
+    
+    {
+        source: "/(.*)",
+        destination: "/",
+    },
+  ],
 }
 
 module.exports = nextConfig
