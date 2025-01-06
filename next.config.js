@@ -10,13 +10,24 @@ let BASE_URL = "https://iti-event.vercel.app/api"
 // }
 
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   env: {
     BASE_URL,
   },
   images: {
     domains: ['jpajjgeqekhebztqwhkr.supabase.co'],
-  }
+  },
+  rewrites: async () => [
+    {
+      source: `/api/:path*`,
+      destination: `${BASE_URL}/:path*`,
+
+    },
+    {
+      source: `/storage/:path*`,
+      destination: `https://jpajjgeqekhebztqwhkr.supabase.co/storage/v1/object/public/:path*`,
+    }
+  ],
 }
 
 module.exports = nextConfig
