@@ -47,7 +47,7 @@ res: NextApiResponse<Data>
                     email: reservation.email,
                     phone: reservation.phone,
                     address: reservation.address,
-                    reservationType: type === "table" ? "จองโต๊ะ" : "จองสินค้า",
+                    reservationType: type === "table" ? "จองโต๊ะ" : "ซื้อสินค้า",
                     detail: detail,
                     trackingCode: reservation.trackingCode,
                 };
