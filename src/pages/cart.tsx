@@ -64,9 +64,9 @@ export default function CartPage({}: Props) {
   function calculateProduct() {
     if (Cart) {
       const subtotal = calculateSubtotal(Cart);
-      const total = calculateTotal(Cart, shipping);
+      // const total = calculateTotal(Cart, shipping);
       setSubtotal(subtotal);
-      setTotal(total);
+      // setTotal(total);
     }
   }
 
@@ -183,7 +183,7 @@ export default function CartPage({}: Props) {
                         </div>
                         <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 ">
                           <p className="text-lg font-bold text-amber-400 ">
-                            {item.price * item.quantity}.-
+                            {(item.price * item.quantity).toLocaleString()}.-
                           </p>
                         </div>
                       </div>
@@ -196,23 +196,17 @@ export default function CartPage({}: Props) {
                       สรุปคำสั่งจอง
                     </h2>
                     <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
-                      <span className="text-gray-700 ">ยอดรวม</span>
+                      <span className="text-gray-700 ">ราคารวม</span>
                       <span className="text-xl font-bold text-gray-700  ">
-                        {subtotal} บาท
+                        {subtotal.toLocaleString()} บาท
                       </span>
                     </div>
-                    <div className="flex items-center justify-between pb-4 mb-4 ">
-                      <span className="text-gray-700  ">ค่าส่ง</span>
-                      <span className="text-xl font-bold text-gray-700  ">
-                        Free
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between pb-4 mb-4 ">
+                    {/* <div className="flex items-center justify-between pb-4 mb-4 ">
                       <span className="text-gray-700 ">ราคาสุทธิ</span>
                       <span className="text-xl font-bold text-gray-700 ">
                         {total} บาท
                       </span>
-                    </div>
+                    </div> */}
                     <h2 className="text-lg text-black ">การชำระเงิน:</h2>
                     <div className="flex items-center mb-4 ">
                       <BankInfo />

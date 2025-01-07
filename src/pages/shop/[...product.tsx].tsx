@@ -222,7 +222,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
 
                 <p className="max-w-md mb-8  text-white">{data.details}</p>
                 <p className="inline-block mb-8 text-4xl font-bold  text-white ">
-                  <span>ราคา {data.price}.- บาท</span>
+                  <span>{data.price} .-</span>
                 </p>
               </div>
               <div className="flex items-center mb-8">

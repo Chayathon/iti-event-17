@@ -26,7 +26,7 @@ export default async function handler(
         const LINEPayload: NotifyData = {
           message: `\n💵 การชำระเงินการจองโต๊ะ 🍽️
                     \n\nรหัสการจอง: ${data.id}
-                    \n\nโต๊ะที่: ${table.index}
+                    \n\nโต๊ะที่: (${table.index}) ${table.name}
                     \n\nชื่อ: ${data.name}
                     \n\nเบอร์โทร: ${data.phone}
                     \n\nอีเมล: ${data.email}
