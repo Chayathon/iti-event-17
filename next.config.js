@@ -2,12 +2,14 @@
 
 // const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL || 'http://localhost:3000'
 
-let BASE_URL = "https://iti-event.vercel.app/api"
+let BASE_URL = "";
 
-//check env dev or prod
-// if (process.env.NODE_ENV !== 'development') {
-//   BASE_URL = process.env.PROD_BASE_URL || process.env.VERCEL_URL
-// }
+// check env dev or prod
+if (process.env.NODE_ENV !== 'development') {
+  BASE_URL = process.env.VERCEL_URL
+} else {
+  BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+}
 
 const nextConfig = {
   reactStrictMode: true,
