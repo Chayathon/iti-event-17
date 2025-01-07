@@ -6,10 +6,8 @@ import type SMTPTransport from "nodemailer/lib/smtp-transport";
 export interface MailData {
   email?: string;
   name?: string;
-  date?: string;
-  paymentMethod?: string;
   reservationId?: string;
-  reservationType?: "จองโต๊ะ" | "จองสินค้า";
+  reservationType?: "จองโต๊ะ" | "ซื้อสินค้า";
   detail?: string;
   generation: number;
 }
@@ -18,8 +16,6 @@ export async function mail(data: MailData) {
   const {
     email,
     name,
-    date,
-    paymentMethod,
     reservationId,
     reservationType,
     detail,
@@ -43,8 +39,6 @@ export async function mail(data: MailData) {
     },
     html: mail
       .replace(/#NAME#/g, name)
-      .replace(/#DATETIME#/g, date)
-      .replace(/#METHOD_PAYMENT#/g, paymentMethod)
       .replace(/#RESERVATION_ID#/g, reservationId)
       .replace(/#RESERVATION_TYPE#/g, reservationType)
       .replace(/#GENERATION#/g, data.generation.toString())

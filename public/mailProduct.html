@@ -44,9 +44,13 @@
     <div class="container">
       <div class="message">
         <p><b>เรียนคุณ #NAME#</b></p>
+        <p>สินค้าของคุณ กำลังจัดส่ง</p>
         <p>
-          สินค้าของคุณ กำลังจัดส่ง<br>
-          หมายเลขพัสดุของคุณคือ <b>#TRACKING_CODE#</b>
+          หมายเลขพัสดุของคุณคือ <b>#TRACKING_CODE#</b><br>
+          หรือตรวจสอบหมายเลขพัสดุได้ที่หน้า
+          <a href="iti-event.vercel.app/tracking?search=#PHONE#" target="_blank">
+            ยืนยันการชำระเงิน
+          </a>
         </p>
         <p align="right">
           ขอแสดงความนับถือ,<br>
@@ -54,7 +58,7 @@
         </p>
         <br>
         <!-- ... (existing content) ... -->
-        <h3>ข้อมูลการ#RESERVATION_TYPE#</h3>
+        <h3>ข้อมูลการจัดส่งสินค้า</h3>
         <p>ชื่อ: #NAME#</p>
         <p>เบอร์โทรศัพท์: #PHONE#</p>
         <p>ที่อยู่: #ADDRESS#</p>
@@ -62,6 +66,10 @@
             รายการสินค้า:
             #DETAIL#
         </div>
+
+        <p align="center">
+          <b>*เป็นข้อความจากระบบอัตโนมัติ กรุณาอย่าตอบกลับ </b>
+        </p>
       </div>
     </div>
   </body>

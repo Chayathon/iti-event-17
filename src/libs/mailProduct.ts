@@ -8,7 +8,7 @@ export interface MailData {
   name?: string;
   phone?: string;
   address?: string;
-  reservationType?: "จองโต๊ะ" | "จองสินค้า";
+  reservationType?: "จองโต๊ะ" | "ซื้อสินค้า";
   detail?: string;
   trackingCode?: string;
 }
