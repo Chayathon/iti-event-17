@@ -204,8 +204,13 @@ export default function ProductModal({}: Props) {
   return (
     <React.Fragment>
       <button
-        className="flex justify-center items-center gap-2 w-full py-4 font-bold text-center text-gray-100 uppercase bg-blue-500 rounded-xl hover:bg-blue-600"
+        className={`flex justify-center items-center gap-2 w-full py-4 font-bold text-center text-gray-100 uppercase rounded-xl ${
+          products.length
+            ? "bg-blue-500 hover:bg-blue-600"
+            : "bg-gray-400 cursor-not-allowed"
+        }`}
         onClick={handleOpen}
+        disabled={!products.length} // ปิดปุ่มถ้า products ว่างเปล่า
       >
         <FaCircleCheck /> ชำระเงิน
       </button>
