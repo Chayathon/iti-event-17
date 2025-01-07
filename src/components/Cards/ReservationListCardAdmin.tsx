@@ -21,11 +21,13 @@ import Link from "next/link";
 import axios from "@/libs/axios";
 import { mutate } from "swr";
 import { useRouter } from "next/navigation";
-import { StatusItem } from "@/interfaces/Product.type";
+import { DeliveryMethod, StatusItem } from "@/interfaces/Product.type";
 
 interface ReservationTableJoinTableData extends ReservationTableData {
   reservationProductItem: ReservationProductData[];
+  totalPrice: number;
   item_status?: StatusItem;
+  delivery: DeliveryMethod;
   trackingCode?: String;
   tableId?: TableData;
 }
@@ -193,17 +195,17 @@ export default function CardTable({
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">โต๊ะที่จอง</dt>
             <dd className="text-gray-700 sm:col-span-2">
-              ({table.index}) {table.name} <b>(ราคา 4,000.- บาท)</b>
+              ({table.index}) {table.name} <b>(ราคา 4,000 บาท)</b>
             </dd>
           </div>
         )}
         {table && table.isRetail && (
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-            <dt className="font-medium text-gray-900">ลักษณะการจอง</dt>
+            <dt className="font-medium text-gray-900">โต๊ะที่จอง</dt>
             <dd className="text-gray-700 sm:col-span-2">
-              รายบุคคล <b>(ราคา 500.- บาท)</b>
+              ({table.index}) {table.name} <b>(ราคา 500 บาท)</b>
             </dd>
-          </div>
+        </div>
         )}
 
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
@@ -248,22 +250,21 @@ export default function CardTable({
                     </p>
                     <p>x {item.quantity} ชิ้น</p>
                     {/* @ts-ignore */}
-                    {item.optionId.price * item.quantity} บาท
+                    {(item.optionId.price * item.quantity).toLocaleString()} บาท
                   </div>
                 ))}
               </dd>
             </div>
+            {(data.delivery !== "PICKUP") && (
+              <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                <dt className="font-medium text-gray-900">ค่าจัดส่ง</dt>
+                <dd className="text-gray-700 sm:col-span-2">50 บาท</dd>
+              </div>
+            )}
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">ราคาสุทธิ</dt>
               <dd className="text-gray-700 sm:col-span-2">
-                {data?.reservationProductItem?.reduce(
-                  (prev, cur) =>
-                    prev +
-                    // @ts-ignore
-                    cur.optionId.price * cur.quantity,
-                  0
-                )}
-                .- บาท
+                {data.totalPrice.toLocaleString()} บาท
               </dd>
             </div>
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">

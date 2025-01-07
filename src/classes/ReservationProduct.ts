@@ -19,6 +19,7 @@ export type ReservationProductData = {
   slip?: string;
   method?: PaymentMethod;
   status?: StatusPayment;
+  shipping?: number;
   totalPrice?: number;
   item_status?: StatusItem;
   delivery?: DeliveryMethod;
@@ -125,6 +126,8 @@ export default class ReservationProduct {
         };
       });
 
+      totalPrice += data.shipping;
+
       const resData = await ReservationProduct.updateReservation({
         id: oriderId,
         totalPrice,
@@ -141,7 +144,7 @@ export default class ReservationProduct {
 
         total += item.price * item.quantity;
 
-        itemList += `\nราคา ${item.price * item.quantity} บาท\n`;
+        itemList += `\nราคา ${(item.price * item.quantity).toLocaleString()} บาท\n`;
       });
 
       notify(
@@ -165,7 +168,8 @@ export default class ReservationProduct {
                       : ''
                   }
                   \nรายการสินค้า: ${itemList}
-                  \nราคาสุทธิ: ${resData.totalPrice}`,
+                  \nค่าจัดส่ง: ${data.shipping}
+                  \nราคาสุทธิ: ${resData.totalPrice.toLocaleString()}`,
           stickerId: 51626507,
           stickerPackageId: 11538,
         },

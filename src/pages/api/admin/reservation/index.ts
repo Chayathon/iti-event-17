@@ -61,19 +61,22 @@ export default async function handler(
               req.body.id
             );
 
+          reservation = reservationProduct;
           let total: number = 0;
+          const shipping = reservation.delivery === "SHIPPING" ? 50 : 0;
 
+          detail += `วิธีรับสินค้า: ${reservation.delivery === "SHIPPING" ? "จัดส่งสินค้า" : "รับสินค้าหน้างาน"}`
+          detail += `<br /><br />รายการสินค้า:`
           resItem.forEach((item: any) => {
             detail += `<br />${item.productId.name}`;
             detail += ` ${item.optionId.name} x ${item.quantity} ชิ้น`;
 
             total += item.price * item.quantity;
 
-            detail += `<br />ราคา ${item.price * item.quantity} บาท<br />`;
+            detail += `<br />ราคา ${(item.price * item.quantity).toLocaleString()} บาท<br />`;
           });
-          detail += `<br />ราคาสุทธิ ${total} บาท<br />`;
-
-          reservation = reservationProduct;
+          detail += `<br />ค่าจัดส่ง ${shipping} บาท<br />`;
+          detail += `<br />ราคาสุทธิ ${reservation.totalPrice.toLocaleString()} บาท<br />`;
         } else {
           res.status(400).json({ message: "Bad Request" });
         }
@@ -82,10 +85,8 @@ export default async function handler(
           name: reservation.name,
           email: reservation.email,
           generation: reservation.generation,
-          paymentMethod: reservation.method,
-          date: moment(reservation.created_at).format("lll"),
           reservationId: reservation.id,
-          reservationType: type === "table" ? "จองโต๊ะ" : "จองสินค้า",
+          reservationType: type === "table" ? "จองโต๊ะ" : "ซื้อสินค้า",
           detail: detail,
         };
 
