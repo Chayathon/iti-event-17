@@ -67,7 +67,7 @@ export default async function handler(
           const shipping = reservation.delivery === "SHIPPING" ? 50 : 0;
 
           detail += `วิธีรับสินค้า: ${reservation.delivery === "SHIPPING" ? "จัดส่งสินค้า" : "รับสินค้าหน้างาน"}`;
-          if(reservation.address) detail += `ที่อยู่: ${reservation.address}`;
+          if(reservation.address) detail += `<br /><br />ที่อยู่: ${reservation.address}`;
 
           detail += `<br /><br />รายการสินค้า:`
           resItem.forEach((item: any) => {
