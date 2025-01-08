@@ -159,7 +159,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                 />
               </div>
               <div className="flex-wrap flex">
-                <div className="w-1/2 p-2 sm:w-1/4">
+                <div className="w-1/2 p-2">
                   <div
                     onClick={()=>handleImageSelect(data.image1)}
                     className="block border cursor-pointer rounded-xl bordlg-blue-300 dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
@@ -171,7 +171,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
                     />
                   </div>
                 </div>
-                <div className="w-1/2 p-2 sm:w-1/4">
+                <div className="w-1/2 p-2">
                   <div
                     onClick={()=>handleImageSelect(data.image2)}
                     className="block border cursor-pointer rounded-lg border-transparent dark:border-transparent dark:hover:border-blue-300 hover:border-blue-300"
