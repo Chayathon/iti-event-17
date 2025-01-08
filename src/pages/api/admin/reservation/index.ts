@@ -43,12 +43,13 @@ export default async function handler(
             id: req.body.id,
             status: req.body.status,
           });
-          await Table.updateTable({
+          const table = await Table.updateTable({
             id: req.body.tableId,
             isReserved: convertReserved(req.body.status),
           });
 
-          reservation = reservationTable;
+          reservation = table;
+          detail += `โต๊ะที่: (${reservation.index}) ${reservation.name}`;
         } else if (type === "product") {
           const reservationProduct = await ReservationProduct.updateReservation(
             {
