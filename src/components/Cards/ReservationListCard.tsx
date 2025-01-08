@@ -220,11 +220,11 @@ export default function CardTable({
             <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
             <dd className="text-gray-700 sm:col-span-2">
               <div className="flex">
-                <span className="ml-5  text-green-500">
-                  ธนาคารกสิกรไทย 
+                <span className="text-green-500">
+                  ธนาคารกสิกรไทย&nbsp;
                   <b onClick={() => copyClipBord("1991200114")} className="hover:cursor-pointer">
                     199-1-20011-4
-                  </b> 
+                  </b>&nbsp;
                   (นางสาวสุภากมล ลักขษร)
                 </span>
                 <div className="pt-1 pl-2 text-xs sm:text-sm">
@@ -390,11 +390,11 @@ export default function CardTable({
           <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
           <dd className="text-gray-700 sm:col-span-2">
             <div className="flex">
-              <span className="ml-5  text-green-500">
-                ธนาคารกสิกรไทย 
+              <span className="text-green-500">
+                ธนาคารกสิกรไทย&nbsp;
                 <b onClick={() => copyClipBord("1991200114")} className="hover:cursor-pointer">
                   199-1-20011-4
-                </b> 
+                </b>&nbsp;
                 (นางสาวสุภากมล ลักขษร)
               </span>
               <div className="pt-1 pl-2 text-xs sm:text-sm">
