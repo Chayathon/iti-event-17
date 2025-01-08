@@ -10,16 +10,9 @@ type Type = "table" | "product";
 
 export default function ReservationCheckPage() {
   const router = useRouter();
-
-  if (!router.isReady) {
-    return <div>Loading...</div>;
-  }
-
   const segment = router.query.segment;
 
-  if (!Array.isArray(segment) || segment.length < 3) {
-    return <div>404</div>;
-  }
+  if (!segment) return <div>404</div>;
 
   const mode = segment[0] as Mode;
   const type = segment[1] as Type;
@@ -37,10 +30,6 @@ export default function ReservationCheckPage() {
   const handleBack = () => {
     router.back();
   };
-
-  if (error) {
-    return <div className="text-center max-h-screen">Error loading data</div>;
-  }
 
   if (!data && !isLoading) {
     return <div className="text-center max-h-screen">404</div>;
