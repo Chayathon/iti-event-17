@@ -11,7 +11,7 @@ export default function BankInfo({}: Props) {
     if (!navigator.clipboard) {
       return;
     }
-    navigator.clipboard.writeText("6632449891").then(() => {
+    navigator.clipboard.writeText("1991200114").then(() => {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000);
     });
@@ -38,7 +38,7 @@ export default function BankInfo({}: Props) {
                 id="path16"
                 style={{
                   display: "inline",
-                  fill: "#01a6e6",
+                  fill: "#5ac84f",
                   fillOpacity: 1,
                   fillRule: "evenodd",
                   stroke: "none",
@@ -61,16 +61,16 @@ export default function BankInfo({}: Props) {
         </svg>
 
         <span>
-          ธนาคารกรุงไทย<br />
+          ธนาคารกสิกรไทย<br />
           <b onClick={copyClipBord} className="text-lg hover:cursor-pointer">
-            663-2-44989-1
+            199-1-20011-4
             &ensp;
             <button onClick={copyClipBord} type="button" className="text-sm transition hover:scale-110 sm:hidden">
               {isCopied ? <FaCheck /> : <FaCopy />}
             </button>
           </b>{" "}
           <br className="flex md:hidden" />
-          (นางสาวสุภาวดี นพพันธ์)
+          (นางสาวสุภากมล ลักขษร)
         </span>
         <div className="pr-2 pt-2 text-3xl hidden sm:block">
           <button onClick={copyClipBord} type="button" className="transition hover:scale-110">

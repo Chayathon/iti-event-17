@@ -154,12 +154,12 @@ export default function CardTable({
     setSelectedfile(file);
   }
   
-  function copyClipBord() {
+  function copyClipBord(data: string) {
     //check if browser support clipboard api
     if (!navigator.clipboard) {
       return;
     }
-    navigator.clipboard.writeText(`${data.trackingCode}`).then(() => {
+    navigator.clipboard.writeText(`${data}`).then(() => {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000);
     });
@@ -336,7 +336,7 @@ export default function CardTable({
             <div className="flex">
               {data.trackingCode}
               <div className="pt-1 pl-2 text-xs sm:text-sm">
-                <button onClick={copyClipBord} type="button" className="transition hover:scale-110">
+                <button onClick={() => copyClipBord(`${data.trackingCode}`)} type="button" className="transition hover:scale-110">
                   {isCopied ? <FaCheck /> : <FaCopy />}
                 </button>
               </div>
@@ -379,8 +379,13 @@ export default function CardTable({
           <dd className="text-gray-700 sm:col-span-2">
             {paymentMethod(data.method)}
             <span className="ml-5  text-blue-500">
-              ธนาคารกรุงไทย <b>663-2-44989-1</b> (นางสาวสุภาวดี นพพันธ์)
+              ธนาคารกสิกรไทย <b>199-1-20011-4</b> (นางสาวสุภากมล ลักขษร)
             </span>
+            <div className="pt-1 pl-2 text-xs sm:text-sm">
+              <button onClick={() => copyClipBord("1991200114")} type="button" className="transition hover:scale-110">
+                {isCopied ? <FaCheck /> : <FaCopy />}
+              </button>
+            </div>
           </dd>
         </div>
         {data.status === "PENDING" && (

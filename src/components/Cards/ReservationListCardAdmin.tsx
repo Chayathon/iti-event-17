@@ -290,7 +290,7 @@ export default function CardTable({
           <dd className="text-gray-700 sm:col-span-2">
             {paymentMethod(data.method)}
             <span className="ml-5  text-blue-500">
-              ธนาคารกรุงไทย <b>663-2-44989-1</b> (นางสาวสุภาวดี นพพันธ์)
+              ธนาคารกสิกรไทย <b>199-1-20011-4</b> (นางสาวสุภากมล ลักขษร)
             </span>
           </dd>
         </div>
