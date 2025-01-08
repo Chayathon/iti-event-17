@@ -53,13 +53,9 @@ export default function ShopPage({}: Props) {
         </div>
         {loading && (
           // title loading
-          <div className="flex flex-col">
-            <div className="flex justify-center mt-4 ">
-              <div className="w-16 h-16 border-t-2 border-white rounded-full animate-spin"></div>
-            </div>
-            <div>
-              <p className="text-center text-white py-2">กำลังโหลดข้อมูล...</p>
-            </div>
+          <div className="flex justify-center mt-4 ">
+            <div className="w-16 h-16 border-t-2 border-white rounded-full animate-spin"></div>
+            <p className="text-center text-white py-2">กำลังโหลดข้อมูล...</p>
           </div>
         )}
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
