@@ -85,12 +85,12 @@ export default function CartPage({}: Props) {
   return (
     <HomeLayout title="🛒 ตะกร้าสินค้า">
       <div>
-        <section className="flex items-center ">
-          <div className="justify-center flex-1 px-4 py-6 mx-auto max-w-7xl lg:py-4 md:px-6">
+        <section className="flex items-center">
+          <div className="justify-center flex-1 px-4 py-6 mx-auto max-w-screen-2xl lg:py-4 md:px-6">
           <button onClick={handleBack} className="btn btn-outline btn-sm mb-2 hidden sm:flex"><FaAngleLeft/>ย้อนกลับ</button>
             <div className="p-8 bg-gray-700 rounded-xl">
               <div className="flex flex-wrap -mx-4">
-                <div className="w-full px-4 mb-8 xl:w-8/12 xl:mb-0">
+                <div className="w-full px-4 mb-8 xl:w-7/12 xl:mb-0">
                   <div className="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
                     <div className="w-full md:block hidden px-4 mb-6 md:w-4/6 lg:w-6/12 md:mb-0">
                       <h2 className="font-bold text-white text-xl">
@@ -181,7 +181,7 @@ export default function CartPage({}: Props) {
                             </button>
                           </div>
                         </div>
-                        <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 ">
+                        <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12">
                           <p className="text-lg font-bold text-amber-400 ">
                             {(item.price * item.quantity).toLocaleString()}.-
                           </p>
@@ -190,14 +190,14 @@ export default function CartPage({}: Props) {
                     ))}
                   </div>
                 </div>
-                <div className="w-full px-4 xl:w-4/12">
+                <div className="w-full px-4 xl:w-5/12">
                   <div className="p-6 border border-blue-100 rounded-xl dark:bg-gray-900 dark:border-gray-900 bg-blue-50 md:p-8">
                     <h2 className="mb-8 text-3xl font-bold text-gray-700 ">
                       สรุปคำสั่งจอง
                     </h2>
-                    <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
-                      <span className="text-gray-700 ">ราคารวม</span>
-                      <span className="text-xl font-bold text-gray-700  ">
+                    <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700">
+                      <span className="text-gray-700">ราคารวม</span>
+                      <span className="text-xl font-bold text-gray-700">
                         {subtotal.toLocaleString()} บาท
                       </span>
                     </div>
@@ -207,11 +207,11 @@ export default function CartPage({}: Props) {
                         {total} บาท
                       </span>
                     </div> */}
-                    <h2 className="text-lg text-black ">การชำระเงิน:</h2>
-                    <div className="flex items-center mb-4 ">
+                    <h2 className="text-lg text-black">การชำระเงิน:</h2>
+                    <div className="flex items-center mb-4">
                       <BankInfo />
                     </div>
-                    <div className="flex items-center justify-between ">
+                    <div className="flex items-center justify-between">
                       <ProductModal />
                     </div>
                   </div>
