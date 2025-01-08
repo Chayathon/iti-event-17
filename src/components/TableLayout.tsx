@@ -144,7 +144,7 @@ export default function TableLayout({ data, admin }: Props) {
                   <b className="text-lg lg:text-2xl md:text-lg">ว่าง</b>
                 )}
                 {!table.isAvailable && (
-                  <b className="text-lg xl:text-lg lg:text-md md:text-sm">อาจารย์</b>
+                  <b className="text-lg xl:text-xl lg:text-lg md:text-md">อาจารย์</b>
                 )}
               </span>
             </div>
