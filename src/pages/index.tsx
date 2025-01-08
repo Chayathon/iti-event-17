@@ -82,7 +82,7 @@ export default function Home() {
                 >
                   <span className="inline-flex gap-2 text-xl">
                     <FaShirt className="translate-y-1" />
-                    จองเสื้อ
+                    สั่งซื้อเสื้อ
                   </span>
                 </Link>
 
