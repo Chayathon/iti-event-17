@@ -146,7 +146,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
 
   return (
     <React.Fragment>
-      <div className="max-w-6xl px-4 mx-auto lg:py-8 md:px-6 md:py-6">
+      <div className="max-w-6xl px-4 mx-auto md:py-8 md:px-6">
       <button onClick={handleBack} className="btn btn-outline btn-sm mb-2 hidden sm:flex"><FaAngleLeft/>ย้อนกลับ</button>
         <div className="flex flex-wrap -mx-4">
           <div className="w-full px-4 md:w-1/2">
