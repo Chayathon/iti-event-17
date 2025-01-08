@@ -219,10 +219,18 @@ export default function CardTable({
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
             <dd className="text-gray-700 sm:col-span-2">
-              {paymentMethod(data.method)}
               <span className="ml-5  text-blue-500">
-                ธนาคารกรุงไทย <b>663-2-44989-1</b> (นางสาวสุภาวดี นพพันธ์)
+                ธนาคารกสิกรไทย
+                <b onClick={() => copyClipBord("1991200114")} className="hover:cursor-pointer">
+                  199-1-20011-4
+                </b>
+                (นางสาวสุภากมล ลักขษร)
               </span>
+              <div className="pt-1 pl-2 text-xs sm:text-sm">
+                <button onClick={() => copyClipBord("1991200114")} type="button" className="transition hover:scale-110">
+                  {isCopied ? <FaCheck /> : <FaCopy />}
+                </button>
+              </div>
             </dd>
           </div>
           {data.status === "PENDING" && (
@@ -377,9 +385,12 @@ export default function CardTable({
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            {paymentMethod(data.method)}
             <span className="ml-5  text-blue-500">
-              ธนาคารกสิกรไทย <b>199-1-20011-4</b> (นางสาวสุภากมล ลักขษร)
+              ธนาคารกสิกรไทย
+              <b onClick={() => copyClipBord("1991200114")} className="hover:cursor-pointer">
+                199-1-20011-4
+              </b>
+              (นางสาวสุภากมล ลักขษร)
             </span>
             <div className="pt-1 pl-2 text-xs sm:text-sm">
               <button onClick={() => copyClipBord("1991200114")} type="button" className="transition hover:scale-110">

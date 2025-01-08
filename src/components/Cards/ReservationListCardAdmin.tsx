@@ -288,7 +288,6 @@ export default function CardTable({
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            {paymentMethod(data.method)}
             <span className="ml-5  text-blue-500">
               ธนาคารกสิกรไทย <b>199-1-20011-4</b> (นางสาวสุภากมล ลักขษร)
             </span>
