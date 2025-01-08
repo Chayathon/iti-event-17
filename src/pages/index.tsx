@@ -104,7 +104,7 @@ export default function Home() {
                 >
                   <span className="inline-flex gap-2 text-xl">
                     <FaGuitar className="translate-y-1" />
-                    สมัครนักดนตรี
+                    สมัครนักร้อง
                   </span>
                 </Link>
 
