@@ -103,7 +103,7 @@ export default function Home() {
                   href="https://docs.google.com/forms/d/e/1FAIpQLSe5LBbWai6KiC32_LQCVmH82ERz3vfeJQ4U8VTL14qWFdnYSw/viewform?fbclid=IwAR0p0SA8AL7e9onQbQhZa-68Xu6CjIDZ5GThkE9HYzTHu7Lu4Oli1hdAItk"
                 >
                   <span className="inline-flex gap-2 text-xl">
-                    <FaGuitar />
+                    <FaGuitar className="translate-y-1" />
                     สมัครนักดนตรี
                   </span>
                 </Link>
