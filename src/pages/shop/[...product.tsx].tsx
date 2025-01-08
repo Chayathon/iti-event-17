@@ -150,7 +150,7 @@ export const ProductCard = ({ data }: { data?: ProductData }) => {
       <button onClick={handleBack} className="btn btn-outline btn-sm mb-2 hidden sm:flex"><FaAngleLeft/>ย้อนกลับ</button>
         <div className="flex flex-wrap -mx-4">
           <div className="w-full px-4 md:w-1/2">
-            <div className="sticky top-0 z-50 overflow-hidden ">
+            <div className="sticky top-0 z-40 overflow-hidden ">
               <div className="relative mb-6 lg:mb-10 lg:h-2/4 ">
                 <img
                   src={setSelectImage}
