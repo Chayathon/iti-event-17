@@ -48,7 +48,7 @@ const MENU: Menu[] = [
     icon: <FaMagnifyingGlass />,
   },
   {
-    title: "สมัครนักร้อง",
+    title: "สมัครนักร้อง/นักดนตรี",
     href: "https://docs.google.com/spreadsheets/d/13t2ZXQIdSm0osMUluaMy0gFNvM95JVHzYRiSvf50Na8/edit?fbclid=IwY2xjawHrEM1leHRuA2FlbQIxMAABHTQIpxT4IlvY2tIfP6PtDCadYNueyQsmvVs4sxvLLm2awd1EBpvmaYThHA_aem_0Qg7cdrFXG5Smlnvkmj9UA&gid=0#gid=0",
     target: "_target",
     icon: <FaGuitar />,
