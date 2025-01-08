@@ -72,7 +72,7 @@ export default function Booking({}: Props) {
             <div className="w-16 h-16 border-t-2 border-white rounded-full animate-spin"></div>
           </div>
           <div>
-            <p className="text-center text-white py-2">กำลังโหลดข้อมูล...</p>
+            <p className="text-center text-lg text-white py-2">กำลังโหลดข้อมูล...</p>
           </div>
         </div>
       ) : (
