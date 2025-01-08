@@ -114,8 +114,6 @@ export default function PaidModal({ selected }: Props) {
 
         const payload: ReservationTableData = {
           tableId: selected?.id,
-          tableIndex: selected?.index,
-          tableName: selected?.name,
           name: `${data.firstName} ${data.lastName}`,
           nickname: data.nickname,
           email: data.email,

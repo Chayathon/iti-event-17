@@ -8,8 +8,6 @@ import { PaymentMethod, StatusPayment } from "@/interfaces/Payment.type";
 export type ReservationTableData = {
   id?: string;
   tableId?: string | TableData;
-  tableIndex?: number;
-  tableName?: string;
   created_at?: string; // Assuming you handle the timestamp as a string
   name?: string;
   phone?: string;
