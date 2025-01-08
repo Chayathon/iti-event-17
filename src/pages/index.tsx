@@ -63,7 +63,7 @@ export default function Home() {
                 >
                   <span className="inline-flex gap-2 text-xl">
                     <FaUtensils className="translate-y-1" />
-                    ดูโต๊ะอาหาร
+                    จองโต๊ะอาหาร
                   </span>
                 </Link>
                 <Link
