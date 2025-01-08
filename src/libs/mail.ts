@@ -4,18 +4,20 @@ import nodemailer from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export interface MailData {
-  email?: string;
   name?: string;
+  phone?: string;
+  email?: string;
+  generation: number;
   reservationId?: string;
   reservationType?: "จองโต๊ะ" | "ซื้อสินค้า";
   detail?: string;
-  generation: number;
 }
 
 export async function mail(data: MailData) {
   const {
-    email,
     name,
+    phone,
+    email,
     reservationId,
     reservationType,
     detail,
@@ -39,9 +41,10 @@ export async function mail(data: MailData) {
     },
     html: mail
       .replace(/#NAME#/g, name)
+      .replace(/#PHONE#/g, phone)
+      .replace(/#GENERATION#/g, data.generation.toString())
       .replace(/#RESERVATION_ID#/g, reservationId)
       .replace(/#RESERVATION_TYPE#/g, reservationType)
-      .replace(/#GENERATION#/g, data.generation.toString())
       .replace(/#DETAIL#/g, detail),
   };
 

@@ -85,6 +85,7 @@ export default async function handler(
         const mailPayload: MailData = {
           name: reservation.name,
           email: reservation.email,
+          phone: reservation.phone,
           generation: reservation.generation,
           reservationId: reservation.id,
           reservationType: type === "table" ? "จองโต๊ะ" : "ซื้อสินค้า",
