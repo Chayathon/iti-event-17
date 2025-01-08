@@ -29,7 +29,7 @@ export default function TableLayout({ data, admin }: Props) {
     }
 
     if (!table.isAvailable) {
-      return "bg-neutral text-white cursor-not-allowed";
+      return "bg-blue-800 text-white cursor-not-allowed pointer-events-none";
     }
 
     if (table.isReserved && thisTable?.status === "COMPLETE") {
@@ -114,9 +114,9 @@ export default function TableLayout({ data, admin }: Props) {
               <div className="badge badge-neutral p-2 bg-blue-800 text-white">
                 อาจารย์
               </div>
-              <div className="badge badge-neutral p-2 bg-neutral text-white">
+              {/* <div className="badge badge-neutral p-2 bg-neutral text-white">
                 ไม่พร้อมให้บริการ
-              </div>
+              </div> */}
             </div>
           </div>
         )}
@@ -144,7 +144,7 @@ export default function TableLayout({ data, admin }: Props) {
                   <b className="text-lg lg:text-2xl md:text-lg">ว่าง</b>
                 )}
                 {!table.isAvailable && (
-                  <b className="text-lg xl:text-lg lg:text-md md:text-sm">ไม่พร้อมให้บริการ</b>
+                  <b className="text-lg xl:text-lg lg:text-md md:text-sm">อาจารย์</b>
                 )}
               </span>
             </div>
