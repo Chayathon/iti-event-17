@@ -53,12 +53,12 @@ const MENU: Menu[] = [
     target: "_target",
     icon: <FaGuitar />,
   },
-  {
-    title: "แบบประเมิน",
-    href: "https://docs.google.com/forms/d/e/1FAIpQLSeaHtaTb-knLgTufbqoAieM9iQSxzPATw3RLPYtJAfJVM3ifw/viewform",
-    target: "_target",
-    icon: <FaClipboardList />,
-  },
+  // {
+  //   title: "แบบประเมิน",
+  //   href: "https://docs.google.com/forms/d/e/1FAIpQLSeQpkQK9ziOJ2I5apdJZi6g2BGURE_ddWym3-jFxHWX8UBkyA/viewform",
+  //   target: "_target",
+  //   icon: <FaClipboardList />,
+  // },
   // {
   //   title: "ทะเบียนกิจกรรมกีฬาสาย",
   //   href: "https://docs.google.com/forms/d/e/1FAIpQLSfiaW0CGh-7JTbXUI16jF-SSAFPpg5oR-9WFyeNvX6vnl8O8Q/viewform?fbclid=IwAR37Qfb08F2CoJTI-C-aqh8YL7TxH5CpUS3BcXnvtWmulbtkKh4f96W7Eu8",
