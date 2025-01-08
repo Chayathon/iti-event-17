@@ -219,17 +219,19 @@ export default function CardTable({
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
             <dd className="text-gray-700 sm:col-span-2">
-              <span className="ml-5  text-blue-500">
-                ธนาคารกสิกรไทย
-                <b onClick={() => copyClipBord("1991200114")} className="hover:cursor-pointer">
-                  199-1-20011-4
-                </b>
-                (นางสาวสุภากมล ลักขษร)
-              </span>
-              <div className="pt-1 pl-2 text-xs sm:text-sm">
-                <button onClick={() => copyClipBord("1991200114")} type="button" className="transition hover:scale-110">
-                  {isCopied ? <FaCheck /> : <FaCopy />}
-                </button>
+              <div className="flex">
+                <span className="ml-5  text-green-500">
+                  ธนาคารกสิกรไทย 
+                  <b onClick={() => copyClipBord("1991200114")} className="hover:cursor-pointer">
+                    199-1-20011-4
+                  </b> 
+                  (นางสาวสุภากมล ลักขษร)
+                </span>
+                <div className="pt-1 pl-2 text-xs sm:text-sm">
+                  <button onClick={() => copyClipBord("1991200114")} type="button" className="transition hover:scale-110">
+                    {isCopied ? <FaCheck /> : <FaCopy />}
+                  </button>
+                </div>
               </div>
             </dd>
           </div>
@@ -342,7 +344,9 @@ export default function CardTable({
           <dt className="font-medium text-gray-900">หมายเลขพัสดุ</dt>
           <dd className="text-gray-700 sm:col-span-2">
             <div className="flex">
-              {data.trackingCode}
+              <span onClick={() => copyClipBord(`${data.trackingCode}`)} className="hover:cursor-pointer">
+                {data.trackingCode}
+              </span>
               <div className="pt-1 pl-2 text-xs sm:text-sm">
                 <button onClick={() => copyClipBord(`${data.trackingCode}`)} type="button" className="transition hover:scale-110">
                   {isCopied ? <FaCheck /> : <FaCopy />}
@@ -385,17 +389,19 @@ export default function CardTable({
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">วิธีการชำระ</dt>
           <dd className="text-gray-700 sm:col-span-2">
-            <span className="ml-5  text-blue-500">
-              ธนาคารกสิกรไทย
-              <b onClick={() => copyClipBord("1991200114")} className="hover:cursor-pointer">
-                199-1-20011-4
-              </b>
-              (นางสาวสุภากมล ลักขษร)
-            </span>
-            <div className="pt-1 pl-2 text-xs sm:text-sm">
-              <button onClick={() => copyClipBord("1991200114")} type="button" className="transition hover:scale-110">
-                {isCopied ? <FaCheck /> : <FaCopy />}
-              </button>
+            <div className="flex">
+              <span className="ml-5  text-green-500">
+                ธนาคารกสิกรไทย 
+                <b onClick={() => copyClipBord("1991200114")} className="hover:cursor-pointer">
+                  199-1-20011-4
+                </b> 
+                (นางสาวสุภากมล ลักขษร)
+              </span>
+              <div className="pt-1 pl-2 text-xs sm:text-sm">
+                <button onClick={() => copyClipBord("1991200114")} type="button" className="transition hover:scale-110">
+                  {isCopied ? <FaCheck /> : <FaCopy />}
+                </button>
+              </div>
             </div>
           </dd>
         </div>
