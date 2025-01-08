@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   FaMagnifyingGlass,
   FaHouse,
-  FaClipboard,
+  FaClipboardList,
   FaGuitar,
   FaComment,
   FaHandshake,
@@ -41,6 +41,24 @@ const MENU: Menu[] = [
     target: "_self",
     icon: <FaBagShopping />,
   },
+  {
+    title: "ยืนยันการชำระเงิน",
+    href: "/tracking",
+    target: "_self",
+    icon: <FaMagnifyingGlass />,
+  },
+  {
+    title: "สมัครนักดนตรี",
+    href: "https://docs.google.com/spreadsheets/d/13t2ZXQIdSm0osMUluaMy0gFNvM95JVHzYRiSvf50Na8/edit?fbclid=IwY2xjawHrEM1leHRuA2FlbQIxMAABHTQIpxT4IlvY2tIfP6PtDCadYNueyQsmvVs4sxvLLm2awd1EBpvmaYThHA_aem_0Qg7cdrFXG5Smlnvkmj9UA&gid=0#gid=0",
+    target: "_target",
+    icon: <FaGuitar />,
+  },
+  {
+    title: "แบบประเมิน",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSeaHtaTb-knLgTufbqoAieM9iQSxzPATw3RLPYtJAfJVM3ifw/viewform",
+    target: "_target",
+    icon: <FaClipboardList />,
+  },
   // {
   //   title: "ทะเบียนกิจกรรมกีฬาสาย",
   //   href: "https://docs.google.com/forms/d/e/1FAIpQLSfiaW0CGh-7JTbXUI16jF-SSAFPpg5oR-9WFyeNvX6vnl8O8Q/viewform?fbclid=IwAR37Qfb08F2CoJTI-C-aqh8YL7TxH5CpUS3BcXnvtWmulbtkKh4f96W7Eu8",
@@ -53,18 +71,6 @@ const MENU: Menu[] = [
   //   target: "_target",
   //   icon: <FaClipboard />,
   // },
-  // {
-  //   title: "สมัครนักดนตรี",
-  //   href: "https://docs.google.com/forms/d/e/1FAIpQLSe5LBbWai6KiC32_LQCVmH82ERz3vfeJQ4U8VTL14qWFdnYSw/viewform?fbclid=IwAR0p0SA8AL7e9onQbQhZa-68Xu6CjIDZ5GThkE9HYzTHu7Lu4Oli1hdAItk",
-  //   target: "_target",
-  //   icon: <FaGuitar />,
-  // },
-  {
-    title: "ยืนยันการชำระเงิน",
-    href: "/tracking",
-    target: "_self",
-    icon: <FaMagnifyingGlass />,
-  },
   //   {
   //     title: "ตารางการแข่งขัน",
   //     href: "/schedule",
