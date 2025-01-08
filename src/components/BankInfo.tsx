@@ -19,8 +19,8 @@ export default function BankInfo({}: Props) {
 
   return (
     <React.Fragment>
-      <div role="alert" className="alert alert-info text-white my-5">
-        <svg
+      <div role="alert" className="alert alert-success text-white my-5">
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 213.6541 213.6541"
           height="32"
@@ -58,7 +58,8 @@ export default function BankInfo({}: Props) {
               />
             </g>
           </g>
-        </svg>
+        </svg> */}
+        <img src="https://jpajjgeqekhebztqwhkr.supabase.co/storage/v1/object/public/attachments/image/kbank.png?t=2025-01-08T08%3A39%3A39.079Z" width={32} height={32} />
 
         <span>
           ธนาคารกสิกรไทย<br />
