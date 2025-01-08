@@ -149,7 +149,7 @@ export default class ReservationTable {
       notify(
         {
           message: `${LINEMSG}
-                  \n\nโต๊ะที่: ${tableReservated.index}
+                  \n\nโต๊ะที่: (${tableReservated.index}) ${tableReservated.name}
                   \n\nชื่อ: ${reservation.name}
                   \n\nเบอร์โทร: ${reservation.phone}
                   \n\nอีเมล: ${reservation.email}
