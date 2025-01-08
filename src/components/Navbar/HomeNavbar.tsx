@@ -129,7 +129,7 @@ export default function Navbar({}: Props) {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-s dropdown-content m-4 z-[1] p-2 shadow bg-blue-900 rounded-box w-52"
+            className="menu menu-s dropdown-content mt-4 ml-3 z-[1] p-2 shadow bg-blue-900 rounded-box w-52"
           >
             {MENU.map((menu) => (
               <li key={menu.title}>
