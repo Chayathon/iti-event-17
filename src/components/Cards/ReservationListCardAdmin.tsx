@@ -139,8 +139,8 @@ export default function CardTable({
           id: data.id,
           status: "COMPLETE" as StatusPayment,
           tableId: data.tableId ? data.tableId.id : "",
-          tableIndex: table.index,
-          tableName: table.name,
+          tableIndex: table?.index ?? "",
+          tableName: table?.name ?? "",
           type: isProduct ? "product" : "table",
         };
 
