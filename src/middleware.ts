@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 
 export async function middleware(req: NextRequest) {
-  const adminPath = "/manage";
+  const adminPath = "/manage/:path*";
   const apiAdminPath = "/api/admin";
 
   const res = NextResponse.next();
@@ -24,10 +24,10 @@ export async function middleware(req: NextRequest) {
         { status: 403, headers: { "Content-Type": "application/json" } }
       );
     }
-    // else if (req.nextUrl.pathname.startsWith(adminPath)) {
-    //   const redirectUrl = req.nextUrl.clone();
-    //   redirectUrl.pathname = "/";
-    //   return NextResponse.redirect(redirectUrl);
-    // }
+    else if (req.nextUrl.pathname.startsWith(adminPath)) {
+      const redirectUrl = req.nextUrl.clone();
+      redirectUrl.pathname = "/";
+      return NextResponse.redirect(redirectUrl);
+    }
   }
 }
