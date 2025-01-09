@@ -89,7 +89,7 @@ export default function Home() {
                 <Link
                   className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   target="_blank"
-                  href="https://docs.google.com/spreadsheets/d/13t2ZXQIdSm0osMUluaMy0gFNvM95JVHzYRiSvf50Na8/edit?fbclid=IwY2xjawHrEM1leHRuA2FlbQIxMAABHTQIpxT4IlvY2tIfP6PtDCadYNueyQsmvVs4sxvLLm2awd1EBpvmaYThHA_aem_0Qg7cdrFXG5Smlnvkmj9UA&gid=0#gid=0"
+                  href="https://docs.google.com/spreadsheets/d/1v11DvOte80LK4ZO0E0x2pVFziRSAiS3N4ASbR8oE3xQ/edit?fbclid=IwY2xjawHs5QNleHRuA2FlbQIxMAABHeqiqYtp-HlkNS_tzs8oyzLQtZkKdmfQu1az4aLSnEct4MfVSKBINZN7ug_aem_BfbcEwT4epOH1kUO2x58tw&pli=1&gid=966458771#gid=966458771"
                 >
                   <span className="inline-flex gap-2 text-xl">
                     <FaRegFutbol className="translate-y-1" />
