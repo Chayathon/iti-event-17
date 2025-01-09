@@ -1,16 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import {
-  FaMagnifyingGlass,
-  FaHouse,
-  FaClipboardList,
-  FaGuitar,
-  FaComment,
   FaHandshake,
-  FaMedal,
+  FaHouse,
   FaUtensils,
   FaBagShopping,
+  FaMagnifyingGlass,
+  FaRegFutbol,
+  FaGuitar,
+  FaComment,
   FaUserTie,
+  FaClipboardList,
+  FaMedal,
 } from "react-icons/fa6";
 
 type Props = {};
@@ -46,6 +47,12 @@ const MENU: Menu[] = [
     href: "/tracking",
     target: "_self",
     icon: <FaMagnifyingGlass />,
+  },
+  {
+    title: "สมัครแข่งขันกีฬาฟุตซอล",
+    href: "https://docs.google.com/spreadsheets/d/1v11DvOte80LK4ZO0E0x2pVFziRSAiS3N4ASbR8oE3xQ/edit?fbclid=IwY2xjawHs5QNleHRuA2FlbQIxMAABHeqiqYtp-HlkNS_tzs8oyzLQtZkKdmfQu1az4aLSnEct4MfVSKBINZN7ug_aem_BfbcEwT4epOH1kUO2x58tw&pli=1&gid=966458771#gid=966458771",
+    target: "_target",
+    icon: <FaRegFutbol />,
   },
   {
     title: "สมัครนักร้อง/นักดนตรี",

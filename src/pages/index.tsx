@@ -3,10 +3,11 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   FaUtensils,
-  FaShirt,
   FaPerson,
-  FaMedal,
+  FaShirt,
+  FaRegFutbol,
   FaGuitar,
+  FaMedal,
   FaTag,
 } from "react-icons/fa6";
 import HomeLayout from "@/components/layouts/HomeLayout";
@@ -85,6 +86,26 @@ export default function Home() {
                     สั่งซื้อเสื้อ
                   </span>
                 </Link>
+                <Link
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
+                  target="_blank"
+                  href="https://docs.google.com/spreadsheets/d/13t2ZXQIdSm0osMUluaMy0gFNvM95JVHzYRiSvf50Na8/edit?fbclid=IwY2xjawHrEM1leHRuA2FlbQIxMAABHTQIpxT4IlvY2tIfP6PtDCadYNueyQsmvVs4sxvLLm2awd1EBpvmaYThHA_aem_0Qg7cdrFXG5Smlnvkmj9UA&gid=0#gid=0"
+                >
+                  <span className="inline-flex gap-2 text-xl">
+                    <FaRegFutbol className="translate-y-1" />
+                    สมัครแข่งขันกีฬาฟุตซอล
+                  </span>
+                </Link>
+                <Link
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
+                  target="_blank"
+                  href="https://docs.google.com/spreadsheets/d/13t2ZXQIdSm0osMUluaMy0gFNvM95JVHzYRiSvf50Na8/edit?fbclid=IwY2xjawHrEM1leHRuA2FlbQIxMAABHTQIpxT4IlvY2tIfP6PtDCadYNueyQsmvVs4sxvLLm2awd1EBpvmaYThHA_aem_0Qg7cdrFXG5Smlnvkmj9UA&gid=0#gid=0"
+                >
+                  <span className="inline-flex gap-2 text-xl">
+                    <FaGuitar className="translate-y-1" />
+                    สมัครนักร้อง/นักดนตรี
+                  </span>
+                </Link>
 
                 {/* <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
@@ -96,17 +117,6 @@ export default function Home() {
                     ทะเบียนกิจกรรมกีฬาสาย
                   </span>
                 </Link> */}
-
-                <Link
-                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
-                  target="_blank"
-                  href="https://docs.google.com/spreadsheets/d/13t2ZXQIdSm0osMUluaMy0gFNvM95JVHzYRiSvf50Na8/edit?fbclid=IwY2xjawHrEM1leHRuA2FlbQIxMAABHTQIpxT4IlvY2tIfP6PtDCadYNueyQsmvVs4sxvLLm2awd1EBpvmaYThHA_aem_0Qg7cdrFXG5Smlnvkmj9UA&gid=0#gid=0"
-                >
-                  <span className="inline-flex gap-2 text-xl">
-                    <FaGuitar className="translate-y-1" />
-                    สมัครนักร้อง/นักดนตรี
-                  </span>
-                </Link>
 
                 {/* <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
