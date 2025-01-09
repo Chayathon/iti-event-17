@@ -333,6 +333,12 @@ export default function CardTable({
           <dt className="font-medium text-gray-900">อีเมล</dt>
           <dd className="text-gray-700 sm:col-span-2">{data.email}</dd>
         </div>
+        {data.address && (
+          <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-900">ที่อยู่</dt>
+            <dd className="text-gray-700 sm:col-span-2">{data.address}</dd>
+          </div>
+        )}
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">สถานะสินค้า</dt>
           <dd className="text-gray-700 sm:col-span-2">

@@ -13,6 +13,7 @@ export type ReservationTableData = {
   phone?: string;
   email?: string;
   generation?: string;
+  address?: string;
   refId?: string;
   slip?: string;
   method?: PaymentMethod;
