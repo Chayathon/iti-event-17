@@ -18,7 +18,8 @@ import supabase from "@/libs/supabase";
 import TagePayment from "@/components/Tage/TagePayment";
 import { DeliveryMethod, StatusItem } from "@/interfaces/Product.type";
 import TageItem from "../Tage/TageItem";
-import { FaCheck, FaCopy } from "react-icons/fa6";
+import { FaCheck, FaCopy, FaArrowUpRightFromSquare } from "react-icons/fa6";
+import Image from "next/image";
 
 type CallbackData = {
   id: string;
@@ -288,10 +289,14 @@ export default function CardTable({
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">หลักฐานการชำระเงิน</dt>
               <dd className="text-gray-700 sm:col-span-2">
-                <img
+                <Image
                   src={data.slip}
                   alt=""
                   className="rounded-lg object-cover w-40 md:w-48 shadow-xl"
+                  width={500}
+                  height={500}
+                  quality={50}
+                  loading="lazy"
                 />
               </dd>
             </div>
@@ -305,7 +310,7 @@ export default function CardTable({
     <div className="flow-root rounded-lg border bg-white border-blue-500-100 py-3 shadow-sm">
       <dl className="-my-3 divide-y divide-gray-100 text-sm">
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">รหัสการจอง</dt>
+          <dt className="font-medium text-gray-900">รหัสการซื้อ</dt>
           <dd className="text-gray-700 sm:col-span-2">{data.id}</dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
@@ -316,7 +321,7 @@ export default function CardTable({
         </div>
 
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-          <dt className="font-medium text-gray-900">สถานะการจอง</dt>
+          <dt className="font-medium text-gray-900">สถานะการซื้อ</dt>
           <dd className="text-gray-700 sm:col-span-2">
             <TagePayment status={data.status} />
           </dd>
@@ -344,13 +349,20 @@ export default function CardTable({
           <dt className="font-medium text-gray-900">หมายเลขพัสดุ</dt>
           <dd className="text-gray-700 sm:col-span-2">
             <div className="flex">
-              <span onClick={() => copyClipBord(`${data.trackingCode}`)} className="hover:cursor-pointer">
+              (Flash Express)&ensp;
+              <a
+                href={`https://www.flashexpress.co.th/fle/tracking?se=${data.trackingCode}`}
+                target="_blank"
+              >
                 {data.trackingCode}
-              </span>
+              </a>
               <div className="pt-1 pl-2 text-xs sm:text-sm">
-                <button onClick={() => copyClipBord(`${data.trackingCode}`)} type="button" className="transition hover:scale-110">
-                  {isCopied ? <FaCheck /> : <FaCopy />}
-                </button>
+                <a
+                  href={`https://www.flashexpress.co.th/fle/tracking?se=${data.trackingCode}`}
+                  target="_blank"
+                >
+                  <FaArrowUpRightFromSquare className="transition hover:scale-110 md:-translate-y-0.5" />
+                </a>
               </div>
             </div>
           </dd>
@@ -458,10 +470,14 @@ export default function CardTable({
           <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
             <dt className="font-medium text-gray-900">หลักฐานการชำระเงิน</dt>
             <dd className="text-gray-700 sm:col-span-2">
-              <img
+              <Image
                 src={data.slip}
                 alt=""
                 className="rounded-lg object-cover w-40 md:w-48 shadow-xl"
+                width={500}
+                height={500}
+                quality={50}
+                loading="lazy"
               />
             </dd>
           </div>

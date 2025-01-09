@@ -128,7 +128,7 @@ export default function Tracking({}: Props) {
       </div>
       <div className="px-2 md:px-10">
         {Data?.product.length > 0 && (
-          <h1 className="text-2xl text-white my-5">📦 รายการจองสินค้า</h1>
+          <h1 className="text-2xl text-white my-5">📦 รายการสั่งซื้อสินค้า</h1>
         )}
         <div className="flex gap-4 flex-col">
           {Data?.product.length > 0 &&
