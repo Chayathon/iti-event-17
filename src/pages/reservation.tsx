@@ -74,7 +74,7 @@ export default function Booking({}: Props) {
           <div className="collapse-content text-sm">
             <li>ข้าวเกรียบ</li>
             <li>ออเดิร์ฟ 5 อย่าง</li>
-            <li>กระเพราะปลาอกไก่ + ไข่นก</li>
+            <li>กระเพาะปลาอกไก่ + ไข่นก</li>
             <li>ขาหมู</li>
             <li>ยำสามกรอบ</li>
             <li>ปลาทับทิมนึ่งมะนาว</li>
