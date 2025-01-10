@@ -177,6 +177,26 @@ export default function PaidModal({ selected }: Props) {
             {selected?.isRetail && (
               <PeopleList people={selected?.reservation} />
             )}
+            <details className="collapse collapse-arrow bg-gray-200 my-5">
+              <summary className="collapse-title font-medium">
+                รายการอาหารและเครื่องดื่ม
+              </summary>
+              <div className="collapse-content text-sm">
+                <li>ข้าวเกรียบ</li>
+                <li>ออเดิร์ฟ 5 อย่าง</li>
+                <li>กระเพราะปลาอกไก่ + ไข่นก</li>
+                <li>ขาหมู</li>
+                <li>ยำสามกรอบ</li>
+                <li>ปลาทับทิมนึ่งมะนาว</li>
+                <li>ต้มยำรวมมิตร</li>
+                <li>ข้าวผัดปู</li>
+                <li>เงาะกระป๋อง</li>
+                <li>น้ำเปล่า 1.5 ลิตร 1 ขวด</li>
+                <li>น้ำอัดลม 1.5 ลิตร 2 ขวด</li>
+                <li>เหล้า (ยังไม่ระบุ)</li>
+                <li>โซดา (ยังไม่ระบุ)</li>
+              </div>
+            </details>
             <input
               type="hidden"
               {...register("tableId")}

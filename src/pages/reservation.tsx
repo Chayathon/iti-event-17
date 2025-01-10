@@ -33,7 +33,7 @@ export default function Booking({}: Props) {
     <HomeLayout title="จองโต๊ะอาหาร">
       <div className="w-full justify-center flex">
         <div
-          className="bg-white lg:w-2/4 w-full border-t border-b border-blue-500 text-blue-700 px-4 py-3 rounded-md shadow-md"
+          className="bg-white lg:w-3/5 w-full border-t border-b border-blue-500 text-blue-700 px-4 py-3 rounded-md shadow-md"
           role="alert"
         >
           <div className="flex items-center">
@@ -65,6 +65,28 @@ export default function Booking({}: Props) {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex justify-center w-full md:w-1/2 mx-auto">
+      <details className="collapse collapse-arrow bg-gray-200 text-black mt-5">
+              <summary className="collapse-title font-medium">
+                รายการอาหารและเครื่องดื่ม
+              </summary>
+              <div className="collapse-content text-sm">
+                <li>ข้าวเกรียบ</li>
+                <li>ออเดิร์ฟ 5 อย่าง</li>
+                <li>กระเพราะปลาอกไก่ + ไข่นก</li>
+                <li>ขาหมู</li>
+                <li>ยำสามกรอบ</li>
+                <li>ปลาทับทิมนึ่งมะนาว</li>
+                <li>ต้มยำรวมมิตร</li>
+                <li>ข้าวผัดปู</li>
+                <li>เงาะกระป๋อง</li>
+                <li>น้ำเปล่า 1.5 ลิตร 1 ขวด</li>
+                <li>น้ำอัดลม 2 ขวด</li>
+                <li>เหล้า (ยังไม่ระบุ)</li>
+                <li>โซดา (ยังไม่ระบุ)</li>
+              </div>
+            </details>
       </div>
       {isLoading ? (
         <div className="flex flex-col">
