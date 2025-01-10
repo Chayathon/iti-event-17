@@ -192,8 +192,8 @@ export default function PaidModal({ selected }: Props) {
                 <li>ข้าวผัดปู</li>
                 <li>เงาะกระป๋อง</li>
                 <li>น้ำเปล่า 1.5 ลิตร 1 ขวด</li>
-                <li>น้ำอัดลม 1.5 ลิตร 2 ขวด</li>
-                <li>เหล้า (ยังไม่ระบุ)</li>
+                <li>น้ำอัดลม 2 ขวด</li>
+                <li>แอลกอฮอล์ (ยังไม่ระบุ)</li>
                 <li>โซดา (ยังไม่ระบุ)</li>
               </div>
             </details>
