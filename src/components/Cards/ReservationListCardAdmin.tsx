@@ -231,11 +231,19 @@ export default function CardTable({
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">เบอร์โทรศัพท์</dt>
-          <dd className="text-gray-700 sm:col-span-2">{data.phone}</dd>
+          <dd className="text-gray-700 sm:col-span-2">
+            <a className="text-black" href={`tel:${data.phone}`}>
+              {data.phone}
+            </a>
+          </dd>
         </div>
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">อีเมล</dt>
-          <dd className="text-gray-700 sm:col-span-2">{data.email}</dd>
+          <dd className="text-gray-700 sm:col-span-2">
+            <a className="text-black" href={`mailto:${data.email}`}>
+              {data.email}
+            </a>
+          </dd>
         </div>
         {isProduct && (
           <>
