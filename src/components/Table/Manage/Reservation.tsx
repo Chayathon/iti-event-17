@@ -16,7 +16,7 @@ type Props = {
 type ReservationType = "all" | "table" | "product";
 
 export default function ReservationTable({ data }: Props) {
-  const [status, setStatus] = useState<StatusPayment>("WAIT");
+  const [status, setStatus] = useState<StatusPayment>("COMPLETE");
   const [type, setType] = useState<ReservationType>("all");
 
   const reservationData = splitReservationStatus(data);

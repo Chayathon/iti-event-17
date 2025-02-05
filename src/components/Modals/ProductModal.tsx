@@ -223,7 +223,8 @@ export default function ProductModal({}: Props) {
             : "bg-gray-400 cursor-not-allowed"
         }`}
         onClick={handleOpen}
-        disabled={!products.length} // ปิดปุ่มถ้า products ว่างเปล่า
+        disabled
+        // disabled={!products.length}
       >
         <FaCircleCheck /> ชำระเงิน
       </button>

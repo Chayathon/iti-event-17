@@ -39,7 +39,7 @@ export default function ShopPage({}: Props) {
   return (
     <HomeLayout title="สั่งซื้อสินค้า">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="flex justify-end">
+        <div className="flex justify-end pointer-events-none">
           <Link
             href={"/cart"}
             className="btn btn-sm md:btn-md flex items-center justify-center w-fit text-white border border-blue-500  hover:bg-blue-600 hover:border-blue-800 rounded-xl"
@@ -51,6 +51,9 @@ export default function ShopPage({}: Props) {
             </div>
           </Link>
         </div>
+        
+        <p className="pt-4 text-center text-lg md:text-2xl lg:text-3xl ">⛔ ขออภัย ขณะนี้ปิดรับคำสั่งซื้อแล้ว ⛔</p>
+
         {loading && (
           // title loading
           <div className="flex flex-col">
@@ -62,7 +65,7 @@ export default function ShopPage({}: Props) {
             </div>
           </div>
         )}
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 pointer-events-none opacity-50">
           {products?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
