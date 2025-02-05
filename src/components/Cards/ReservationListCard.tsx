@@ -395,7 +395,7 @@ export default function CardTable({
         )}
         <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
           <dt className="font-medium text-gray-900">ราคาสุทธิ</dt>
-          <dd className="text-gray-700 sm:col-span-2">
+          <dd className="text-gray-700 font-bold sm:col-span-2">
             {data.totalPrice.toLocaleString()} บาท
           </dd>
         </div>
