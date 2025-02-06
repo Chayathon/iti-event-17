@@ -12,6 +12,7 @@ import {
   FaUserTie,
   FaClipboardList,
   FaMedal,
+  FaCalendarCheck,
 } from "react-icons/fa6";
 
 type Props = {};
@@ -48,17 +49,23 @@ const MENU: Menu[] = [
     target: "_self",
     icon: <FaMagnifyingGlass />,
   },
+  // {
+  //   title: "สมัครแข่งขันกีฬาฟุตซอล",
+  //   href: "https://docs.google.com/spreadsheets/d/1v11DvOte80LK4ZO0E0x2pVFziRSAiS3N4ASbR8oE3xQ/edit?fbclid=IwY2xjawHs5QNleHRuA2FlbQIxMAABHeqiqYtp-HlkNS_tzs8oyzLQtZkKdmfQu1az4aLSnEct4MfVSKBINZN7ug_aem_BfbcEwT4epOH1kUO2x58tw&pli=1&gid=966458771#gid=966458771",
+  //   target: "_target",
+  //   icon: <FaRegFutbol />,
+  // },
+  // {
+  //   title: "สมัครนักร้อง/นักดนตรี",
+  //   href: "https://docs.google.com/spreadsheets/d/13t2ZXQIdSm0osMUluaMy0gFNvM95JVHzYRiSvf50Na8/edit?fbclid=IwY2xjawHrEM1leHRuA2FlbQIxMAABHTQIpxT4IlvY2tIfP6PtDCadYNueyQsmvVs4sxvLLm2awd1EBpvmaYThHA_aem_0Qg7cdrFXG5Smlnvkmj9UA&gid=0#gid=0",
+  //   target: "_target",
+  //   icon: <FaGuitar />,
+  // },
   {
-    title: "สมัครแข่งขันกีฬาฟุตซอล",
-    href: "https://docs.google.com/spreadsheets/d/1v11DvOte80LK4ZO0E0x2pVFziRSAiS3N4ASbR8oE3xQ/edit?fbclid=IwY2xjawHs5QNleHRuA2FlbQIxMAABHeqiqYtp-HlkNS_tzs8oyzLQtZkKdmfQu1az4aLSnEct4MfVSKBINZN7ug_aem_BfbcEwT4epOH1kUO2x58tw&pli=1&gid=966458771#gid=966458771",
+    title: "ปฏิทินกิจกรรม",
+    href: "https://jpajjgeqekhebztqwhkr.supabase.co/storage/v1/object/public/attachments/image/schedule.jpg",
     target: "_target",
-    icon: <FaRegFutbol />,
-  },
-  {
-    title: "สมัครนักร้อง/นักดนตรี",
-    href: "https://docs.google.com/spreadsheets/d/13t2ZXQIdSm0osMUluaMy0gFNvM95JVHzYRiSvf50Na8/edit?fbclid=IwY2xjawHrEM1leHRuA2FlbQIxMAABHTQIpxT4IlvY2tIfP6PtDCadYNueyQsmvVs4sxvLLm2awd1EBpvmaYThHA_aem_0Qg7cdrFXG5Smlnvkmj9UA&gid=0#gid=0",
-    target: "_target",
-    icon: <FaGuitar />,
+    icon: <FaCalendarCheck />,
   },
   // {
   //   title: "แบบประเมิน",
@@ -67,33 +74,11 @@ const MENU: Menu[] = [
   //   icon: <FaClipboardList />,
   // },
   // {
-  //   title: "ทะเบียนกิจกรรมกีฬาสาย",
-  //   href: "https://docs.google.com/forms/d/e/1FAIpQLSfiaW0CGh-7JTbXUI16jF-SSAFPpg5oR-9WFyeNvX6vnl8O8Q/viewform?fbclid=IwAR37Qfb08F2CoJTI-C-aqh8YL7TxH5CpUS3BcXnvtWmulbtkKh4f96W7Eu8",
-  //   target: "_target",
-  //   icon: <FaMedal />,
-  // },
-  // {
   //   title: "จองที่นั่งเดี่ยว",
   //   href: "https://docs.google.com/forms/d/e/1FAIpQLSe5LBbWai6KiC32_LQCVmH82ERz3vfeJQ4U8VTL14qWFdnYSw/viewform?fbclid=IwAR3QEsLL7RryTcKDaYa_uETFF2eoIjYChPHd7QHBlPP3hK9oKYMDsgtipJ0",
   //   target: "_target",
   //   icon: <FaClipboard />,
   // },
-  //   {
-  //     title: "ตารางการแข่งขัน",
-  //     href: "/schedule",
-  //   },
-  //   {
-  //     title: "กติกาการแข่งขัน",
-  //     href: "/rules",
-  //   },
-  //   {
-  //     title: "ผลการแข่งขัน",
-  //     href: "/results",
-  //   },
-  //   {
-  //     title: "สถิติการแข่งขัน",
-  //     href: "/statistics",
-  //   },
   // {
   //   title: "สถานที่จัดงาน",
   //   href: "/location",
