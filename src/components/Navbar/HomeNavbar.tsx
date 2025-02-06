@@ -63,7 +63,7 @@ const MENU: Menu[] = [
   // },
   {
     title: "ปฏิทินกิจกรรม",
-    href: "https://jpajjgeqekhebztqwhkr.supabase.co/storage/v1/object/public/attachments/image/schedule.jpg",
+    href: "/schedule",
     target: "_target",
     icon: <FaCalendarCheck />,
   },
