@@ -61,7 +61,7 @@ export default function TableLayout({ data, admin }: Props) {
       return;
     }
 
-    if(table.isAvailable && !table.isReserved && !table.isRetail) {
+    if((table.isAvailable && !table.isReserved)) {
       //หมดเขตการจอง
       Swal.fire({
         title: "ขออภัย",
@@ -69,15 +69,17 @@ export default function TableLayout({ data, admin }: Props) {
         icon: "error",
         timer: 3000,
       });
+
+      return;
     }
 
-    // const modalElement = document.getElementById(
-    //   "reservationModal"
-    // ) as HTMLDialogElement | null;
-    // if (modalElement) {
-    //   setSelected(table);
-    //   modalElement.showModal();
-    // }
+    const modalElement = document.getElementById(
+      "reservationModal"
+    ) as HTMLDialogElement | null;
+    if (modalElement) {
+      setSelected(table);
+      modalElement.showModal();
+    }
   }
 
   if (!data) return <div>loading...</div>;
