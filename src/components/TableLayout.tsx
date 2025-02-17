@@ -61,21 +61,21 @@ export default function TableLayout({ data, admin }: Props) {
       return;
     }
 
-    // Swal.fire({
-    //   //หมดเขตการจอง
-    //   title: "ขออภัย",
-    //   html: `<b class="font-xl">ระบบปิดการจองแล้ว</b>`,
-    //   icon: "info",
-    //   timer: 3000,
-    // });
+    Swal.fire({
+      //หมดเขตการจอง
+      title: "ขออภัย",
+      html: `<b class="font-xl">ขณะนี้ ระบบปิดรับการจองแล้ว</b>`,
+      icon: "error",
+      timer: 3000,
+    });
 
-    const modalElement = document.getElementById(
-      "reservationModal"
-    ) as HTMLDialogElement | null;
-    if (modalElement) {
-      setSelected(table);
-      modalElement.showModal();
-    }
+    // const modalElement = document.getElementById(
+    //   "reservationModal"
+    // ) as HTMLDialogElement | null;
+    // if (modalElement) {
+    //   setSelected(table);
+    //   modalElement.showModal();
+    // }
   }
 
   if (!data) return <div>loading...</div>;
@@ -95,7 +95,9 @@ export default function TableLayout({ data, admin }: Props) {
                 title="มีการโทรแจ้งให้ทราบ 1 ครั้ง"
                 className="text-xl text-white mt-4"
               >
-               {/* ⛔ ระบบปิดการจองแล้ว ⛔ */}
+              <b className="text-lg md:text-xl lg:text-2xl">
+                ⛔ ระบบปิดรับการจองแล้ว ⛔
+              </b>
               </span>
             </div>
             <div className="w-full text-center bg-slate-600 rounded-2xl my-5">
