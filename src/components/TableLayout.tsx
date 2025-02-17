@@ -61,7 +61,7 @@ export default function TableLayout({ data, admin }: Props) {
       return;
     }
 
-    if(table.isAvailable || !table.isReserved || !table.isRetail) {
+    if(table.isAvailable && !table.isReserved && !table.isRetail) {
       //หมดเขตการจอง
       Swal.fire({
         title: "ขออภัย",
