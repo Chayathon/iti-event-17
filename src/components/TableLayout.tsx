@@ -61,13 +61,15 @@ export default function TableLayout({ data, admin }: Props) {
       return;
     }
 
-    Swal.fire({
+    if(table.isAvailable || !table.isReserved || !table.isRetail) {
       //หมดเขตการจอง
-      title: "ขออภัย",
-      html: `<b class="font-xl">ขณะนี้ ระบบปิดรับการจองแล้ว</b>`,
-      icon: "error",
-      timer: 3000,
-    });
+      Swal.fire({
+        title: "ขออภัย",
+        html: `<b class="font-xl">ขณะนี้ ระบบปิดรับการจองแล้ว</b>`,
+        icon: "error",
+        timer: 3000,
+      });
+    }
 
     // const modalElement = document.getElementById(
     //   "reservationModal"
