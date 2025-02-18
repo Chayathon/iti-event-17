@@ -25,7 +25,7 @@ export default function TableLayout({ data, admin }: Props) {
     thisTable = table.reservation[0];
 
     if (thisTable?.status === "PENDING" || thisTable?.status === "WAIT") {
-      return "bg-yellow-500 text-white cursor-pointer hover:scale-110 transition";
+      return "bg-yellow-500 text-white cursor-pointer hover:scale-105 transition";
     }
 
     if (!table.isAvailable) {
@@ -33,10 +33,10 @@ export default function TableLayout({ data, admin }: Props) {
     }
 
     if (table.isReserved && thisTable?.status === "COMPLETE") {
-      return "bg-blue-500 text-white cursor-pointer hover:scale-110 transition";
+      return "bg-blue-500 text-white cursor-pointer hover:scale-105 transition";
     }
 
-    return "bg-green-500 text-white cursor-pointer hover:scale-110 transition";
+    return "bg-green-500 text-white cursor-pointer hover:scale-105 transition";
   }
 
   async function onClick(table: TableWithReservation) {
