@@ -127,7 +127,7 @@ export default function TableLayout({ data, admin }: Props) {
           </div>
         )}
 
-        <div className="grid grid-cols-8 w-full lg:gap-4 gap-2">
+        <div className="grid grid-cols-6 w-full lg:gap-4 gap-2">
           {data?.map((table) => (
             <div
               key={table.id}
