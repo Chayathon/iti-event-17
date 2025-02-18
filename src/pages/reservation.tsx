@@ -49,7 +49,7 @@ export default function Booking({}: Props) {
             <div>
               <p className="font-bold">โปรดทราบ</p>
               <p className="text-sm">
-                ➡️ โต๊ะจะแบ่งเป็น 5 แถว แถวละ 8 โต๊ะ รวมทั้งสิ้น 40 โต๊ะ
+                ➡️ โต๊ะจะแบ่งเป็น 4 แถว แถวละ 6 โต๊ะ รวมทั้งสิ้น 20 โต๊ะ
               </p>
               <p className="text-sm">
                 ➡️ <b>การเหมาโต๊ะ</b> จะเป็นการซื้อบัตรจองโต๊ะนั้น ๆ
