@@ -295,7 +295,7 @@ export default function CardTable({
               <dd className="text-gray-700 sm:col-span-2">
                 (Flash Express)&ensp;
                 <a
-                  href={`https://www.flashexpress.co.th/fle/tracking?se=${data.trackingCode}`}
+                  href={`https://th.kex-express.com/th/track/?track=${data.trackingCode}`}
                   target="_blank"
                 >
                   {data.trackingCode}

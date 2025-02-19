@@ -350,16 +350,16 @@ export default function CardTable({
           <dt className="font-medium text-gray-900">หมายเลขพัสดุ</dt>
           <dd className="text-gray-700 sm:col-span-2">
             <div className="flex">
-              (Flash Express)&ensp;
+              (KEX Express)&ensp;
               <a
-                href={`https://www.flashexpress.co.th/fle/tracking?se=${data.trackingCode}`}
+                href={`https://th.kex-express.com/th/track/?track=${data.trackingCode}`}
                 target="_blank"
               >
                 {data.trackingCode}
               </a>
               <div className="pt-1 pl-2 text-xs sm:text-sm">
                 <a
-                  href={`https://www.flashexpress.co.th/fle/tracking?se=${data.trackingCode}`}
+                  href={`https://th.kex-express.com/th/track/?track=${data.trackingCode}`}
                   target="_blank"
                 >
                   <FaArrowUpRightFromSquare className="transition hover:scale-110 md:-translate-y-0.5" />
