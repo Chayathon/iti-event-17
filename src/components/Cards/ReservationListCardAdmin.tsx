@@ -293,7 +293,7 @@ export default function CardTable({
               <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">หมายเลขพัสดุ</dt>
               <dd className="text-gray-700 sm:col-span-2">
-                (Flash Express)&ensp;
+                (KEX Express)&ensp;
                 <a
                   href={`https://th.kex-express.com/th/track/?track=${data.trackingCode}`}
                   target="_blank"
