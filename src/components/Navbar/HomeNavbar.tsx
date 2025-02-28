@@ -62,7 +62,7 @@ const MENU: Menu[] = [
   //   icon: <FaGuitar />,
   // },
   {
-    title: "ปฏิทินกิจกรรม",
+    title: "ตารางเวลากิจกรรม",
     href: "/schedule",
     target: "_target",
     icon: <FaCalendarCheck />,

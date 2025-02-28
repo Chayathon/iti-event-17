@@ -9,6 +9,7 @@ import {
   FaGuitar,
   FaMedal,
   FaTag,
+  FaCalendarCheck,
 } from "react-icons/fa6";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import PaidModal from "@/components/Modals/PaidModal";
@@ -76,7 +77,6 @@ export default function Home() {
                     จองที่นั่งเดี่ยว
                   </span>
                 </Link>
-
                 <Link
                   className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-10 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   href="/shop"
@@ -86,7 +86,19 @@ export default function Home() {
                     สั่งซื้อเสื้อ
                   </span>
                 </Link>
+
                 <Link
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-10 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
+                  target="_blank"
+                  href="/schedule"
+                >
+                  <span className="inline-flex gap-2 text-xl">
+                    <FaCalendarCheck className="translate-y-1" />
+                    ตารางเวลากิจกรรม
+                  </span>
+                </Link>
+
+                {/* <Link
                   className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
                   target="_blank"
                   href="https://docs.google.com/spreadsheets/d/1v11DvOte80LK4ZO0E0x2pVFziRSAiS3N4ASbR8oE3xQ/edit?fbclid=IwY2xjawHs5QNleHRuA2FlbQIxMAABHeqiqYtp-HlkNS_tzs8oyzLQtZkKdmfQu1az4aLSnEct4MfVSKBINZN7ug_aem_BfbcEwT4epOH1kUO2x58tw&pli=1&gid=966458771#gid=966458771"
@@ -105,7 +117,7 @@ export default function Home() {
                     <FaGuitar className="translate-y-1" />
                     สมัครนักร้อง/นักดนตรี
                   </span>
-                </Link>
+                </Link> */}
 
                 {/* <Link
                   className="inline-block  w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
