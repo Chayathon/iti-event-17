@@ -10,6 +10,7 @@ import {
   FaMedal,
   FaTag,
   FaCalendarCheck,
+  FaClipboardList,
 } from "react-icons/fa6";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import PaidModal from "@/components/Modals/PaidModal";
@@ -97,6 +98,16 @@ export default function Home() {
                     ตารางเวลากิจกรรม
                   </span>
                 </Link>
+                {/* <Link
+                  className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-10 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
+                  target="_blank"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSeQpkQK9ziOJ2I5apdJZi6g2BGURE_ddWym3-jFxHWX8UBkyA/viewform"
+                >
+                  <span className="inline-flex gap-2 text-xl">
+                    <FaClipboardList className="translate-y-1" />
+                    แบบประเมิน
+                  </span>
+                </Link> */}
 
                 {/* <Link
                   className="inline-block w-full rounded-xl border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto duration-150"
