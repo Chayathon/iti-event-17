@@ -68,7 +68,7 @@ const MENU: Menu[] = [
     icon: <FaCalendarCheck />,
   },
   {
-    title: "แบบประเมิน",
+    title: "แบบประเมินความพึงพอใจ",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSeQpkQK9ziOJ2I5apdJZi6g2BGURE_ddWym3-jFxHWX8UBkyA/viewform",
     target: "_target",
     icon: <FaClipboardList />,

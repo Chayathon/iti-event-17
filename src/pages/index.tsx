@@ -105,7 +105,7 @@ export default function Home() {
                 >
                   <span className="inline-flex gap-2 text-xl">
                     <FaClipboardList className="translate-y-1" />
-                    แบบประเมิน
+                    แบบประเมินความพึงพอใจ
                   </span>
                 </Link>
 
