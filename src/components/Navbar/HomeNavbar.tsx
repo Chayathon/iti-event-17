@@ -67,12 +67,12 @@ const MENU: Menu[] = [
     target: "_target",
     icon: <FaCalendarCheck />,
   },
-  // {
-  //   title: "แบบประเมิน",
-  //   href: "https://docs.google.com/forms/d/e/1FAIpQLSeQpkQK9ziOJ2I5apdJZi6g2BGURE_ddWym3-jFxHWX8UBkyA/viewform",
-  //   target: "_target",
-  //   icon: <FaClipboardList />,
-  // },
+  {
+    title: "แบบประเมิน",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSeQpkQK9ziOJ2I5apdJZi6g2BGURE_ddWym3-jFxHWX8UBkyA/viewform",
+    target: "_target",
+    icon: <FaClipboardList />,
+  },
   // {
   //   title: "จองที่นั่งเดี่ยว",
   //   href: "https://docs.google.com/forms/d/e/1FAIpQLSe5LBbWai6KiC32_LQCVmH82ERz3vfeJQ4U8VTL14qWFdnYSw/viewform?fbclid=IwAR3QEsLL7RryTcKDaYa_uETFF2eoIjYChPHd7QHBlPP3hK9oKYMDsgtipJ0",
